@@ -1,0 +1,18 @@
+# Ignorar todos los archivos con extensión .log o .aux
+*.log
+*.aux
+*.fls
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.toc
+
+# Ignorar carpetas generadas por código (como Python o Node)
+__pycache__/
+node_modules/
+
+# Ignorar archivos del sistema operativo (común en Mac)
+.DS_Store
+
+# Ignorar archivos ocultos de variables de entorno
+.env
