@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket} % Paquete ideal para la notación de Dirac
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\title{Sobre los primeros pasos del caminante de una moneda de 4D}
+\author{Saúl Nájera Allara}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Sea $\mathcal{H}_p$ el espacio de hilbert de la posición y $\mathcal{H}_c$ el espacio de hilbert de la moneda. El estado del caminante 
+pertenece al espacio:
+\begin{equation*}
+\mathcal{H}=\mathcal{H}_p \otimes \mathcal{H}_c
+\end{equation*}
+Considerando que $dim\, \mathcal{H}_c=4$ y sea $\{c_i\}_{i=1,\cdots,4}$ una base ortonormal de $\mathcal{H}_c$.
+Podemos interpretar que $\ket{c_1}$ denota la dirección izquierda, $\ket{c_2}$ arriba, $\ket{c_3}$ derecha, $\ket{c_4}$ abajo.
+
+Dado $\ket{c}\in \mathcal{H}_c$, se sigue que:
+\begin{equation*}
+    \ket{c}=\sum_{m=1}^{4}\lambda_m \ket{c_m}.
+\end{equation*}
+Pidiendo que $\bra{c}\ket{c}=1$, se obtiene:
+\begin{equation*}
+    \sum_{m=1}^{4}|\lambda_n|^2=1.
+\end{equation*}
+Un estado localizado genérico es de la forma:
+\begin{equation}
+    \ket{\psi}=\sum_{m=1}^{4}\ket{x,y}\otimes\ket{\lambda_m c_m}.
+    \label{eq:eq1}
+\end{equation}
+Si $\Omega$ denota el interior del estadio, entonces se define la acción del operador shift condicional S sobre un estado de la forma dada en \eqref{eq:eq1} como:
+\begin{equation}
+   S\ket{x,y}\otimes \ket{c_m}=
+   \begin{cases}
+        \ket{x+\delta_m^{(x)},y+\delta_m^{(y)}}\otimes \ket{c_m} & \text{si $(x,y)\in \Omega$}.
+        \\
+        \ket{x,y}\otimes \ket{\bar{c}_m} & \text{si $(x,y)\notin \Omega$}.
+    \end{cases}
+\end{equation}
+Donde $\delta_m^{(x)}$, $\delta_m^{(x)}$, denotan desplazamientos unitarios (se desplazan a alguno de los vértices más cercanos) que depende de una regla fija asociada los $c_m$
+y $\bar{c_m}$ denota invertir la dirección de $c_m$, es decir, izquierda pasa a derecha, arriba pasa a abajo, etc.
+En particular, se considera la regla de asignación según:
+\begin{equation*}
+\begin{cases}
+    \text{Si $\ket{c_m}=\ket{c_1}$} & \text{, entonces }\delta_1^{(x)}=-1\,,\delta_1^{(y)}=0. \\
+     \text{Si $\ket{c_m}=\ket{c_2}$} & \text{, entonces }\delta_2^{(x)}=0\,,\delta_2^{(y)}=1. \\
+      \text{Si $\ket{c_m}=\ket{c_3}$} & \text{, entonces }\delta_3^{(x)}=1\,,\delta_3^{(y)}=0. \\
+       \text{Si $\ket{c_m}=\ket{c_4}$} & \text{, entonces }\delta_4^{(x)}=0\,,\delta_4^{(y)}=-1. \\
+\end{cases}
+\end{equation*}
+Defínase el operador moneda según:
+\begin{equation}
+   C(\theta)= 1_p\otimes M(\theta)
+\end{equation}
+Donde $M(\theta)$ viene dada según:
+\begin{equation*}
+M(\theta) = 
+\begin{pmatrix}
+-\sin^2\theta & \cos^2\theta & \cos\theta\sin\theta & \cos\theta\sin\theta \\
+\cos^2\theta & -\sin^2\theta & \cos\theta\sin\theta & \cos\theta\sin\theta \\
+\cos\theta\sin\theta & \cos\theta\sin\theta & -\cos^2\theta & \sin^2\theta \\
+\cos\theta\sin\theta & \cos\theta\sin\theta & \sin^2\theta & -\cos^2\theta
+\end{pmatrix}
+\end{equation*}
+En particular, para $\theta=\frac{\pi}{4}$, se tiene:
+\begin{equation*}
+M(\frac{\pi}{4}) = 
+\begin{pmatrix}
+-1/2 & 1/2 & 1/2 & 1/2 \\
+1/2 & -1/2 & 1/2 & 1/2 \\
+1/2 & 1/2 & -1/2 & 1/2 \\
+1/2 & 1/2 & 1/2 & -1/2
+\end{pmatrix}
+\end{equation*}
+$M(\frac{\pi}{4})$ es unitaria.
+
+Si consideramos que los $\ket{c_i}$ son los vectores canónicos $\ket{e_i}$, entonces se tiene para $\theta=\frac{\pi}{4}$ que:
+\begin{align*}
+\begin{cases}
+M(\frac{\pi}{4})\ket{c_1}=-\frac{1}{2}\ket{c_1}+\frac{1}{2}\ket{c_2}+\frac{1}{2}\ket{c_3}+\frac{1}{2}\ket{c_4}
+\\
+M(\frac{\pi}{4})\ket{c_2}=\frac{1}{2}\ket{c_1}-\frac{1}{2}\ket{c_2}+\frac{1}{2}\ket{c_3}+\frac{1}{2}\ket{c_4}
+\\
+M(\frac{\pi}{4})\ket{c_3}=\frac{1}{2}\ket{c_1}+\frac{1}{2}\ket{c_2}-\frac{1}{2}\ket{c_3}+\frac{1}{2}\ket{c_4}
+\\
+M(\frac{\pi}{4})\ket{c_4}=\frac{1}{2}\ket{c_1}+\frac{1}{2}\ket{c_2}+\frac{1}{2}\ket{c_3}-\frac{1}{2}\ket{c_4}
+\end{cases}
+\end{align*}
+Vemos que
+\begin{equation*}
+M(\theta)\ket{c_i}=\sum_{k=1}^{4}\alpha_k \ket{c_k}\, , \alpha_k \neq 0
+\end{equation*}
+Note que al ser unitaria, se preserva la norma y por tanto $\alpha_i$ son amplitudes de probabilidad.
+El operador evolución se define según:
+\begin{equation}
+U=S\cdot C(\theta).
+\end{equation}
+Consideremos el primer paso de un caminante de la forma:
+\begin{equation}
+    \ket{\psi_0}=\ket{x,y}\otimes\ket{c_1}
+\end{equation}
+Entonces:
+\begin{align*}
+\ket{\psi_1}= S\cdot C(\theta)\ket{\psi_0}=S\cdot C(\theta)\ket{x,y}\otimes\ket{c_1}
+\\
+=S\ket{x,y}\otimes M(\theta)\ket{c_1}
+\\
+=S\ket{x,y}\otimes \sum_{k=1}^{4}\alpha_k \ket{c_k}
+\\
+\ket{\psi_1}=\sum_{k=1}^{4}S\ket{x,y}\otimes \alpha_k \ket{c_k}
+\end{align*}
+Aplicando las reglas de asignación establecidas, se tendría que:
+\begin{equation}
+    \ket{\psi_1}=\ket{x-1,y}\otimes \alpha_1 \ket{c_1}+\ket{x,y+1}\otimes \alpha_2 \ket{c_2}+\ket{x+1,y}\otimes \alpha_3 \ket{c_3}
+    +\ket{x,y-1}\otimes \alpha_4 \ket{c_4}
+\end{equation}
+Inmediantamente podemos concluir que la evolución a un primer paso de cualquier estado localizado de la forma \eqref{eq:eq1} se obtienen cuatro estados localizados en las casillas inmediatas a la posición inicial
+y para cada estado se tiene como estado de moneda la dirección en la que se movió con un peso $\alpha_k$ de que suceda.
+Las $\alpha_i$ dependen directamente de $M(\theta)$ y para el caso de $\theta=\frac{\pi}{4}$ se para cada dirección posible, igual probabilidad.
+
+Para estados de la forma 
+\begin{equation}
+    \ket{\phi}=\ket{x,y}\otimes \lambda \ket{c_i}
+\end{equation}
+Considere 
+\begin{equation*}
+    \ket{\phi}=(1_p\otimes \lambda)\ket{x,y}\otimes \ket{c_i}
+\end{equation*}
+Y se verifica que: \[[U,1_p\otimes \lambda]=0\]
+Y aplicando el mismo análisis que antes, se sigue que, para el estado
+\[\ket{\phi_0}=\ket{x,y}\otimes \lambda \ket{c_1}\]
+Se tiene la evolución
+\begin{align*}
+   \ket{\phi_1}= U\ket{\phi_0}=(1_p\otimes \lambda )U\ket{x,y}\otimes \ket{c_1}
+   \\
+   \\
+  \ket{\phi_1} =(1_p\otimes \lambda )(\ket{x-1,y}\otimes \alpha_1 \ket{c_1}+\ket{x,y+1}\otimes \alpha_2 \ket{c_2}
+   \\
+   +\ket{x+1,y}\otimes \alpha_3 \ket{c_3}+\ket{x,y-1}\otimes \alpha_4 \ket{c_4})
+   \\\\
+    \ket{\phi_1} =\ket{x-1,y}\otimes \lambda\alpha_1 \ket{c_1}+\ket{x,y+1}\otimes \lambda\alpha_2 \ket{c_2}
+   \\
+   +\ket{x+1,y}\otimes \lambda\alpha_3 \ket{c_3}+\ket{x,y-1}\otimes \lambda\alpha_4 \ket{c_4}
+\end{align*}
+
+\end{document}
