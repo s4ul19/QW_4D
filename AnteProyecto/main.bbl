@@ -1,0 +1,42 @@
+\begin{thebibliography}{1}
+
+\bibitem{portugal2018quantum}
+Renato Portugal.
+\newblock {\em Quantum Walks and Search Algorithms}.
+\newblock Quantum Science and Technology. Springer, 2nd edition, 2018.
+
+\bibitem{shenvi2003quantum}
+Neil Shenvi, Julia Kempe, and K.~Birgitta Whaley.
+\newblock Quantum random-walk search algorithm.
+\newblock {\em Physical Review A}, 67(5):052307, 2003.
+
+\bibitem{bohigas1984characterization}
+Oriol Bohigas, Marie-Joya Giannoni, and Charles Schmit.
+\newblock Characterization of chaotic quantum spectra and universality of level fluctuation laws.
+\newblock {\em Physical Review Letters}, 52(1):1--4, 1984.
+
+\bibitem{berry1977level}
+Michael~V. Berry and Michael Tabor.
+\newblock Level clustering in the regular spectrum.
+\newblock {\em Proceedings of the Royal Society of London. A. Mathematical and Physical Sciences}, 356(1686):375--394, 1977.
+
+\bibitem{alonso-lobo2025simplest}
+C.~Alonso-Lobo, Gabriel~G. Carlo, and F.~Borondo.
+\newblock The simplest 2d quantum walk detects chaoticity, 2025.
+
+\bibitem{wigner1951statistical}
+Eugene~P. Wigner.
+\newblock On the statistical distribution of the widths and spacings of nuclear resonance levels.
+\newblock {\em Mathematical Proceedings of the Cambridge Philosophical Society}, 47(4):790--798, 1951.
+
+\bibitem{mehta1991random}
+Madan~Lal Mehta.
+\newblock {\em Random Matrices}.
+\newblock Academic Press, San Diego, 2nd edition, 1991.
+
+\bibitem{haake2018quantum}
+Fritz Haake, Sven Gnutzmann, and Marek Ku{\'s}.
+\newblock {\em Quantum Signatures of Chaos}.
+\newblock Springer Series in Synergetics. Springer, 4th edition, 2018.
+
+\end{thebibliography}

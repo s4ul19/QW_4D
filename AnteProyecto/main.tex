@@ -1,0 +1,136 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel} % 'es-tabla' cambia "Cuadro" por "Tabla"
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% --- Configuración de la bibliografía ---
+\usepackage{cite} 
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+\begin{document}
+
+\begin{center}
+    \Large \textbf{UNIVERSIDAD DE SAN CARLOS DE GUATEMALA} \\
+    \textbf{ESCUELA DE CIENCIAS FÍSICAS Y MATEMÁTICAS} \\[1.5cm]
+    \Large \textbf{Ejercicio Profesional Supervisado:} \\
+    \textbf{Caminatas cuánticas con una moneda en 4D} \\[1.5cm]
+    \textbf{Saúl Estuardo Nájera Allara} \\
+    Carné: 202107506 \\[1cm]
+    Julio 2026\\[1cm]
+    Licenciatura en Física Aplicada \\[1.5cm]
+    \textbf{Asesorado por:} \\
+    M.Sc. José Alfredo de León (IF-UNAM), \\
+    Dr. Carlos Pineda (IF-UNAM), \\
+    Ing. Rodolfo Samayoa (ECFM-USAC)
+\end{center}
+
+\newpage
+
+\section{Descripción general de la institución}
+
+\subsection{Instituto de investigación de Ciencias Físicas y Matemáticas, USAC}
+El Instituto de investigación de Ciencias Físicas y Matemáticas (ICFM) es la unidad de la Escuela de Ciencias Físicas y Matemáticas (ECFM) que promueve y realiza estudios avanzados en áreas científicas, fundamentales y aplicadas, de las ciencias físicas y matemáticas. El ICFM se proyecta como una plataforma regional de excelencia dedicada a la investigación y difusión del conocimiento en física y matemática. Las principales líneas de trabajo del ICFM son:
+\begin{itemize}
+    \item La investigación académica en ciencia básica y aplicada.
+    \item La promoción de la investigación en ciencia básica y aplicada en el ámbito universitario.
+    \item La difusión y divulgación del conocimiento generado por la investigación en ciencias físicas y matemáticas.
+    \item La actualización continua de programas académicos de ciencias físicas y matemáticas.
+\end{itemize}
+
+\subsection{Instituto de Física, UNAM}
+El Instituto de Física de la Universidad Nacional Autónoma de México (UNAM) fue fundado en 1939 y se ha consolidado como uno de los principales centros de investigación en física en México. Su misión incluye la investigación, la formación de recursos humanos y la difusión del conocimiento científico. El instituto ha contribuido a la creación de otras instituciones de investigación y ha sido fundamental en el desarrollo científico dentro y fuera de México. Las principales líneas de investigación incluyen:
+\begin{itemize}
+    \item Física Cuántica y Fotónica
+    \item Estado Sólido
+    \item Física Experimental
+    \item Física Nuclear y Aplicaciones de la Radiación
+    \item Física Química
+    \item Materia Condensada
+    \item Sistemas Complejos
+    \item Física Teórica
+\end{itemize}
+
+\section{Descripción del grupo de trabajo}
+El grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM) es un grupo de investigación de la Universidad Nacional Autónoma de México (UNAM) liderado por el Dr. Carlos Pineda Zorrilla e integrado por investigadores y estudiantes de varios departamentos, entre ellos el IIMAS-UNAM, el ICN-UNAM y el IF-UNAM. Su enfoque principal es la óptica cuántica y la información cuántica, con un fuerte énfasis en la investigación y el desarrollo académico.
+
+Este proyecto, el cual se enmarca en el ámbito de los sistemas cuánticos abiertos, estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa. Actualmente, el M.Sc. José Alfredo se encuentra cursando su doctorado en Ciencias (Física) en el Posgrado en Ciencias Físicas de la Universidad Nacional Autónoma de México y desde sus estudios de maestría se ha dedicado a la investigación en física cuántica. Por otro lado, el Dr. Carlos Pineda es jefe del departamento de Física cuántica y Fotónica del Instituto de Física de la UNAM y lleva más de 20 años dedicados a la investigación científica y docencia. Finalmente, el Ing. Samayoa ostenta la posición de jefe del Departamento de Física en la ECFM-USAC y cuenta con una notable carrera como profesor en la misma unidad académica.
+
+\section{Descripción general del proyecto}
+Se presenta el esqueleto y un párrafo introductorio asociado a cada item.
+\begin{itemize}
+    \item Hablar de las caminatas cuánticas discretas:
+    \begin{itemize}
+       \item Una caminata cuántica se define sobre un grafo, donde los vértices representan las posiciones permitidas para el caminante y las aristas indican las transiciones admisibles entre los sitios. 
+        El dominio espacial es estrictamente discreto y la evolución temporal puede considerarse de manera discreta o continua~\cite{portugal2018quantum}.
+        Una de las características de las caminatas cuánticas es que proporcionan un marco teórico para el diseño de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}, por ejemplo el algoritmo de Grover, diseñado para encontrar un elemento específico en una base de datos sin ordenar,
+        puede formularse como una caminata cuántica sobre un grafo completo~\cite{portugal2018quantum}.
+    \end{itemize}
+
+    \item Hablar de caos cuántico, en particular BGS y Berry-Tarbor.
+    \begin{itemize}
+        \item El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
+        En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson, característica de variables aleatorias independientes~\cite{berry1977level}.
+        Mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
+      
+    \end{itemize}
+    
+    \item Discutir la emergencia de caos cuántico en caminatas cuánticas discretas cuya frontera sea un estadio de algún billar (rectángulo, sinai, etc). (¿Qué condiciones contribuyen a la emergencia de caos?, motivación (alonso lobos)).
+    \begin{itemize}
+        \item Motivados por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
+        estudios recientes han utilizado caminatas cuánticas con monedas bidimensionales para detectar la emergencia de caos cuántico en función de dichas condiciones de contorno~\cite{alonso-lobo2025simplest}.
+         Sin embargo no es claro si la geometría de la frontera es suficiente para la emergencia de caos cuántico, o si la estructura del operador moneda influye significativamente en las propiedades espectrales del sistema.
+    \end{itemize}
+    \item Comentar los indicadores que se emplearan para el estudio.
+    \begin{itemize}   
+        \item Es posible detectar caos cuántico mediante las correlaciones de corto alcance en el espectro de energías del sistema según las diferencias a primer vecino en el espectro de energías, $s$, y haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random},
+        con este indicador es observado que, la densidad de probabilidad $P(s)$ para sistemas caóticos, exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$) y para sistemas integrables, se exhibe 'level clustering' ($P(s)\propto e^{-s}$)~\cite{mehta1991random,alonso-lobo2025simplest}.
+        Así mismo, es posible detectar caos cuántico mediante correlaciones de largo alcance y se empleará el factor de forma espectral (SFF por su siglas en inglés)~\cite{haake2018quantum} para ello, la manifestación de caos cuántico en este indicador es mediante la aparación del agujero de correlaciones (dip), una rampa y una saturación alrededor de un valor dado (plateu)~\cite{haake2018quantum},
+        si el sistema es integrable, no existe un dip y únicamente se presenta el plateu.
+    \end{itemize}
+
+\end{itemize}
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica discreta en el tiempo con una moneda de cuatro dimensiones y un espacio de posición con geometría de billar.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de Rectángulo y Sinaí.
+    \item Determinar la densidad de cuasienergías del operador de evolución para identificar singularidades espectrales o regularidades estructurales asociadas a cada geometría.
+    \item Contrastar las predicciones de la teoría de matrices aleatorias con los resultados numéricos de la distribución del  espaciamiento de niveles a primer vecino y el factor de forma espectral para determinar la existencia de correlaciones de corto y largo alcance en el espectro cuasienergías.
+    \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos.
+\end{itemize}
+
+\section{Justificación del proyecto}
+
+\section{Cronograma de actividades}
+Y la distribución de tareas será como se puede observar en el cronograma.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Tareas} & \textbf{Mes 1} & \textbf{Mes 2} & \textbf{Mes 3} & \textbf{Mes 4} & \textbf{Mes 5} & \textbf{Mes 6} \\ \hline
+Extensión       & & & & & & \\ \hline
+Docencia        & & & & & & \\ \hline
+Tarea 1         & & & & & & \\ \hline
+Tarea 2         & & & & & & \\ \hline
+Tarea 3         & & & & & & \\ \hline
+Tarea 4         & & & & & & \\ \hline
+Tarea 5         & & & & & & \\ \hline
+Tarea 6         & & & & & & \\ \hline
+\end{tabular}
+\caption{Cronograma de actividades propuesto.}
+\end{table}
+
+\newpage
+% --- Inserción de la bibliografía ---
+\bibliographystyle{unsrt} % Estilo de la bibliografía (orden de aparición)
+\bibliography{ref}        % Nombre de tu archivo .bib (sin la extensión)
+
+\end{document}
