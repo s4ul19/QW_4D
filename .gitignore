@@ -9,3 +9,5 @@ main.pdf
 *.toc
 .DS_Store
 .env
+.bbl
+.blg
