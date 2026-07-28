@@ -1,6 +1,8 @@
 # Ignorar todos los archivos con extensión .log o .aux
 main.pdf
 *.log
+*.bbl
+*.blg
 *.aux
 *.fls
 *.out
