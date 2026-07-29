@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}  % {{{*
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla]{babel} % 'es-tabla' cambia "Cuadro" por "Tabla"
 \usepackage{amsmath}
@@ -10,8 +10,12 @@
 \usepackage{cite} 
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
-\begin{document}
 
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\FXRegisterAuthor{cp}{acp}{\color{blue}CP}
+  % *}}}
+\begin{document}
+% Titulo y otras cosas {{{*
 \begin{center}
     \Large \textbf{UNIVERSIDAD DE SAN CARLOS DE GUATEMALA} \\
     \textbf{ESCUELA DE CIENCIAS FÍSICAS Y MATEMÁTICAS} \\[1.5cm]
@@ -26,10 +30,9 @@
     Dr. Carlos Pineda (IF-UNAM), \\
     Ing. Rodolfo Samayoa (ECFM-USAC)
 \end{center}
-
+  % *}}}
 \newpage
-
-\section{Descripción general de la institución}
+\section{Descripción general de la institución}  % {{{*
 
 \subsection{Instituto de investigación de Ciencias Físicas y Matemáticas, USAC}
 El Instituto de investigación de Ciencias Físicas y Matemáticas (ICFM) es la unidad de la Escuela de Ciencias Físicas y Matemáticas (ECFM) que promueve y realiza estudios avanzados en áreas científicas, fundamentales y aplicadas, de las ciencias físicas y matemáticas. El ICFM se proyecta como una plataforma regional de excelencia dedicada a la investigación y difusión del conocimiento en física y matemática. Las principales líneas de trabajo del ICFM son:
@@ -53,15 +56,18 @@ El Instituto de Física de la Universidad Nacional Autónoma de México (UNAM) f
     \item Física Teórica
 \end{itemize}
 
-\section{Descripción del grupo de trabajo}
+% *}}}
+\section{Descripción del grupo de trabajo}  % {{{*
 El grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM) es un grupo de investigación de la Universidad Nacional Autónoma de México (UNAM) liderado por el Dr. Carlos Pineda Zorrilla e integrado por investigadores y estudiantes de varios departamentos, entre ellos el IIMAS-UNAM, el ICN-UNAM y el IF-UNAM. Su enfoque principal es la óptica cuántica y la información cuántica, con un fuerte énfasis en la investigación y el desarrollo académico.
 
-Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa. Actualmente, el M.Sc. José Alfredo se encuentra cursando su doctorado en Ciencias (Física) en el Posgrado en Ciencias Físicas de la Universidad Nacional Autónoma de México y desde sus estudios de maestría se ha dedicado a la investigación en física cuántica. Por otro lado, el Dr. Carlos Pineda es jefe del departamento de Física cuántica y Fotónica del Instituto de Física de la UNAM y lleva más de 20 años dedicados a la investigación científica y docencia. Finalmente, el Ing. Samayoa ostenta la posición de jefe del Departamento de Física en la ECFM-USAC y cuenta con una notable carrera como profesor en la misma unidad académica.
+Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa. Actualmente, el M.Sc. José Alfredo se encuentra cursando su doctorado en Ciencias (Física) en el Posgrado en Ciencias Físicas de la Universidad Nacional Autónoma de México y desde sus estudios de maestría se ha dedicado a la investigación en física cuántica. Por otro lado, el Dr. Carlos Pineda es jefe del departamento de Física cuántica y Fotónica del Instituto de Física de la UNAM y lleva más de 20 años dedicados a la investigación científica y docencia\cpnote{ya no soy jefe}. Finalmente, el Ing. Samayoa ostenta la posición de jefe del Departamento de Física en la ECFM-USAC y cuenta con una notable carrera como profesor en la misma unidad académica.
 
-\section{Descripción general del proyecto}
+% *}}}
+\section{Descripción general del proyecto}  % {{{*
 \textit{Se presenta el esqueleto y un párrafo introductorio asociado a cada item.}
+\cpnote{no los veo bien hilados. al escribir las ideas, poner tambien el hilo}
 \begin{itemize}
-    \item Hablar de las caminatas cuánticas discretas:
+    \item Hablar de las caminatas cuánticas discretas: \cpnote{para que tan complicado? Vamos sobre lo que verdaderamente importa. piensa primero que es lo que quieres decir y lo pones aca antes de escribir el parrafo}
     \begin{itemize}
        \item Una caminata cuántica se define sobre un grafo, donde los vértices representan las posiciones permitidas para el caminante y las aristas indican las transiciones admisibles entre los sitios. 
         El dominio espacial es estrictamente discreto y la evolución temporal puede considerarse de manera discreta o continua~\cite{portugal2018quantum}.
@@ -97,23 +103,27 @@ Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien 
         
 \end{itemize}
 
-\section{Objetivos}
+% *}}}
+\section{Objetivos}  % {{{*
 
 \subsection{Objetivo general}
-Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica discreta en el tiempo con una moneda de cuatro dimensiones y un espacio de posición con geometría de billar.
+Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica discreta en el tiempo con una moneda de cuatro dimensiones y un espacio de posición con geometría de billar. \cpnote{chido}
 
 \subsection{Objetivos específicos}
+\cpnote{Bien planteados, me gusta}
 \begin{itemize}
-    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de Rectángulo y Sinaí.
+    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de Rectángulo \cpnote{no es nombre propio} y Sinaí.
     \item Determinar la densidad de cuasienergías del operador de evolución para identificar singularidades espectrales o regularidades estructurales asociadas a cada geometría.
     \item Contrastar las predicciones de la teoría de matrices aleatorias con los resultados numéricos de la distribución del  espaciamiento de niveles a primer vecino y el factor de forma espectral para determinar la existencia de correlaciones de corto y largo alcance en el espectro cuasienergías.
     \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos.
 \end{itemize}
 
-\section{Justificación del proyecto}
+% *}}}
+\section{Justificación del proyecto}  % {{{*
 \textbf{Pendiente.}
 
-\section{Cronograma de actividades}
+% *}}}
+\section{Cronograma de actividades}  % {{{*
 
 \textbf{Pendiente.}
 \begin{table}[h]
@@ -130,10 +140,11 @@ Tarea 6         & & & & & & \\ \hline
 \end{tabular}
 \caption{Cronograma de actividades propuesto.}
 \end{table}
-
+% *}}}
 \newpage
-% --- Inserción de la bibliografía ---
+% --- Inserción de la bibliografía ---  % {{{*
 \bibliographystyle{unsrt} % Estilo de la bibliografía (orden de aparición)
 \bibliography{ref}        % Nombre de tu archivo .bib (sin la extensión)
-
+  % *}}}
 \end{document}
+
