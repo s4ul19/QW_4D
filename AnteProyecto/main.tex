@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{geometry}
+
 \geometry{margin=2.5cm}
 
 % --- Configuración de la bibliografía ---
@@ -13,6 +14,7 @@
 
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \FXRegisterAuthor{cp}{acp}{\color{blue}CP}
+\FXRegisterAuthor{sn}{asn}{\color{red}SN}
   % *}}}
 \begin{document}
 % Titulo y otras cosas {{{*
@@ -60,22 +62,36 @@ El Instituto de Física de la Universidad Nacional Autónoma de México (UNAM) f
 \section{Descripción del grupo de trabajo}  % {{{*
 El grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM) es un grupo de investigación de la Universidad Nacional Autónoma de México (UNAM) liderado por el Dr. Carlos Pineda Zorrilla e integrado por investigadores y estudiantes de varios departamentos, entre ellos el IIMAS-UNAM, el ICN-UNAM y el IF-UNAM. Su enfoque principal es la óptica cuántica y la información cuántica, con un fuerte énfasis en la investigación y el desarrollo académico.
 
-Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa. Actualmente, el M.Sc. José Alfredo se encuentra cursando su doctorado en Ciencias (Física) en el Posgrado en Ciencias Físicas de la Universidad Nacional Autónoma de México y desde sus estudios de maestría se ha dedicado a la investigación en física cuántica. Por otro lado, el Dr. Carlos Pineda es jefe del departamento de Física cuántica y Fotónica del Instituto de Física de la UNAM y lleva más de 20 años dedicados a la investigación científica y docencia\cpnote{ya no soy jefe}. Finalmente, el Ing. Samayoa ostenta la posición de jefe del Departamento de Física en la ECFM-USAC y cuenta con una notable carrera como profesor en la misma unidad académica.
-
+Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa.
 % *}}}
 \section{Descripción general del proyecto}  % {{{*
 \textit{Se presenta el esqueleto y un párrafo introductorio asociado a cada item.}
 \cpnote{no los veo bien hilados. al escribir las ideas, poner tambien el hilo}
+\snnote{ok.}
 \begin{itemize}
     \item Hablar de las caminatas cuánticas discretas: \cpnote{para que tan complicado? Vamos sobre lo que verdaderamente importa. piensa primero que es lo que quieres decir y lo pones aca antes de escribir el parrafo}
+    \snnote{Describir que son las caminatas cuánticas y establecer que tipo de caminata se usará.}
     \begin{itemize}
-       \item Una caminata cuántica se define sobre un grafo, donde los vértices representan las posiciones permitidas para el caminante y las aristas indican las transiciones admisibles entre los sitios. 
-        El dominio espacial es estrictamente discreto y la evolución temporal puede considerarse de manera discreta o continua~\cite{portugal2018quantum}.
-        Una de las características de las caminatas cuánticas es que proporcionan un marco teórico para el diseño de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}, por ejemplo el algoritmo de Grover, diseñado para encontrar un elemento específico en una base de datos sin ordenar,
-        puede formularse como una caminata cuántica sobre un grafo completo~\cite{portugal2018quantum}.
+       \item Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica, el estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
+       En este trabajo se considerará un dominio espacial bidimensional y una dimensión de su espacio de moneda de 4. La dinámica depende de como se formule el operador unitario $\mathcal{U}$ responsable de la evolución.
+       Basándose en la literatura existente~\cite{portugal2018quantum}, una posible forma de definir $\mathcal{U}$ es:
+        \begin{equation*}
+            \mathcal{U}=S\cdot C.
+        \end{equation*}
+        Siendo $S$ un operador que desplaza al caminante según el estado de su moneda y $C$ un operador que actúa  únicamente sobre el estado de la moneda.
+        La forma de S depende de las condiciones de frontera a considerar.
     \end{itemize}
+    \item Discutir la emergencia de caos cuántico en caminatas cuánticas discretas cuya frontera sea un estadio de algún billar (rectángulo, sinai, etc).
+    \snnote{Introducir la idea central del trabajo, la emergencia de caos cuántico en las caminatas cuánticas.}
+    \begin{itemize}
+        \item Motivado por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
+        se sugiere investigar si la dinámica de un caminante pueda exhibir rasgos de caoticidad o integrabilidad y si las condiciones de frontera a considerar son suficientes para establecer dicha distinción.
+        Se ha estudiado un modelo de caminata cuántica bidimensional empleando como estado de moneda dos qubits~\cite{alonso-lobo2025simplest} llegando a concluir que sí existía una correspondencia entre las condiciones de frontera y la dinámica del sistema.
+        Sin embargo no es concluyente si empleando un estado de moneda que consta de un qudit se siga manteniendo semejante correspondencia.
+    \end{itemize}   
 
     \item Hablar de caos cuántico, en particular BGS y Berry-Tarbor.
+    \snnote{Comentar en que consiste el caos cuántico.}
     \begin{itemize}
         \item El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
         En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson, característica de variables aleatorias independientes~\cite{berry1977level}.
@@ -83,13 +99,9 @@ Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien 
       
     \end{itemize}
     
-    \item Discutir la emergencia de caos cuántico en caminatas cuánticas discretas cuya frontera sea un estadio de algún billar (rectángulo, sinai, etc). (¿Qué condiciones contribuyen a la emergencia de caos?, motivación (alonso lobos)).
-    \begin{itemize}
-        \item Motivados por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
-        estudios recientes han utilizado caminatas cuánticas con monedas bidimensionales para detectar la emergencia de caos cuántico en función de dichas condiciones de contorno~\cite{alonso-lobo2025simplest}.
-         Sin embargo no es claro si la geometría de la frontera es suficiente para la emergencia de caos cuántico, o si la estructura del operador moneda influye significativamente en las propiedades espectrales del sistema.
-    \end{itemize}
+    
     \item Comentar los indicadores que se emplearan para el estudio.
+    \snnote{Indicar de que forma se cuantificará la detección de caos cuántico.}
     \begin{itemize}   
         \item Es posible detectar caos cuántico mediante las correlaciones de corto alcance en el espectro de energías del sistema según las diferencias a primer vecino en el espectro de energías, $s$, y haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random},
         con este indicador es observado que, la densidad de probabilidad $P(s)$ para sistemas caóticos, exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$) y para sistemas integrables, se exhibe 'level clustering' ($P(s)\propto e^{-s}$)~\cite{mehta1991random,alonso-lobo2025simplest}.
@@ -97,11 +109,13 @@ Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien 
         si el sistema es integrable, no existe un dip y únicamente se presenta el plateu.
     \end{itemize}
     \item Discutir que problema se busca abordar.
-    
-        Este trabajo busca investigar cuales son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica discreta con una moneda de 4 dimensiones,
-        tomando en cuenta distintas condiciones de frontera y distintos operadores de moneda.
-        
+    \snnote{Reiterar el propósito de investigar la emergencia de caos cuántico según distintas condiciones de frontera a emplear.}
+    \begin{itemize}
+    \item Este trabajo busca investigar cuales son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica con una moneda de 4 dimensiones,
+        tomando en cuenta distintas condiciones de frontera.
+    \end{itemize}  
 \end{itemize}
+
 
 % *}}}
 \section{Objetivos}  % {{{*
@@ -112,7 +126,7 @@ Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica 
 \subsection{Objetivos específicos}
 \cpnote{Bien planteados, me gusta}
 \begin{itemize}
-    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de Rectángulo \cpnote{no es nombre propio} y Sinaí.
+    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de rectángulo \cpnote{no es nombre propio}\snnote{listo.} y Sinaí.
     \item Determinar la densidad de cuasienergías del operador de evolución para identificar singularidades espectrales o regularidades estructurales asociadas a cada geometría.
     \item Contrastar las predicciones de la teoría de matrices aleatorias con los resultados numéricos de la distribución del  espaciamiento de niveles a primer vecino y el factor de forma espectral para determinar la existencia de correlaciones de corto y largo alcance en el espectro cuasienergías.
     \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos.
