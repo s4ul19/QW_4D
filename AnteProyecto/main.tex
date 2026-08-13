@@ -60,64 +60,39 @@ El Instituto de Física de la Universidad Nacional Autónoma de México (UNAM) f
 
 % *}}}
 \section{Descripción del grupo de trabajo}  % {{{*
-El grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM) es un grupo de investigación de la Universidad Nacional Autónoma de México (UNAM) liderado por el Dr. Carlos Pineda Zorrilla e integrado por investigadores y estudiantes de varios departamentos, entre ellos el IIMAS-UNAM, el ICN-UNAM y el IF-UNAM. Su enfoque principal es la óptica cuántica y la información cuántica, con un fuerte énfasis en la investigación y el desarrollo académico.
+El grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM) es un grupo de investigación de la Universidad Nacional Autónoma de México (UNAM) liderado por el Dr. Carlos Pineda Zorrilla. Su enfoque principal es la óptica cuántica y la información cuántica, con un fuerte énfasis en la investigación y el desarrollo académico.
 
 Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa.
 % *}}}
 \section{Descripción general del proyecto}  % {{{*
-\textit{Se presenta el esqueleto y un párrafo introductorio asociado a cada item.}
-\cpnote{no los veo bien hilados. al escribir las ideas, poner tambien el hilo}
-\snnote{ok.}
-\begin{itemize}
-    \item Hablar de las caminatas cuánticas discretas: \cpnote{para que tan complicado? Vamos sobre lo que verdaderamente importa. piensa primero que es lo que quieres decir y lo pones aca antes de escribir el parrafo}
-    \snnote{Describir que son las caminatas cuánticas y establecer que tipo de caminata se usará.}
-    \begin{itemize}
-       \item Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica, el estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
+Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica, el estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
        En este trabajo se considerará un dominio espacial bidimensional y una dimensión de su espacio de moneda de 4. La dinámica depende de como se formule el operador unitario $\mathcal{U}$ responsable de la evolución.
        Basándose en la literatura existente~\cite{portugal2018quantum}, una posible forma de definir $\mathcal{U}$ es:
-        \begin{equation*}
+        \begin{equation}
             \mathcal{U}=S\cdot C.
-        \end{equation*}
-        Siendo $S$ un operador que desplaza al caminante según el estado de su moneda y $C$ un operador que actúa  únicamente sobre el estado de la moneda.
-        La forma de S depende de las condiciones de frontera a considerar.
-    \end{itemize}
-    \item Discutir la emergencia de caos cuántico en caminatas cuánticas discretas cuya frontera sea un estadio de algún billar (rectángulo, sinai, etc).
-    \snnote{Introducir la idea central del trabajo, la emergencia de caos cuántico en las caminatas cuánticas.}
-    \begin{itemize}
-        \item Motivado por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
+            \label{eq:U}
+        \end{equation}
+        Siendo $S$ un operador que desplaza al caminante según el estado de su moneda y $C$ un operador que actúa únicamente sobre el estado de la moneda.
+        La forma de S depende de las condiciones de frontera a considerar y la evolución de un estado según \eqref{eq:U} esta influenciada por la elección del operador $C$.
+        Una de las características de las caminatas cuánticas es que proporcionan un marco teórico para el diseño de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}, por ejemplo el algoritmo de Grover, diseñado para encontrar un elemento específico en una base de datos sin ordenar,
+        puede formularse como una caminata cuántica sobre un grafo completo~\cite{portugal2018quantum}.
+
+        El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
+        En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson~\cite{berry1977level}.
+        Mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
+
+        Motivado por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
         se sugiere investigar si la dinámica de un caminante pueda exhibir rasgos de caoticidad o integrabilidad y si las condiciones de frontera a considerar son suficientes para establecer dicha distinción.
         Se ha estudiado un modelo de caminata cuántica bidimensional empleando como estado de moneda dos qubits~\cite{alonso-lobo2025simplest} llegando a concluir que sí existía una correspondencia entre las condiciones de frontera y la dinámica del sistema.
         Sin embargo no es concluyente si empleando un estado de moneda que consta de un qudit se siga manteniendo semejante correspondencia.
-    \end{itemize}   
 
-    \item Hablar de caos cuántico, en particular BGS y Berry-Tarbor.
-    \snnote{Comentar en que consiste el caos cuántico.}
-    \begin{itemize}
-        \item El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
-        En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson, característica de variables aleatorias independientes~\cite{berry1977level}.
-        Mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
-      
-    \end{itemize}
-    
-    
-    \item Comentar los indicadores que se emplearan para el estudio.
-    \snnote{Indicar de que forma se cuantificará la detección de caos cuántico.}
-    \begin{itemize}   
-        \item Es posible detectar caos cuántico mediante las correlaciones de corto alcance en el espectro de energías del sistema según las diferencias a primer vecino en el espectro de energías, $s$, y haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random},
-        con este indicador es observado que, la densidad de probabilidad $P(s)$ para sistemas caóticos, exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$) y para sistemas integrables, se exhibe 'level clustering' ($P(s)\propto e^{-s}$)~\cite{mehta1991random,alonso-lobo2025simplest}.
-        Así mismo, es posible detectar caos cuántico mediante correlaciones de largo alcance y se empleará el factor de forma espectral (SFF por su siglas en inglés)~\cite{haake2018quantum} para ello, la manifestación de caos cuántico en este indicador es mediante la aparación del agujero de correlaciones (dip), una rampa y una saturación alrededor de un valor dado (plateu)~\cite{haake2018quantum},
-        si el sistema es integrable, no existe un dip y únicamente se presenta el plateu.
-    \end{itemize}
-    \item Discutir que problema se busca abordar.
-    \snnote{Reiterar el propósito de investigar la emergencia de caos cuántico según distintas condiciones de frontera a emplear.}
-    \begin{itemize}
-    \item Este trabajo busca investigar cuales son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica con una moneda de 4 dimensiones,
-        tomando en cuenta distintas condiciones de frontera.
-    \end{itemize}  
-\end{itemize}
+        Una forma de detectar caos cuántico es mediante las correlaciones de corto alcance en el espectro de energías del sistema. Empleando las diferencias a primer vecino, $s$ y haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random},
+        es observado que la densidad de probabilidad $P(s)$ para sistemas caóticos exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$) y sistemas integrables, exhiben 'level clustering' ($P(s)\propto e^{-s}$)~\cite{mehta1991random,alonso-lobo2025simplest}.
+        Otra forma de detectar caos cuántico es empleando correlaciones de largo alcance, para ello se empleará el factor de forma espectral (SFF por su siglas en inglés)~\cite{haake2018quantum}, la manifestación de caos cuántico para este indicador es mediante la aparación del agujero de correlaciones (dip), una rampa (ramp) y una saturación alrededor de un valor dado (plateu)~\cite{haake2018quantum},
+        si el sistema es integrable, no existe un dip y únicamente se presenta el plateu. Puesto que \eqref{eq:U} es unitaria, sus valores propios son en general complejos de norma 1, por lo que se considerará para este trabajo las fases de dichos valores propios y es con estos valores con los que se realiza la estadística.
 
-
-% *}}}
+Se analizan cuales son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica según el operador \eqref{eq:U}, tomando en cuenta distintas condiciones de frontera y operadores de $C$. Buscando responder a la pregunta de si las condiciones de frontera son suficientes para determinar la caoticidad o integrabilidad de la caminata a estudiar.
+        % *}}}
 \section{Objetivos}  % {{{*
 
 \subsection{Objetivo general}
