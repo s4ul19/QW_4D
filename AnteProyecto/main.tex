@@ -15,6 +15,9 @@
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \FXRegisterAuthor{cp}{acp}{\color{blue}CP}
 \FXRegisterAuthor{sn}{asn}{\color{red}SN}
+\usepackage{xcolor}
+\definecolor{jacolor}{HTML}{C82800}
+\FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
   % *}}}
 \begin{document}
 % Titulo y otras cosas {{{*
@@ -65,34 +68,37 @@ El grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM) es un grupo 
 Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien fungirá como cotutor junto con el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa.
 % *}}}
 \section{Descripción general del proyecto}  % {{{*
-Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica, el estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
-       En este trabajo se considerará un dominio espacial bidimensional y una dimensión de su espacio de moneda de 4. La dinámica depende de como se formule el operador unitario $\mathcal{U}$ responsable de la evolución.
-       Basándose en la literatura existente~\cite{portugal2018quantum}, una posible forma de definir $\mathcal{U}$ es:
-        \begin{equation}
-            \mathcal{U}=S\cdot C.
-            \label{eq:U}
-        \end{equation}
-        Siendo $S$ un operador que desplaza al caminante según el estado de su moneda y $C$ un operador que actúa únicamente sobre el estado de la moneda.
-        La forma de S depende de las condiciones de frontera a considerar y la evolución de un estado según \eqref{eq:U} esta influenciada por la elección del operador $C$.
-        Una de las características de las caminatas cuánticas es que proporcionan un marco teórico para el diseño de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}, por ejemplo el algoritmo de Grover, diseñado para encontrar un elemento específico en una base de datos sin ordenar,
-        puede formularse como una caminata cuántica sobre un grafo completo~\cite{portugal2018quantum}.
+\janote{Tenés algo que haga check spelling? Porque veo errores de ese tipo}
 
-        El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
-        En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson~\cite{berry1977level}.
-        Mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
+Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica\janote{punto y desde aquí comienza otro enunciado}, el estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
+En este trabajo se considerará un dominio espacial bidimensional y una dimensión de su espacio de moneda de cuatro. La dinámica depende de como se formule el operador unitario $\mathcal{U}$ responsable de la evolución.
+Basándose en la literatura existente~\cite{portugal2018quantum}, una posible forma de definir $\mathcal{U}$ es:
+\begin{equation}
+    \mathcal{U}=S\cdot C.
+    \label{eq:U}
+\end{equation}
+Siendo $S$ un operador que desplaza al caminante según el estado de su moneda y $C$ un operador que actúa únicamente sobre el estado de la moneda.
+La forma de S\janote{$S$} depende de las condiciones de frontera a considerar y la evolución de un estado según \eqref{eq:U} esta\janote{está} influenciada por la elección del operador $C$.
+Una de las características de las caminatas cuánticas es que proporcionan un marco teórico para el diseño de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}, por ejemplo el algoritmo de Grover, diseñado para encontrar un elemento específico en una base de datos sin ordenar,
+puede formularse como una caminata cuántica sobre un grafo completo~\cite{portugal2018quantum}\janote{mala redacción de este enunciado, corregir}.
 
-        Motivado por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
-        se sugiere investigar si la dinámica de un caminante pueda exhibir rasgos de caoticidad o integrabilidad y si las condiciones de frontera a considerar son suficientes para establecer dicha distinción.
-        Se ha estudiado un modelo de caminata cuántica bidimensional empleando como estado de moneda dos qubits~\cite{alonso-lobo2025simplest} llegando a concluir que sí existía una correspondencia entre las condiciones de frontera y la dinámica del sistema.
-        Sin embargo no es concluyente si empleando un estado de moneda que consta de un qudit se siga manteniendo semejante correspondencia.
+El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
+En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson~\cite{berry1977level}.
+Mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
 
-        Una forma de detectar caos cuántico es mediante las correlaciones de corto alcance en el espectro de energías del sistema. Empleando las diferencias a primer vecino, $s$ y haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random},
-        es observado que la densidad de probabilidad $P(s)$ para sistemas caóticos exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$) y sistemas integrables, exhiben 'level clustering' ($P(s)\propto e^{-s}$)~\cite{mehta1991random,alonso-lobo2025simplest}.
-        Otra forma de detectar caos cuántico es empleando correlaciones de largo alcance, para ello se empleará el factor de forma espectral (SFF por su siglas en inglés)~\cite{haake2018quantum}, la manifestación de caos cuántico para este indicador es mediante la aparación del agujero de correlaciones (dip), una rampa (ramp) y una saturación alrededor de un valor dado (plateu)~\cite{haake2018quantum},
-        si el sistema es integrable, no existe un dip y únicamente se presenta el plateu. Puesto que \eqref{eq:U} es unitaria, sus valores propios son en general complejos de norma 1, por lo que se considerará para este trabajo las fases de dichos valores propios y es con estos valores con los que se realiza la estadística.
+Motivado por el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras, 
+se sugiere\janote{quién sugiere o a quién la estás sugiriendo?} investigar si la dinámica de un caminante pueda exhibir rasgos de caoticidad o integrabilidad y si las condiciones de frontera a considerar son suficientes para establecer dicha distinción.
+Se ha estudiado un modelo de caminata cuántica bidimensional empleando como estado de moneda dos qubits~\cite{alonso-lobo2025simplest} llegando a concluir que sí existía una correspondencia entre las condiciones de frontera y la dinámica del sistema.
+Sin embargo no es concluyente si empleando un estado de moneda que consta de un qudit se siga manteniendo semejante correspondencia\janote{El objetivo de este párrafo es decir qué querés hacer (primer enunciado) o hablar sobre el estado del arte (segundo y tercer enunciado)?}.
 
+Una forma de detectar caos cuántico es mediante las correlaciones de corto alcance en el espectro de energías del sistema\janote{mal primer enunciado porque sólo contiene la idea de la primera mitad del párrafo. El párrafo de qué trata en general? En función de eso escribí otro primer enunciado}. Empleando las diferencias a primer vecino\janote{primeros vecinos}, $s$\janote{cómo se define $s$?} y haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random},
+es observado que la densidad de probabilidad $P(s)$ para sistemas caóticos exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$) y sistemas integrables, exhiben '\janote{``}level clustering'\janote{''} ($P(s)\propto e^{-s}$\janote{esto no es level clustering})~\cite{mehta1991random,alonso-lobo2025simplest}.
+Otra forma de detectar caos cuántico es empleando correlaciones de largo alcance, para ello se empleará el factor de forma espectral (SFF por su siglas en inglés)~\cite{haake2018quantum}, la manifestación de caos cuántico para este indicador es mediante la aparación del agujero de correlaciones (dip), una rampa (ramp) y una saturación alrededor de un valor dado (plateu)~\cite{haake2018quantum}\janote{decir que sólo después de promediar},
+si el sistema es integrable, no existe un dip y únicamente se presenta el plateu\janote{este enunciado está larguísimo, partilo en 3}. Puesto que \eqref{eq:U} es unitaria, sus valores propios son en general complejos de norma 1, por lo que se considerará para este trabajo las fases de dichos valores propios y es con estos valores con los que se realiza la estadística\janote{este enunciado está completamente desconectado del párrafo}.
+
+\janote{A este párrafo le falta iterar, está muy escueto y debería de dar más detalles acerca de qué se trata el proyecto, amarrando con las cosas que introdujiste en el marco teórico que presentaste antes}
 Se analizan cuales son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica según el operador \eqref{eq:U}, tomando en cuenta distintas condiciones de frontera y operadores de $C$. Buscando responder a la pregunta de si las condiciones de frontera son suficientes para determinar la caoticidad o integrabilidad de la caminata a estudiar.
-        % *}}}
+% *}}}
 \section{Objetivos}  % {{{*
 
 \subsection{Objetivo general}
