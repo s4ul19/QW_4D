@@ -1,0 +1,59 @@
+%Para figuras \begin{figure}[H]
+   % \centering
+    %\includegraphics[width=0.8\textwidth]{RectangleStateTimeEvol.pdf}
+    %\caption{Evolución de un estado localizado con estado inicial de moneda $(1,1,1,1)$ en el tiempo $t=275$ pasos. Dimensiones del estadio: $L_x=200$, $L_y=175$. Moneda de Grover: $\pi/4$.}
+%\end{figure}
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{braket}
+\graphicspath{{Imgs/}}
+\title{Dinámica de caminatas cuánticas\\
+Con una moneda de 4D}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Generalidades}
+El estado de un caminante pertenece al espacio de Hilbert $\mathcal{H}=\mathcal{H}_c\otimes \mathcal{H}_p $, siendo $\mathcal{H}_c$ y $\mathcal{H}_p$
+espacios de Hilbert de la moneda y de la posición, respectivamente.
+La evolución de un caminante viene descrita por el operador evolución $\mathcal{U}$ tal que si $\ket{\psi_0}$ es un estado inicial en el tiempo $t = 0$,
+entonces:
+\begin{equation}
+\ket{\psi_1}=U\ket{\psi_0}.
+\end{equation}
+representa el primer paso del estado inicial $\ket{\psi_0}$.
+Por inducción se deduce que, a un n-ésimo paso :
+\begin{equation}
+\ket{\psi_n}=U \ket{\psi_{n-1}}=U^{n} \ket{\psi_0}.
+\end{equation}
+Pues $\mathcal{U}$ es unitaria, sus eigenvalores son de norma 1 y por tanto conviene estudiar las fases de dichos valores.
+A la fase asociada al eigenvalor dado se le llamará eigenfase.
+
+La forma de definir $U$ que se seguirá en estas notas es la siguiente:
+\begin{equation}
+\mathcal{U}=S\cdot C
+\end{equation}
+Siendo $S$ un operador que desplaza al caminante según su estado de moneda y $C$ un operador que actua sobre el estado de moneda del caminante.
+
+Es de mencionar que la presencia de condiciones de frontera está cifrada en la estructura del operador $S$.
+La dinámica resultante depende de la elección de $C$ y del tipo de condiciones de frontera a escoger.
+No es claro cuales son las condiciones sobre las cuales emerge caos cuántico (elección de moneda $C$, condiciones de frontera, etc \dots)
+\section{Dinámica segúna una moneda de Grover:}
+\subsection{Para un estadio rectangular}
+
+\end{document}
