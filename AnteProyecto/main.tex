@@ -28,7 +28,7 @@
     \textbf{Caminatas cuánticas con una moneda en 4D} \\[1.5cm]
     \textbf{Saúl Estuardo Nájera Allara} \\
     Carné: 202107506 \\[1cm]
-    Julio 2026\\[1cm]
+    Julio 2026 \cpnote{Actualiza la fecha a cuando pienses entregarlo es decir Agosto o septiembre}\\[1cm]
     Licenciatura en Física Aplicada \\[1.5cm]
     \textbf{Asesorado por:} \\
     M.Sc. José Alfredo de León (IF-UNAM), \\
@@ -70,7 +70,7 @@ Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien 
 \section{Descripción general del proyecto}  % {{{*
 
 Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica. El estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
-En este trabajo se considerará un dominio espacial bidimensional y una dimensión de su espacio de moneda de cuatro. La dinámica depende de cómo se formule el operador unitario $\mathcal{U}$ responsable de la evolución.
+En este trabajo se considerará un dominio espacial bidimensional y una dimensión de su espacio de moneda de cuatro\cpnote{Redaccion rara}. La dinámica depende de cómo se formule el operador unitario $\mathcal{U}$ responsable de la evolución\cpnote{frase vacia}.
 Basándose en la literatura existente~\cite{portugal2018quantum}, una posible forma de definir $\mathcal{U}$ es:
 \begin{equation}
     \mathcal{U}=S\cdot C.
@@ -84,16 +84,21 @@ por ejemplo, el algoritmo de Grover~\cite{grover1996fastquantummechanicalalgorit
 El estudio del caos cuántico se originó a partir del análisis de sistemas cuánticos cuyo límite clásico exhibe una dinámica caótica. Esta investigación condujo a establecer una correspondencia entre la estadística de los espectros de energía de dichos sistemas y la estadística de los ensambles descritos por la teoría de matrices aleatorias (RMT, por sus siglas en inglés)~\cite{bohigas1984characterization}.
 En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson~\cite{berry1977level}.
 Mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
+\cpnote{
+1. "Mientras que" iniciando oración tras punto.
+"Mientras que" es una conjunción subordinante — necesita una cláusula principal a la que subordinarse. Empezar una oración nueva con ella (después de punto) es un calco del inglés ("Whereas...") que en español académico formal se lee como fragmento.
+}
 
 
 En la literatura reciente, se ha estudiado un modelo de caminata cuántica bidimensional que emplea un solo qubit como estado de moneda~\cite{alonso-lobo2025simplest}, 
 concluyendo que existe una correspondencia entre las condiciones de frontera y la dinámica del sistema.
 Sin embargo, no es concluyente si esta relación se mantiene al emplear un estado de moneda conformado por un único sistema de cuatro dimensiones (qudit).
 Tomando en consideración el hecho de que una partícula libre clásica en un dominio bidimensional exhibe una dinámica caótica o integrable dependiendo de la geometría de sus fronteras,
-este trabajo propone investigar si la dinámica de un caminante con una moneda en 4D exhibe rasgos de caoticidad o integrabilidad y si las condiciones de frontera son suficientes para establecer dicha distinción.
+este trabajo propone investigar si la dinámica de un caminante con una moneda en 4D exhibe rasgos de caoticidad o integrabilidad y si las condiciones de frontera son suficientes para establecer dicha distinción\cpnote{Esta frase es super importante porque estas diciendo lo que quieres hacer en el trabajo, sin embargo se me hace innecesariamente complicada. Quizá partela en dos o simplificala}.
 
 La presencia de caos cuántico en un sistema se identifica analizando las propiedades estadísticas de su espectro, evaluando para ello tanto las correlaciones de corto como de largo alcance.
 Puesto que el operador de evolución $\mathcal{U}$ es unitario, sus valores propios son números complejos de norma 1, por lo tanto, el análisis estadístico no se realiza sobre los valores propios de $\mathcal{U}$, sino sobre las fases de dichos valores propios, conocidas como cuasienergías.
+\cpnote{No entiendo el proposito de este parrafo. Croe que es mas bien como dependiendo de lo que sigue en el siguiente. Piensa en rediseñar este y los siguientes parrafos. si no está claro, lo podemos platicar en una minireuion. otra idea sería poner esta idea justo en el parrafo donde hablas de RMT. Aca realmente se siente un poco fuera de contexto. }
 
 Para estudiar las correlaciones de corto alcance se emplean las diferencias a primeros vecinos, $s$, definida como la separación entre dos cuasienergías consecutivas normalizada por el espaciamiento medio del espectro. 
 Haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random}, se observa que la densidad de probabilidad $P(s)$ para sistemas caóticos exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$). En contraste, los sistemas integrables obedecen una estadística de Poisson ($P(s) = e^{-s}$), esta distribución produce una máxima probabilidad para espaciamientos pequeños, fenómeno que se visualiza como una aglomeración de niveles o \textit{level clustering}~\cite{mehta1991random,alonso-lobo2025simplest}.
@@ -101,17 +106,16 @@ Haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,
 Por otro lado, para detectar correlaciones de largo alcance se empleará el factor de forma espectral (SFF por sus siglas en inglés)~\cite{haake2018quantum}. La manifestación de caos cuántico para este indicador consiste en la aparición de un agujero de correlaciones (\textit{dip}), seguido de una rampa (\textit{ramp}) y una saturación alrededor de un valor constante (\textit{plateau}), características que se revelan únicamente después de aplicar un promedio estadístico adecuado (sobre ventanas móviles o ensambles)~\cite{haake2018quantum}.
 Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, presentándose únicamente el \textit{plateau}. 
 
-En este trabajo se analizará cuáles son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica según el operador \eqref{eq:U}, tomando en cuenta distintas condiciones de frontera y operadores de $C$, se busca responder a la pregunta de si las condiciones de frontera son suficientes para determinar la caoticidad o integrabilidad de la caminata a estudiar.
+En este trabajo se analizará cuáles son las condiciones sobre las cuales emerge caos cuántico en una caminata cuántica según el operador \eqref{eq:U}, tomando en cuenta distintas condiciones de frontera y operadores de $C$, se busca responder a la pregunta de si las condiciones de frontera son suficientes para determinar la caoticidad o integrabilidad de la caminata a estudiar. \cpnote{Creo que puedes usar frases o conceptos que liguen este parrafo con los anteriores}
 % *}}}
 \section{Objetivos}  % {{{*
 
 \subsection{Objetivo general}
-Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica discreta en el tiempo con una moneda de cuatro dimensiones y un espacio de posición con geometría de billar. \cpnote{chido}
+Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica discreta en el tiempo con una moneda de cuatro dimensiones y un espacio de posición con geometría de billar. 
 
 \subsection{Objetivos específicos}
-\cpnote{Bien planteados, me gusta}
 \begin{itemize}
-    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de rectángulo \cpnote{no es nombre propio}\snnote{listo.} y Sinaí.
+    \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de rectángulo y Sinaí.
     \item Determinar la densidad de cuasienergías del operador de evolución para identificar singularidades espectrales o regularidades estructurales asociadas a cada geometría.
     \item Contrastar las predicciones de la teoría de matrices aleatorias con los resultados numéricos de la distribución del espaciamiento de niveles a primeros vecinos y el factor de forma espectral para determinar la existencia de correlaciones de corto y largo alcance en el espectro de cuasienergías.
     \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos.
@@ -120,10 +124,12 @@ Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica 
 
 % *}}}
 \section{Justificación del proyecto}  % {{{*
+\cpnote{Escribelos por favor}
 \textbf{Pendiente.}
 
 % *}}}
 \section{Cronograma de actividades}  % {{{*
+\cpnote{Escribelos por favor}
 
 \textbf{Pendiente.}
 \begin{table}[h]
