@@ -14,6 +14,12 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{braket}
+
+\usepackage{xcolor}
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\definecolor{jacolor}{RGB}{200,40,0}
+\FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
+
 \graphicspath{{Imgs/}}
 \title{Dinámica de caminatas cuánticas\\
 Con una moneda de 4D}
@@ -23,6 +29,8 @@ Con una moneda de 4D}
 % *}}}
 \begin{document}
 \maketitle
+\janote{Faltan resultados sobre el promedio temporal de la distribución de probabilidad (la que tiene una distribución límite)}\janote{Lo importante aquí era que aparecían dos cosas: (1) localización en el sito inicial que es característica de la moneda de Grover (explicación en un paper de Aharonov, creo, Saul sabe), (2) patrones de localización siempre que la geometría es integrable, y ausencia de los patrones cuando la geometría es caótica}
+\janote{Faltan resultados sobre la IPR}
 \tableofcontents
 \newpage
 \section{Generalidades} % {{{*
