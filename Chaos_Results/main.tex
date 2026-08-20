@@ -29,7 +29,8 @@ Con una moneda de 4D}
 % *}}}
 \begin{document}
 \maketitle
-\janote{Faltan resultados sobre el promedio temporal de la distribución de probabilidad (la que tiene una distribución límite)}\janote{Lo importante aquí era que aparecían dos cosas: (1) localización en el sito inicial que es característica de la moneda de Grover (explicación en un paper de Aharonov, creo, Saul sabe), (2) patrones de localización siempre que la geometría es integrable, y ausencia de los patrones cuando la geometría es caótica}
+\janote{Faltan resultados sobre el promedio temporal de la distribución de probabilidad (la que tiene una distribución límite)}
+\janote{Lo importante aquí era que aparecían dos cosas: (1) localización en el sito inicial que es característica de la moneda de Grover (explicación en un paper de Aharonov \cite{aharonov2001quantum}, creo, Saul sabe), (2) patrones de localización siempre que la geometría es integrable, y ausencia de los patrones cuando la geometría es caótica}
 \janote{Faltan resultados sobre la IPR}
 \tableofcontents
 \newpage
@@ -51,7 +52,7 @@ A la fase asociada al eigenvalor dado se le llamará eigenfase.
 
 La forma de definir $U$ que se seguirá en estas notas es la siguiente:
 \begin{equation}
-\mathcal{U}=S\cdot C
+\mathcal{U}=S\cdot C.
 \end{equation}
 Siendo $S$ un operador que desplaza al caminante según su estado de moneda y $C$ un operador que actua sobre el estado de moneda del caminante.
 
@@ -60,8 +61,29 @@ La dinámica resultante depende de la elección de $C$ y del tipo de condiciones
 No es claro cuales son las condiciones sobre las cuales emerge caos cuántico (elección de moneda $C$, condiciones de frontera, etc \dots)
 
 % *}}}
-\section{Dinámica según una moneda de Grover:} % {{{*
-\subsection{Para un estadio rectangular}
+
+\section{Acerca de la limit distribution.}
+Considerando que $dim(\mathcal{H}_c)=4$ y un dominio espacial $\Omega$ tal que si $(x,y)\in \Omega$ entonces $\ket{x,y}\in \mathcal{H}_p$.
+Sea $v$ el nodo asociado a la coordenada $(x,y)$, luego
+$$
+\ket{c_i}\otimes\ket{v}=\ket{c_i,v}.
+$$
+representa un estado localizado en la posición $v=(x,y)$ con estado de moneda $c_i$.
+Defínase la probabilidad de hallar al caminante en la coordenada $v=(x,y)$ en un tiempo $t$ partiendo del estado inicial $\ket{\alpha_0}$, independientemente de su estado de moneda, según~\cite{aharonov2001quantum}:
+\begin{equation}
+    P_t(v|\alpha_0)=\sum_{k}|\braket{c_k,v|\alpha_t}|^{2}.
+    \label{eq:SiteProb}
+\end{equation}
+Esta cantidad no converge a un límite asintótico.
+
+Así mismo se define la distribución límite, \textit{limit distribution}~\cite{aharonov2001quantum}, la cual es el promedio temporal de \eqref{eq:SiteProb}.
+\begin{equation}
+    \bar{P_T}(v|\alpha_0)=\frac{1}{T}\sum_{t=0}^{T-1}P_t(v|\alpha_0).
+    \label{eq:LimitDist}
+\end{equation}
+\section{Dinámica según distintas monedas.}
+\subsection{Dinámica según una moneda de Grover:} % {{{*
+\subsubsection{Para un estadio rectangular}
 Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \begin{figure}[H]
     \centering
@@ -90,7 +112,7 @@ Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \end{figure}
 \end{itemize}
 
-\subsection{Para un estadio triangular:}
+\subsubsection{Para un estadio triangular:}
 Empleando un estadio triangular de lado $L=49$.
 \begin{figure}[H]
     \centering
@@ -120,7 +142,7 @@ Empleando un estadio triangular de lado $L=49$.
 \end{figure}
 \end{itemize}
 
-\subsection{Para un estadio 1/8 de sinaí:}
+\subsubsection{Para un estadio 1/8 de sinaí:}
 Empleando un estadio triangular de lado $L=63$ y $R=44$.
 \begin{figure}[H]
     \centering
@@ -151,8 +173,8 @@ Empleando un estadio triangular de lado $L=63$ y $R=44$.
 \end{itemize}
 
 % *}}}
-\section{Dinámica según una moneda de Haadamar:} % {{{*
-\subsection{Para un estadio rectangular}
+\subsection{Dinámica según una moneda de Haadamar:} % {{{*
+\subsubsection{Para un estadio rectangular}
 Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \begin{figure}[H]
     \centering
@@ -181,7 +203,7 @@ Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \end{figure}
 \end{itemize}
 
-\subsection{Para un estadio triangular:}
+\subsubsection{Para un estadio triangular:}
 Empleando un estadio triangular de lado $L=49$.
 \begin{figure}[H]
     \centering
@@ -211,7 +233,7 @@ Empleando un estadio triangular de lado $L=49$.
 \end{figure}
 \end{itemize}
 
-\subsection{Para un estadio 1/8 de sinaí:}
+\subsubsection{Para un estadio 1/8 de sinaí:}
 Empleando un estadio triangular de lado $L=63$ y $R=44$.
 \begin{figure}[H]
     \centering
@@ -242,9 +264,9 @@ Empleando un estadio triangular de lado $L=63$ y $R=44$.
 \end{itemize}
 
 % *}}}
-\section{Dinámica según una moneda aleatoria del ensamble COE:} % {{{*
+\subsection{Dinámica según una moneda aleatoria del ensamble COE:} % {{{*
 La moneda pertenece a una muestra del ensamble circular ortogonal.
-\subsection{Para un estadio rectangular}
+\subsubsection{Para un estadio rectangular}
 Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \begin{figure}[H]
     \centering
@@ -273,7 +295,7 @@ Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \end{figure}
 \end{itemize}
 
-\subsection{Para un estadio triangular:}
+\subsubsection{Para un estadio triangular:}
 Empleando un estadio triangular de lado $L=49$.
 \begin{figure}[H]
     \centering
@@ -303,7 +325,7 @@ Empleando un estadio triangular de lado $L=49$.
 \end{figure}
 \end{itemize}
 
-\subsection{Para un estadio 1/8 de sinaí:}
+\subsubsection{Para un estadio 1/8 de sinaí:}
 Empleando un estadio triangular de lado $L=63$ y $R=44$.
 \begin{figure}[H]
     \centering
@@ -332,6 +354,10 @@ Empleando un estadio triangular de lado $L=63$ y $R=44$.
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
-
 % *}}}
+
+% --- NUEVA SECCIÓN DE BIBLIOGRAFÍA ---
+\bibliographystyle{plain}
+\bibliography{ref}
+
 \end{document}
