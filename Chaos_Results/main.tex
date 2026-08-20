@@ -22,7 +22,7 @@
 
 \graphicspath{{Imgs/}}
 \title{Dinámica de caminatas cuánticas\\
-Con una moneda de 4D}
+Con una moneda en 4D}
 \author{}
 \date{}
 
@@ -35,89 +35,171 @@ Con una moneda de 4D}
 \tableofcontents
 \newpage
 \section{Generalidades} % {{{*
-El estado de un caminante pertenece al espacio de Hilbert $\mathcal{H}=\mathcal{H}_c\otimes \mathcal{H}_p $, siendo $\mathcal{H}_c$ y $\mathcal{H}_p$
-espacios de Hilbert de la moneda y de la posición, respectivamente.
-La evolución de un caminante viene descrita por el operador evolución $\mathcal{U}$ tal que si $\ket{\psi_0}$ es un estado inicial en el tiempo $t = 0$,
-entonces:
+El estado de un caminante pertenece al espacio de Hilbert $\mathcal{H}=\mathcal{H}_c\otimes \mathcal{H}_p $, siendo $\mathcal{H}_c$ y $\mathcal{H}_p$ los espacios de Hilbert de la moneda y de la posición, respectivamente.
+
+La evolución de un caminante viene descrita por el operador evolución $U$ tal que, si $\ket{\psi_0}$ es un estado inicial en el tiempo $t = 0$, entonces:
 \begin{equation}
-\ket{\psi_1}=U\ket{\psi_0}.
+\ket{\psi_1}=U\ket{\psi_0}
 \end{equation}
-representa el primer paso del estado inicial $\ket{\psi_0}$.
-Por inducción se deduce que, a un n-ésimo paso :
+representa el primer paso del estado inicial $\ket{\psi_0}$. Por inducción se deduce que, al $n$-ésimo paso:
 \begin{equation}
 \ket{\psi_n}=U \ket{\psi_{n-1}}=U^{n} \ket{\psi_0}.
 \end{equation}
-Pues $\mathcal{U}$ es unitaria, sus eigenvalores son de norma 1 y por tanto conviene estudiar las fases de dichos valores.
-A la fase asociada al eigenvalor dado se le llamará eigenfase.
+Dado que $U$ es unitaria, sus eigenvalores son de norma 1 y por tanto conviene estudiar las fases de dichos valores. A la fase asociada a un eigenvalor dado se le llamará eigenfase.
 
 La forma de definir $U$ que se seguirá en estas notas es la siguiente:
 \begin{equation}
-\mathcal{U}=S\cdot C.
+U=S\cdot C.
 \end{equation}
-Siendo $S$ un operador que desplaza al caminante según su estado de moneda y $C$ un operador que actua sobre el estado de moneda del caminante.
+donde $S$ es un operador que desplaza al caminante según su estado de moneda y $C$ es un operador que actúa sobre el estado de moneda del caminante.
 
-Es de mencionar que la presencia de condiciones de frontera está cifrada en la estructura del operador $S$.
-La dinámica resultante depende de la elección de $C$ y del tipo de condiciones de frontera a escoger.
-No es claro cuales son las condiciones sobre las cuales emerge caos cuántico (elección de moneda $C$, condiciones de frontera, etc \dots)
+Cabe mencionar que la presencia de condiciones de frontera está codificada en la estructura del operador $S$. La dinámica resultante depende de la elección de $C$ y del tipo de condiciones de frontera a escoger. No es claro cuáles son las condiciones exactas sobre las cuales emerge caos cuántico (elección de moneda $C$, condiciones de frontera, etc.).
 
 % *}}}
 
-\section{Acerca de la limit distribution.}
-Considerando que $dim(\mathcal{H}_c)=4$ y un dominio espacial $\Omega$ tal que si $(x,y)\in \Omega$ entonces $\ket{x,y}\in \mathcal{H}_p$.
-Sea $v$ el nodo asociado a la coordenada $(x,y)$, luego
-$$
-\ket{c_i}\otimes\ket{v}=\ket{c_i,v}.
-$$
-representa un estado localizado en la posición $v=(x,y)$ con estado de moneda $c_i$.
-Defínase la probabilidad de hallar al caminante en la coordenada $v=(x,y)$ en un tiempo $t$ partiendo del estado inicial $\ket{\alpha_0}$, independientemente de su estado de moneda, según~\cite{aharonov2001quantum}:
+\section{Distribución límite}
+Considérese un espacio de moneda de dimensión $\text{dim}(\mathcal{H}_c)=4$ y un dominio espacial $\Omega$ tal que, si $(x,y)\in \Omega$, entonces el estado de posición correspondiente es $\ket{x,y}\in \mathcal{H}_p$. Sea $v$ el nodo asociado a la coordenada $(x,y)$; luego, el producto tensorial
 \begin{equation}
-    P_t(v|\alpha_0)=\sum_{k}|\braket{c_k,v|\alpha_t}|^{2}.
+\ket{c_i}\otimes\ket{v}=\ket{c_i,v}
+\label{eq:State}
+\end{equation}
+representa un estado localizado en la posición $v=(x,y)$ con un estado interno de moneda $c_i$.
+
+Los vectores $\ket{c_i}$ conforman la base del subespacio de la moneda $\mathcal{H}_c$ y representan las direcciones de movimiento permitidas. Estas se interpretan como izquierda, arriba, derecha y abajo, y sin pérdida de generalidad se asignan a $\ket{c_1}, \ket{c_2}, \ket{c_3}$ y $\ket{c_4}$, respectivamente.
+
+La probabilidad de hallar al caminante en el nodo $v$ en un tiempo $t$, dado un estado inicial $\ket{\alpha_0}$ e independientemente de su estado de moneda, se define como~\cite{aharonov2001quantum}:
+\begin{equation}
+    P_t(v|\alpha_0)=\sum_{k=1}^{4}|\braket{c_k,v|\alpha_t}|^{2}.
     \label{eq:SiteProb}
 \end{equation}
-Esta cantidad no converge a un límite asintótico.
 
-Así mismo se define la distribución límite, \textit{limit distribution}~\cite{aharonov2001quantum}, la cual es el promedio temporal de \eqref{eq:SiteProb}.
+Debido a la naturaleza unitaria de la evolución cuántica, las amplitudes de probabilidad oscilan y esta cantidad no converge a un límite asintótico cuando $t \to \infty$. Para lidiar con esta falta de convergencia, se define la distribución límite (\textit{limit distribution})~\cite{aharonov2001quantum} como el promedio temporal de las probabilidades \eqref{eq:SiteProb}:
 \begin{equation}
     \bar{P_T}(v|\alpha_0)=\frac{1}{T}\sum_{t=0}^{T-1}P_t(v|\alpha_0).
     \label{eq:LimitDist}
 \end{equation}
-\section{Dinámica según distintas monedas.}
-\subsection{Dinámica según una moneda de Grover:} % {{{*
+\subsection{Moneda de Grover}
+La moneda de Grover es especial en el sentido de que, para la mayoría de estados iniciales de moneda, se observa que el caminante se localiza alrededor de su posición inicial, a excepción del caso en el que el caminante cuenta con un estado inicial de moneda de la forma:
+\begin{equation}
+\ket{c}= \pm\left(\frac{1}{2}\ket{c_1}-\frac{1}{2}\ket{c_2}+\frac{1}{2}\ket{c_3}-\frac{1}{2}\ket{c_4}\right)
+\label{eq:GrvState}
+\end{equation}
+
+\subsubsection{Rectángulo}
+Empleando un estadio rectangular con $L_x = 100,\, L_y=70$, se consideran estados localizados en una posición aleatoria y, por lo discutido previamente, con un estado de moneda de la forma \eqref{eq:GrvState}. Sin embargo, la primera figura muestra cómo sería la \textit{limit distribution} si se empleara un estado aleatorio de moneda.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_Grover_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_Grover_RndPosSpecialCoin.pdf}
+    \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
+\end{figure}
+
+\subsubsection{Triángulo}
+Empleando un estadio triangular de lado $L=70$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Triangle_Grover_RndPosSpecialCoin.pdf}
+    \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
+\end{figure}
+
+\subsubsection{Sinaí}
+Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_Grover_RndPosSpecialCoin.pdf}
+    \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
+\end{figure}
+\subsection{Moneda de Hadamard}
+\subsubsection{Rectángulo}
+Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_Haad_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+
+\subsubsection{Triángulo}
+Empleando un estadio triangular de lado $L=70$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Triangle_Haad_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+
+\subsubsection{Sinaí}
+Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_Haad_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+\subsection{Moneda aleatoria del ensamble COE}
+Tomando una moneda aleatoria del Ensamble Circular Ortogonal (COE).
+\subsubsection{Rectángulo}
+Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_COE_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+
+\subsubsection{Triángulo}
+Empleando un estadio triangular de lado $L=70$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Triangle_COE_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+
+\subsubsection{Sinaí}
+Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_COE_RndPosCoin.pdf}
+    \caption{Usando un estado de moneda aleatorio.}
+\end{figure}
+\section{Dinámica según distintas monedas}
+\subsection{Dinámica según una moneda de Grover} % {{{*
 \subsubsection{Para un estadio rectangular}
-Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
+Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Rect.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio rectangular con $L_x = 40,\, L_y=30$}
 \end{figure}
 \begin{itemize}
     \item DoS:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{DoS_Rect_Grover.pdf}
-    \caption{DoS, notar las degeneraciones para $0$ y $\pi$}
+    \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Ps_Rect_Grover.pdf}
-    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$}
+    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{SFF_Rect_Grover.pdf}
-    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$}
+    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \end{itemize}
 
-\subsubsection{Para un estadio triangular:}
+\subsubsection{Para un estadio triangular}
 Empleando un estadio triangular de lado $L=49$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Triangle.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio triangular con $L = 49$}
 \end{figure}
 \begin{itemize}
     \newpage
@@ -125,29 +207,29 @@ Empleando un estadio triangular de lado $L=49$.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{DoS_Triangle_Grover.pdf}
-    \caption{DoS, notar las degeneraciones para $0$ y $\pi$}
+    \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Ps_Triangle_Grover.pdf}
-    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$}
+    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{SFF_Triangle_Grover.pdf}
-    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$}
+    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \end{itemize}
 
-\subsubsection{Para un estadio 1/8 de sinaí:}
-Empleando un estadio triangular de lado $L=63$ y $R=44$.
+\subsubsection{Para un estadio 1/8 de Sinaí}
+Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Sinai.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio $1/8$ de Sinaí con $L = 63$ y $R = 44$}
 \end{figure}
 \begin{itemize}
     \newpage
@@ -155,31 +237,31 @@ Empleando un estadio triangular de lado $L=63$ y $R=44$.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{DoS_Sinai_Grover.pdf}
-    \caption{DoS, notar las degeneraciones para $0$ y $\pi$}
+    \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Ps_Sinai_Grover.pdf}
-    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$}
+    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{SFF_Sinai_Grover.pdf}
-    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$}
+    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \end{itemize}
 
 % *}}}
-\subsection{Dinámica según una moneda de Haadamar:} % {{{*
+\subsection{Dinámica según una moneda de Hadamard} % {{{*
 \subsubsection{Para un estadio rectangular}
-Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
+Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Rect.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio rectangular con $L_x = 40,\, L_y=30$}
 \end{figure}
 \begin{itemize}
     \item DoS:
@@ -203,12 +285,12 @@ Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \end{figure}
 \end{itemize}
 
-\subsubsection{Para un estadio triangular:}
+\subsubsection{Para un estadio triangular}
 Empleando un estadio triangular de lado $L=49$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Triangle.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio triangular con $L = 49$}
 \end{figure}
 \begin{itemize}
     \newpage
@@ -233,12 +315,12 @@ Empleando un estadio triangular de lado $L=49$.
 \end{figure}
 \end{itemize}
 
-\subsubsection{Para un estadio 1/8 de sinaí:}
-Empleando un estadio triangular de lado $L=63$ y $R=44$.
+\subsubsection{Para un estadio 1/8 de Sinaí}
+Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Sinai.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio $1/8$ de Sinaí con $L = 63$ y $R = 44$}
 \end{figure}
 \begin{itemize}
     \newpage
@@ -264,14 +346,14 @@ Empleando un estadio triangular de lado $L=63$ y $R=44$.
 \end{itemize}
 
 % *}}}
-\subsection{Dinámica según una moneda aleatoria del ensamble COE:} % {{{*
-La moneda pertenece a una muestra del ensamble circular ortogonal.
+\subsection{Dinámica según una moneda aleatoria del ensamble COE} % {{{*
+La moneda pertenece a una muestra del Ensamble Circular Ortogonal (COE).
 \subsubsection{Para un estadio rectangular}
-Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
+Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Rect.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio rectangular con $L_x = 40,\, L_y=30$}
 \end{figure}
 \begin{itemize}
     \item DoS:
@@ -295,12 +377,12 @@ Empleando un estadio rectángular con $L_x = 40,\, L_y=30$.
 \end{figure}
 \end{itemize}
 
-\subsubsection{Para un estadio triangular:}
+\subsubsection{Para un estadio triangular}
 Empleando un estadio triangular de lado $L=49$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Triangle.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio triangular con $L = 49$}
 \end{figure}
 \begin{itemize}
     \newpage
@@ -325,12 +407,12 @@ Empleando un estadio triangular de lado $L=49$.
 \end{figure}
 \end{itemize}
 
-\subsubsection{Para un estadio 1/8 de sinaí:}
-Empleando un estadio triangular de lado $L=63$ y $R=44$.
+\subsubsection{Para un estadio 1/8 de Sinaí}
+Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Stadium_Sinai.pdf}
-    \caption{Estadio rectángular con $L_x = 40,\, L_y=30$}
+    \caption{Estadio $1/8$ de Sinaí con $L = 63$ y $R = 44$}
 \end{figure}
 \begin{itemize}
     \newpage
