@@ -28,7 +28,7 @@
     \textbf{Caminatas cuánticas con una moneda en 4D} \\[1.5cm]
     \textbf{Saúl Estuardo Nájera Allara} \\
     Carné: 202107506 \\[1cm]
-    Julio 2026 \cpnote{Actualiza la fecha a cuando pienses entregarlo es decir Agosto o septiembre}\\[1cm]
+    Agosto 2026 \cpnote{Actualiza la fecha a cuando pienses entregarlo es decir Agosto o septiembre}\snnote{Actualizado.}\\[1cm]
     Licenciatura en Física Aplicada \\[1.5cm]
     \textbf{Asesorado por:} \\
     M.Sc. José Alfredo de León (IF-UNAM), \\
@@ -71,7 +71,7 @@ Este proyecto estará bajo la asesoría del M.Sc. José Alfredo de León, quien 
 
 Las caminatas cuánticas son el análogo cuántico de una caminata aleatoria clásica. El estado de un caminante es el producto tensorial de su posición y el estado de su moneda.
 En este trabajo se considerará un dominio espacial bidimensional y \sout{una dimensión de su espacio de moneda de cuatro}\cpnote{Redaccion rara}\snnote{listo.} un espacio de moneda de dimensión 4. \sout{La dinámica depende de cómo se formule el operador unitario $\mathcal{U}$ responsable de la evolución}\cpnote{frase vacia}\snnote{Fue removida, realmente no estaba diciendo mucho.} 
-Basándose en la literatura existente~\cite{portugal2018quantum}, una posible forma de definir $\mathcal{U}$ es:
+La evolución del caminante está dictada por la aplicación del operador unitario de evolución $\mathcal{U}$. Basándose en la literatura existente~\cite{portugal2018quantum}, una forma posible de definir dicho operador es:
 \begin{equation}
     \mathcal{U}=S\cdot C.
     \label{eq:U}
@@ -85,8 +85,8 @@ El estudio del caos cuántico se originó a partir del análisis de sistemas cu�
 En este marco, la conjetura de Berry-Tabor postula que las fluctuaciones espectrales de sistemas con una contraparte clásica integrable obedecen una estadística de Poisson~\cite{berry1977level}\sout{. Mientras}\cpnote{
 1. 'Mientras que' iniciando oración tras punto.
 'Mientras que' es una conjunción subordinante — necesita una cláusula principal a la que subordinarse. Empezar una oración nueva con ella (después de punto) es un calco del inglés ("Whereas...") que en español académico formal se lee como fragmento.
-}\snnote{Gracias por eso, no tenía idea.}, mientras que la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
-Para aplicar este formalismo a las caminatas cuánticas, se debe considerar que el operador de evolución $\mathcal{U}$ es unitario y sus valores propios son complejos de norma 1; por lo tanto, la presencia de caos cuántico no se evalúa con los valores propios de \eqref{eq:U}, sino sobre las fases de dichos valores propios, conocidas como cuasienergías, analizando sus correlaciones estadísticas tanto de corto como de largo alcance.
+}\snnote{Gracias por la observación. Lo modifiqué para evitar la subordinante y mantener las oraciones independientes.} Por su parte, la conjetura de Bohigas, Giannoni y Schmit (BGS) establece que, si el análogo clásico es caótico, las propiedades estadísticas del espectro seguirán de manera universal las predicciones de RMT~\cite{bohigas1984characterization}.
+\snnote{I. Aca moví el párrafo que había colocado en la línea 97 a 98.}Para aplicar este formalismo a las caminatas cuánticas, se debe considerar que el operador de evolución $\mathcal{U}$ es unitario y sus valores propios son complejos de norma 1; por lo tanto, la presencia de caos cuántico no se evalúa con los valores propios de \eqref{eq:U}, sino sobre las fases de dichos valores propios, conocidas como cuasienergías, analizando sus correlaciones estadísticas tanto de corto como de largo alcance.
 
 En la literatura reciente, se ha estudiado un modelo de caminata cuántica bidimensional que emplea un solo qubit como estado de moneda~\cite{alonso-lobo2025simplest}, 
 concluyendo que existe una correspondencia entre las condiciones de frontera y la dinámica del sistema.
@@ -96,7 +96,7 @@ Clásicamente, una partícula libre en un dominio bidimensional presenta una din
 
 \sout{La presencia de caos cuántico en un sistema se identifica analizando las propiedades estadísticas de su espectro, evaluando para ello tanto las correlaciones de corto como de largo alcance.
 Puesto que el operador de evolución $\mathcal{U}$ es unitario, sus valores propios son números complejos de norma 1, por lo tanto, el análisis estadístico no se realiza sobre los valores propios de $\mathcal{U}$, sino sobre las fases de dichos valores propios, conocidas como cuasienergías.}
-\cpnote{No entiendo el proposito de este parrafo. Croe que es mas bien como dependiendo de lo que sigue en el siguiente. Piensa en rediseñar este y los siguientes parrafos. si no está claro, lo podemos platicar en una minireuion. otra idea sería poner esta idea justo en el parrafo donde hablas de RMT. Aca realmente se siente un poco fuera de contexto. }\snnote{Lo he movido de lugar a la sección donde hablo de RMT.}
+\cpnote{No entiendo el proposito de este parrafo. Croe que es mas bien como dependiendo de lo que sigue en el siguiente. Piensa en rediseñar este y los siguientes parrafos. si no está claro, lo podemos platicar en una minireuion. otra idea sería poner esta idea justo en el parrafo donde hablas de RMT. Aca realmente se siente un poco fuera de contexto. }\snnote{I. Lo he movido de lugar a la sección donde hablo de RMT.}
 
 Para estudiar las correlaciones de corto alcance se emplean las diferencias a primeros vecinos, $s$, definida como la separación entre dos cuasienergías consecutivas normalizada por el espaciamiento medio del espectro. 
 Haciendo uso de las predicciones analíticas de RMT~\cite{wigner1951statistical,mehta1991random}, se observa que la densidad de probabilidad $P(s)$ para sistemas caóticos exhibe repulsión de niveles ($P(s)\rightarrow 0,\, s\rightarrow 0$). En contraste, los sistemas integrables obedecen una estadística de Poisson ($P(s) = e^{-s}$), esta distribución produce una máxima probabilidad para espaciamientos pequeños, fenómeno que se visualiza como una aglomeración de niveles o \textit{level clustering}~\cite{mehta1991random,alonso-lobo2025simplest}.
