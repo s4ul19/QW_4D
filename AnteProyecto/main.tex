@@ -24,7 +24,7 @@
 \begin{center}
     \Large \textbf{UNIVERSIDAD DE SAN CARLOS DE GUATEMALA} \\
     \textbf{ESCUELA DE CIENCIAS FÍSICAS Y MATEMÁTICAS} \\[1.5cm]
-    \Large \textbf{Protocolo de trabajo de tesis:} \\
+    \Large \textbf{Protocolo de trabajo de tesis.:} \\
     \textbf{Caminatas cuánticas con una moneda en 4D} \\[1.5cm]
     \textbf{Saúl Estuardo Nájera Allara} \\
     Carné: 202107506 \\[1cm]
@@ -54,23 +54,24 @@ Este proyecto se desarrolla en el marco del Instituto de investigación de Cienc
 \section{Justificación}  % {{{*
 \cpnote{Escribelos por favor}\snnote{Esqueleto Propuesto}
 \begin{itemize}
-\item Justificar por qué vale la pena estudiar las caminatas cuánticas en primer lugar, destacando su utilidad en la ciencia actual.
-
-Las caminatas cuánticas poseen una relevancia científica importante, ya que dan lugar a la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum} y permiten simular sistemas complejos~\cite{portugal2018quantum}. 
-Además, destacan por posibilitar realizaciones experimentales que no requieren de computadoras cuánticas universales~\cite{portugal2018quantum,lorz2019photonic},
-proporcionando así una plataforma controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información.
+    \item Justificar por qué vale la pena estudiar las caminatas cuánticas en primer lugar, destacando su utilidad en la ciencia actual.
+   
+   Las caminatas cuánticas poseen una relevancia científica importante, ya que dan lugar a la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum} y permiten simular sistemas físicos complejos, tales como fenómenos de transporte coherente, transiciones de fase topológicas y dinámicas en redes estructuradas~\cite{portugal2018quantum}. 
+   Además, debido a su estructura matemática, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas, sin requerir el desarrollo de computadoras cuánticas universales~\cite{portugal2018quantum,lorz2019photonic}. Esto proporciona una plataforma empírica controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información.
 
 \item Justificar por qué usar billares (rectángulo y Sinaí).
     
-En el marco de la correspondencia entre la dinámica clásica y la mecánica cuántica, los sistemas de billar clásicos resultan paradigmáticos, pues muestran cómo un cambio en la geometría de las fronteras puede llevar a un sistema de  integrabilidad al caos. 
-Incorporar estas geometrías de billar en el espacio de posición de una caminata cuántica ofrece un escenario ideal para investigar la existencia, o en su defecto la ausencia, de un comportamiento análogo en el contexto 
-cuántico.
-   
-\item Justificar porque hacer este estudio si ya existen trabajos similares~\cite{alonso-lobo2025simplest}.
+    Parte del estudio del caos cuántico se centra en comprender cómo se manifiestan las propiedades de un sistema clásicamente caótico en su contraparte cuántica.
+    Para explorar esta correspondencia, los sistemas de billar resultan paradigmáticos, pues permiten transicionar entre una dinámica clásica integrable y una caótica alterando únicamente la geometría de sus fronteras (como ocurre al pasar de un rectángulo a un billar de Sinaí). 
+    Por otro lado, incorporar estas geometrías en el espacio de posición de una caminata cuántica ofrece un escenario ideal porque estos modelos discretos otorgan un control matemático preciso sobre los operadores de evolución.
+
+\item Justificar por qué hacer este estudio si ya existen trabajos similares~\cite{alonso-lobo2025simplest}.
     
-   Si bien estudios recientes en la literatura han reportado la existencia de una correspondencia entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales, dichos trabajos se han restringido al uso de estados de moneda de menor dimensión, como un solo qubit~\cite{alonso-lobo2025simplest}.
-    En este sentido, el estado del arte presenta un vacío importante respecto a la universalidad de este fenómeno al incrementar los grados de libertad locales. La implementación de un estado de moneda de cuatro dimensiones (qudit) representa un aumento sustancial en la complejidad del operador de evolución. 
-    Por lo tanto, resulta importante investigar si la geometría de las fronteras sigue siendo una condición suficientemente fuerte para dictar el caos o la integrabilidad del sistema, o si la estructura interna de una moneda en 4D altera las firmas espectrales esperadas.
+    Si bien estudios recientes han reportado la existencia de una correspondencia entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales, dichos trabajos se han restringido al uso de un solo qubit como estado de moneda~\cite{alonso-lobo2025simplest}. 
+    Por un lado, en el enfoque bidimensional, las distribuciones espectrales obtenidas por~\cite{alonso-lobo2025simplest} no logran reproducir con exactitud las predicciones universales del Ensamble Ortogonal Gaussiano (GOE) esperadas para sistemas caóticos.
+     Por otro lado, dado que un caminante en una red bidimensional cuenta con cuatro direcciones posibles de desplazamiento (arriba, abajo, derecha, izquierda), emplear una moneda de dimensión dos para gobernar esta dinámica es solo una posible forma de definir la caminta discreta bidimensional.
+      Resulta mucho más natural y directo codificar estos cuatro movimientos en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). 
+     Por lo tanto, es de interés investigar si esta formulación "mejora" las firmas espectrales y determina si la topología de las fronteras es una condición suficientemente robusta para dictar el caos o la integrabilidad del sistema.
 \end{itemize}
 % *}}}
 \section{Objetivos}  % {{{*
