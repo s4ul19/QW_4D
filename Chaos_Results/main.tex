@@ -29,9 +29,10 @@ Con una moneda en 4D}
 % *}}}
 \begin{document}
 \maketitle
-\janote{Faltan resultados sobre el promedio temporal de la distribución de probabilidad (la que tiene una distribución límite)}
-\janote{Lo importante aquí era que aparecían dos cosas: (1) localización en el sito inicial que es característica de la moneda de Grover (explicación en un paper de Aharonov \cite{aharonov2001quantum}, creo, Saul sabe), (2) patrones de localización siempre que la geometría es integrable, y ausencia de los patrones cuando la geometría es caótica}
+
 \janote{Faltan resultados sobre la IPR}
+
+\janote{Creo que Saul también tiene resultados para el operador shift definido como en Portugal}
 \tableofcontents
 \newpage
 \section{Generalidades} % {{{*
@@ -56,8 +57,9 @@ donde $S$ es un operador que desplaza al caminante según su estado de moneda y 
 Cabe mencionar que la presencia de condiciones de frontera está codificada en la estructura del operador $S$. La dinámica resultante depende de la elección de $C$ y del tipo de condiciones de frontera a escoger. No es claro cuáles son las condiciones exactas sobre las cuales emerge caos cuántico (elección de moneda $C$, condiciones de frontera, etc.).
 
 % *}}}
+\section{Distribución límite} % {{{*
+\janote{Lo que recuerdo de importante de estos resultados era que aparecían dos cosas: (1) localización en el sito inicial que es característica de la moneda de Grover (explicación en un paper de Aharonov \cite{aharonov2001quantum}, creo, Saul sabe), (2) patrones de localización siempre que la geometría es integrable, y ausencia de los patrones cuando la geometría es caótica}
 
-\section{Distribución límite}
 Considérese un espacio de moneda de dimensión $\text{dim}(\mathcal{H}_c)=4$ y un dominio espacial $\Omega$ tal que, si $(x,y)\in \Omega$, entonces el estado de posición correspondiente es $\ket{x,y}\in \mathcal{H}_p$. Sea $v$ el nodo asociado a la coordenada $(x,y)$; luego, el producto tensorial
 \begin{equation}
 \ket{c_i}\otimes\ket{v}=\ket{c_i,v}
@@ -73,7 +75,7 @@ La probabilidad de hallar al caminante en el nodo $v$ en un tiempo $t$, dado un 
     \label{eq:SiteProb}
 \end{equation}
 
-Debido a la naturaleza unitaria de la evolución cuántica, las amplitudes de probabilidad oscilan y esta cantidad no converge a un límite asintótico cuando $t \to \infty$. Para lidiar con esta falta de convergencia, se define la distribución límite (\textit{limit distribution})~\cite{aharonov2001quantum} como el promedio temporal de las probabilidades \eqref{eq:SiteProb}:
+Debido a la naturaleza unitaria de la evolución cuántica, las amplitudes de probabilidad oscilan y esta cantidad no converge a un límite asintótico cuando $t \to \infty$. Para lidiar con esta falta de convergencia, se define la distribución límite (\textit{limit distribution})~\cite{aharonov2001quantum} como el promedio temporal de las probabilidades \eqref{eq:SiteProb}\janote{``Distribución límite'' no puede ser una definición. Debe ser el concepto definido como la distribución límite a la que converge este promedio temporal}:
 \begin{equation}
     \bar{P_T}(v|\alpha_0)=\frac{1}{T}\sum_{t=0}^{T-1}P_t(v|\alpha_0).
     \label{eq:LimitDist}
@@ -163,7 +165,8 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
     \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_COE_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
-\section{Dinámica según distintas monedas}
+% *}}}
+\section{Dinámica según distintas monedas} % {{{*
 \subsection{Dinámica según una moneda de Grover} % {{{*
 \subsubsection{Para un estadio rectangular}
 Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
@@ -438,8 +441,10 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
 \end{itemize}
 % *}}}
 
-% --- NUEVA SECCIÓN DE BIBLIOGRAFÍA ---
+% *}}}
+% --- NUEVA SECCIÓN DE BIBLIOGRAFÍA --- % {{{*
 \bibliographystyle{plain}
 \bibliography{ref}
+% *}}}
 
 \end{document}
