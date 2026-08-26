@@ -84,7 +84,7 @@ Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica 
     \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de rectángulo y Sinaí.
     \item Determinar la densidad de cuasienergías del operador de evolución para identificar singularidades espectrales o regularidades estructurales asociadas a cada geometría.
     \item Contrastar las predicciones de la teoría de matrices aleatorias con los resultados numéricos de la distribución del espaciamiento de niveles a primeros vecinos y el factor de forma espectral para determinar la existencia de correlaciones de corto y largo alcance en el espectro de cuasienergías.
-    \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos.
+    \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos\snnote{A discutir.}.
 \end{itemize}
 % *}}}
 \section{Marco teórico}  % {{{*
@@ -112,10 +112,25 @@ Por otro lado, para detectar correlaciones de largo alcance se empleará el fact
 Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, presentándose únicamente el \textit{plateau}. 
 % *}}}
 \section{Metodología}  % {{{*
+\begin{itemize}
+    \item Implementación computacional del modelo.
 
-Integrando las herramientas de análisis estadístico de RMT previamente descritas, este trabajo caracterizará las condiciones bajo las cuales emerge caos cuántico en la evolución dictada por el operador \eqref{eq:U}. Específicamente, mediante la evaluación de las correlaciones de corto y largo alcance en el espectro de cuasienergías, 
-se explorarán distintas geometrías para las condiciones de frontera y variaciones en el operador de moneda $C$.
-Con ello, se busca responder a la pregunta de si la topología de las fronteras es suficiente para determinar la caoticidad o integrabilidad del sistema.
+    En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}.
+    Para ello, se definirán computacionalmente los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. 
+    La estructura del operador de desplazamiento $S$ se establecerá mediante un conjunto de reglas de movimiento condicionadas por el estado de la moneda. Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I} \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones.
+    
+    \item Diagonalización y extracción del espectro de cuasienergías.
+    
+    A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su espectro de valores propios. Dado que la evolución es descrita por un operador unitario, dichos valores son números complejos de norma 1. 
+    El análisis posterior se enfocará exclusivamente en las fases de estos valores, las cuales corresponden a las cuasienergías del sistema y servirán como base para el estudio estadístico.
+    
+    \item Análisis estadístico de correlaciones mediante RMT
+    
+    Con el espectro de cuasienergías obtenido, se procederá a evaluar las firmas de caos cuántico contrastando los resultados numéricos con las predicciones de la teoría de matrices aleatorias (RMT).
+    Para evaluar las correlaciones de corto alcance, se calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando identificar repulsión de niveles o estadística de Poisson.
+    Adicionalmente, para detectar correlaciones de largo alcance, se computará el factor de forma espectral (SFF) aplicando los promedios estadísticos adecuados para visualizar la posible formación de un agujero de correlaciones, una rampa y su eventual saturación.
+    
+\end{itemize}
 
 % *}}}
 % --- Inserción de la bibliografía ---  % {{{*
