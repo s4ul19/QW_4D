@@ -115,22 +115,33 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
 \begin{itemize}
     \item Implementación computacional del modelo.
 
-    En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}\janote{para cuál operador shift? El que lo mueve en cruz o equis?}.
+    En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}\janote{para cuál operador shift? El que lo mueve en cruz o equis?}\snnote{He agregado ese detalle unas líneas más adelante}.
     Para ello, se definirán computacionalmente los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. 
-    La estructura del operador de desplazamiento $S$ se establecerá mediante un conjunto de reglas de movimiento condicionadas por el estado de la moneda. Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I} \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones. \janote{Aquí creo que te toca decir que vas a utilizar un paquete que ya está hecho y no que vos lo vas a hacer porque sería mentira}
+    \sout{La estructura del operador de desplazamiento $S$ se establecerá mediante un conjunto de reglas de movimiento condicionadas por el estado de la moneda.} La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones en las cuatro direcciones ortogonales), según el estado de la moneda. 
+    Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones.
+    \janote{Aquí creo que te toca decir que vas a utilizar un paquete que ya está hecho y no que vos lo vas a hacer porque sería mentira}\snnote{Okay.}
+    Cabe destacar que la implementación numérica de $\eqref{eq:U}$ y las herramientas de análisis no se programarán desde cero, sino que se llevarán a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.
     
     \item Diagonalización y extracción del espectro de cuasienergías.
     
     A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su espectro de valores propios. Dado que la evolución es descrita por un operador unitario, dichos valores son números complejos de norma 1. 
-    El análisis posterior se enfocará exclusivamente en las fases de estos valores, las cuales corresponden a las cuasienergías del sistema y servirán como base para el estudio estadístico.\janote{Falta decir que vas a hacer el unfolding del espectro. Sería bueno que gemini te explique cuál es el método que usa la función y lo expliqués aquí. No hace falta que lo expliqués ahorita en el esqueeleto, pero sí una vez tengás el visto bueno de Carlos para escribir}
-    
+    El análisis se enfocará exclusivamente en las fases de estos valores, las cuales corresponden a las cuasienergías del sistema y servirán como base para el estudio estadístico.
+    \janote{Falta decir que vas a hacer el unfolding del espectro. Sería bueno que gemini te explique cuál es el método que usa la función y lo expliqués aquí. No hace falta que lo expliqués ahorita en el esqueeleto, pero sí una vez tengás el visto bueno de Carlos para escribir}\snnote{He añadido lo del unfolding.}
+    Sin embargo, previo al estudio estadístico, se aplicará un procedimiento de desdoblamiento espectral (\textit{unfolding}) a este conjunto de cuasienergías para separar la densidad media de estados de las fluctuaciones espectrales locales, garantizando así un espaciamiento medio unitario que permita la comparación directa con las predicciones de RMT.
+
     \item Análisis estadístico de correlaciones mediante RMT
     
     Con el espectro de cuasienergías obtenido, se procederá a evaluar las firmas de caos cuántico contrastando los resultados numéricos con las predicciones de la teoría de matrices aleatorias (RMT).
     Para evaluar las correlaciones de corto alcance, se calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando identificar repulsión de niveles o estadística de Poisson.
     Adicionalmente, para detectar correlaciones de largo alcance, se calculará el factor de forma espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar la formación la posible emergencia de un agujero de correlaciones, una rampa y su saturación.
 
-    \janote{y el IPR?}
+    \janote{y el IPR?}\snnote{Listo.}
+
+    \item Dinámica espacial y localización
+    
+    Finalmente, se calculará la evolución temporal de la razón inversa de participación (IPR) directamente en el espacio de posición del caminante.
+     El comportamiento de este indicador permitirá buscar y caracterizar las señales de localización o deslocalización espacial que son típicas de los regímenes caóticos frente a los integrable
+    
 \end{itemize}
 
 % *}}}
