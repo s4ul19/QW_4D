@@ -48,23 +48,34 @@ Este proyecto se desarrolla en el marco del Instituto de investigación de Cienc
 % *}}}
 \section{Justificación}  % {{{*
 
-\cpnote{Me parece bien como esqueleto. Ahora el reto está en unirlos como una idea coherente. Osea que la
-lectura se sienta fluida al pasar de un parrafo al siguiente (ahora no está).}\snnote{Listo.}
-
 Las caminatas cuánticas poseen una relevancia científica importante, ya que dan lugar a la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum} y, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular sistemas físicos complejos. 
 Esto facilita el estudio de fenómenos como el transporte coherente, las transiciones de fase topológicas y las dinámicas en redes estructuradas~\cite{portugal2018quantum}. Además, debido a su estructura matemática, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas, sin requerir el desarrollo de computadoras cuánticas universales~\cite{portugal2018quantum,lorz2019photonic}.
 De este modo, proporcionan una entorno controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información.
+\cpnote{Este primer parrafo está bien.}
 
 En este contexto, resulta de particular interés investigar si existe una analogía fundamental entre la dinámica de una partícula clásica confinada en un dominio espacial y la evolución temporal de una caminata cuántica. 
-Clásicamente, este problema se estudia mediante sistemas de billar, los cuales demuestran cómo un cambio puramente geométrico en las fronteras (por ejemplo, la transición de un rectángulo a un billar de Sinaí) es suficiente para llevar al sistema de la integrabilidad al caos.
-Incorporar estas geometrías en el espacio bidimensional de una caminata cuántica resulta ventajoso para el estudio del caos cuántico, ya que, al tratarse de un modelo discreto, se obtiene un control matemático sobre el operador de evolución, lo que facilita aislar la influencia de la frontera sobre el comportamiento espectral del sistema.
+Clásicamente, este problema se estudia mediante sistemas de billar, los cuales
+demuestran cómo un cambio puramente geométrico en las fronteras (por ejemplo,
+la transición de un rectángulo a un billar de Sinaí) es suficiente para llevar
+al sistema de la integrabilidad al caos\cpnote{Estas pegando lo de caminatas
+cuanticas y billares, pero en el contexto clásico no se de ejemplos. Parece que
+quieres pegar a la fuerza caminatas y caos y pues no}.
+\cpnote{De aca en adelante se cae el flujo porque ya no se que es lo que
+quieres decir en el parrafo}
+\cpnote{Dale de nuevo estructura a este parrafo para que quede como una historia 
+coherente. Creo que toca regresar al esqueleto y realmente pensar bien como 
+conectar las ideas.}
+Incorporar estas geometrías en el espacio bidimensional de una caminata
+cuántica resulta ventajoso para el estudio del caos cuántico, ya que, al
+tratarse de un modelo discreto, se obtiene un control matemático sobre el
+operador de evolución, lo que facilita aislar la influencia de la frontera
+sobre el comportamiento espectral del sistema.
 Aunque este enfoque ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales, dichos trabajos se han restringido al uso de un solo qubit como estado de moneda~\cite{alonso-lobo2025simplest}.
 Esta limitación presenta dos problemas importantes. Por un lado, las distribuciones espectrales obtenidas bajo este enfoque no logran reproducir con exactitud las predicciones universales del Ensamble Ortogonal Gaussiano (GOE) esperadas para sistemas caóticos. Por otro lado, dado que un caminante en una red bidimensional cuenta con cuatro direcciones posibles de desplazamiento (arriba, abajo, derecha, izquierda), 
-\sout{emplear una moneda de dimensión dos para gobernar esta dinámica es solo una posible forma de definir la caminata discreta bidimensional}\cpnote{Creo que esta frase no tiene mucho sentido}\snnote{Reescrito para darle sentido físico.}
- emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta estructuralmente restrictivo y artificial. 
+emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta
+estructuralmente restrictivo y artificial. 
 Resulta mucho más natural y directo codificar estos cuatro movimientos ortogonales en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). Por lo tanto, es de interés investigar si esta formulación mejora las firmas espectrales y permite determinar si la topología de las fronteras es una condición suficiente para dictar, por sí sola, el caos o la integrabilidad del sistema.
 % *}}}
-
 \section{Objetivos}  % {{{*
 
 \subsection{Objetivo general}
@@ -108,7 +119,7 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
 
     En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}.
     Para ello, se definirán computacionalmente los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. 
-    La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones en las cuatro direcciones ortogonales), según el estado de la moneda. 
+    La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones en las cuatro direcciones ortogonales \cpnote{hay infinitas direcciones ortogonales}), según el estado de la moneda. 
     Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones.
     Cabe destacar que la implementación numérica de $\eqref{eq:U}$ y las herramientas de análisis no se programarán desde cero, sino que se llevarán a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.
     
@@ -120,9 +131,15 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
 
     \item Análisis estadístico de correlaciones mediante RMT
     
-    Con el espectro de cuasienergías obtenido, se procederá a evaluar las firmas de caos cuántico contrastando los resultados numéricos con las predicciones de la teoría de matrices aleatorias (RMT).
-    Para evaluar las correlaciones de corto alcance, se calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando identificar repulsión de niveles o estadística de Poisson.
-    Adicionalmente, para detectar correlaciones de largo alcance, se calculará el factor de forma espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar la formación la posible emergencia de un agujero de correlaciones, una rampa y su saturación.
+    Con el espectro de cuasienergías obtenido, se procederá a evaluar las
+    firmas \cpnote{me parece que en español no usamos esa palabra como se usa
+    en ingles. Por favor cambiala (prefiero) o confirmame que uds si la usan
+    (si insistes)} de caos cuántico contrastando los resultados numéricos con
+    las predicciones de la teoría de matrices aleatorias (RMT) \cpnote{ojo que ya lo habías introducido. Solo se introduce una vez y ya}.
+    Para evaluar las correlaciones de corto alcance, se calculará la
+    distribución del espaciamiento a primeros vecinos $P(s)$, buscando
+    identificar repulsión de niveles o estadística de Poisson.
+    Adicionalmente, para detectar correlaciones de largo alcance, se calculará el factor de forma espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar la formación la posible emergencia de un agujero de correlaciones, una rampa y su saturación\cpnote{Aca tienes un lio con la redaccion. Revisa}.
 
     \item Dinámica espacial y localización
     
@@ -130,6 +147,7 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
      El comportamiento de este indicador permitirá buscar y caracterizar las señales de localización o deslocalización espacial que son típicas de los regímenes caóticos frente a los integrable
     
 \end{itemize}
+\cpnote{Hay una herramienta muy importante y bonita que hemos usado que es la visualizacion de la evolucion de la funcion de onda en el espacio de evolucion. Creo que es tan importante que vale la pena mencionarla}
 
 % *}}}
 % --- Inserción de la bibliografía ---  % {{{*
