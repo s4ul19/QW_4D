@@ -75,6 +75,24 @@ Esta limitación presenta dos problemas importantes. Por un lado, las distribuci
 emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta
 estructuralmente restrictivo y artificial. 
 Resulta mucho más natural y directo codificar estos cuatro movimientos ortogonales en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). Por lo tanto, es de interés investigar si esta formulación mejora las firmas espectrales y permite determinar si la topología de las fronteras es una condición suficiente para dictar, por sí sola, el caos o la integrabilidad del sistema.
+
+% \cpnote{Me parece bien como esqueleto. Ahora el reto está en unirlos como una idea coherente. Osea que la
+% lectura se sienta fluida al pasar de un parrafo al siguiente (ahora no está).}\snnote{Listo.}
+
+Las caminatas cuánticas poseen una relevancia científica importante. Por un lado, son la base para la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}. Por otro lado, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular una amplia variedad de sistemas físicos complejos.
+Esto facilita el estudio de fenómenos como el transporte coherente, las transiciones de fase topológicas y las dinámicas en redes estructuradas~\cite{portugal2018quantum}.
+Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas. 
+Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas que actualmente impiden la construcción de computadoras cuánticas universales a gran escala (por ejemplo, la decoherencia)~\cite{portugal2018quantum,lorz2019photonic}. 
+Gracias a estos montajes experimentales, los investigadores disponen de un entorno controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información de los sistemas a trabajar.
+
+
+\sout{En este contexto, resulta de particular interés investigar si existe una analogía fundamental entre la dinámica de una partícula clásica confinada en un dominio espacial y la evolución temporal de una caminata cuántica}\janote{Este enunciado me parece que no está bien motivado y desconectado del párrafo anterior. Qué querés decir en este párrafo?}\snnote{Enunciado reescrito para conectar con el final del párrafo anterior. El enfoque ahora es usar ese ``entorno controlable'' para estudiar el caos cuántico.}
+Uno de los fenómenos que pueden ser explorados aprovechando estos entornos controlables es el caos cuántico. 
+\sout{Clásicamente, este problema se estudia mediante sistemas de billar, los cuales demuestran cómo un cambio puramente geométrico en las fronteras (por ejemplo, la transición de un rectángulo a un billar de Sinaí) es suficiente para llevar al sistema de la integrabilidad al caos}\janote{no entiendo qué querés decir con este enunciado}\snnote{Idea aclarada. Quité ña anología clásica y directamente establecí que el billar es una herramienta geométrica para inducir caos.}
+Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras (como ocurre al pasar de un rectángulo a un billar de Sinaí). Incorporar estas geometrías en el espacio bidimensional de una caminata cuántica resulta ventajoso: al tratarse de un modelo discreto, otorga un control matemático riguroso sobre el operador de evolución, lo que facilita aislar la influencia exclusiva de la frontera sobre el comportamiento espectral del sistema.
+
+Aunque este enfoque geométrico ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales, dichos trabajos se han restringido al uso de un solo qubit como estado de moneda~\cite{alonso-lobo2025simplest}. Esta limitación presenta dos problemas importantes. Por un lado, las distribuciones espectrales obtenidas bajo este enfoque no logran reproducir con exactitud las predicciones universales del Ensamble Ortogonal Gaussiano (GOE) esperadas para sistemas caóticos. Por otro lado, dado que un caminante en una red bidimensional cuenta con cuatro direcciones posibles de desplazamiento (arriba, abajo, derecha, izquierda), \sout{emplear una moneda de dimensión dos para gobernar esta dinámica es solo una posible forma de definir la caminata discreta bidimensional}\cpnote{Creo que esta frase no tiene mucho sentido}\snnote{Reescrito para darle sentido físico y contrastar con la moneda 4D.} emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta estructuralmente restrictivo y artificial. Resulta mucho más natural y directo codificar estos cuatro movimientos ortogonales en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). Por lo tanto, es de interés investigar si esta formulación mejora las firmas espectrales y permite determinar si la topología de las fronteras es una condición suficiente para dictar, por sí sola, el caos o la integrabilidad del sistema.
+
 % *}}}
 \section{Objetivos}  % {{{*
 
@@ -86,7 +104,7 @@ Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica 
     \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de rectángulo y Sinaí.
     \item Determinar la densidad de cuasienergías del operador de evolución para identificar singularidades espectrales o regularidades estructurales asociadas a cada geometría.
     \item Contrastar las predicciones de la teoría de matrices aleatorias con los resultados numéricos de la distribución del espaciamiento de niveles a primeros vecinos y el factor de forma espectral para determinar la existencia de correlaciones de corto y largo alcance en el espectro de cuasienergías.
-    \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos.
+    \item Calcular la evolución temporal de la razón inversa de participación (IPR) en el espacio de posición para buscar las señales de (des)localización típicas de sistemas caóticos. 
 \end{itemize}
 % *}}}
 \section{Marco teórico}  % {{{*
