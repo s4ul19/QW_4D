@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{geometry}
 \usepackage[normalem]{ulem}
+\usepackage{xparse} % Necesario para argumentos opcionales delimitados con { } (tipo g)
 
 \geometry{margin=2.5cm}
 
@@ -18,6 +19,36 @@
 
 \definecolor{jacolor}{HTML}{C82800}
 \FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
+
+% Notes with one argument keep the usual FiXme behavior.  With two
+% arguments they show Insert/Reason; with three, Remove/Insert/Reason.
+\NewDocumentCommand{\flexfxnote}{m m m m}{%
+  \IfNoValueTF{#3}{#1{#2}}{%
+    \IfNoValueTF{#4}{%
+      #1{\sout{#2} #3}%
+    }{%
+      #1{\sout{#2} #3 {\small \tt #4}}%
+    }%
+  }%
+}
+\NewCommandCopy{\fxnoteoriginal}{\fxnote}
+\NewCommandCopy{\janoteoriginal}{\janote}
+\NewCommandCopy{\cpnoteoriginal}{\cpnote}
+\NewCommandCopy{\mpnoteoriginal}{\mpnote}
+\NewCommandCopy{\jnnoteoriginal}{\jnnote}
+\NewCommandCopy{\clnoteoriginal}{\clnote}
+\NewCommandCopy{\codexnoteoriginal}{\codexnote}
+\RenewDocumentCommand{\fxnote}{m g g}{%
+  \flexfxnote{\fxnoteoriginal}{#1}{#2}{#3}}
+\RenewDocumentCommand{\janote}{m g g}{%
+  \flexfxnote{\janoteoriginal}{#1}{#2}{#3}}
+\RenewDocumentCommand{\cpnote}{m g g}{%
+  \flexfxnote{\cpnoteoriginal}{#1}{#2}{#3}}
+
+\newcommand{\jainsert}[1]{\janote{#1}}
+\newcommand{\jaremove}[1]{\janote{\sout{#1}}}
+\newcommand{\jareason}[1]{\janote{\tt #1}}
+\newcommand{\jacomment}[2]{\uline{#1}\janote{#2}}
   % *}}}
 \begin{document}
 % Título y otras cosas {{{*
@@ -51,7 +82,7 @@ Este proyecto se desarrolla en el marco del Instituto de investigación de Cienc
 Las caminatas cuánticas poseen una relevancia científica importante. Por un lado, son la base para la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}. Por otro lado, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular una amplia variedad de sistemas físicos complejos.
 Esto facilita el estudio de fenómenos como el transporte coherente, las transiciones de fase topológicas y las dinámicas en redes estructuradas~\cite{portugal2018quantum}.
 Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas. 
-Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas que actualmente impiden la construcción de computadoras cuánticas universales a gran escala (por ejemplo, la decoherencia)~\cite{portugal2018quantum,lorz2019photonic}. 
+Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas\jainsert{, como la decohrencia,} que actualmente impiden la construcción de computadoras cuánticas universales a gran escala\jaremove{ (por ejemplo, la decoherencia)}~\cite{portugal2018quantum,lorz2019photonic}. 
 Gracias a estos montajes experimentales, los investigadores disponen de un entorno controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información de los sistemas a trabajar.
 \cpnote{Este primer parrafo está bien.}
 
@@ -82,8 +113,8 @@ Resulta mucho más natural y directo codificar estos cuatro movimientos ortogona
 \snnote{Nuevo segundo párrafo}
 
 Uno de los fenómenos que pueden ser explorados aprovechando estos entornos controlables es el caos cuántico. 
-Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras (como ocurre al pasar de un rectángulo a un billar de Sinaí).
-Incorporar estas geometrías en el espacio bidimensional de una caminata cuántica resulta ventajoso: al tratarse de un modelo discreto, otorga un control matemático riguroso sobre el operador de evolución, lo que facilita aislar la influencia exclusiva de la frontera sobre el comportamiento espectral del sistema y a diferencia del Hamiltoniano de una partícula libre continua, el operador unitario $\mathcal{U}$ de la caminata cuántica incorpora un grado de libertad interno a través del operador de moneda. 
+Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras \jacomment{(como ocurre al pasar de un rectángulo a un billar de Sinaí\janote{cita})}{creo que esto va mejor con una coma, en vez de entre paréntesis}.
+Incorporar estas geometrías en el espacio bidimensional de una caminata cuántica\janote{falta un enunciado antes que haga de puente entre billares clásicos y cuánticos} resulta ventajoso: al tratarse de un modelo discreto, otorga un control matemático riguroso sobre el operador de evolución, lo que facilita aislar la influencia exclusiva de la frontera sobre el comportamiento espectral del sistema y a diferencia del Hamiltoniano de una partícula libre continua, el operador unitario $\mathcal{U}$ de la caminata cuántica incorpora un grado de libertad interno a través del operador de moneda\janote{No entiendo este enunciado, hablemos por whatsapp}. 
 Esta característica proporciona un espacio de parámetros adicional que permite alterar la dinámica del sistema sin alterar la geometría espacial.
 
 Aunque este enfoque geométrico ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales,
