@@ -82,40 +82,17 @@ Este proyecto se desarrolla en el marco del Instituto de investigación de Cienc
 Las caminatas cuánticas poseen una relevancia científica importante. Por un lado, son la base para la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}. Por otro lado, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular una amplia variedad de sistemas físicos complejos.
 Esto facilita el estudio de fenómenos como el transporte coherente, las transiciones de fase topológicas y las dinámicas en redes estructuradas~\cite{portugal2018quantum}.
 Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas. 
-Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas\jainsert{, como la decohrencia,} que actualmente impiden la construcción de computadoras cuánticas universales a gran escala\jaremove{ (por ejemplo, la decoherencia)}~\cite{portugal2018quantum,lorz2019photonic}. 
+Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas, como la decohrencia, que actualmente impiden la construcción de computadoras cuánticas universales a gran escala~\cite{portugal2018quantum,lorz2019photonic}. 
 Gracias a estos montajes experimentales, los investigadores disponen de un entorno controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información de los sistemas a trabajar.
-\cpnote{Este primer parrafo está bien.}
-
-\sout{En este contexto, resulta de particular interés investigar si existe una analogía fundamental entre la dinámica de una partícula clásica confinada en un dominio espacial y la evolución temporal de una caminata cuántica. 
-Clásicamente, este problema se estudia mediante sistemas de billar, los cuales
-demuestran cómo un cambio puramente geométrico en las fronteras (por ejemplo,
-la transición de un rectángulo a un billar de Sinaí) es suficiente para llevar
-al sistema de la integrabilidad al caos}
-\cpnote{Estas pegando lo de caminatas
-cuanticas y billares, pero en el contexto clásico no se de ejemplos. Parece que
-quieres pegar a la fuerza caminatas y caos y pues no}.
-\cpnote{De aca en adelante se cae el flujo porque ya no se que es lo que
-quieres decir en el parrafo}
-\cpnote{Dale de nuevo estructura a este parrafo para que quede como una historia 
-coherente. Creo que toca regresar al esqueleto y realmente pensar bien como 
-conectar las ideas.}\snnote{Se ha reescrito este párrafo por completo.}
-\sout{Incorporar estas geometrías en el espacio bidimensional de una caminata
-cuántica resulta ventajoso para el estudio del caos cuántico, ya que, al
-tratarse de un modelo discreto, se obtiene un control matemático sobre el
-operador de evolución, lo que facilita aislar la influencia de la frontera
-sobre el comportamiento espectral del sistema.
-Aunque este enfoque ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales, dichos trabajos se han restringido al uso de un solo qubit como estado de moneda.
-Esta limitación presenta dos problemas importantes. Por un lado, las distribuciones espectrales obtenidas bajo este enfoque no logran reproducir con exactitud las predicciones universales del Ensamble Ortogonal Gaussiano (GOE) esperadas para sistemas caóticos. Por otro lado, dado que un caminante en una red bidimensional cuenta con cuatro direcciones posibles de desplazamiento (arriba, abajo, derecha, izquierda), 
-emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta
-estructuralmente restrictivo y artificial. 
-Resulta mucho más natural y directo codificar estos cuatro movimientos ortogonales en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). Por lo tanto, es de interés investigar si esta formulación mejora las firmas espectrales y permite determinar si la topología de las fronteras es una condición suficiente para dictar, por sí sola, el caos o la integrabilidad del sistema.}
-
-\snnote{Nuevo segundo párrafo}
 
 Uno de los fenómenos que pueden ser explorados aprovechando estos entornos controlables es el caos cuántico. 
-Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras \jacomment{(como ocurre al pasar de un rectángulo a un billar de Sinaí\janote{cita})}{creo que esto va mejor con una coma, en vez de entre paréntesis}.
-Incorporar estas geometrías en el espacio bidimensional de una caminata cuántica\janote{falta un enunciado antes que haga de puente entre billares clásicos y cuánticos} resulta ventajoso: al tratarse de un modelo discreto, otorga un control matemático riguroso sobre el operador de evolución, lo que facilita aislar la influencia exclusiva de la frontera sobre el comportamiento espectral del sistema y a diferencia del Hamiltoniano de una partícula libre continua, el operador unitario $\mathcal{U}$ de la caminata cuántica incorpora un grado de libertad interno a través del operador de moneda\janote{No entiendo este enunciado, hablemos por whatsapp}. 
-Esta característica proporciona un espacio de parámetros adicional que permite alterar la dinámica del sistema sin alterar la geometría espacial.
+Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras, como ocurre al pasar de un rectángulo a un billar de Sinaí~\cite{sinai1970dynamical}.
+\jacomment{\janote{cita}\snnote{Agregado}}{creo que esto va mejor con una coma, en vez de entre paréntesis}\snnote{Se quitaron}.
+\sout{Incorporar estas geometrías en el espacio bidimensional de una caminata cuántica}\janote{falta un enunciado antes que haga de puente entre billares clásicos y cuánticos}\snnote{Añadí un enunciado puente para conectar el caos clásico de los billares con su contraparte cuántica.}
+Para investigar cómo se manifiestan estas propiedades en el régimen cuántico, resulta ventajoso incorporar dichas geometrías en el espacio bidimensional de la posición, ya que
+\sout{y a diferencia del Hamiltoniano de una partícula libre continua, el operador unitario $\mathcal{U}$ de la caminata cuántica incorpora un grado de libertad interno a través del operador de moneda}\janote{No entiendo este enunciado, hablemos por whatsapp}\snnote{Reescrito manteniendo la idea simple que discutimos: la ventaja de variar parámetros independientemente.}
+\sout{Esta característica proporciona un espacio de parámetros adicional que permite alterar la dinámica del sistema sin alterar la geometría espacial.}
+las caminatas cuánticas nos permiten variar de manera independiente tanto las condiciones de frontera como el operador de moneda, ofreciendo así un excelente escenario para estudiar a detalle la dinámica del sistema.
 
 Aunque este enfoque geométrico ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales,
 dichos trabajos se han restringido al uso de un solo qubit como estado de moneda~\cite{alonso-lobo2025simplest}. Esta limitación presenta dos problemas importantes. 
@@ -162,36 +139,16 @@ Por otro lado, para detectar correlaciones de largo alcance se empleará el fact
 Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, presentándose únicamente el \textit{plateau}. 
 % *}}}
 \section{Metodología}  % {{{*
-\begin{itemize}
-    \item Implementación computacional del modelo.
-    
-    En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}.
-    Para ello, se definirán computacionalmente los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. 
-    La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones \sout{en las cuatro direcciones ortogonales}\cpnote{hay infinitas direcciones ortogonales}\snnote{Corregido. Se especificó que el movimiento ocurre a lo largo de los ejes de la red.} a lo largo de los ejes cartesianos de la red bidimensional), según el estado de la moneda. 
-    Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones.
-    Cabe destacar que la implementación numérica de \eqref{eq:U} y las herramientas de análisis no se programarán desde cero, sino que se llevarán a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.
 
-    
-    \item Diagonalización y extracción del espectro de cuasienergías.
-    
-    A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su espectro de valores propios. Dado que la evolución es descrita por un operador unitario, dichos valores son números complejos de norma 1. 
-    El análisis se enfocará exclusivamente en las fases de estos valores, las cuales corresponden a las cuasienergías del sistema y servirán como base para el estudio estadístico.
-    Sin embargo, previo al estudio estadístico, se aplicará un procedimiento de desdoblamiento espectral (\textit{unfolding}) a este conjunto de cuasienergías para separar la densidad media de estados de las fluctuaciones espectrales locales, garantizando así un espaciamiento medio unitario que permita la comparación directa con las predicciones de RMT.
+En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}. Para ello, se definirán computacionalmente los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones a lo largo de los ejes cartesianos de la red bidimensional), según el estado de la moneda. Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones. Cabe destacar que la implementación numérica de \eqref{eq:U} y las herramientas de análisis no se programarán desde cero, sino que se llevarán a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.
 
-    \item Análisis estadístico de correlaciones mediante RMT
-    
-    Con el espectro de cuasienergías obtenido, se procederá a evaluar las \sout{firmas}\cpnote{me parece que en español no usamos esa palabra como se usa en ingles. Por favor cambiala (prefiero) o confirmame que uds si la usan (si insistes)}\snnote{Corregido. No utilizó con frecuencia la palabra firmas la verdad.} manifestaciones de caos cuántico contrastando los resultados numéricos con las predicciones de \sout{la teoría de matrices aleatorias (RMT)} \cpnote{ojo que ya lo habías introducido. Solo se introduce una vez y ya}\snnote{Corregido. Se dejó únicamente el acrónimo.} RMT.
-    Para evaluar las correlaciones de corto alcance, se calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando identificar repulsión de niveles o estadística de Poisson.
-    Adicionalmente, para detectar correlaciones de largo alcance, se calculará el factor de forma espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar \sout{la formación la posible emergencia}\cpnote{Aca tienes un lio con la redaccion. Revisa}\snnote{Corregido. Se eliminó la redundancia en la redacción.} la posible formación de un agujero de correlaciones, una rampa y su saturación.
+A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su espectro de valores propios. Dado que la evolución es descrita por un operador unitario, dichos valores son números complejos de norma 1. El análisis se enfocará exclusivamente en las fases de estos valores, las cuales corresponden a las cuasienergías del sistema y servirán como base para el estudio estadístico. Sin embargo, previo al estudio estadístico, se aplicará un procedimiento de desdoblamiento espectral (\textit{unfolding}) a este conjunto de cuasienergías para separar la densidad media de estados de las fluctuaciones espectrales locales, garantizando así un espaciamiento medio unitario que permita la comparación directa con las predicciones de RMT.
 
-    \item Dinámica espacial y localización.
-    
-    \cpnote{Hay una herramienta muy importante y bonita que hemos usado que es la visualizacion de la evolucion de la funcion de onda en el espacio de evolucion. Creo que es tan importante que vale la pena mencionarla}\snnote{Añadido. Se incluyó la metodología para la visualización espacial como paso previo al IPR.}
-    Para complementar el análisis espectral, se estudiarán las consecuencias espaciales de la dinámica. En primer lugar, se implementará una herramienta de visualización de la función de onda en el espacio de posición; esto se logrará calculando la probabilidad de hallar al caminante en cada nodo de la red para un tiempo $t$, independientemente de su estado de moneda.
-    A partir de esta distribución de probabilidad espacial, se procederá a calcular la evolución temporal de la razón inversa de participación (IPR). 
-    El comportamiento conjunto de estas herramientas permitirán visualizar y caracterizar formalmente las señales de localización o deslocalización espacial, fenómenos que diferencian típicamente a los regímenes caóticos de los integrables.
+Con el espectro de cuasienergías obtenido, se procederá a evaluar las manifestaciones de caos cuántico contrastando los resultados numéricos con las predicciones de RMT. Para evaluar las correlaciones de corto alcance, se calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando identificar repulsión de niveles o estadística de Poisson. Adicionalmente, para detectar correlaciones de largo alcance, se calculará el factor de forma espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar la posible formación de un agujero de correlaciones, una rampa y su saturación.
 
-\end{itemize}
+Para complementar el análisis espectral, se estudiarán las consecuencias espaciales de la dinámica. En primer lugar, se implementará una herramienta de visualización de la función de onda en el espacio de posición; esto se logrará calculando la probabilidad de hallar al caminante en cada nodo de la red para un tiempo $t$, independientemente de su estado de moneda. A partir de esta distribución de probabilidad espacial, se procederá a calcular la evolución temporal de la razón inversa de participación (IPR). El comportamiento conjunto de estas herramientas permitirá visualizar y caracterizar formalmente las señales de localización o deslocalización espacial, fenómenos que diferencian típicamente a los regímenes caóticos de los integrables.
+
+% *}}}
 
 % *}}}
 % --- Inserción de la bibliografía ---  % {{{*
