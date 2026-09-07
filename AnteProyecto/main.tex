@@ -138,14 +138,54 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
 \section{Metodología}  % {{{*
 
 \snnote{Siendo revisada por: CP}
+\cpnote{Listo}
 
-En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación~\eqref{eq:U}. Para ello, se definirán computacionalmente los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones a lo largo de los ejes cartesianos de la red bidimensional), según el estado de la moneda. Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones. Cabe destacar que la implementación numérica de \eqref{eq:U} y las herramientas de análisis no se programarán desde cero, sino que se llevarán a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.
+En primer lugar, se implementará numéricamente el operador de evolución
+unitaria dado por la ecuación~\eqref{eq:U}. Para ello, se definirán
+computacionalmente los espacios de posición acotados por billares con
+geometrías de rectángulo y Sinaí. La estructura del operador de desplazamiento
+$S$ se establecerá mediante reglas que condicionan el movimiento del caminante
+hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo
+únicamente transiciones a lo largo de los ejes cartesianos de la red
+bidimensional), según el estado de la moneda. Por su parte, la dinámica interna
+del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes
+\mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el
+espacio de posición y $\mathcal{C}$ es un operador unitario que actúa
+exclusivamente sobre el espacio de la moneda de cuatro dimensiones. Cabe
+destacar que la implementación numérica de \eqref{eq:U} y las herramientas de
+análisis no se programarán desde cero, sino que se llevarán a cabo utilizando
+librerías especializadas desarrolladas en Wolfram Mathematica.
 
-A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su espectro de valores propios. Dado que la evolución es descrita por un operador unitario, dichos valores son números complejos de norma 1. El análisis se enfocará exclusivamente en las fases de estos valores, las cuales corresponden a las cuasienergías del sistema y servirán como base para el estudio estadístico. Sin embargo, previo al estudio estadístico, se aplicará un procedimiento de desdoblamiento espectral (\textit{unfolding}) a este conjunto de cuasienergías para separar la densidad media de estados de las fluctuaciones espectrales locales, garantizando así un espaciamiento medio unitario que permita la comparación directa con las predicciones de RMT.
+A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su
+espectro de valores propios. Dado que la evolución es descrita por un operador
+unitario, dichos valores son números complejos de norma 1. El análisis se
+enfocará exclusivamente en las fases de estos valores, las cuales corresponden
+a las cuasienergías del sistema y servirán como base para el estudio
+estadístico. Sin embargo, previo al estudio estadístico, se aplicará un
+procedimiento de desdoblamiento espectral (\textit{unfolding}) a este conjunto
+de cuasienergías para separar la densidad media de estados de las fluctuaciones
+espectrales locales, garantizando así un espaciamiento medio unitario que
+permita la comparación directa con las predicciones de RMT.
 
-Con el espectro de cuasienergías obtenido, se procederá a evaluar las manifestaciones de caos cuántico contrastando los resultados numéricos con las predicciones de RMT. Para evaluar las correlaciones de corto alcance, se calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando identificar repulsión de niveles o estadística de Poisson. Adicionalmente, para detectar correlaciones de largo alcance, se calculará el factor de forma espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar la posible formación de un agujero de correlaciones, una rampa y su saturación.
+Con el espectro de cuasienergías obtenido, se procederá a evaluar las
+manifestaciones de caos cuántico contrastando los resultados numéricos con las
+predicciones de RMT. Para evaluar las correlaciones de corto alcance, se
+calculará la distribución del espaciamiento a primeros vecinos $P(s)$, buscando
+identificar repulsión de niveles o estadística de Poisson. Adicionalmente, para
+detectar correlaciones de largo alcance, se calculará el factor de forma
+espectral (SFF) aplicando los promedios estadísticos apropiados para visualizar
+la posible formación de un agujero de correlaciones, una rampa y su saturación.
 
-Para complementar el análisis espectral, se estudiarán las consecuencias espaciales de la dinámica. En primer lugar, se implementará una herramienta de visualización de la función de onda en el espacio de posición; esto se logrará calculando la probabilidad de hallar al caminante en cada nodo de la red para un tiempo $t$, independientemente de su estado de moneda. A partir de esta distribución de probabilidad espacial, se procederá a calcular la evolución temporal de la razón inversa de participación (IPR). El comportamiento conjunto de estas herramientas permitirá visualizar y caracterizar formalmente las señales de localización o deslocalización espacial, fenómenos que diferencian típicamente a los regímenes caóticos de los integrables.
+Para complementar el análisis espectral, se estudiarán las consecuencias
+espaciales de la dinámica. En primer lugar, se implementará una herramienta de
+visualización de la función de onda en el espacio de posición; esto se logrará
+calculando la probabilidad de hallar al caminante en cada nodo de la red para
+un tiempo $t$, independientemente de su estado de moneda. A partir de esta
+distribución de probabilidad espacial, se procederá a calcular la evolución
+temporal de la razón inversa de participación (IPR). El comportamiento conjunto
+de estas herramientas permitirá visualizar y caracterizar formalmente las
+señales de localización o deslocalización espacial, fenómenos que diferencian
+típicamente a los regímenes caóticos de los integrables.
 
 % *}}}
 % --- Bibliografía ---  % {{{*
