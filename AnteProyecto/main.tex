@@ -77,29 +77,6 @@ Clásicamente, una partícula libre en un dominio bidimensional presenta una din
 
 Este proyecto se desarrolla en el marco del Instituto de investigación de Ciencias Físicas y Matemáticas (ICFM) de la USAC, en colaboración con el Instituto de Física de la UNAM. El trabajo se lleva a cabo en conjunto con el grupo de Información y Óptica cuántica de la UNAM (GIOC-UNAM). La investigación está bajo la asesoría del M.Sc. José Alfredo de León, fungiendo como cotutores el Dr. Carlos Francisco Pineda Zorrilla y el Ing. Rodolfo Samayoa.
 % *}}}
-\section{Justificación}  % {{{*
-
-\snnote{Siendo revisada por: JA}
-
-\janote{La posición de esta sección es rígida? Si no, mover a alguna posción después de Marco teórico}. 
-
-Las caminatas cuánticas poseen una relevancia científica importante. Por un lado, son la base para la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}. Por otro lado, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular una amplia variedad de sistemas físicos complejos.
-Esto facilita el estudio de fenómenos como el transporte coherente, las transiciones de fase topológicas y las dinámicas en redes estructuradas~\cite{portugal2018quantum}.
-Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas. 
-Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas, como la decohrencia, que actualmente impiden la construcción de computadoras cuánticas universales a gran escala~\cite{portugal2018quantum,lorz2019photonic}. 
-Gracias a estos montajes experimentales, los investigadores disponen de un entorno controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información de los sistemas a trabajar.
-
-Uno de los fenómenos que pueden ser explorados aprovechando estos entornos controlables es el caos cuántico. 
-Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras, como ocurre al pasar de un rectángulo a un billar de Sinaí~\cite{sinai1970dynamical}.
-Para investigar cómo se manifiestan estas propiedades en el régimen cuántico, las caminatas cuánticas \janote{discretas en el tiempo (DTQWs por sus siglas en inglés)} ofrecen un marco de estudio ventajoso. En estos modelos discretos es posible imponer las geometrías de los billares clásicos directamente como condiciones de frontera\janote{esta no es ventaja, en la partícula libre también se puede hacer}. Esto resulta ideal ya que las caminatas cuánticas\janote{DTQWs especificamente,no cualquier moderlo de caminata cuántica (por eso un comentario mío arriba)} nos permiten variar de manera independiente tanto estas condiciones de frontera como el operador de moneda, ofreciendo así un excelente escenario para estudiar a detalle la dinámica del sistema\janote{esta última parte del enunciado cambiala para decir que nos permite estudiar si sólo las condiciones de frontera dan lugar a caos}.
-
-Aunque este enfoque geométrico ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales,
-dichos trabajos se han restringido al uso de un solo qubit\janote{sistema de dos niveles en vez de qubit} como estado\janote{es un subsistema} de moneda~\cite{alonso-lobo2025simplest}. Esta limitación presenta dos problemas importantes. 
-Por un lado, las distribuciones espectrales obtenidas bajo este enfoque no logran\janote{no concuerdan más bien} reproducir con exactitud las predicciones universales del Ensamble Ortogonal Gaussiano (GOE) esperadas para sistemas caóticos. 
-Por otro lado, dado que un caminante en una red bidimensional cuenta con cuatro direcciones posibles de desplazamiento (arriba, abajo, derecha, izquierda), 
-emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta estructuralmente restrictivo y artificial. Resulta mucho más natural y directo codificar estos cuatro movimientos ortogonales en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). Por lo tanto, es de interés investigar si esta formulación mejora\janote{rigurosamente no es mejorar, sino que simplementen se sigan las predicciones esperadas} las firmas espectrales y permite determinar si la topología de las fronteras es una condición suficiente para dictar, por sí sola, el caos o la integrabilidad del sistema.
-
-% *}}}
 \section{Objetivos}  % {{{*
 
 \subsection{Objetivo general}
@@ -139,24 +116,20 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
 % *}}}
 \section{Metodología}  % {{{*
 
+
 \snnote{Siendo revisada por: CP}
 \cpnote{Listo}
 
-En primer lugar, se implementará numéricamente el operador de evolución
-unitaria dado por la ecuación~\eqref{eq:U}. Para ello, se definirán
-computacionalmente los espacios de posición acotados por billares con
-geometrías de rectángulo y Sinaí. La estructura del operador de desplazamiento
-$S$ se establecerá mediante reglas que condicionan el movimiento del caminante
-hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo
-únicamente transiciones a lo largo de los ejes cartesianos de la red
-bidimensional), según el estado de la moneda. Por su parte, la dinámica interna
-del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes
-\mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el
-espacio de posición y $\mathcal{C}$ es un operador unitario que actúa
-exclusivamente sobre el espacio de la moneda de cuatro dimensiones. Cabe
-destacar que la implementación numérica de \eqref{eq:U} y las herramientas de
-análisis no se programarán desde cero, sino que se llevarán a cabo utilizando
-librerías especializadas desarrolladas en Wolfram Mathematica\janote{Empezaste el párrafo diciendo que vas a implementar y terminaste diciendo que más bien vas a usar herramientas de libs. Arreglalo para ser consistente en todo el párrafo}. 
+\sout{En primer lugar, se implementará numéricamente el operador de evolución unitaria dado por la ecuación}~\eqref{eq:U}\sout{.}
+\janote{Empezaste el párrafo diciendo que vas a implementar y terminaste diciendo que más bien vas a usar herramientas de libs. Arreglalo para ser consistente en todo el párrafo}
+\snnote{Contradicción resuelta. Se estableció desde la primera oración que todo el modelo se construirá utilizando las librerías, eliminando la aclaración del final.} 
+En primer lugar, la construcción computacional del operador de evolución unitaria dado por la ecuación~\eqref{eq:U} y de las herramientas de análisis se llevará a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.
+Para ello, se definirán los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. 
+La estructura del operador de desplazamiento $S$ se establecerá mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones a lo largo de los ejes cartesianos de la red bidimensional), según el estado de la moneda. 
+Por su parte, la dinámica interna del caminante se gobernará mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones. 
+\sout{Cabe destacar que la implementación numérica de}~\eqref{eq:U}
+\sout{y las herramientas de análisis no se programarán desde cero, sino que se llevarán a cabo utilizando librerías especializadas desarrolladas en Wolfram Mathematica.}
+
 
 A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su
 espectro de valores propios. Dado que la evolución es descrita por un operador
@@ -188,10 +161,39 @@ temporal de la razón inversa de participación (IPR). El comportamiento conjunt
 de estas herramientas permitirá visualizar y caracterizar formalmente las
 señales de localización o deslocalización espacial, fenómenos que diferencian
 típicamente a los regímenes caóticos de los integrables.
+\section{Justificación}  % {{{*
 
+\snnote{Siendo revisada por: JA}
+
+\janote{La posición de esta sección es rígida? Si no, mover a alguna posción después de Marco teórico}. 
+\snnote{He movido la sección, no creo que sea rígida la posición.}
+
+Las caminatas cuánticas poseen una relevancia científica importante. Por un lado, son la base para la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}. Por otro lado, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular una amplia variedad de sistemas físicos complejos.
+Esto facilita el estudio de fenómenos como el transporte coherente, las transiciones de fase topológicas y las dinámicas en redes estructuradas~\cite{portugal2018quantum}.
+Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos o redes ópticas. 
+Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas, como la decohrencia, que actualmente impiden la construcción de computadoras cuánticas universales a gran escala~\cite{portugal2018quantum,lorz2019photonic}. 
+Gracias a estos montajes experimentales, los investigadores disponen de un entorno controlable~\cite{kendon2003decoherence} para explorar la dinámica de la información de los sistemas a trabajar.
+
+Uno de los fenómenos que pueden ser explorados aprovechando estos entornos controlables es el caos cuántico. 
+Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras, como ocurre al pasar de un rectángulo a un billar de Sinaí~\cite{sinai1970dynamical}.
+Para investigar cómo se manifiestan estas propiedades en el régimen cuántico, las caminatas cuánticas discretas en el tiempo (DTQWs por sus siglas en inglés)
+ \janote{discretas en el tiempo (DTQWs por sus siglas en inglés)}\snnote{Agregado.} 
+ ofrecen un marco de estudio ventajoso,
+\sout{En estos modelos discretos es posible imponer las geometrías de los billares clásicos directamente como condiciones de frontera}
+\janote{esta no es ventaja, en la partícula libre también se puede hacer}\snnote{He reescrito esta parte}.
+\sout{Esto resulta ideal} ya que nos permiten variar de manera independiente tanto las condiciones de frontera como el operador de moneda, \sout{ofreciendo así un excelente escenario para estudiar a detalle la dinámica del sistema}\janote{esta última parte del enunciado cambiala para decir que nos permite estudiar si sólo las condiciones de frontera dan lugar a caos}\snnote{Reescrito.} ofreciendo así las herramientas necesarias para determinar si la topología de las fronteras es, por sí sola, suficiente para dar lugar a la emergencia del caos.
+
+Aunque este enfoque geométrico ha comenzado a explorarse, evidenciando una correspondencia preliminar entre las condiciones de frontera y la dinámica espectral en caminatas cuánticas bidimensionales,
+dichos trabajos se han restringido al uso de un solo \sout{qubit}\janote{sistema de dos niveles en vez de qubit}\snnote{Término sustituido.} sistema de dos niveles como \sout{estado}\janote{es un subsistema}\snnote{Corregido.} subsistema de moneda~\cite{alonso-lobo2025simplest}. Esta limitación presenta dos problemas importantes. 
+Por un lado, las distribuciones espectrales obtenidas bajo este enfoque \sout{no logran reproducir con exactitud}\janote{no concuerdan más bien}\snnote{Arreglado.} no concuerdan exactamente con las predicciones universales del Ensamble Ortogonal Gaussiano (GOE) esperadas para sistemas caóticos. 
+Por otro lado, dado que un caminante en una red bidimensional cuenta con cuatro direcciones posibles de desplazamiento (arriba, abajo, derecha, izquierda), 
+emplear un sistema de dos niveles (qubit) para gobernar esta dinámica resulta estructuralmente restrictivo y artificial. Resulta mucho más natural y directo codificar estos cuatro movimientos ortogonales en un sistema de moneda que posea la misma dimensionalidad, es decir, un estado de cuatro dimensiones (qudit). Por lo tanto, es de interés investigar si esta formulación \sout{mejora las firmas espectrales y permite}\janote{rigurosamente no es mejorar, sino que simplementen se sigan las predicciones esperadas}\snnote{Reescrito.} permite que el comportamiento espectral siga las predicciones estadísticas esperadas, permitiendo determinar si la topología de las fronteras es una condición suficiente para dictar, por sí sola, el caos o la integrabilidad del sistema.
+
+% *}}}
 % *}}}
 % --- Bibliografía ---  % {{{*
 \bibliographystyle{unsrt} % Estilo de la bibliografía (orden de aparición)
 \bibliography{ref}        % Nombre de tu archivo .bib (sin la extensión)
 % *}}}
+
 \end{document}
