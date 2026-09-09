@@ -118,7 +118,7 @@ Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, pre
 \snnote{Siendo revisada por: CP}
 \cpnote{Listo}
 
-En primer lugar, la implementación del operador de evolución unitaria dado por la ecuación~\eqref{eq:U} y el análisis del sistema se llevarán a cabo empleando el paquete especializado \textit{QuantumWalks}~\cite{quantumwalks}\janote{Corregí el bibitem, parece que no modificaste nada de como te lo dio gemini} desarrollado en Wolfram Mathematica, del cual el autor del presente trabajo es contribuyente. 
+En primer lugar, la implementación del operador de evolución unitaria dado por la ecuación~\eqref{eq:U} y el análisis del sistema se llevarán a cabo empleando el paquete especializado \textit{QuantumWalks}~\cite{quantumwalks} desarrollado en Wolfram Mathematica, del cual el autor del presente trabajo es contribuyente. 
 Para ello, haciendo uso de este paquete se construirán los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. La estructura del operador de desplazamiento $S$ se generará mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones a lo largo de los ejes cartesianos de la red bidimensional), según el estado de la moneda.
 Por su parte, la dinámica interna del caminante estará descrita mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones.
 
