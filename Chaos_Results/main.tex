@@ -68,7 +68,8 @@ Considérese un espacio de moneda de dimensión $\text{dim}(\mathcal{H}_c)=4$ y 
 \end{equation}
 representa un estado localizado en la posición $v=(x,y)$ con un estado interno de moneda $c_i$.
 
-Los vectores $\ket{c_i}$ conforman la base del subespacio de la moneda $\mathcal{H}_c$ y representan las direcciones de movimiento permitidas. Estas se interpretan como izquierda, arriba, derecha y abajo, y sin pérdida de generalidad se asignan a $\ket{c_1}, \ket{c_2}, \ket{c_3}$ y $\ket{c_4}$, respectivamente.
+Los vectores $\ket{c_i}$ conforman la base del subespacio de la moneda $\mathcal{H}_c$ y representan las direcciones de movimiento permitidas.
+Estas se interpretan como arriba, abajo, izquierd y derecha y sin pérdida de generalidad se asignan a $\ket{c_1}, \ket{c_2}, \ket{c_3}$ y $\ket{c_4}$, respectivamente.
 
 La probabilidad de hallar al caminante en el nodo $v$ en un tiempo $t$, dado un estado inicial $\ket{\alpha_0}$ e independientemente de su estado de moneda, se define como~\cite{aharonov2001quantum}:
 \begin{equation}
@@ -76,7 +77,8 @@ La probabilidad de hallar al caminante en el nodo $v$ en un tiempo $t$, dado un 
     \label{eq:SiteProb}
 \end{equation}
 
-Debido a la naturaleza unitaria de la evolución cuántica, las amplitudes de probabilidad oscilan y esta cantidad no converge a un límite asintótico cuando $t \to \infty$. Para lidiar con esta falta de convergencia, se define la distribución límite (\textit{limit distribution})~\cite{aharonov2001quantum} como el promedio temporal de las probabilidades \eqref{eq:SiteProb}\janote{``Distribución límite'' no puede ser una definición. Debe ser el concepto definido como la distribución límite a la que converge este promedio temporal}:
+Debido a la naturaleza unitaria de la evolución cuántica, las amplitudes de probabilidad oscilan y esta cantidad no converge a un límite asintótico cuando $t \to \infty$. 
+Para lidiar con esta falta de convergencia, se define el promedio temporal de las probabilidades dadas según \eqref{eq:SiteProb}, la cual sí converge a un distribución límite~\cite{aharonov2001quantum}:
 \begin{equation}
     \bar{P_T}(v|\alpha_0)=\frac{1}{T}\sum_{t=0}^{T-1}P_t(v|\alpha_0).
     \label{eq:LimitDist}
@@ -89,16 +91,16 @@ La moneda de Grover es especial en el sentido de que, para la mayoría de estado
 \end{equation}
 
 \subsubsection{Rectángulo}
-Empleando un estadio rectangular con $L_x = 100,\, L_y=70$, se consideran estados localizados en una posición aleatoria y, por lo discutido previamente, con un estado de moneda de la forma \eqref{eq:GrvState}. Sin embargo, la primera figura muestra cómo sería la \textit{limit distribution} si se empleara un estado aleatorio de moneda.
+Empleando un estadio rectangular con $L_x = 100,\, L_y=70$, se consideran estados localizados en una posición aleatoria y, por lo discutido previamente, con un estado de moneda de la forma \eqref{eq:GrvState}. Sin embargo, la primera figura muestra cómo sería la promedio temporal si se empleara un estado aleatorio de moneda.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_Grover_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_Grover_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_Grover_RndPosSpecialCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_Grover_RndPosSpecialCoin.pdf}
     \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
 \end{figure}
 
@@ -106,7 +108,7 @@ Empleando un estadio rectangular con $L_x = 100,\, L_y=70$, se consideran estado
 Empleando un estadio triangular de lado $L=70$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Triangle_Grover_RndPosSpecialCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Triangle_Grover_RndPosSpecialCoin.pdf}
     \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
 \end{figure}
 
@@ -114,7 +116,7 @@ Empleando un estadio triangular de lado $L=70$.
 Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_Grover_RndPosSpecialCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Sinai_Grover_RndPosSpecialCoin.pdf}
     \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
 \end{figure}
 \subsection{Moneda de Hadamard}
@@ -122,7 +124,7 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
 Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_Haad_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_Haad_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 
@@ -130,7 +132,7 @@ Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
 Empleando un estadio triangular de lado $L=70$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Triangle_Haad_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Triangle_Haad_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 
@@ -138,7 +140,7 @@ Empleando un estadio triangular de lado $L=70$.
 Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_Haad_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Sinai_Haad_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 \subsection{Moneda aleatoria del ensamble COE}
@@ -147,7 +149,7 @@ Tomando una moneda aleatoria del Ensamble Circular Ortogonal (COE).
 Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Rect_COE_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_COE_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 
@@ -155,7 +157,7 @@ Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
 Empleando un estadio triangular de lado $L=70$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Triangle_COE_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Triangle_COE_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 
@@ -163,7 +165,7 @@ Empleando un estadio triangular de lado $L=70$.
 Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{LimitDist_Sinai_COE_RndPosCoin.pdf}
+    \includegraphics[width=0.5\textwidth]{LimitDist_Sinai_COE_RndPosCoin.pdf}
     \caption{Usando un estado de moneda aleatorio.}
 \end{figure}
 % *}}}
@@ -180,13 +182,13 @@ Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Rect_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Rect_Grover.pdf}
     \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Rect_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Rect_Grover.pdf}
     \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \newpage
@@ -210,20 +212,20 @@ Empleando un estadio triangular de lado $L=49$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Triangle_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Triangle_Grover.pdf}
     \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Triangle_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Triangle_Grover.pdf}
     \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Triangle_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Triangle_Grover.pdf}
     \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \end{itemize}
@@ -240,20 +242,20 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Sinai_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Sinai_Grover.pdf}
     \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Sinai_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Sinai_Grover.pdf}
     \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Sinai_Grover.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Sinai_Grover.pdf}
     \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
 \end{figure}
 \end{itemize}
@@ -271,20 +273,20 @@ Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Rect_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Rect_Haad.pdf}
     \caption{DoS.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Rect_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Rect_Haad.pdf}
     \caption{$P(s)$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Rect_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Rect_Haad.pdf}
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
@@ -301,20 +303,20 @@ Empleando un estadio triangular de lado $L=49$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Triangle_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Triangle_Haad.pdf}
     \caption{DoS.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Triangle_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Triangle_Haad.pdf}
     \caption{$P(s)$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Triangle_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Triangle_Haad.pdf}
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
@@ -331,20 +333,20 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Sinai_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Sinai_Haad.pdf}
     \caption{DoS.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Sinai_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Sinai_Haad.pdf}
     \caption{$P(s)$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Sinai_Haad.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Sinai_Haad.pdf}
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
@@ -363,20 +365,20 @@ Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Rect_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Rect_RndCOE.pdf}
     \caption{DoS.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Rect_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Rect_RndCOE.pdf}
     \caption{$P(s)$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Rect_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Rect_RndCOE.pdf}
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
@@ -393,20 +395,20 @@ Empleando un estadio triangular de lado $L=49$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Sinai_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Sinai_RndCOE.pdf}
     \caption{DoS.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Triangle_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Triangle_RndCOE.pdf}
     \caption{$P(s)$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Triangle_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Triangle_RndCOE.pdf}
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
@@ -423,20 +425,20 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
     \item DoS:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{DoS_Sinai_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{DoS_Sinai_RndCOE.pdf}
     \caption{DoS.}
 \end{figure}
     \item $P(s)$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Ps_Sinai_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{Ps_Sinai_RndCOE.pdf}
     \caption{$P(s)$.}
 \end{figure}
 \newpage
     \item $SFF$:
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Sinai_RndCOE.pdf}
+    \includegraphics[width=0.5\textwidth]{SFF_Sinai_RndCOE.pdf}
     \caption{$SFF$.}
 \end{figure}
 \end{itemize}
