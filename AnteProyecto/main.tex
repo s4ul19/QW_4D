@@ -4,8 +4,6 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{geometry}
-\usepackage[normalem]{ulem}
-\usepackage{xparse} % Necesario para argumentos opcionales delimitados con { } (tipo g)
 
 \geometry{margin=2.5cm}
 
@@ -13,43 +11,7 @@
 \usepackage{cite} 
 \usepackage{xcolor}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
-\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
-\FXRegisterAuthor{cp}{acp}{\color{blue}CP}
-\FXRegisterAuthor{sn}{asn}{\color{red}SN}
 
-\definecolor{jacolor}{HTML}{C82800}
-\FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
-
-% Notes with one argument keep the usual FiXme behavior.  With two
-% arguments they show Insert/Reason; with three, Remove/Insert/Reason.
-\NewDocumentCommand{\flexfxnote}{m m m m}{%
-  \IfNoValueTF{#3}{#1{#2}}{%
-    \IfNoValueTF{#4}{%
-      #1{\sout{#2} #3}%
-    }{%
-      #1{\sout{#2} #3 {\small \tt #4}}%
-    }%
-  }%
-}
-\NewCommandCopy{\fxnoteoriginal}{\fxnote}
-\NewCommandCopy{\janoteoriginal}{\janote}
-\NewCommandCopy{\cpnoteoriginal}{\cpnote}
-\NewCommandCopy{\mpnoteoriginal}{\mpnote}
-\NewCommandCopy{\jnnoteoriginal}{\jnnote}
-\NewCommandCopy{\clnoteoriginal}{\clnote}
-\NewCommandCopy{\codexnoteoriginal}{\codexnote}
-\RenewDocumentCommand{\fxnote}{m g g}{%
-  \flexfxnote{\fxnoteoriginal}{#1}{#2}{#3}}
-\RenewDocumentCommand{\janote}{m g g}{%
-  \flexfxnote{\janoteoriginal}{#1}{#2}{#3}}
-\RenewDocumentCommand{\cpnote}{m g g}{%
-  \flexfxnote{\cpnoteoriginal}{#1}{#2}{#3}}
-
-\newcommand{\jainsert}[1]{\janote{#1}}
-\newcommand{\jaremove}[1]{\janote{\sout{#1}}}
-\newcommand{\jareason}[1]{\janote{\tt #1}}
-\newcommand{\jacomment}[2]{\uline{#1}\janote{#2}}
-  % *}}}
 \begin{document}
 % Título y otras cosas {{{*
 \begin{center}
@@ -81,6 +43,7 @@ Este proyecto se desarrolla en el marco del Instituto de investigación de Cienc
 
 \subsection{Objetivo general}
 Caracterizar la emergencia de caos cuántico en un modelo de caminata cuántica discreta en el tiempo con una moneda de cuatro dimensiones y un espacio de posición con geometría de billar. 
+
 \subsection{Objetivos específicos}
 \begin{itemize}
     \item Implementar numéricamente el operador de evolución de un paso para el modelo de caminata cuántica discreta en el tiempo en espacios de posición acotados por billares con geometrías de rectángulo y Sinaí.
@@ -114,13 +77,10 @@ Por otro lado, para detectar correlaciones de largo alcance se empleará el fact
 Si el sistema es integrable, no existe un \textit{dip} ni una \textit{ramp}, presentándose únicamente el \textit{plateau}. 
 % *}}}
 \section{Metodología}  % {{{*
-\snnote{Siendo revisada por: CP}
-\cpnote{Listo}
 
 En primer lugar, la implementación del operador de evolución unitaria dado por la ecuación~\eqref{eq:U} y el análisis del sistema se llevarán a cabo empleando el paquete especializado \textit{QuantumWalks}~\cite{quantumwalks} desarrollado en Wolfram Mathematica, del cual el autor del presente trabajo es contribuyente. 
 Para ello, haciendo uso de este paquete se construirán los espacios de posición acotados por billares con geometrías de rectángulo y Sinaí. La estructura del operador de desplazamiento $S$ se generará mediante reglas que condicionan el movimiento del caminante hacia sus primeros vecinos siguiendo un esquema de cruz (es decir, permitiendo únicamente transiciones a lo largo de los ejes cartesianos de la red bidimensional), según el estado de la moneda.
 Por su parte, la dinámica interna del caminante estará descrita mediante el operador $C = \mathbb{I}_P \otimes \mathcal{C}$, donde $\mathbb{I}_P$ representa el operador identidad en el espacio de posición y $\mathcal{C}$ es un operador unitario que actúa exclusivamente sobre el espacio de la moneda de cuatro dimensiones.
-
 
 A partir del operador~\eqref{eq:U}, el siguiente paso consiste en extraer su
 espectro de valores propios. Dado que la evolución es descrita por un operador
@@ -156,14 +116,10 @@ típicamente a los regímenes caóticos de los integrables.
 % *}}}
 \section{Justificación}  % {{{*
 
-% \snnote{Siendo revisada por: JA}
-\janote{Tiene mi VoBo}
-\cpnote{Tiene mi VoBo}
-
 Las caminatas cuánticas poseen una relevancia científica importante. Por un lado, son la base para la implementación de nuevos algoritmos cuánticos~\cite{shenvi2003quantum}. Por otro lado, al constituir un modelo de computación universal~\cite{childs2009universal,lovett2010universal}, permiten simular una amplia variedad de sistemas físicos complejos.
 Esto facilita el estudio de fenómenos como el transporte coherente~\cite{mulken2011continuous,Xu_2008}, las transiciones de fase topológicas~\cite{kitagawa2010exploring} y las dinámicas en redes estructuradas~\cite{Dhamapurkar_2026,portugal2018quantum}.
-Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos~\cite{peruzzo2010quantum,lorz2019photonic} o redes ópticas~\cite{karski2009quantum,Schreiber_2010}\cpnote{cita, por favor cuando pongas las citas, trata de que esté el link y que se pueda hacer click, para verificar que si citaste bien}\snnote{Añadidas citas.}\cpnote{Es facil poner el link en la bibliografia. Porfa ponselo. Es decir, que pueda uno irse al documento citado con un click}\snnote{Links añadidos}. 
-Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas, como la decohrencia, que actualmente impiden la construcción de computadoras cuánticas universales a gran escala~\cite{portugal2018quantum}. 
+Además, estos modelos pueden ser implementados directamente en diversas plataformas experimentales, como circuitos fotónicos~\cite{peruzzo2010quantum,lorz2019photonic} o redes ópticas~\cite{karski2009quantum,Schreiber_2010}. 
+Esta viabilidad experimental representa una ventaja, ya que permite investigar fenómenos cuánticos evadiendo las limitaciones tecnológicas, como la decoherencia, que actualmente impiden la construcción de computadoras cuánticas universales a gran escala~\cite{portugal2018quantum}. 
 
 Uno de los fenómenos que pueden ser explorados aprovechando estos entornos controlables es el caos cuántico. 
 Para estudiar este fenómeno de forma aislada, los sistemas de billar resultan ideales, ya que clásicamente permiten transicionar de una dinámica integrable a una caótica alterando únicamente la geometría de sus fronteras, como ocurre al pasar de un rectángulo a un billar de Sinaí~\cite{sinai1970dynamical}.

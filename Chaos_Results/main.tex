@@ -15,6 +15,37 @@
 \usepackage{hyperref}
 \usepackage{braket}
 
+% Paneles de estadística espectral provenientes de estadistica_espectral.tex.
+% Se prefiere PNG cuando existen ambas versiones, igual que en el original.
+\newcommand{\SpectralPanel}[3]{%
+  \IfFileExists{Imgs/#1_#2_#3.png}{%
+    \includegraphics[width=\linewidth,height=3.4cm,keepaspectratio]{Imgs/#1_#2_#3.png}%
+  }{%
+    \IfFileExists{Imgs/#1_#2_#3.pdf}{%
+      \includegraphics[width=\linewidth,height=3.4cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
+    }{%
+      \fbox{\parbox[c][3cm][c]{0.88\linewidth}{\centering\small Sin figura guardada}}%
+    }%
+  }%
+}
+\newcommand{\SpectralRow}[2]{%
+  \begin{minipage}[c]{0.09\textwidth}\centering\texttt{#2}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Rect}{#2}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Sinai}{#2}\end{minipage}\par
+}
+\newcommand{\SpectralGrid}[5]{%
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}{0.09\textwidth}\strut\end{minipage}\hfill
+    \begin{minipage}{0.43\textwidth}\centering Rectángulo\end{minipage}\hfill
+    \begin{minipage}{0.43\textwidth}\centering Sinaí\end{minipage}\par
+    \SpectralRow{#1}{#3}
+    \SpectralRow{#1}{#4}
+    \SpectralRow{#1}{#5}
+    \caption{#2 para las monedas \texttt{#3}, \texttt{#4} y \texttt{#5} en los estadios rectangular y de Sinaí.}
+  \end{figure}%
+}
+
 \usepackage{xcolor}
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \definecolor{jacolor}{RGB}{200,40,0}
@@ -446,6 +477,44 @@ Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
 
 % *}}}
 % --- NUEVA SECCIÓN DE BIBLIOGRAFÍA --- % {{{*
+\section{Estadística espectral e IPR espacial}
+Los siguientes paneles reúnen los resultados de DoS y unfolding, $P(s)$,
+$P(r)$ y SFF para los estadios rectangular y de Sinaí. Los códigos de moneda
+se conservan como aparecen en las figuras originales. Cuando no existe una
+figura guardada, se indica en el panel correspondiente.
+
+\subsection{DoS y unfolding}
+\SpectralGrid{DoS}{DoS y unfolding}{oo}{o}{b}
+\SpectralGrid{DoS}{DoS y unfolding}{gpg}{uoou}{ubu}
+\SpectralGrid{DoS}{DoS y unfolding}{u}{upu}{p}
+
+\subsection{Distribución de espaciamientos \texorpdfstring{$P(s)$}{P(s)}}
+\SpectralGrid{Ps}{$P(s)$}{oo}{o}{b}
+\SpectralGrid{Ps}{$P(s)$}{gpg}{uoou}{ubu}
+\SpectralGrid{Ps}{$P(s)$}{u}{upu}{p}
+
+\subsection{Distribución \texorpdfstring{$P(r)$}{P(r)}}
+\SpectralGrid{Pr}{$P(r)$}{oo}{o}{b}
+\SpectralGrid{Pr}{$P(r)$}{gpg}{uoou}{ubu}
+\SpectralGrid{Pr}{$P(r)$}{u}{upu}{p}
+
+\subsection{Factor de forma espectral (SFF)}
+\SpectralGrid{SFF}{SFF}{oo}{o}{b}
+\SpectralGrid{SFF}{SFF}{gpg}{uoou}{ubu}
+\SpectralGrid{SFF}{SFF}{u}{upu}{p}
+
+\subsection{Comparación del IPR espacial}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Imgs/IPR_Comparacion_Rect.png}
+    \caption{Comparación del IPR espacial en el rectángulo de dimensiones $80\times50$.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Imgs/IPR_Comparacion_Sinai.png}
+    \caption{Comparación del IPR espacial en el estadio de Sinaí con $L=120$ y $R=90$.}
+\end{figure}
+
 \bibliographystyle{plain}
 \bibliography{ref}
 % *}}}
