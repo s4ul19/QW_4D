@@ -19,30 +19,54 @@
 % Se prefiere PNG cuando existen ambas versiones, igual que en el original.
 \newcommand{\SpectralPanel}[3]{%
   \IfFileExists{Imgs/#1_#2_#3.png}{%
-    \includegraphics[width=\linewidth,height=3.4cm,keepaspectratio]{Imgs/#1_#2_#3.png}%
+    \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.png}%
   }{%
     \IfFileExists{Imgs/#1_#2_#3.pdf}{%
-      \includegraphics[width=\linewidth,height=3.4cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
+      \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
     }{%
-      \fbox{\parbox[c][3cm][c]{0.88\linewidth}{\centering\small Sin figura guardada}}%
+      \fbox{\parbox[c][3.8cm][c]{0.88\linewidth}{\centering\small Sin figura guardada}}%
     }%
-  }%
+  }
 }
 \newcommand{\SpectralRow}[2]{%
   \begin{minipage}[c]{0.09\textwidth}\centering\texttt{#2}\end{minipage}\hfill
   \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Rect}{#2}\end{minipage}\hfill
   \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Sinai}{#2}\end{minipage}\par
 }
-\newcommand{\SpectralGrid}[5]{%
-  \begin{figure}[H]
-    \centering
+\newcommand{\SpectralHeader}{%
     \begin{minipage}{0.09\textwidth}\strut\end{minipage}\hfill
     \begin{minipage}{0.43\textwidth}\centering Rectángulo\end{minipage}\hfill
     \begin{minipage}{0.43\textwidth}\centering Sinaí\end{minipage}\par
-    \SpectralRow{#1}{#3}
-    \SpectralRow{#1}{#4}
-    \SpectralRow{#1}{#5}
-    \caption{#2 para las monedas \texttt{#3}, \texttt{#4} y \texttt{#5} en los estadios rectangular y de Sinaí.}
+}
+\newcommand{\SpectralGrid}[2]{%
+  \begin{figure}[H]
+    \centering
+    \SpectralHeader
+    \SpectralRow{#1}{oo}
+    \SpectralRow{#1}{o}
+    \SpectralRow{#1}{b}
+    \caption{#2 para las monedas \texttt{oo}, \texttt{o}, \texttt{b},
+    \texttt{gpg}, \texttt{uoou}, \texttt{ubu}, \texttt{u}, \texttt{upu}
+    y \texttt{p} en los estadios rectangular y de Sinaí.
+    Los paneles continúan en las páginas siguientes.}
+  \end{figure}
+  \begin{figure}[H]
+    \ContinuedFloat
+    \centering
+    \SpectralHeader
+    \SpectralRow{#1}{gpg}
+    \SpectralRow{#1}{uoou}
+    \SpectralRow{#1}{ubu}
+    \caption[]{#2 (continuación).}
+  \end{figure}
+  \begin{figure}[H]
+    \ContinuedFloat
+    \centering
+    \SpectralHeader
+    \SpectralRow{#1}{u}
+    \SpectralRow{#1}{upu}
+    \SpectralRow{#1}{p}
+    \caption[]{#2 (continuación).}
   \end{figure}%
 }
 
@@ -50,6 +74,7 @@
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \definecolor{jacolor}{RGB}{200,40,0}
 \FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
+
 
 
 \graphicspath{{Imgs/}}
@@ -62,9 +87,6 @@ Con una moneda en 4D}
 \begin{document}
 \maketitle
 
-\janote{Faltan resultados sobre la IPR}
-
-\janote{Creo que Saul también tiene resultados para el operador shift definido como en Portugal}
 \tableofcontents
 \newpage
 \section{Generalidades} % {{{*
@@ -78,7 +100,8 @@ representa el primer paso del estado inicial $\ket{\psi_0}$. Por inducción se d
 \begin{equation}
 \ket{\psi_n}=U \ket{\psi_{n-1}}=U^{n} \ket{\psi_0}.
 \end{equation}
-Dado que $U$ es unitaria, sus eigenvalores son de norma 1 y por tanto conviene estudiar las fases de dichos valores. A la fase asociada a un eigenvalor dado se le llamará eigenfase.
+Como $U$ es unitario, sus eigenvalores tienen módulo uno. La fase de un
+eigenvalor se denomina eigenfase.
 
 La forma de definir $U$ que se seguirá en estas notas es la siguiente:
 \begin{equation}
@@ -86,397 +109,86 @@ U=S\cdot C.
 \end{equation}
 donde $S$ es un operador que desplaza al caminante según su estado de moneda y $C$ es un operador que actúa sobre el estado de moneda del caminante.
 
-Cabe mencionar que la presencia de condiciones de frontera está codificada en la estructura del operador $S$. La dinámica resultante depende de la elección de $C$ y del tipo de condiciones de frontera a escoger. No es claro cuáles son las condiciones exactas sobre las cuales emerge caos cuántico (elección de moneda $C$, condiciones de frontera, etc.).
+Las condiciones de frontera están codificadas en el operador $S$.
 
 % *}}}
-\section{Distribución límite} % {{{*
-\janote{Lo que recuerdo de importante de estos resultados era que aparecían dos cosas: (1) localización en el sito inicial que es característica de la moneda de Grover (explicación en un paper de Aharonov \cite{aharonov2001quantum}, creo, Saul sabe), (2) patrones de localización siempre que la geometría es integrable, y ausencia de los patrones cuando la geometría es caótica}
-
-Considérese un espacio de moneda de dimensión $\text{dim}(\mathcal{H}_c)=4$ y un dominio espacial $\Omega$ tal que, si $(x,y)\in \Omega$, entonces el estado de posición correspondiente es $\ket{x,y}\in \mathcal{H}_p$. Sea $v$ el nodo asociado a la coordenada $(x,y)$; luego, el producto tensorial
+\section{Distribución temporal promedio} % {{{*
+Sea $\ket{\alpha_t}=U^t\ket{\alpha_0}$ el estado del caminante después de
+$t$ pasos. La probabilidad de encontrarlo en el nodo $v$, sin distinguir su
+estado interno de moneda, es~\cite{aharonov2001quantum}
 \begin{equation}
-\ket{c_i}\otimes\ket{v}=\ket{c_i,v}
-\label{eq:State}
-\end{equation}
-representa un estado localizado en la posición $v=(x,y)$ con un estado interno de moneda $c_i$.
-
-Los vectores $\ket{c_i}$ conforman la base del subespacio de la moneda $\mathcal{H}_c$ y representan las direcciones de movimiento permitidas.
-Estas se interpretan como arriba, abajo, izquierd y derecha y sin pérdida de generalidad se asignan a $\ket{c_1}, \ket{c_2}, \ket{c_3}$ y $\ket{c_4}$, respectivamente.
-
-La probabilidad de hallar al caminante en el nodo $v$ en un tiempo $t$, dado un estado inicial $\ket{\alpha_0}$ e independientemente de su estado de moneda, se define como~\cite{aharonov2001quantum}:
-\begin{equation}
-    P_t(v|\alpha_0)=\sum_{k=1}^{4}|\braket{c_k,v|\alpha_t}|^{2}.
+    P_t(v\mid\alpha_0)=\sum_{k=1}^{4}
+    \left|\braket{c_k,v|\alpha_t}\right|^{2},
     \label{eq:SiteProb}
 \end{equation}
+con $\{\ket{c_k}\}_{k=1}^{4}$ una base del espacio de moneda.
 
-Debido a la naturaleza unitaria de la evolución cuántica, las amplitudes de probabilidad oscilan y esta cantidad no converge a un límite asintótico cuando $t \to \infty$. 
-Para lidiar con esta falta de convergencia, se define el promedio temporal de las probabilidades dadas según \eqref{eq:SiteProb}, la cual sí converge a un distribución límite~\cite{aharonov2001quantum}:
+La distribución temporal promedio durante los primeros $T$ pasos se define
+como~\cite{aharonov2001quantum}
 \begin{equation}
-    \bar{P_T}(v|\alpha_0)=\frac{1}{T}\sum_{t=0}^{T-1}P_t(v|\alpha_0).
-    \label{eq:LimitDist}
+    \overline{P}_{T}(v\mid\alpha_0)
+    =\frac{1}{T}\sum_{t=0}^{T-1}P_t(v\mid\alpha_0)
+    =\frac{1}{T}\sum_{t=0}^{T-1}\sum_{k=1}^{4}
+    \left|\braket{c_k,v|U^t|\alpha_0}\right|^2.
+    \label{eq:TimeAverageDist}
 \end{equation}
-\subsection{Moneda de Grover}
-La moneda de Grover es especial en el sentido de que, para la mayoría de estados iniciales de moneda, se observa que el caminante se localiza alrededor de su posición inicial, a excepción del caso en el que el caminante cuenta con un estado inicial de moneda de la forma:
-\begin{equation}
-\ket{c}= \pm\left(\frac{1}{2}\ket{c_1}-\frac{1}{2}\ket{c_2}+\frac{1}{2}\ket{c_3}-\frac{1}{2}\ket{c_4}\right)
-\label{eq:GrvState}
-\end{equation}
-
-\subsubsection{Rectángulo}
-Empleando un estadio rectangular con $L_x = 100,\, L_y=70$, se consideran estados localizados en una posición aleatoria y, por lo discutido previamente, con un estado de moneda de la forma \eqref{eq:GrvState}. Sin embargo, la primera figura muestra cómo sería la promedio temporal si se empleara un estado aleatorio de moneda.
+\subsection{Comparación de monedas en el rectángulo}
+La figura~\ref{fig:time-average-rect} muestra la distribución temporal promedio en
+un rectángulo de dimensiones $L_x=100$ y $L_y=87$ para las nueve monedas
+consideradas.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_Grover_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_Grover_RndPosSpecialCoin.pdf}
-    \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
-\end{figure}
-
-\subsubsection{Triángulo}
-Empleando un estadio triangular de lado $L=70$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Triangle_Grover_RndPosSpecialCoin.pdf}
-    \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Rect_p-uoou.png}}
+    \par\medskip
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Rect_ubu-upu.png}}
+    \caption{Distribución temporal promedio en el rectángulo de dimensiones
+    $100\times87$ para las monedas \texttt{p}, \texttt{oo}, \texttt{b},
+    \texttt{gpg}, \texttt{o}, \texttt{uoou}, \texttt{ubu}, \texttt{u} y
+    \texttt{upu}. Cada escala de grises corresponde a la probabilidad
+    promedio $\overline{P}_{T}$.}
+    \label{fig:time-average-rect}
 \end{figure}
 
-\subsubsection{Sinaí}
-Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
+\subsection{Comparación de monedas en el estadio de Sinaí}
+La figura~\ref{fig:time-average-sinai} muestra la distribución temporal
+promedio en el estadio de Sinaí con $L=120$ y $R=90$ para las mismas nueve
+monedas. Los tres grupos de paneles comparten un único número de figura.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Sinai_Grover_RndPosSpecialCoin.pdf}
-    \caption{Usando un estado de la forma \eqref{eq:GrvState}.}
-\end{figure}
-\subsection{Moneda de Hadamard}
-\subsubsection{Rectángulo}
-Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_Haad_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_p-b.png}}
+    \caption{Distribución temporal promedio en el estadio de Sinaí con
+    $L=120$ y $R=90$ para las monedas \texttt{p}, \texttt{oo}, \texttt{b},
+    \texttt{gpg}, \texttt{o}, \texttt{uoou}, \texttt{ubu}, \texttt{u} y
+    \texttt{upu}. Primera parte: \texttt{p}, \texttt{oo} y \texttt{b}.
+    Las escalas de grises indican la probabilidad promedio
+    $\overline{P}_{T}$ de cada panel.}
+    \label{fig:time-average-sinai}
 \end{figure}
 
-\subsubsection{Triángulo}
-Empleando un estadio triangular de lado $L=70$.
 \begin{figure}[H]
+    \ContinuedFloat
     \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Triangle_Haad_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_gpg-uoou.png}}
+    \caption[]{Distribución temporal promedio en el estadio de Sinaí
+    (continuación): monedas \texttt{gpg}, \texttt{o} y \texttt{uoou}.}
 \end{figure}
 
-\subsubsection{Sinaí}
-Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
 \begin{figure}[H]
+    \ContinuedFloat
     \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Sinai_Haad_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_ubu-upu.png}}
+    \caption[]{Distribución temporal promedio en el estadio de Sinaí
+    (continuación): monedas \texttt{ubu}, \texttt{u} y \texttt{upu}.}
 \end{figure}
-\subsection{Moneda aleatoria del ensamble COE}
-Tomando una moneda aleatoria del Ensamble Circular Ortogonal (COE).
-\subsubsection{Rectángulo}
-Empleando un estadio rectangular con $L_x = 100,\, L_y=70$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Rect_COE_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
-\end{figure}
-
-\subsubsection{Triángulo}
-Empleando un estadio triangular de lado $L=70$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Triangle_COE_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
-\end{figure}
-
-\subsubsection{Sinaí}
-Empleando un estadio $1/8$ de Sinaí de lado $L=70,\,R=50$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{LimitDist_Sinai_COE_RndPosCoin.pdf}
-    \caption{Usando un estado de moneda aleatorio.}
-\end{figure}
-% *}}}
-\section{Dinámica según distintas monedas} % {{{*
-\subsection{Dinámica según una moneda de Grover} % {{{*
-\subsubsection{Para un estadio rectangular}
-Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Rect.pdf}
-    \caption{Estadio rectangular con $L_x = 40,\, L_y=30$}
-\end{figure}
-\begin{itemize}
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Rect_Grover.pdf}
-    \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Rect_Grover.pdf}
-    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{SFF_Rect_Grover.pdf}
-    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
-\end{figure}
-\end{itemize}
-
-\subsubsection{Para un estadio triangular}
-Empleando un estadio triangular de lado $L=49$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Triangle.pdf}
-    \caption{Estadio triangular con $L = 49$}
-\end{figure}
-\begin{itemize}
-    \newpage
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Triangle_Grover.pdf}
-    \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Triangle_Grover.pdf}
-    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Triangle_Grover.pdf}
-    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
-\end{figure}
-\end{itemize}
-
-\subsubsection{Para un estadio 1/8 de Sinaí}
-Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Sinai.pdf}
-    \caption{Estadio $1/8$ de Sinaí con $L = 63$ y $R = 44$}
-\end{figure}
-\begin{itemize}
-    \newpage
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Sinai_Grover.pdf}
-    \caption{DoS, notar las degeneraciones para $0$ y $\pi$.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Sinai_Grover.pdf}
-    \caption{$P(s)$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Sinai_Grover.pdf}
-    \caption{$SFF$, para este cálculo se excluyeron los valores degenerados de $0$ y $\pi$.}
-\end{figure}
-\end{itemize}
 
 % *}}}
-\subsection{Dinámica según una moneda de Hadamard} % {{{*
-\subsubsection{Para un estadio rectangular}
-Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Rect.pdf}
-    \caption{Estadio rectangular con $L_x = 40,\, L_y=30$}
-\end{figure}
-\begin{itemize}
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Rect_Haad.pdf}
-    \caption{DoS.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Rect_Haad.pdf}
-    \caption{$P(s)$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Rect_Haad.pdf}
-    \caption{$SFF$.}
-\end{figure}
-\end{itemize}
-
-\subsubsection{Para un estadio triangular}
-Empleando un estadio triangular de lado $L=49$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Triangle.pdf}
-    \caption{Estadio triangular con $L = 49$}
-\end{figure}
-\begin{itemize}
-    \newpage
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Triangle_Haad.pdf}
-    \caption{DoS.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Triangle_Haad.pdf}
-    \caption{$P(s)$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Triangle_Haad.pdf}
-    \caption{$SFF$.}
-\end{figure}
-\end{itemize}
-
-\subsubsection{Para un estadio 1/8 de Sinaí}
-Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Sinai.pdf}
-    \caption{Estadio $1/8$ de Sinaí con $L = 63$ y $R = 44$}
-\end{figure}
-\begin{itemize}
-    \newpage
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Sinai_Haad.pdf}
-    \caption{DoS.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Sinai_Haad.pdf}
-    \caption{$P(s)$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Sinai_Haad.pdf}
-    \caption{$SFF$.}
-\end{figure}
-\end{itemize}
-
-% *}}}
-\subsection{Dinámica según una moneda aleatoria del ensamble COE} % {{{*
-La moneda pertenece a una muestra del Ensamble Circular Ortogonal (COE).
-\subsubsection{Para un estadio rectangular}
-Empleando un estadio rectangular con $L_x = 40,\, L_y=30$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Rect.pdf}
-    \caption{Estadio rectangular con $L_x = 40,\, L_y=30$}
-\end{figure}
-\begin{itemize}
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Rect_RndCOE.pdf}
-    \caption{DoS.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Rect_RndCOE.pdf}
-    \caption{$P(s)$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Rect_RndCOE.pdf}
-    \caption{$SFF$.}
-\end{figure}
-\end{itemize}
-
-\subsubsection{Para un estadio triangular}
-Empleando un estadio triangular de lado $L=49$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Triangle.pdf}
-    \caption{Estadio triangular con $L = 49$}
-\end{figure}
-\begin{itemize}
-    \newpage
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Sinai_RndCOE.pdf}
-    \caption{DoS.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Triangle_RndCOE.pdf}
-    \caption{$P(s)$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Triangle_RndCOE.pdf}
-    \caption{$SFF$.}
-\end{figure}
-\end{itemize}
-
-\subsubsection{Para un estadio 1/8 de Sinaí}
-Empleando un estadio $1/8$ de Sinaí de lado $L=63$ y radio $R=44$.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Stadium_Sinai.pdf}
-    \caption{Estadio $1/8$ de Sinaí con $L = 63$ y $R = 44$}
-\end{figure}
-\begin{itemize}
-    \newpage
-    \item DoS:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{DoS_Sinai_RndCOE.pdf}
-    \caption{DoS.}
-\end{figure}
-    \item $P(s)$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Ps_Sinai_RndCOE.pdf}
-    \caption{$P(s)$.}
-\end{figure}
-\newpage
-    \item $SFF$:
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{SFF_Sinai_RndCOE.pdf}
-    \caption{$SFF$.}
-\end{figure}
-\end{itemize}
-% *}}}
-
-% *}}}
-% --- NUEVA SECCIÓN DE BIBLIOGRAFÍA --- % {{{*
 \section{Estadística espectral e IPR espacial}
 Los siguientes paneles reúnen los resultados de DoS y unfolding, $P(s)$,
 $P(r)$ y SFF para los estadios rectangular y de Sinaí. Los códigos de moneda
@@ -484,35 +196,182 @@ se conservan como aparecen en las figuras originales. Cuando no existe una
 figura guardada, se indica en el panel correspondiente.
 
 \subsection{DoS y unfolding}
-\SpectralGrid{DoS}{DoS y unfolding}{oo}{o}{b}
-\SpectralGrid{DoS}{DoS y unfolding}{gpg}{uoou}{ubu}
-\SpectralGrid{DoS}{DoS y unfolding}{u}{upu}{p}
+\SpectralGrid{DoS}{DoS y unfolding}
 
 \subsection{Distribución de espaciamientos \texorpdfstring{$P(s)$}{P(s)}}
-\SpectralGrid{Ps}{$P(s)$}{oo}{o}{b}
-\SpectralGrid{Ps}{$P(s)$}{gpg}{uoou}{ubu}
-\SpectralGrid{Ps}{$P(s)$}{u}{upu}{p}
+\SpectralGrid{Ps}{$P(s)$}
 
 \subsection{Distribución \texorpdfstring{$P(r)$}{P(r)}}
-\SpectralGrid{Pr}{$P(r)$}{oo}{o}{b}
-\SpectralGrid{Pr}{$P(r)$}{gpg}{uoou}{ubu}
-\SpectralGrid{Pr}{$P(r)$}{u}{upu}{p}
+\SpectralGrid{Pr}{$P(r)$}
 
 \subsection{Factor de forma espectral (SFF)}
-\SpectralGrid{SFF}{SFF}{oo}{o}{b}
-\SpectralGrid{SFF}{SFF}{gpg}{uoou}{ubu}
-\SpectralGrid{SFF}{SFF}{u}{upu}{p}
+\SpectralGrid{SFF}{SFF}
 
 \subsection{Comparación del IPR espacial}
+Con la probabilidad de posición $P_t(v\mid\alpha_0)$ definida en
+\eqref{eq:SiteProb}, el IPR espacial en el paso $t$ es
+\begin{equation}
+    \mathrm{IPR}^{\mathrm{esp}}(t\mid\alpha_0)
+    =\frac{\displaystyle\sum_{v\in\Omega}P_t(v\mid\alpha_0)^2}
+           {\displaystyle\left(\sum_{v\in\Omega}P_t(v\mid\alpha_0)\right)^2}
+    =\sum_{v\in\Omega}P_t(v\mid\alpha_0)^2
+    \quad\text{si }\braket{\alpha_t|\alpha_t}=1.
+    \label{eq:ipr-spatial}
+\end{equation}
+Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
+
+\subsubsection{Estado inicial localizado en posición}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{Imgs/IPR_Comparacion_Rect.png}
-    \caption{Comparación del IPR espacial en el rectángulo de dimensiones $80\times50$.}
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Rect.png}}
+    \caption{Evolución del IPR espacial para un estado inicial localizado en
+    posición, en el rectángulo de dimensiones $80\times50$.}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{Imgs/IPR_Comparacion_Sinai.png}
-    \caption{Comparación del IPR espacial en el estadio de Sinaí con $L=120$ y $R=90$.}
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Sinai.png}}
+    \caption{Evolución del IPR espacial para un estado inicial localizado en
+    posición, en el estadio de Sinaí con $L=120$ y $R=90$.}
+\end{figure}
+
+\subsubsection{Estado inicial deslocalizado}
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Rect_Deslocalizado.png}}
+    \caption{Evolución del IPR espacial para un estado inicial deslocalizado
+    en el rectángulo de dimensiones $80\times50$, durante $1000$ pasos.}
+    \label{fig:ipr-rect-deslocalizado}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Sinai_Deslocalizado.png}}
+    \caption{Evolución del IPR espacial para un estado inicial deslocalizado
+    en el estadio de Sinaí con $L=120$ y $R=90$, durante $1000$ pasos.}
+    \label{fig:ipr-sinai-deslocalizado}
+\end{figure}
+
+\section{Densidad espacial del IPR}
+Para un eigenestado $\ket{\phi_n}$ del operador de evolución, su
+probabilidad en el nodo $v$ es
+\begin{equation}
+    p_n(v)=\sum_{c=1}^{4}\left|\braket{c,v|\phi_n}\right|^2.
+\end{equation}
+La contribución de ese nodo al IPR espacial del eigenestado se define como
+\begin{equation}
+    I_n(v)=\frac{p_n(v)^2}
+    {\left(\sum_{u\in\Omega}p_n(u)\right)^2},
+    \qquad
+    \mathrm{IPR}^{\mathrm{esp}}_n=\sum_{v\in\Omega}I_n(v).
+    \label{eq:ipr-density}
+\end{equation}
+Para un eigenestado normalizado, $I_n(v)=p_n(v)^2$.
+
+\subsection{Rectángulo}
+Los mapas siguientes
+muestran esta densidad en un rectángulo de dimensiones $30\times30$. En cada
+intervalo de eigenfase $\varepsilon$ se presenta un eigenestado representativo;
+las anotaciones de los paneles indican su eigenfase, IPR total y residuo
+numérico. Se usó una moneda que la estadística espectral da integrabilidad.
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{IPRDensity_Rect_Intervals04-09.png}}
+    \caption{Densidad espacial $I_n(v)$ del IPR en el rectángulo $30\times30$
+    para eigenestados representativos de los intervalos de eigenfase 4 al 15.
+    Primera parte: intervalos 4 al 9. El tono oscuro indica mayor contribución
+    local al IPR; cada panel tiene su propia escala.}
+    \label{fig:ipr-density-rect}
+\end{figure}
+
+\begin{figure}[H]
+    \ContinuedFloat
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{IPRDensity_Rect_Intervals10-15.png}}
+    \caption[]{Densidad espacial $I_n(v)$ del IPR en el rectángulo $30\times30$
+    (continuación): intervalos de eigenfase 10 al 15.}
+\end{figure}
+
+\subsection{Sinaí}
+Los mapas siguientes
+muestran esta densidad en un Sinai de dimensiones $L=65\,, R=25$. En cada
+intervalo de eigenfase $\varepsilon$ se presenta un eigenestado representativo;
+las anotaciones de los paneles indican su eigenfase, IPR total y residuo
+numérico.
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{IPRDensity_Sinai_Intervals01-08.png}}
+    \caption{Densidad espacial $I_n(v)$ del IPR en el estadio de Sinaí para
+    eigenestados representativos de los intervalos de eigenfase 1 al 8.
+    El tono oscuro indica mayor contribución local al IPR.}
+    \label{fig:ipr-density-sinai}
+\end{figure}
+
+\section{Entrelazamiento moneda--posición}
+Para cuantificar el entrelazamiento entre los grados de libertad de moneda y
+posición se considera la entropía de von Neumann de la matriz de densidad
+reducida de la moneda,
+\begin{equation}
+    S(t)=-\operatorname{Tr}\!\left[\rho_c(t)\ln\rho_c(t)\right],
+    \qquad
+    \rho_c(t)=\operatorname{Tr}_{p}\!\left(
+    \lvert\psi_t\rangle\langle\psi_t\rvert\right).
+\end{equation}
+Como el espacio de moneda tiene dimensión cuatro, el valor máximo posible es
+$S_{\max}=\ln 4$, indicado mediante la línea horizontal punteada en las
+figuras. Las curvas corresponden a una evolución de $1000$ pasos para las
+monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
+\texttt{uoou}, \texttt{ubu}, \texttt{u} y \texttt{upu}.
+
+\subsection{Estado inicial localizado}
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Rect.png}}
+    \caption{Evolución de la entropía de entrelazamiento moneda--posición en
+    el rectángulo de dimensiones $80\times50$ para las nueve monedas indicadas
+    en la leyenda.}
+    \label{fig:entanglement-rect}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Sinai.png}}
+    \caption{Evolución de la entropía de entrelazamiento moneda--posición en
+    el estadio de Sinaí con $L=120$ y $R=90$ para las nueve monedas indicadas
+    en la leyenda.}
+    \label{fig:entanglement-sinai}
+\end{figure}
+
+\subsection{Estado inicial deslocalizado}
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Rect_Deslocalizado.png}}
+    \caption{Evolución de la entropía de entrelazamiento moneda--posición
+    para un estado inicial deslocalizado en el rectángulo de dimensiones
+    $80\times50$, durante $1000$ pasos y para las nueve monedas indicadas en
+    la leyenda.}
+    \label{fig:entanglement-rect-deslocalizado}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Sinai_Deslocalizado.png}}
+    \caption{Evolución de la entropía de entrelazamiento moneda--posición
+    para un estado inicial deslocalizado en el estadio de Sinaí con $L=120$
+    y $R=90$, durante $1000$ pasos y para las nueve monedas indicadas en la
+    leyenda.}
+    \label{fig:entanglement-sinai-deslocalizado}
 \end{figure}
 
 \bibliographystyle{plain}
