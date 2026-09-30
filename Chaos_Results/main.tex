@@ -132,7 +132,7 @@ como~\cite{aharonov2001quantum}
     \left|\braket{c_k,v|U^t|\alpha_0}\right|^2.
     \label{eq:TimeAverageDist}
 \end{equation}
-\subsection{Comparación de monedas en el rectángulo}
+\subsection{Comparación de monedas en el rectángulo} % {{{*
 La figura~\ref{fig:time-average-rect} muestra la distribución temporal promedio en
 un rectángulo de dimensiones $L_x=100$ y $L_y=87$ para las nueve monedas
 consideradas.
@@ -152,7 +152,8 @@ consideradas.
     \label{fig:time-average-rect}
 \end{figure}
 
-\subsection{Comparación de monedas en el estadio de Sinaí}
+% *}}}
+\subsection{Comparación de monedas en el estadio de Sinaí} % {{{*
 La figura~\ref{fig:time-average-sinai} muestra la distribución temporal
 promedio en el estadio de Sinaí con $L=120$ y $R=90$ para las mismas nueve
 monedas. Los tres grupos de paneles comparten un único número de figura.
@@ -189,25 +190,30 @@ monedas. Los tres grupos de paneles comparten un único número de figura.
 \end{figure}
 
 % *}}}
-\section{Estadística espectral e IPR espacial}
+% *}}}
+\section{Estadística espectral e IPR espacial} % {{{*
 Los siguientes paneles reúnen los resultados de DoS y unfolding, $P(s)$,
 $P(r)$ y SFF para los estadios rectangular y de Sinaí. Los códigos de moneda
 se conservan como aparecen en las figuras originales. Cuando no existe una
 figura guardada, se indica en el panel correspondiente.
 
-\subsection{DoS y unfolding}
+\subsection{DoS y unfolding} % {{{*
 \SpectralGrid{DoS}{DoS y unfolding}
 
-\subsection{Distribución de espaciamientos \texorpdfstring{$P(s)$}{P(s)}}
+% *}}}
+\subsection{Distribución de espaciamientos \texorpdfstring{$P(s)$}{P(s)}} % {{{*
 \SpectralGrid{Ps}{$P(s)$}
 
-\subsection{Distribución \texorpdfstring{$P(r)$}{P(r)}}
+% *}}}
+\subsection{Distribución \texorpdfstring{$P(r)$}{P(r)}} % {{{*
 \SpectralGrid{Pr}{$P(r)$}
 
-\subsection{Factor de forma espectral (SFF)}
+% *}}}
+\subsection{Factor de forma espectral (SFF)} % {{{*
 \SpectralGrid{SFF}{SFF}
 
-\subsection{Comparación del IPR espacial}
+% *}}}
+\subsection{Comparación del IPR espacial} % {{{*
 Con la probabilidad de posición $P_t(v\mid\alpha_0)$ definida en
 \eqref{eq:SiteProb}, el IPR espacial en el paso $t$ es
 \begin{equation}
@@ -255,7 +261,9 @@ Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
     \label{fig:ipr-sinai-deslocalizado}
 \end{figure}
 
-\section{Densidad espacial del IPR}
+% *}}}
+% *}}}
+\section{Densidad espacial del IPR} % {{{*
 Para un eigenestado $\ket{\phi_n}$ del operador de evolución, su
 probabilidad en el nodo $v$ es
 \begin{equation}
@@ -271,7 +279,7 @@ La contribución de ese nodo al IPR espacial del eigenestado se define como
 \end{equation}
 Para un eigenestado normalizado, $I_n(v)=p_n(v)^2$.
 
-\subsection{Rectángulo}
+\subsection{Rectángulo} % {{{*
 Los mapas siguientes
 muestran esta densidad en un rectángulo de dimensiones $30\times30$. En cada
 intervalo de eigenfase $\varepsilon$ se presenta un eigenestado representativo;
@@ -298,7 +306,8 @@ numérico. Se usó una moneda que la estadística espectral da integrabilidad.
     (continuación): intervalos de eigenfase 10 al 15.}
 \end{figure}
 
-\subsection{Sinaí}
+% *}}}
+\subsection{Sinaí} % {{{*
 Los mapas siguientes
 muestran esta densidad en un Sinai de dimensiones $L=65\,, R=25$. En cada
 intervalo de eigenfase $\varepsilon$ se presenta un eigenestado representativo;
@@ -314,7 +323,9 @@ numérico.
     \label{fig:ipr-density-sinai}
 \end{figure}
 
-\section{Entrelazamiento moneda--posición}
+% *}}}
+% *}}}
+\section{Entrelazamiento moneda--posición} % {{{*
 Para cuantificar el entrelazamiento entre los grados de libertad de moneda y
 posición se considera la entropía de von Neumann de la matriz de densidad
 reducida de la moneda,
@@ -330,7 +341,7 @@ figuras. Las curvas corresponden a una evolución de $1000$ pasos para las
 monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \texttt{uoou}, \texttt{ubu}, \texttt{u} y \texttt{upu}.
 
-\subsection{Estado inicial localizado}
+\subsection{Estado inicial localizado} % {{{*
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
@@ -351,7 +362,8 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
     \label{fig:entanglement-sinai}
 \end{figure}
 
-\subsection{Estado inicial deslocalizado}
+% *}}}
+\subsection{Estado inicial deslocalizado} % {{{*
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
@@ -373,6 +385,8 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
     leyenda.}
     \label{fig:entanglement-sinai-deslocalizado}
 \end{figure}
+
+% *}}}
 
 \bibliographystyle{plain}
 \bibliography{ref}
