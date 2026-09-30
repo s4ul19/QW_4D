@@ -42,30 +42,30 @@
   \begin{figure}[H]
     \centering
     \SpectralHeader
-    \SpectralRow{#1}{oo}
-    \SpectralRow{#1}{o}
-    \SpectralRow{#1}{b}
-    \caption{#2 para las monedas \texttt{oo}, \texttt{o}, \texttt{b},
-    \texttt{gpg}, \texttt{uoou}, \texttt{ubu}, \texttt{u}, \texttt{upu}
-    y \texttt{p} en los estadios rectangular y de Sinaí.
+    \SpectralRow{#1}{p}
+    \SpectralRow{#1}{gpg}
+    \SpectralRow{#1}{upu}
+    \caption{#2 para las monedas \texttt{p}, \texttt{gpg}, \texttt{upu},
+    \texttt{b}, \texttt{ubu}, \texttt{oo}, \texttt{uoou}, \texttt{o}
+    y \texttt{u} en los estadios rectangular y de Sinaí.
     Los paneles continúan en las páginas siguientes.}
   \end{figure}
   \begin{figure}[H]
     \ContinuedFloat
     \centering
     \SpectralHeader
-    \SpectralRow{#1}{gpg}
-    \SpectralRow{#1}{uoou}
+    \SpectralRow{#1}{b}
     \SpectralRow{#1}{ubu}
+    \SpectralRow{#1}{oo}
     \caption[]{#2 (continuación).}
   \end{figure}
   \begin{figure}[H]
     \ContinuedFloat
     \centering
     \SpectralHeader
+    \SpectralRow{#1}{uoou}
+    \SpectralRow{#1}{o}
     \SpectralRow{#1}{u}
-    \SpectralRow{#1}{upu}
-    \SpectralRow{#1}{p}
     \caption[]{#2 (continuación).}
   \end{figure}%
 }
@@ -313,7 +313,7 @@ numérico.
     El tono oscuro indica mayor contribución local al IPR.}
     \label{fig:ipr-density-sinai}
 \end{figure}
-
+ 
 \section{Entrelazamiento moneda--posición}
 Para cuantificar el entrelazamiento entre los grados de libertad de moneda y
 posición se considera la entropía de von Neumann de la matriz de densidad
@@ -329,7 +329,7 @@ $S_{\max}=\ln 4$, indicado mediante la línea horizontal punteada en las
 figuras. Las curvas corresponden a una evolución de $1000$ pasos para las
 monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \texttt{uoou}, \texttt{ubu}, \texttt{u} y \texttt{upu}.
-
+ 
 \subsection{Estado inicial localizado}
 \begin{figure}[H]
     \centering
@@ -350,8 +350,8 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
     en la leyenda.}
     \label{fig:entanglement-sinai}
 \end{figure}
-
-\subsection{Estado inicial deslocalizado}
+ 
+\subsection{Estado inicial deslocalizados}
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
