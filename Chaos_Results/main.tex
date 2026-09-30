@@ -3,23 +3,28 @@
     %\includegraphics[width=0.8\textwidth]{RectangleStateTimeEvol.pdf}
     %\caption{Evolución de un estado localizado con estado inicial de moneda $(1,1,1,1)$ en el tiempo $t=275$ pasos. Dimensiones del estadio: $L_x=200$, $L_y=175$. Moneda de Grover: $\pi/4$.}
 %\end{figure} % *}}}
-\documentclass[12pt,a4paper]{article} % {{{*
+\documentclass[aps, pra, onecolumn, longbibliography]{revtex4-2} % {{{*
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{float}
-\usepackage{amsmath}
+\usepackage{amsmath} 
 \usepackage{amsfonts}
-\usepackage{subcaption}
+% \usepackage[caption=false]{subfig}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{braket}
 
+\usepackage{xcolor}
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\definecolor{jacolor}{RGB}{200,40,0}
+\FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
+
 % Paneles de estadística espectral provenientes de estadistica_espectral.tex.
 % Se prefiere PNG cuando existen ambas versiones, igual que en el original.
 \newcommand{\SpectralPanel}[3]{%
-  \IfFileExists{Imgs/#1_#2_#3.png}{%
-    \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.png}%
+  \IfFileExists{Imgs/#1_#2_#3.pdf}{%
+    \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
   }{%
     \IfFileExists{Imgs/#1_#2_#3.pdf}{%
       \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
@@ -70,21 +75,27 @@
   \end{figure}%
 }
 
-\usepackage{xcolor}
-\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
-\definecolor{jacolor}{RGB}{200,40,0}
-\FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
+% revtex4-2 does not provide \ContinuedFloat (from the caption package,
+% which is not compatible with revtex).  Keep multipart figures under one
+% number and retain distinct hyperref anchors for each continuation.
+\newcounter{continuedfloat}
+\renewcommand*{\theHfigure}{\arabic{figure}.\arabic{continuedfloat}}
+\newcommand{\ContinuedFloat}{%
+  \addtocounter{figure}{-1}%
+  \stepcounter{continuedfloat}%
+}
+
+% `fixme` modifies the author machinery and is incompatible with revtex4-2.
+% No fixme commands are used in this document, so it is deliberately omitted.
 
 
 
 \graphicspath{{Imgs/}}
-\title{Dinámica de caminatas cuánticas\\
-Con una moneda en 4D}
-\author{}
-\date{}
 
 % *}}}
 \begin{document}
+\title{Discrete-time quantum walks in billiards}
+\date{}
 \maketitle
 
 \tableofcontents
@@ -140,10 +151,10 @@ consideradas.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{TimeAverage_Rect_p-uoou.png}}
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Rect_p-uoou.pdf}}
     \par\medskip
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{TimeAverage_Rect_ubu-upu.png}}
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Rect_ubu-upu.pdf}}
     \caption{Distribución temporal promedio en el rectángulo de dimensiones
     $100\times87$ para las monedas \texttt{p}, \texttt{oo}, \texttt{b},
     \texttt{gpg}, \texttt{o}, \texttt{uoou}, \texttt{ubu}, \texttt{u} y
@@ -161,7 +172,7 @@ monedas. Los tres grupos de paneles comparten un único número de figura.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_p-b.png}}
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_p-b.pdf}}
     \caption{Distribución temporal promedio en el estadio de Sinaí con
     $L=120$ y $R=90$ para las monedas \texttt{p}, \texttt{oo}, \texttt{b},
     \texttt{gpg}, \texttt{o}, \texttt{uoou}, \texttt{ubu}, \texttt{u} y
@@ -175,7 +186,7 @@ monedas. Los tres grupos de paneles comparten un único número de figura.
     \ContinuedFloat
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_gpg-uoou.png}}
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_gpg-uoou.pdf}}
     \caption[]{Distribución temporal promedio en el estadio de Sinaí
     (continuación): monedas \texttt{gpg}, \texttt{o} y \texttt{uoou}.}
 \end{figure}
@@ -184,7 +195,7 @@ monedas. Los tres grupos de paneles comparten un único número de figura.
     \ContinuedFloat
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_ubu-upu.png}}
+    height=0.72\textheight,keepaspectratio]{TimeAverage_Sinai_ubu-upu.pdf}}
     \caption[]{Distribución temporal promedio en el estadio de Sinaí
     (continuación): monedas \texttt{ubu}, \texttt{u} y \texttt{upu}.}
 \end{figure}
@@ -230,14 +241,14 @@ Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Rect.png}}
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Rect.pdf}}
     \caption{Evolución del IPR espacial para un estado inicial localizado en
     posición, en el rectángulo de dimensiones $80\times50$.}
 \end{figure}
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Sinai.png}}
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Sinai.pdf}}
     \caption{Evolución del IPR espacial para un estado inicial localizado en
     posición, en el estadio de Sinaí con $L=120$ y $R=90$.}
 \end{figure}
@@ -246,7 +257,7 @@ Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Rect_Deslocalizado.png}}
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Rect_Deslocalizado.pdf}}
     \caption{Evolución del IPR espacial para un estado inicial deslocalizado
     en el rectángulo de dimensiones $80\times50$, durante $1000$ pasos.}
     \label{fig:ipr-rect-deslocalizado}
@@ -255,7 +266,7 @@ Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Sinai_Deslocalizado.png}}
+    height=0.72\textheight,keepaspectratio]{Imgs/IPR_Comparacion_Sinai_Deslocalizado.pdf}}
     \caption{Evolución del IPR espacial para un estado inicial deslocalizado
     en el estadio de Sinaí con $L=120$ y $R=90$, durante $1000$ pasos.}
     \label{fig:ipr-sinai-deslocalizado}
@@ -289,7 +300,7 @@ numérico. Se usó una moneda que la estadística espectral da integrabilidad.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{IPRDensity_Rect_Intervals04-09.png}}
+    height=0.72\textheight,keepaspectratio]{IPRDensity_Rect_Intervals04-09.pdf}}
     \caption{Densidad espacial $I_n(v)$ del IPR en el rectángulo $30\times30$
     para eigenestados representativos de los intervalos de eigenfase 4 al 15.
     Primera parte: intervalos 4 al 9. El tono oscuro indica mayor contribución
@@ -301,7 +312,7 @@ numérico. Se usó una moneda que la estadística espectral da integrabilidad.
     \ContinuedFloat
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{IPRDensity_Rect_Intervals10-15.png}}
+    height=0.72\textheight,keepaspectratio]{IPRDensity_Rect_Intervals10-15.pdf}}
     \caption[]{Densidad espacial $I_n(v)$ del IPR en el rectángulo $30\times30$
     (continuación): intervalos de eigenfase 10 al 15.}
 \end{figure}
@@ -316,7 +327,7 @@ numérico.
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{IPRDensity_Sinai_Intervals01-08.png}}
+    height=0.72\textheight,keepaspectratio]{IPRDensity_Sinai_Intervals01-08.pdf}}
     \caption{Densidad espacial $I_n(v)$ del IPR en el estadio de Sinaí para
     eigenestados representativos de los intervalos de eigenfase 1 al 8.
     El tono oscuro indica mayor contribución local al IPR.}
@@ -345,7 +356,7 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Rect.png}}
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Rect.pdf}}
     \caption{Evolución de la entropía de entrelazamiento moneda--posición en
     el rectángulo de dimensiones $80\times50$ para las nueve monedas indicadas
     en la leyenda.}
@@ -355,7 +366,7 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Sinai.png}}
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Sinai.pdf}}
     \caption{Evolución de la entropía de entrelazamiento moneda--posición en
     el estadio de Sinaí con $L=120$ y $R=90$ para las nueve monedas indicadas
     en la leyenda.}
@@ -367,7 +378,7 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Rect_Deslocalizado.png}}
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Rect_Deslocalizado.pdf}}
     \caption{Evolución de la entropía de entrelazamiento moneda--posición
     para un estado inicial deslocalizado en el rectángulo de dimensiones
     $80\times50$, durante $1000$ pasos y para las nueve monedas indicadas en
@@ -378,7 +389,7 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.08\textwidth,
-    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Sinai_Deslocalizado.png}}
+    height=0.72\textheight,keepaspectratio]{EntanglementEntropy_Sinai_Deslocalizado.pdf}}
     \caption{Evolución de la entropía de entrelazamiento moneda--posición
     para un estado inicial deslocalizado en el estadio de Sinaí con $L=120$
     y $R=90$, durante $1000$ pasos y para las nueve monedas indicadas en la
@@ -388,8 +399,260 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 
 % *}}}
 
-\bibliographystyle{plain}
+\bibliographystyle{apsrev4-2}
 \bibliography{ref}
+% *}}}
+
+\clearpage
+\appendix
+\section{Concentración de la medida de la pureza de Choi} % {{{*
+\janote{Esto surgió de una conversación con ChatGPT, aún no está digerido por mí}
+
+Consideremos una DTQW con
+\begin{equation}
+    \mathcal H=\mathcal H_c\otimes\mathcal H_p,
+    \qquad
+    \dim\mathcal H_c=4,
+    \qquad
+    \dim\mathcal H_p=N,
+\end{equation}
+donde $N$ es el número de sitios permitidos por la geometría del billar.
+La evolución $U=SC$ se mantiene fija y la única variable será el estado
+inicial de posición
+\begin{equation}
+    \ket{\psi}_p=\sum_{a=1}^{N}\psi_a\ket{a}_p,
+    \qquad
+    \braket{\psi|\psi}=1.
+\end{equation}
+Al tiempo $t$, el canal reducido de la moneda es
+\begin{equation}
+    \mathcal E_{\psi,t}(\rho_c)
+    =
+    \operatorname{Tr}_p\left[
+        U^t\left(\rho_c\otimes\ket{\psi}\bra{\psi}\right)U^{-t}
+    \right].
+\end{equation}
+
+Usaremos la matriz de Choi normalizada
+\begin{equation}
+    J_{\psi,t}
+    =
+    (\mathbb I_r\otimes\mathcal E_{\psi,t})(\Phi_4),
+    \qquad
+    \Phi_4=\ket{\Phi_4}\bra{\Phi_4},
+    \qquad
+    \ket{\Phi_4}
+    =
+    \frac{1}{2}\sum_{\mu=1}^{4}
+    \ket{\mu}_r\ket{\mu}_c,
+\end{equation}
+de modo que $\operatorname{Tr}J_{\psi,t}=1$. La cantidad de interés es
+\begin{equation}
+    \mathcal P_t(\psi)
+    =
+    \operatorname{Tr}\left(J_{\psi,t}^2\right).
+    \label{eq:ChoiPurityConcentration}
+\end{equation}
+
+\subsection{Constante de Lipschitz}
+
+Es útil introducir el canal
+\begin{equation}
+    \Lambda_t(\rho_p)
+    =
+    \operatorname{Tr}_p\left[
+        (\mathbb I_r\otimes U^t)
+        (\Phi_4\otimes\rho_p)
+        (\mathbb I_r\otimes U^{-t})
+    \right],
+\end{equation}
+que es CPTP y satisface
+$J_{\psi,t}=\Lambda_t(\ket{\psi}\bra{\psi})$.
+Definamos
+\begin{equation}
+    B_{\psi,t}
+    =
+    \Lambda_t^\dagger(J_{\psi,t}).
+\end{equation}
+Como $\Lambda_t^\dagger$ es unital y positivo,
+$0\leq B_{\psi,t}\leq\mathbb I$, y además
+\begin{equation}
+    \bra{\psi}B_{\psi,t}\ket{\psi}
+    =
+    \operatorname{Tr}(J_{\psi,t}^2)
+    =
+    \mathcal P_t(\psi).
+\end{equation}
+
+Para una variación tangente $\ket{\delta\psi}$ sobre la esfera de estados,
+\begin{equation}
+    \delta\mathcal P_t
+    =
+    4\,\operatorname{Re}
+    \bra{\delta\psi}B_{\psi,t}\ket{\psi},
+\end{equation}
+por lo que el gradiente tangencial es
+\begin{equation}
+    \nabla_S\mathcal P_t
+    =
+    4\left(B_{\psi,t}-\mathcal P_t(\psi)\mathbb I\right)\ket{\psi}.
+\end{equation}
+Por tanto, la constante de Lipschitz que aparece en el lema de Lévy es
+exactamente
+\begin{equation}
+    \boxed{
+    \eta_t
+    =
+    4\sup_{\psi}
+    \sqrt{
+        \bra{\psi}B_{\psi,t}^2\ket{\psi}
+        -\mathcal P_t(\psi)^2
+    }}.
+    \label{eq:ExactLipschitzChoi}
+\end{equation}
+Su valor depende, en general, de $U$ y de $t$. Sin embargo,
+$B_{\psi,t}^2\leq B_{\psi,t}$ implica
+\begin{equation}
+    \left\|\nabla_S\mathcal P_t\right\|^2
+    \leq
+    16\mathcal P_t(1-\mathcal P_t)
+    \leq4,
+\end{equation}
+y obtenemos la cota universal
+\begin{equation}
+    \boxed{\eta_t\leq2.}
+    \label{eq:LipschitzBoundChoi}
+\end{equation}
+La igualdad no tiene por qué alcanzarse; por ejemplo, si el canal de la
+moneda es independiente de $\ket{\psi}$, entonces $\eta_t=0$.
+
+\subsection{Promedio Haar exacto}
+
+Sea $W_t=U^t$ y definamos los bloques de $W_t$ sobre la base de posición,
+\begin{equation}
+    K_{xa}^{(t)}
+    =
+    {}_p\!\bra{x}W_t\ket{a}_p,
+\end{equation}
+que son operadores $4\times4$ sobre la moneda. Para
+$\ket{\psi}=\sum_a\psi_a\ket{a}$, los operadores de Kraus del canal
+reducido son
+\begin{equation}
+    K_x(\psi)=\sum_a\psi_a K_{xa}^{(t)}.
+\end{equation}
+La pureza de Choi puede escribirse como
+\begin{equation}
+    \mathcal P_t(\psi)
+    =
+    \frac{1}{16}
+    \sum_{x,y}
+    \left|
+        \operatorname{Tr}_c
+        \left[K_x^\dagger(\psi)K_y(\psi)\right]
+    \right|^2.
+    \label{eq:ChoiPurityKraus}
+\end{equation}
+Introduciendo las matrices $N\times N$
+\begin{equation}
+    (M_{xy}^{(t)})_{ab}
+    =
+    \operatorname{Tr}_c
+    \left[
+        (K_{xa}^{(t)})^\dagger K_{yb}^{(t)}
+    \right],
+\end{equation}
+se tiene
+$\operatorname{Tr}[K_x^\dagger K_y]
+=\bra{\psi}M_{xy}^{(t)}\ket{\psi}$.
+Para un estado Haar aleatorio en $\mathbb C^N$,
+\begin{equation}
+    \mathbb E_{\psi}
+    \left[
+        \left|\bra{\psi}M\ket{\psi}\right|^2
+    \right]
+    =
+    \frac{
+        \operatorname{Tr}(MM^\dagger)
+        +|\operatorname{Tr}M|^2
+    }{N(N+1)}.
+\end{equation}
+Además, la unitariedad de $W_t$ implica
+\begin{equation}
+    \operatorname{Tr}M_{xy}^{(t)}
+    =
+    4\delta_{xy}.
+\end{equation}
+Por consiguiente, el promedio Haar de la pureza es exactamente
+\begin{equation}
+    \boxed{
+    \overline{\mathcal P}_t
+    =
+    \mathbb E_{\psi}\mathcal P_t(\psi)
+    =
+    \frac{1}{N+1}
+    +
+    \frac{1}{16N(N+1)}
+    \sum_{x,y}
+    \operatorname{Tr}
+    \left[
+        M_{xy}^{(t)}(M_{xy}^{(t)})^\dagger
+    \right].
+    }
+    \label{eq:HaarAverageChoiPurity}
+\end{equation}
+Esta expresión es exacta para cualquier geometría, moneda y tiempo; toda
+la dependencia dinámica está contenida en los bloques de $U^t$.
+
+\subsection{Concentración}
+
+Los estados puros de posición corresponden a la esfera real
+$S^{2N-1}$. Usando la versión del lema de Lévy
+\begin{equation}
+    \Pr\left(
+        |f-\mathbb Ef|\geq\epsilon
+    \right)
+    \leq
+    2\exp\left[
+        -\frac{2C(d+1)\epsilon^2}{\eta^2}
+    \right],
+    \qquad
+    C=\frac{1}{18\pi^3}
+    \simeq1.79175\times10^{-3},
+\end{equation}
+con $d=2N-1$, obtenemos
+\begin{equation}
+    \boxed{
+    \Pr\left(
+        |\mathcal P_t(\psi)-\overline{\mathcal P}_t|
+        \geq\epsilon
+    \right)
+    \leq
+    2\exp\left[
+        -\frac{4CN\epsilon^2}{\eta_t^2}
+    \right].
+    }
+\end{equation}
+Finalmente, usando la cota universal $\eta_t\leq2$,
+\begin{equation}
+    \boxed{
+    \Pr\left(
+        |\mathcal P_t(\psi)-\overline{\mathcal P}_t|
+        \geq\epsilon
+    \right)
+    \leq
+    2\exp\left[
+        -\frac{N\epsilon^2}{18\pi^3}
+    \right].
+    }
+    \label{eq:ChoiPurityLevy}
+\end{equation}
+Así, para $N\gg1$, la pureza de Choi de casi todos los estados iniciales
+Haar de posición se concentra alrededor del valor
+\eqref{eq:HaarAverageChoiPurity}, con fluctuaciones típicas que decrecen
+como $N^{-1/2}$. La constante numérica de Lévy es conservadora, por lo que
+la concentración observada numéricamente puede ser considerablemente más
+fuerte que esta cota rigurosa.
+
 % *}}}
 
 \end{document}
