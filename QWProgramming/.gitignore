@@ -1,0 +1,5 @@
+# Keep external dependencies and generated system files out of version control.
+JA_libs/
+.DS_Store
+__pycache__/
+*.pyc

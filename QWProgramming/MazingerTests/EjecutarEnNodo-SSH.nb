@@ -14,34 +14,11 @@ lista de entradas. La funcion pura se aplica por separado a cada entrada. La \
 salida mantiene el orden de la lista. La cantidad solicitada debe ser \
 compatible con los recursos y las normas de uso del cluster.", "Text", 
          ExpressionUUID -> "4bd5bfed-4a10-47ae-8855-c4675d508ebf"], 
-        Cell[BoxData["ClearAll[QuantumWalks`QWMisc`EjecutarEnNodo];\nQuantumW\
-alks`QWMisc`EjecutarEnNodo::args = \"Argumentos invalidos: usa nodo, cantidad \
-positiva, funcion pura, lista y preparacion opcional.\";\n(* --- Trabajos \
-independientes en kernels temporales de Mazinger --- \
-*)\nQuantumWalks`QWMisc`EjecutarEnNodo[nodo_String, \
-cantidad_Integer?Positive, proceso_Function,\n    entradas_List, \
-preparacion_Function : Function[True]] /;\n    MemberQ[{\"nodo1\", \"nodo2\", \
-\"nodo3\", \"nodo4\"}, nodo] :=\n  (* Conserva los nombres completos durante \
-el envio SSH, incluso cuando\n     QuantumWalks ya esta cargado en el kernel \
-local. *)\n  Block[{$Context = \"Global`\", $ContextPath = {\"System`\"}},\n  \
-RemoteEvaluate[\"ssh://robot\",\n    Module[{kernels = {}, estado},\n      \
-WithCleanup[\n        kernels = LaunchKernels[\n          \
-KernelConfiguration[\"ssh://\" <> nodo, \"KernelCount\" -> cantidad]],\n      \
-  If[! ListQ[kernels] || Length[kernels] =!= cantidad,\n          \
-Failure[\"KernelsNoDisponibles\", <|\n            \"MessageTemplate\" -> \"No \
-se pudieron abrir todos los kernels solicitados.\",\n            \"Nodo\" -> \
-nodo, \"Solicitados\" -> cantidad,\n            \"Abiertos\" -> \
-If[ListQ[kernels], Length[kernels], 0]|>],\n          estado = With[{iniciar \
-= preparacion},\n            ParallelEvaluate[iniciar[], kernels, \
-DistributedContexts -> None]];\n          If[! AllTrue[estado, TrueQ],\n      \
-      Failure[\"PreparacionFallida\", <|\n              \"MessageTemplate\" \
--> \"La preparacion no devolvio True en todos los kernels.\",\n              \
-\"Nodo\" -> nodo, \"EstadoPorKernel\" -> estado|>],\n            \
-ParallelMap[proceso, entradas, Method -> \"FinestGrained\",\n              \
-DistributedContexts -> None]\n          ]\n        ],\n        \
-If[ListQ[kernels], CloseKernels[kernels]]\n      ]\n    ],\n    \
-IncludeDefinitions -> False\n  ]];\n\nQuantumWalks`QWMisc`EjecutarEnNodo[___] \
-:=\n  (Message[QuantumWalks`QWMisc`EjecutarEnNodo::args]; $Failed);\n\n"], 
+        Cell[BoxData[RowBox[{RowBox[{"root", "=", RowBox[{"DirectoryName", 
+                "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], ";", 
+            RowBox[{"Get", "[", RowBox[{"FileNameJoin", "[", RowBox[
+                 {"{", RowBox[{"root", ",", "\"scripts\"", ",", 
+                    "\"load_project.wl\""}], "}"}], "]"}], "]"}], ";"}]], 
          "Input"]}, Open]], Cell[CellGroupData[
        {Cell["Comprobar el reparto", "Section", ExpressionUUID -> 
           "e37e423d-e70e-4f0d-a2f8-1844a616e1bd"], Cell["Este ejemplo pide \
@@ -57,7 +34,7 @@ identificadores deben mostrar que participaron dos procesos distintos.",
                           " ", "$ProcessID", ",", " ", RowBox[{"x", "^", 
                           "2"}]}], "}"}]}], "]"}], ",", " ", RowBox[{"Range", 
                         "[", "6", "]"}]}], "]"}]}], ";"}], "\n", "prueba"}], 
-            "Input", CellLabel -> "In[20]:=", ExpressionUUID -> 
+            "Input", ExpressionUUID -> 
              "aac7f449-6db6-4a7e-baef-4adf3308dde5"]}, Open]], 
         Cell[BoxData[RowBox[{"DeleteDuplicates", "[", 
             RowBox[{"prueba", "[", RowBox[{"[", RowBox[{"All", ",", " ", 
@@ -94,10 +71,9 @@ solicitados.", "Text", ExpressionUUID ->
                       "]"}], "]"}], ",", " ", RowBox[{"Length", " ", "/@", 
                     " ", RowBox[{"resultados", "[", RowBox[{"[", RowBox[
                          {"All", ",", " ", "\"Autovalores\""}], "]"}], 
-                      "]"}]}]}], "}"}]}], "Input", CellLabel -> "In[22]:=", 
-            ExpressionUUID -> "12f019f9-d23d-4be4-9e5e-d12980c00bd2"]}, 
-          Open]]}, Open]], Cell[CellGroupData[
-       {Cell["Guardar en el Mac (opcional)", "Section", 
+                      "]"}]}]}], "}"}]}], "Input", ExpressionUUID -> 
+             "12f019f9-d23d-4be4-9e5e-d12980c00bd2"]}, Open]]}, Open]], 
+     Cell[CellGroupData[{Cell["Guardar en el Mac (opcional)", "Section", 
          ExpressionUUID -> "162f45d4-e621-47f1-8a11-95b1fd09ec2c"], 
         Cell["La variable resultados queda en la memoria del kernel local. \
 Evalua la celda siguiente si deseas conservarla como archivo WDX junto a este \
