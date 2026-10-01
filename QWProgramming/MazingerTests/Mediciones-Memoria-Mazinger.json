@@ -1,0 +1,81 @@
+{
+  "fecha": "2026-09-30",
+  "nodos": [
+    {
+      "nodo": "nodo1",
+      "fisicos": 20,
+      "logicos": 20,
+      "ram": 33349152768,
+      "disponible": 27633704960,
+      "carga": 0.0
+    },
+    {
+      "nodo": "nodo2",
+      "fisicos": 20,
+      "logicos": 40,
+      "ram": 33339256832,
+      "disponible": 21304225792,
+      "carga": 4.2
+    },
+    {
+      "nodo": "nodo3",
+      "fisicos": 16,
+      "logicos": 32,
+      "ram": 134710972416,
+      "disponible": 86853771264,
+      "carga": 31.07
+    },
+    {
+      "nodo": "nodo4",
+      "fisicos": 8,
+      "logicos": 16,
+      "ram": 67060985856,
+      "disponible": 64967036928,
+      "carga": 0.06
+    }
+  ],
+  "benchmark": {
+    "nodo": "nodo4",
+    "kernels": 1,
+    "hilos_por_subkernel": 1,
+    "resultados": [
+      {
+        "lado": 10,
+        "N": 400,
+        "segundos": 0.385644,
+        "bytes_matriz": 2560208,
+        "pico_RSS": 223698944
+      },
+      {
+        "lado": 16,
+        "N": 1024,
+        "segundos": 4.152701,
+        "bytes_matriz": 16777424,
+        "pico_RSS": 259088384
+      },
+      {
+        "lado": 20,
+        "N": 1600,
+        "segundos": 11.212088,
+        "bytes_matriz": 40960208,
+        "pico_RSS": 344416256
+      },
+      {
+        "lado": 24,
+        "N": 2304,
+        "segundos": 30.015815,
+        "bytes_matriz": 84934864,
+        "pico_RSS": 434073600
+      }
+    ],
+    "todos_autovalores_numericos": true,
+    "nota": "Trabajos secuenciales en el mismo subkernel; RSS es el m\u00e1ximo acumulado del proceso."
+  },
+  "limites": {
+    "MaxLicenseProcesses": "Infinity",
+    "MaxLicenseSubprocesses": "Infinity",
+    "memory_max_usuario": "max",
+    "cpu_max_usuario": "max 100000"
+  },
+  "modelo_provisional_bytes_por_proceso": "0.5 * 2^30 + 96 * N^2"
+}

@@ -1,0 +1,62 @@
+{
+  "L": 16,
+  "R": 12,
+  "domain": "1/8",
+  "N_sites": 88,
+  "D": 352,
+  "samples": 128,
+  "seed": 20260930,
+  "coin": "CUE(4), misma moneda en todos los sitios y tiempos",
+  "unfolding": false,
+  "boundary_counts_up_down_right_left": [
+    8,
+    8,
+    17,
+    17
+  ],
+  "F1_exact": 176.5,
+  "K1_exact": 0.5014204545454546,
+  "F2_exact": 3134.2,
+  "K2_exact": 8.903977272727273,
+  "A_squared_norm": 23754.0,
+  "A_pair_swap_inner_product": 23754.0,
+  "A_row_swap_inner_product": 990.0,
+  "A_column_swap_inner_product": 990.0,
+  "K1_MC": 0.4773782061582139,
+  "K1_SE": 0.04362971103358996,
+  "K2_MC": 9.387880070107657,
+  "K2_SE": 1.3587069585284552,
+  "mean_spacing_ratio": 0.5780014877668194,
+  "SE_spacing_ratio_between_coins": 0.0018943637476029889,
+  "max_eigenvalue_modulus_error": 1.9317880628477724e-14,
+  "max_coin_unitarity_error": 2.170494720016844e-15,
+  "block_size_steps": 14,
+  "elapsed_seconds": 11.936304584000027,
+  "validation": {
+    "unitarity_error": 3.0749567607529397e-15,
+    "short_time_Haar_validation_samples": 12000,
+    "short_time_Haar_validation_z_scores": [
+      0.9543525189677944,
+      -0.11085305615168596
+    ],
+    "single_position_CUE4_F1_F2": [
+      1.0,
+      2.0
+    ]
+  },
+  "band_0.2_0.6": {
+    "K_mean": 0.4487468322335799,
+    "SE_between_coins": 0.006692039661280615,
+    "K_CUE_mean": 0.4005681818181818
+  },
+  "band_0.6_1.0": {
+    "K_mean": 0.7213522291280972,
+    "SE_between_coins": 0.0068862903146299954,
+    "K_CUE_mean": 0.8011363636363636
+  },
+  "band_1.2_2.0": {
+    "K_mean": 0.9439559316073399,
+    "SE_between_coins": 0.006553065495773474,
+    "K_CUE_mean": 1.0
+  }
+}

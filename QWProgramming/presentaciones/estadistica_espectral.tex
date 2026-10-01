@@ -1,0 +1,99 @@
+\documentclass[10pt]{article}
+\usepackage[paperwidth=20cm,paperheight=11.25cm,margin=0.55cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lmodern}
+\usepackage{tikz}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Cada página muestra tres monedas en columnas y los dos estadios en filas.
+% Si una salida no se guardó en el notebook, aparece una marca en su posición.
+% Para la moneda O en Sinaí se incluyen Ps_Sinai_o.pdf y Pr_Sinai_o.png.
+\newcommand{\CoinHeading}[1]{%
+  \begin{minipage}[c][0.43cm][c]{0.30\textwidth}
+    \strut
+  \end{minipage}%
+}
+\newcommand{\PlotCell}[3]{%
+  \begin{minipage}[c][3.85cm][c]{0.30\textwidth}
+    \centering
+    \IfFileExists{Imgs/#1_#2_#3.png}{%
+      \includegraphics[width=\linewidth,height=3.75cm,keepaspectratio]{Imgs/#1_#2_#3.png}%
+    }{%
+      \IfFileExists{Imgs/#1_#2_#3.pdf}{%
+        \includegraphics[width=\linewidth,height=3.75cm,keepaspectratio,clip]{Imgs/#1_#2_#3.pdf}%
+      }{%
+        \colorbox{gray!10}{\parbox[c][3.55cm][c]{0.92\linewidth}{%
+          \centering\small\color{gray!65!black}Sin figura guardada\\en el notebook}}%
+      }%
+    }%
+  \end{minipage}%
+}
+\newcommand{\StadiumRow}[6]{%
+  \noindent
+  \begin{minipage}[c][3.85cm][c]{1.28cm}
+    \strut
+  \end{minipage}\hfill
+  \PlotCell{#1}{#2}{#4}\hfill
+  \PlotCell{#1}{#2}{#5}\hfill
+  \PlotCell{#1}{#2}{#6}\par
+}
+\newcommand{\GridPage}[5]{%
+  \begin{center}\large\bfseries\phantom{#1}\end{center}
+  \noindent\hspace*{1.28cm}\hfill
+  \CoinHeading{#3}\hfill\CoinHeading{#4}\hfill\CoinHeading{#5}\par
+  \vspace{0.05cm}
+  \StadiumRow{#2}{Rect}{Rect.}{#3}{#4}{#5}
+  \vspace{0.08cm}
+  \StadiumRow{#2}{Sinai}{Sinaí}{#3}{#4}{#5}
+  % Los rótulos se trazan al final para que queden por encima de las figuras.
+  \begin{tikzpicture}[remember picture,overlay]
+    \node at ([yshift=-0.78cm]current page.north) {\large\bfseries #1};
+    \node at ([xshift=4.87cm,yshift=-1.59cm]current page.north west)
+      {\small\bfseries\MakeUppercase{#3}};
+    \node at ([xshift=10.74cm,yshift=-1.59cm]current page.north west)
+      {\small\bfseries\MakeUppercase{#4}};
+    \node at ([xshift=16.61cm,yshift=-1.59cm]current page.north west)
+      {\small\bfseries\MakeUppercase{#5}};
+    \node at ([xshift=1.18cm,yshift=-3.85cm]current page.north west)
+      {\small\bfseries Rect.};
+    \node at ([xshift=1.18cm,yshift=-7.75cm]current page.north west)
+      {\small\bfseries Sinaí};
+  \end{tikzpicture}%
+  \newpage
+}
+\newcommand{\IPRPage}[3]{%
+  \begin{center}
+    {\large\bfseries IPR espacial: #1\par}
+    \vspace{0.08cm}
+    {\small #3\par}
+    \vspace{0.12cm}
+    \includegraphics[width=\textwidth,height=8.35cm,keepaspectratio]{Imgs/IPR_Comparacion_#2.png}
+  \end{center}
+  \newpage
+}
+
+\begin{document}
+\GridPage{DoS y Unfold}{DoS}{oo}{o}{b}
+\GridPage{DoS y Unfold}{DoS}{gpg}{uoou}{ubu}
+\GridPage{DoS y Unfold}{DoS}{u}{upu}{p}
+
+\GridPage{$P(s)$}{Ps}{p}{gpg}{upu}
+\GridPage{$P(s)$}{Ps}{b}{ubu}{oo}
+\GridPage{$P(s)$}{Ps}{uoou}{o}{u}
+
+\GridPage{$P(r)$}{Pr}{p}{gpg}{upu}
+\GridPage{$P(r)$}{Pr}{b}{ubu}{oo}
+\GridPage{$P(r)$}{Pr}{uoou}{o}{u}
+
+\GridPage{SFF}{SFF}{p}{gpg}{upu}
+\GridPage{SFF}{SFF}{b}{ubu}{oo}
+\GridPage{SFF}{SFF}{uoou}{o}{u}
+
+\IPRPage{Rectángulo}{Rect}{Dimensiones: $80\times50$}
+\IPRPage{Sinaí}{Sinai}{Parámetros: $L=120$, $R=90$}
+\end{document}

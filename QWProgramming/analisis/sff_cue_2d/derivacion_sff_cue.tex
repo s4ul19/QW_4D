@@ -1,0 +1,302 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\CUE}{\operatorname{CUE}}
+\title{Factor de forma espectral de un caminante bidimensional\\
+con moneda homogénea CUE(4)}
+\author{Nota de cálculo sobre el modelo de \texttt{Chaos\_Results/main.pdf}}
+\date{30 de septiembre de 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Para una DTQW con $N$ posiciones y una moneda $C\sim\CUE(4)$,
+la dimensión espectral es $D=4N$. Si el operador completo presenta
+correlaciones caóticas de clase unitaria, su referencia universal es
+$K(\tau)=\min(\tau,1)$, con $\tau=t/D$.
+Esta referencia no es una identidad para $U=S(I_N\otimes C)$:
+la moneda homogénea produce correlaciones entre caminos y la reflexión
+genera contribuciones geométricas a tiempos cortos. Se derivan la
+referencia CUE, los momentos Haar exactos a uno y dos pasos y una
+comprobación numérica reproducible en dos tamaños de Sinaí.
+\end{abstract}
+
+\section{Modelo y promedio}
+La sección I de \texttt{main.pdf}, p.~2, define $U=S\cdot C$ y sitúa las
+condiciones de frontera en $S$; la sección III.D, pp.~15--17, muestra el
+SFF. La implementación usada aquí se toma de
+\texttt{QWMisc.wl} y de los archivos \texttt{Sinai.wl} y
+\texttt{Common.wl} del repositorio. En el orden posición por moneda,
+\begin{equation}
+ \mathcal H=\mathbb C^N\otimes\mathbb C^4,\qquad
+ U_C=S(I_N\otimes C),\qquad D=4N,\qquad C\sim\CUE(4).
+ \label{eq:model}
+\end{equation}
+El orden moneda por posición del PDF da la misma expresión tras una
+permutación de la base. Se sortea una moneda por realización y se usa
+\emph{la misma} en todos los sitios y en todos los pasos. No se introduce
+desorden espacial ni se vuelve a sortear la moneda durante la evolución.
+
+Los cuatro estados son arriba, abajo, derecha e izquierda. Si el vecino
+en la dirección $b$ pertenece al dominio, $S$ mueve al caminante y
+conserva $b$. Si falta el vecino, mantiene la posición e invierte la
+dirección $b\mapsto\bar b$. Este $S$ es una permutación unitaria.
+El dominio discreto de \texttt{GenerateSinaiBasis} es
+\begin{equation}
+ \Omega_{L,R}=\{(x,y)\in\mathbb Z^2:0\leq y\leq x\leq L,
+                   \ x^2+y^2\geq R^2\}.
+\end{equation}
+Se trata del dominio de un octavo con su propia reflexión local.
+Para una moneda CUE genérica no se puede identificar automáticamente
+con un sector de simetría del Sinaí completo: esa identificación requiere
+que la moneda respete las simetrías correspondientes.
+
+Definimos el SFF físico sin normalizar, y su versión normalizada, como
+\begin{align}
+ F_\Omega(t)&=\int_{U(4)}\left|\Tr\,[S(I_N\otimes C)]^t\right|^2
+                         d\mu_H(C), \label{eq:exactintegral}\\
+ K_\Omega(t)&=\frac{F_\Omega(t)}D
+ =\frac1D\E_C\left[\sum_{j,k=1}^D e^{it(\theta_j-\theta_k)}\right],
+ \qquad t\in\mathbb Z. \label{eq:k}
+\end{align}
+Aquí $e^{i\theta_j}$ son los eigenvalores de $U_C$. El promedio es sobre
+monedas, no sobre estados iniciales. La invariancia Haar bajo
+$C\mapsto e^{i\varphi}C$ implica
+\begin{equation}
+ \E_C\Tr U_C^t=0\quad(t\neq0).
+\end{equation}
+Por tanto, para tiempos enteros no nulos el SFF de este ensamble coincide
+con el conectado. En $t=0$, $F_\Omega(0)=D^2$, $K_\Omega(0)=D$ y el
+conectado es cero. Una densidad media uniforme del ensamble no obliga
+a que la densidad de cada realización sea uniforme.
+
+\section{Derivación de la referencia universal CUE}
+Una moneda CUE(4) tiene sólo 16 parámetros reales; el operador de
+dimensión $D$ no resulta Haar en $U(D)$ por esa sola elección.
+La hipótesis adicional para usar CUE como clase universal es que
+el operador completo tenga correlaciones caóticas de clase unitaria,
+sin una simetría antiunitaria física que lo sitúe en COE, y que se
+analice un espectro sin mezclar sectores conservados. Una moneda Haar
+genérica no impone las relaciones de reciprocidad de una moneda COE.
+
+Para una matriz \emph{completa} $V\sim\CUE(D)$, el núcleo de correlación
+y la densidad de dos puntos distintos son
+\begin{align}
+ A_D(\theta-\theta')&=\frac1{2\pi}
+        \sum_{m=0}^{D-1}e^{im(\theta-\theta')},\\
+ \rho_2(\theta,\theta')&=\left(\frac D{2\pi}\right)^2
+                  -|A_D(\theta-\theta')|^2.
+\end{align}
+Separando los $D$ términos diagonales de \eqref{eq:k}, para $t\neq0$,
+\begin{equation}
+ F_{\CUE(D)}(t)=D+int_0^{2\pi}\!\int_0^{2\pi}
+  e^{it(\theta-\theta')}\rho_2(\theta,\theta')\,d\theta\,d\theta'.
+\end{equation}
+El término constante de $\rho_2$ integra a cero. La expansión del
+cuadrado del núcleo deja una suma sobre $m,n\in\{0,\ldots,D-1\}$.
+La integral sólo selecciona $t+m-n=0$: hay $D-|t|$ parejas para
+$0<|t|<D$ y ninguna para $|t|\geq D$. Así,
+\begin{equation}
+ \boxed{F_{\CUE(D)}(t)=\min(|t|,D),\qquad
+        K_{\CUE(D)}(t)=\min\left(\frac{|t|}{D},1\right)}
+ \quad(t\neq0).
+ \label{eq:cue}
+\end{equation}
+Este resultado finito es exacto para Haar en $U(D)$ \cite{bertini}.
+Como $\Delta\theta=2\pi/D$, el tiempo de Heisenberg en pasos es
+$t_H=2\pi/\Delta\theta=D=4N$. Con $\tau=t/t_H$, la predicción para
+el caminante en el régimen universal es
+\begin{equation}
+ \boxed{K_\Omega(\tau)\simeq
+ \begin{cases}\tau,&\tau_{\rm Th}\ll\tau\leq1,\\
+               1,&\tau\geq1,
+ \end{cases}\qquad \tau_{\rm Th}=t_{\rm Th}/D.}
+\end{equation}
+El tiempo de Thouless, las contribuciones de caminos cortos y la
+dependencia de la densidad en cada moneda no quedan determinados por
+la afirmación de caos geométrico. No se deduce una identidad a todos
+los tiempos a partir de esa afirmación. La saturación del SFF de la
+\emph{moneda} en $t=4$ tampoco determina la saturación del caminante.
+
+\section{Resultados Haar exactos para el shift del repositorio}
+\subsection{Un paso: contribución de frontera}
+Sea $B_b$ el número de sitios cuyo vecino en la dirección $b$ no existe.
+Los desplazamientos interiores no contribuyen a la traza. Sólo
+contribuyen las reflexiones, por lo que
+\begin{equation}
+ \Tr U_C=\sum_{b=1}^4 B_b C_{b,\bar b}.
+\end{equation}
+Usando $\E[C_{ij}\overline{C_{kl}}]=\delta_{ik}\delta_{jl}/4$,
+\begin{equation}
+ \boxed{F_\Omega(1)=\frac14\sum_b B_b^2,\qquad
+ K_\Omega(1)=\frac1{4D}\sum_b B_b^2
+            =\frac1{16N}\sum_b B_b^2.}
+ \label{eq:k1}
+\end{equation}
+Es un resultado exacto del modelo, válido sin asumir caos. Las
+amplitudes se suman coherentemente sobre sitios porque todos comparten
+la misma moneda. Para $L=49,R=37$, los parámetros del bloque espectral
+de Sinaí en \texttt{FunctionsTester.nb}, se obtiene
+\begin{equation}
+ N=708,\quad D=2832,\quad (B_\uparrow,B_\downarrow,B_\rightarrow,B_\leftarrow)
+ =(23,23,50,50),\quad K_\Omega(1)=0.534781\ldots .
+\end{equation}
+En cambio, la referencia Haar completa sería $1/2832=0.0003531\ldots$.
+Esto prueba que \eqref{eq:cue} no describe exactamente el promedio
+sobre monedas a todos los tiempos.
+
+\subsection{Dos pasos: suma de caminos y cuarto momento Haar}
+Definamos $B_{bd}$ como el número de sitios donde faltan ambos vecinos
+$b$ y $d$. Los únicos caminos cerrados de dos pasos son un avance y
+su regreso, o dos reflexiones en la misma posición:
+\begin{equation}
+ \Tr U_C^2=\sum_b (N-B_b)C_{b,\bar b}C_{\bar b,b}
+       +\sum_{b,d}B_{bd}C_{b,\bar d}C_{d,\bar b}.
+ \label{eq:trace2}
+\end{equation}
+Para dar una fórmula compacta y directamente implementable, escribamos
+$\Tr U_C^2=\sum_{ijkl}A_{ijkl}C_{ij}C_{kl}$, donde $A$ cuenta los
+caminos ordenados de \eqref{eq:trace2}. El cuarto momento Haar de $U(4)$ es
+\begin{align}
+ &\E[C_{ij}C_{kl}\overline{C_{ab}C_{cd}}]\nonumber\\
+ &=\frac{\delta_{ia}\delta_{kc}\delta_{jb}\delta_{ld}
+             +\delta_{ic}\delta_{ka}\delta_{jd}\delta_{lb}}{15}
+ -\frac{\delta_{ia}\delta_{kc}\delta_{jd}\delta_{lb}
+             +\delta_{ic}\delta_{ka}\delta_{jb}\delta_{ld}}{60}.
+\end{align}
+En consecuencia, con producto interno de Frobenius,
+\begin{equation}
+ \boxed{\begin{aligned}F_\Omega(2)&=
+ \frac{\|A\|_F^2+\langle A,A^{\rm par}\rangle}{15}
+ -\frac{\langle A,A^{\rm fila}\rangle+
+         \langle A,A^{\rm col}\rangle}{60},\\
+ K_\Omega(2)&=F_\Omega(2)/D.\end{aligned}}
+\end{equation}
+donde $A^{\rm par}_{ijkl}=A_{klij}$,
+$A^{\rm fila}_{ijkl}=A_{kjil}$ y $A^{\rm col}_{ijkl}=A_{ilkj}$.
+El script construye $A$ a partir de la permutación $S$ y evalúa esta
+fórmula sin diagonalizar el operador.
+
+En una familia bidimensional compacta con $B_b=O(\sqrt N)$,
+el término interior dominante es
+$2N(C_{\uparrow\downarrow}C_{\downarrow\uparrow}
+    +C_{\rightarrow\leftarrow}C_{\leftarrow\rightarrow})$.
+Como los dos monomios no tienen correlación Haar entre sí y cada uno
+tiene segundo momento $1/15$,
+\begin{equation}
+ F_\Omega(2)=\frac{8N^2}{15}+O(N^{3/2}),\qquad
+ K_\Omega(2)=\frac{2N}{15}+O(\sqrt N).
+\end{equation}
+La contribución temprana puede crecer con el tamaño aun cuando las
+correlaciones locales posteriores sean caóticas.
+
+\subsection{Estructura exacta a tiempos generales}
+La traza es la suma de amplitudes de caminos cerrados con estados de
+moneda: $\Tr U_C^t=\sum_{p\in\mathcal P_t}\prod_{r=1}^t
+C_{b_r(p),a_r(p)}$. Sustituir en \eqref{eq:exactintegral} expresa el
+SFF como suma sobre pares de caminos, seguida de una integral Haar
+de $t$ entradas de $C$ y $t$ conjugadas. Esas integrales se evalúan
+mediante contracciones de Weingarten. A partir de $t>4$, la matriz
+Gram de permutaciones es singular y se usa su pseudoinversa o la
+expansión restringida a particiones con a lo sumo cuatro filas.
+No se puede factorizar el promedio por sitios ni por pasos: se repite
+la misma variable aleatoria $C$. La geometría entra en las
+multiplicidades de caminos; la hipótesis de caos permite una
+aproximación universal, pero no fija esas multiplicidades exactas.
+
+\section{Comprobación numérica y alcance}
+Se generaron monedas Haar mediante QR de matrices Ginibre complejas
+y corrección de las fases de la diagonal de $R$ \cite{mezzadri}.
+Se diagonalizó $U_C$ y se calculó el SFF de las fases originales para
+$t=1,\ldots,2D$. Estos tamaños son una comprobación a escala reducida,
+no una diagonalización del estadio $L=120,R=90$ del PDF ni del caso
+$L=49,R=37$ de los paneles espectrales.
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & $L=16,R=12$ & $L=24,R=18$\\
+\midrule
+Posiciones $N$ & 88 & 184\\
+Dimensión $D$ & 352 & 736\\
+Monedas independientes & 128 & 64\\
+$K(1)$ exacto & 0.501420 & 0.522418\\
+$K(1)$ numérico & $0.4774\pm0.0436$ & $0.4061\pm0.0593$\\
+$K(2)$ exacto & 8.90398 & 20.09429\\
+$K(2)$ numérico & $9.3879\pm1.3587$ & $16.5199\pm2.5082$\\
+$\overline K$, $1.2\leq\tau\leq2$ & $0.9440\pm0.0066$ & $0.9420\pm0.0063$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Los errores son errores estándar entre monedas. Para bandas temporales
+se promedia primero dentro de cada moneda, conservando las
+correlaciones entre tiempos al estimar el error. La figura
+\texttt{sff\_cue\_2d.png} muestra bloques de aproximadamente $0.04D$
+pasos y, aparte, los primeros 40 pasos.
+
+Se observa una rampa y una aproximación a la meseta, con desviaciones
+sistemáticas frente a la referencia CUE que superan el error estadístico.
+No se ha demostrado convergencia exacta a CUE ni se ha determinado
+$t_{\rm Th}$. La meseta sola no prueba caos: para cualquier espectro
+simple, el promedio de Cesàro a tiempo infinito de $K$ es uno;
+con degeneraciones de multiplicidad $m_\nu$ es
+$\sum_\nu m_\nu^2/D$.
+
+Como diagnóstico separado se desplegó cada espectro con una densidad
+positiva suavizada por Fejér, usando 8 y 16 armónicos. Para $D=736$, la
+media en $1.2\leq\tau\leq2$ pasa a $0.9764\pm0.0040$ y
+$0.9838\pm0.0038$, respectivamente. El desplegado mejora parte del
+acuerdo, pero deja desviaciones y dependencia del suavizado. Este
+SFF de niveles desplegados no es $|\Tr U_C^t|^2/D$ del operador físico.
+Los dos observables se guardan por separado.
+
+La validación comprueba la unitariedad, que $S$ sea una permutación,
+la igualdad entre trazas de potencias y eigenvalores, y los momentos
+Haar de uno y dos pasos con 12000 monedas en una geometría pequeña.
+Además, para una sola posición se recupera $F(1)=1,F(2)=2$ de CUE(4).
+El máximo desvío del módulo de los eigenvalores en los dos ensambles
+es $3.4\times10^{-14}$.
+
+\section{Archivos y uso en Wolfram}
+La carpeta de esta nota contiene \texttt{calcular\_sff.py}, los
+eigenfases, monedas, geometría y series en \texttt{datos\_sff.npz},
+tablas CSV, resúmenes JSON, la figura PNG/SVG y el diagnóstico de
+desplegado. Las semillas son 20260930 y 20260931. El cálculo de
+eigenfases y SFF requiere sólo NumPy; la figura usa Matplotlib.
+
+En \texttt{QWMisc.wl}, la referencia de \texttt{qwSffPlot} usa
+\texttt{SpectralFormFactorRMT[tau,1]} y la leyenda COE. Para CUE, el
+índice debe ser 2. Los archivos originales se conservaron. Para un
+SFF físico desde una lista completa de eigenfases, basta evaluar
+\begin{verbatim}
+dim = Length[eigenphases];
+times = Range[2 dim];
+k = (Abs[Total[Exp[I # eigenphases]]]^2/dim &) /@ times;
+reference = Min[#, 1] & /@ N[times/dim];
+\end{verbatim}
+Si se usa \texttt{CompileSFF} sobre niveles desplegados, se está
+calculando el segundo observable descrito arriba. En ambos casos la
+dimensión para escalar el tiempo es el número de eigenfases, $D=4N$.
+
+\begin{thebibliography}{9}
+\bibitem{model} \emph{Discrete-time quantum walks in billiards},
+\texttt{Chaos\_Results/main.pdf}, secciones I y III.D;
+\texttt{QWMisc.wl}, \texttt{QuantumWalks/Billiards/Common.wl},
+\texttt{Sinai.wl} y \texttt{FunctionsTester.nb} del repositorio local.
+\bibitem{bertini} B. Bertini, P. Kos y T. Prosen,
+\emph{Random Matrix Spectral Form Factor of Dual-Unitary Quantum Circuits},
+secciones 2.3--2.4, ecuación (18),
+\href{https://arxiv.org/abs/2012.12254}{arXiv:2012.12254}.
+Se usa aquí su referencia CUE; no se traslada su teorema de circuitos
+dual-unitarios al caminante.
+\bibitem{mezzadri} F. Mezzadri,
+\emph{How to generate random matrices from the classical compact groups},
+\href{https://arxiv.org/abs/math-ph/0609050}{arXiv:math-ph/0609050}.
+\end{thebibliography}
+\end{document}

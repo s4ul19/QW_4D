@@ -12,6 +12,8 @@ main.pdf
 *.toc
 .DS_Store
 .env
+__pycache__/
+*.pyc
 .bbl
 .blg
 Chaos_Results/mainNotes.bib

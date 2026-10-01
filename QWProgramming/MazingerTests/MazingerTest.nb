@@ -1,0 +1,283 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10614,        273]
+NotebookOptionsPosition[      7460,        215]
+NotebookOutlinePosition[      7874,        232]
+CellTagsIndexPosition[      7831,        229]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Prueba de kernels remotos en Mazinger", "Title",ExpressionUUID->"812ca9e0-3960-44b0-a7c4-e7e99163e0b8"],
+
+Cell["\<\
+Evalua las celdas de arriba hacia abajo. Este notebook usa Mazinger como \
+kernel principal. Cada ParallelEvaluate dirige una evaluacion al nodo \
+indicado.\
+\>", "Text",ExpressionUUID->"41bcd4b8-231b-44aa-8f04-cf09a31c641c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"$MachineName", ",", "$Version"}], "}"}]], "Input",
+ CellChangeTimes->{{3.999718866108069*^9, 3.9997188661081333`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"02b12165-4c84-432c-830d-dc9ca59e62da"],
+
+Cell[CellGroupData[{
+
+Cell["1. Comprueba que el kernel principal sea Mazinger.", "Section",ExpressionUUID->"1f7faaab-e29d-4299-9152-d84d1c1cc68a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"$MachineName", ",", " ", "$Version"}], "}"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"0b324e22-c189-454e-b1cd-e22805a897d6"],
+
+Cell["Debe aparecer mazinger.", "Text",
+ CellChangeTimes->{{3.9997169111612263`*^9, 
+  3.999716911533667*^9}},ExpressionUUID->"f82ef446-df2e-4e17-9d06-\
+d43075f0f243"],
+
+Cell[BoxData[
+ RowBox[{"kNodo1", "=", 
+  RowBox[{"First", "@", 
+   RowBox[{"LaunchKernels", "[", "\"\<ssh://nodo1\>\"", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.999718756248011*^9, 3.999718756248086*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"069910d0-e3fd-4e2f-b3b6-f452ca55b24d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Abre un kernel en cada nodo.", "Section",ExpressionUUID->"20dd9982-7791-4e76-80ce-e5ff9e971c5a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CloseKernels", "[", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.999718045840951*^9, 3.9997180559160833`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"73f2fac4-6e92-4c7c-8d33-0a31c1248775"],
+
+Cell[BoxData["$KernelCount"], "Input",
+ CellChangeTimes->{{3.9997180635362377`*^9, 3.999718064449139*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"703d7dc3-7444-4cf9-8377-abd4a5a0f8ed"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LaunchKernels", "[", "2", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"LaunchKernels", "[", 
+   RowBox[{"{", "\"\<ssh://nodo1?5\>\"", "}"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"LaunchKernels", "[", 
+   RowBox[{"{", "\"\<ssh://nodo2?5\>\"", "}"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.999718027889907*^9, 3.999718037894177*^9}, {
+  3.999718128119829*^9, 3.999718137478904*^9}, {3.99971819144291*^9, 
+  3.999718193853963*^9}, {3.999718440735429*^9, 3.999718449641374*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"fdf5b24f-eeb5-4964-8906-06e22bcf23ae"],
+
+Cell[BoxData["$KernelCount"], "Input",
+ CellChangeTimes->{{3.9997180670915947`*^9, 3.9997180698211327`*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"e527184e-aa3e-476d-b2c8-cbd984ca463c"],
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{
+   RowBox[{"Prime", "[", "i", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "9"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.999718375588443*^9, 3.999718386286909*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"6d0f41de-4578-4762-8ea0-f8a61f1c3b65"],
+
+Cell[BoxData[
+ RowBox[{"CloseKernels", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.999718072798223*^9, 
+  3.999718076992051*^9}},ExpressionUUID->"1f909068-42a7-44f5-b890-\
+f296f517db90"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"kNodo1", " ", "=", " ", 
+   RowBox[{"First", "@", 
+    RowBox[{"LaunchKernels", "[", 
+     RowBox[{"{", "\"\<ssh://nodo1?10\>\"", "}"}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"kNodo2", " ", "=", " ", 
+   RowBox[{"First", "@", 
+    RowBox[{"LaunchKernels", "[", "\"\<ssh://nodo2\>\"", "]"}]}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{
+  3.9997173784909267`*^9, {3.999717790018714*^9, 3.999717820974964*^9}, {
+   3.9997178616658792`*^9, 3.999717867714302*^9}, 3.99971791573391*^9, 
+   3.999717950240234*^9},
+ CellLabel->"In[32]:=",ExpressionUUID->"01810ecb-1df1-4fca-86ab-ea366f0502ab"],
+
+Cell[BoxData["$KernelCount"], "Input",
+ CellChangeTimes->{{3.9997178274960938`*^9, 3.9997178313848953`*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"f495857d-1369-4e98-9e86-87e6f627701d"],
+
+Cell[BoxData[
+ RowBox[{"CloseKernels", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.999717958550355*^9, 3.999717960944827*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"927fd447-c775-4b68-8d95-6b608f00f53a"],
+
+Cell[BoxData["$KernelCount"], "Input",
+ CellChangeTimes->{{3.9997179621432657`*^9, 3.999717966257326*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"7097f89c-cc4f-451a-8704-e84e83011d7e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Envia una evaluacion a nodos particulares", "Section",
+ CellChangeTimes->{{3.999717381248404*^9, 
+  3.999717386016634*^9}},ExpressionUUID->"e32bee81-6d52-4924-914d-\
+bd04243bbffa"],
+
+Cell[CellGroupData[{
+
+Cell["al nodo 1", "Subsubsection",
+ CellChangeTimes->{{3.9997173929842243`*^9, 
+  3.99971739582607*^9}},ExpressionUUID->"63de2818-74bd-4caf-873f-\
+8b9416a75ef5"],
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"$MachineName", ",", " ", 
+     RowBox[{"2", " ", "+", " ", "2"}]}], "}"}], ",", " ", "kNodo1"}], 
+  "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"602bb843-a55b-4e98-9685-9e63827db8ef"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["al nodo2", "Subsection",
+ CellChangeTimes->{{3.999717399500574*^9, 
+  3.9997174124237556`*^9}},ExpressionUUID->"edd6ef28-ed03-46c0-bfbc-\
+5936bd36838f"],
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"$MachineName", ",", " ", 
+     RowBox[{"3", " ", "+", " ", "3"}]}], "}"}], ",", " ", "kNodo2"}], 
+  "]"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"82dff117-955e-4d85-860e-72bb7c4a0122"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Usando ambos nodos en una misma celda", "Subsection",
+ CellChangeTimes->{{3.999717530613307*^9, 
+  3.999717546081061*^9}},ExpressionUUID->"d8cf9bb0-80b9-4900-afc8-\
+cf28b1b2f5a8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"ParallelEvaluate", "[", 
+    RowBox[{
+     RowBox[{"2", "+", "2"}], ",", "kNodo1"}], "]"}], ",", 
+   RowBox[{"ParallelEvaluate", "[", 
+    RowBox[{
+     RowBox[{"3", "+", "3"}], ",", "kNodo2"}], "]"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.999717547172888*^9, 3.999717547172948*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"c1b6c09b-f53c-4e97-8263-017841c4daab"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["5. Cierra los kernels remotos al terminar.", "Section",ExpressionUUID->"af3b6063-c6fc-4685-a6d9-ce30d45cb48f"],
+
+Cell[BoxData[
+ RowBox[{"CloseKernels", "[", 
+  RowBox[{"{", 
+   RowBox[{"kNodo1", ",", " ", "kNodo2"}], "}"}], "]"}]], "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"1f235fc4-54de-45f9-9c00-af8702618774"],
+
+Cell["\<\
+Si reinicias el kernel principal, vuelve a ejecutar las celdas del paso 2 \
+antes de evaluar en los nodos.\
+\>", "Text",ExpressionUUID->"a0a29f47-7b5e-4a94-8639-d5f2f43f961a"]
+}, Open  ]]
+}, Open  ]]
+},
+Evaluator->"Mazinger",
+WindowSize->{1470, 817},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ec6574b3-5ffb-49f8-8280-8cedd372488c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 109, 0, 96, "Title",ExpressionUUID->"812ca9e0-3960-44b0-a7c4-e7e99163e0b8"],
+Cell[688, 24, 235, 4, 33, "Text",ExpressionUUID->"41bcd4b8-231b-44aa-8f04-cf09a31c641c"],
+Cell[926, 30, 236, 4, 29, "Input",ExpressionUUID->"02b12165-4c84-432c-830d-dc9ca59e62da"],
+Cell[CellGroupData[{
+Cell[1187, 38, 124, 0, 66, "Section",ExpressionUUID->"1f7faaab-e29d-4299-9152-d84d1c1cc68a"],
+Cell[1314, 40, 173, 3, 29, "Input",ExpressionUUID->"0b324e22-c189-454e-b1cd-e22805a897d6"],
+Cell[1490, 45, 167, 3, 33, "Text",ExpressionUUID->"f82ef446-df2e-4e17-9d06-d43075f0f243"],
+Cell[1660, 50, 284, 5, 29, "Input",ExpressionUUID->"069910d0-e3fd-4e2f-b3b6-f452ca55b24d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1981, 60, 105, 0, 66, "Section",ExpressionUUID->"20dd9982-7791-4e76-80ce-e5ff9e971c5a"],
+Cell[2089, 62, 224, 4, 29, "Input",ExpressionUUID->"73f2fac4-6e92-4c7c-8d33-0a31c1248775"],
+Cell[2316, 68, 184, 2, 29, "Input",ExpressionUUID->"703d7dc3-7444-4cf9-8377-abd4a5a0f8ed"],
+Cell[2503, 72, 631, 12, 70, "Input",ExpressionUUID->"fdf5b24f-eeb5-4964-8906-06e22bcf23ae"],
+Cell[3137, 86, 186, 2, 29, "Input",ExpressionUUID->"e527184e-aa3e-476d-b2c8-cbd984ca463c"],
+Cell[3326, 90, 315, 7, 29, "Input",ExpressionUUID->"6d0f41de-4578-4762-8ea0-f8a61f1c3b65"],
+Cell[3644, 99, 186, 4, 29, "Input",ExpressionUUID->"1f909068-42a7-44f5-b890-f296f517db90"],
+Cell[3833, 105, 629, 15, 49, "Input",ExpressionUUID->"01810ecb-1df1-4fca-86ab-ea366f0502ab"],
+Cell[4465, 122, 187, 2, 29, "Input",ExpressionUUID->"f495857d-1369-4e98-9e86-87e6f627701d"],
+Cell[4655, 126, 205, 3, 29, "Input",ExpressionUUID->"927fd447-c775-4b68-8d95-6b608f00f53a"],
+Cell[4863, 131, 185, 2, 29, "Input",ExpressionUUID->"7097f89c-cc4f-451a-8704-e84e83011d7e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5085, 138, 189, 3, 66, "Section",ExpressionUUID->"e32bee81-6d52-4924-914d-bd04243bbffa"],
+Cell[CellGroupData[{
+Cell[5299, 145, 161, 3, 43, "Subsubsection",ExpressionUUID->"63de2818-74bd-4caf-873f-8b9416a75ef5"],
+Cell[5463, 150, 284, 7, 29, "Input",ExpressionUUID->"602bb843-a55b-4e98-9685-9e63827db8ef"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5784, 162, 158, 3, 53, "Subsection",ExpressionUUID->"edd6ef28-ed03-46c0-bfbc-5936bd36838f"],
+Cell[5945, 167, 284, 7, 29, "Input",ExpressionUUID->"82dff117-955e-4d85-860e-72bb7c4a0122"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6266, 179, 185, 3, 70, "Subsection",ExpressionUUID->"d8cf9bb0-80b9-4900-afc8-cf28b1b2f5a8"],
+Cell[6454, 184, 416, 10, 70, "Input",ExpressionUUID->"c1b6c09b-f53c-4e97-8263-017841c4daab"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6919, 200, 116, 0, 70, "Section",ExpressionUUID->"af3b6063-c6fc-4685-a6d9-ce30d45cb48f"],
+Cell[7038, 202, 206, 4, 70, "Input",ExpressionUUID->"1f235fc4-54de-45f9-9c00-af8702618774"],
+Cell[7247, 208, 185, 3, 70, "Text",ExpressionUUID->"a0a29f47-7b5e-4a94-8639-d5f2f43f961a"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

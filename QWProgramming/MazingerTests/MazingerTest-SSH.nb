@@ -1,0 +1,233 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      7656,        225]
+NotebookOptionsPosition[      5437,        172]
+NotebookOutlinePosition[      5848,        189]
+CellTagsIndexPosition[      5805,        186]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Pruebas de Mazinger por SSH", "Title",ExpressionUUID->"73da62a9-63dd-4bb4-9b25-ba473c6a3594"],
+
+Cell["Ejecutar las celdas en orden.", "Text",
+ CellChangeTimes->{{3.999731666989441*^9, 
+  3.999731670236801*^9}},ExpressionUUID->"63bc60c9-8f17-4cb8-82ee-\
+95f85983296f"],
+
+Cell[CellGroupData[{
+
+Cell["1. Identifica el kernel principal", "Section",ExpressionUUID->"3c4ba661-a90f-4d33-9ad9-9315ffb44f8f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"$MachineName", ",", " ", "$Version"}], "}"}]], "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"033acac7-e083-4272-a424-b254c19eab59"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Sauls-MacBook-Air\"\>", 
+   ",", "\<\"15.0.1 for Mac OS X ARM (64-bit) (July 2, 2026)\"\>"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.9997313895816307`*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"d7ff9d5c-a401-471d-973e-8da8ca78e3e6"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Comprueba la conexion SSH con Mazinger", "Section",ExpressionUUID->"c661da27-fb1c-4aee-8420-7e2c21838e70"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RemoteEvaluate", "[", 
+  RowBox[{"\"\<ssh://robot\>\"", ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"$MachineName", ",", " ", "$Version"}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"7af73d09-8c67-4183-a09c-a119fbc9b81d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"mazinger\"\>", 
+   ",", "\<\"14.2.0 for Linux x86 (64-bit) (December 26, 2024)\"\>"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.999731398022067*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"35cba668-e0c5-42d1-9718-30b92f35d485"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Envia un calculo a nodo1", "Section",ExpressionUUID->"c30555aa-edc3-4ec9-9910-a5dcede48273"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RemoteEvaluate", "[", 
+  RowBox[{"\"\<ssh://robot\>\"", ",", " ", 
+   RowBox[{"RemoteEvaluate", "[", 
+    RowBox[{"\"\<ssh://nodo1\>\"", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"$MachineName", ",", " ", 
+       RowBox[{"2", " ", "+", " ", "2"}]}], "}"}]}], "]"}]}], "]"}]], "Input",\
+
+ CellLabel->"In[12]:=",ExpressionUUID->"cfd8aa82-b366-4f01-9108-903cd25dd8b7"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"nodo1\"\>", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{3.999731415648673*^9},
+ CellLabel->"Out[12]=",ExpressionUUID->"441b45c2-feac-4632-843a-7033d05ca44b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4. Envia otro calculo a nodo2", "Section",ExpressionUUID->"17d23a99-c4c2-4c54-990c-3edc8a2cb86b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RemoteEvaluate", "[", 
+  RowBox[{"\"\<ssh://robot\>\"", ",", " ", 
+   RowBox[{"RemoteEvaluate", "[", 
+    RowBox[{"\"\<ssh://nodo2\>\"", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"$MachineName", ",", " ", 
+       RowBox[{"3", " ", "+", " ", "3"}]}], "}"}]}], "]"}]}], "]"}]], "Input",\
+
+ CellLabel->"In[13]:=",ExpressionUUID->"777f2ca2-014c-4e36-9473-93db1594a6ce"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"nodo2\"\>", ",", "6"}], "}"}]], "Output",
+ CellChangeTimes->{3.999731432400531*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"9621c081-bf8b-4925-ac1e-88444c007266"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["5. Usa los dos nodos dentro de una misma celda", "Section",ExpressionUUID->"eac6f997-2597-4c35-9c53-aea6b2bd104b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RemoteEvaluate", "[", 
+  RowBox[{"\"\<ssh://robot\>\"", ",", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ks", ",", " ", "r"}], "}"}], ",", " ", 
+     RowBox[{
+      RowBox[{"ks", " ", "=", " ", 
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{"LaunchKernels", "[", "\"\<ssh://nodo1\>\"", "]"}], ",", " ", 
+         RowBox[{"LaunchKernels", "[", "\"\<ssh://nodo2\>\"", "]"}]}], 
+        "]"}]}], ";", " ", 
+      RowBox[{"r", " ", "=", " ", 
+       RowBox[{"ParallelEvaluate", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"$MachineName", ",", " ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"$MachineName", " ", "==", " ", "\"\<nodo1\>\""}], ",", 
+             " ", 
+             RowBox[{"2", " ", "+", " ", "2"}], ",", " ", 
+             RowBox[{"3", " ", "+", " ", "3"}]}], "]"}]}], "}"}], ",", " ", 
+         "ks"}], "]"}]}], ";", " ", 
+      RowBox[{"CloseKernels", "[", "ks", "]"}], ";", " ", "r"}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"5c69cb19-eabd-4b24-9c4c-27e3ef4fdce0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"nodo1\"\>", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"nodo2\"\>", ",", "6"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.9997315331083193`*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"ea3cca56-7864-4676-b22e-8567b7157991"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1470, 817},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"eb783e61-210c-43e1-9b09-fea7a9faa117"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 99, 0, 96, "Title",ExpressionUUID->"73da62a9-63dd-4bb4-9b25-ba473c6a3594"],
+Cell[678, 24, 171, 3, 33, "Text",ExpressionUUID->"63bc60c9-8f17-4cb8-82ee-95f85983296f"],
+Cell[CellGroupData[{
+Cell[874, 31, 107, 0, 66, "Section",ExpressionUUID->"3c4ba661-a90f-4d33-9ad9-9315ffb44f8f"],
+Cell[CellGroupData[{
+Cell[1006, 35, 174, 3, 29, "Input",ExpressionUUID->"033acac7-e083-4272-a424-b254c19eab59"],
+Cell[1183, 40, 281, 6, 33, "Output",ExpressionUUID->"d7ff9d5c-a401-471d-973e-8da8ca78e3e6"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1513, 52, 115, 0, 66, "Section",ExpressionUUID->"c661da27-fb1c-4aee-8420-7e2c21838e70"],
+Cell[CellGroupData[{
+Cell[1653, 56, 264, 5, 29, "Input",ExpressionUUID->"7af73d09-8c67-4183-a09c-a119fbc9b81d"],
+Cell[1920, 63, 272, 6, 33, "Output",ExpressionUUID->"35cba668-e0c5-42d1-9718-30b92f35d485"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2241, 75, 101, 0, 66, "Section",ExpressionUUID->"c30555aa-edc3-4ec9-9910-a5dcede48273"],
+Cell[CellGroupData[{
+Cell[2367, 79, 391, 9, 29, "Input",ExpressionUUID->"cfd8aa82-b366-4f01-9108-903cd25dd8b7"],
+Cell[2761, 90, 206, 4, 33, "Output",ExpressionUUID->"441b45c2-feac-4632-843a-7033d05ca44b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3016, 100, 103, 0, 66, "Section",ExpressionUUID->"17d23a99-c4c2-4c54-990c-3edc8a2cb86b"],
+Cell[CellGroupData[{
+Cell[3144, 104, 391, 9, 29, "Input",ExpressionUUID->"777f2ca2-014c-4e36-9473-93db1594a6ce"],
+Cell[3538, 115, 206, 4, 33, "Output",ExpressionUUID->"9621c081-bf8b-4925-ac1e-88444c007266"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3793, 125, 120, 0, 66, "Section",ExpressionUUID->"eac6f997-2597-4c35-9c53-aea6b2bd104b"],
+Cell[CellGroupData[{
+Cell[3938, 129, 1138, 28, 49, "Input",ExpressionUUID->"5c69cb19-eabd-4b24-9c4c-27e3ef4fdce0"],
+Cell[5079, 159, 318, 8, 33, "Output",ExpressionUUID->"ea3cca56-7864-4676-b22e-8567b7157991"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

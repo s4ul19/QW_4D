@@ -1,0 +1,3 @@
+[submodule "QWProgramming/JA_libs"]
+	path = QWProgramming/JA_libs
+	url = git@github.com:deleonja/libs.git
