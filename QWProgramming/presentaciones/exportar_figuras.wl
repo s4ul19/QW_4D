@@ -15,18 +15,18 @@ Module[
     Infinity
   ];
 
-  stadiums = {{9, "Rect"}, {10, "Sinai"}};
+  stadiums = {{"Rectángulo", "Rect"}, {"Sinaí", "Sinai"}};
   coins = {"p", "oo", "b", "gpg", "o", "uoou", "ubu", "u", "upu"};
   statistics = {{"P(s)", "Ps"}, {"P(r)", "Pr"}, {"SFF", "SFF"}};
 
   Do[
-    section = sections[[stadiumSpec[[1]]]];
     stadium = stadiumSpec[[2]];
-    If[!StringContainsQ[section[[1, 1]],
-        If[stadium === "Rect", "Rect", "Sina"]],
-      Print["Sección inesperada: ", stadium];
-      Return[$Failed]
-    ];
+    section = SelectFirst[sections,
+      MatchQ[First[#], Cell[title_, "Section", ___] /; title === stadiumSpec[[1]]] &,
+      Missing["Section"]];
+    If[MissingQ[section],
+      Print["Falta la sección: ", stadiumSpec[[1]], ". Evalúa y guarda el notebook antes de exportar."];
+      Return[$Failed]];
 
     Do[
       name = statisticSpec[[1]];

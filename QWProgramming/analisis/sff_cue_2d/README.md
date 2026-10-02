@@ -38,6 +38,7 @@ no se reemplazan por niveles desplegados. Las desviaciones observadas frente a C
 son mayores que los errores estándar y no se presentan como una demostración de
 convergencia a CUE.
 
-La función `QWSFF` original usa la referencia COE con índice 1. La referencia
-correspondiente a este caso es CUE, índice 2; la nota incluye la expresión directa
-para el SFF físico en Wolfram, sin modificar esa función.
+La versión actual de `QWSFF` muestra las referencias COE (índice 1) y CUE
+(índice 2), configurables con `RMTEnsembles`. Para este caso puede usarse
+`RMTEnsembles -> {2}`. La nota incluye también la expresión directa para el SFF
+físico en Wolfram; `QWSFF` sigue calculando el observable desplegado.

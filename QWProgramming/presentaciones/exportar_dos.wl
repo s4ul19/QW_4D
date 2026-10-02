@@ -18,30 +18,31 @@ Module[{base, notebook, sections, section, groups, outputs, plots, insetPlots,
     section = SelectFirst[sections,
       MatchQ[First[#], Cell[title_, "Section", ___] /;
         title === sectionName] &, Missing["Section"]];
-    If[MissingQ[section], Print["Falta la sección: ", sectionName]; Exit[1]];
+    If[MissingQ[section], Print["Falta la sección: ", sectionName]; Return[$Failed]];
     groups = Cases[section,
       CellGroupData[cells_List, ___] /;
         MatchQ[First[cells], Cell["DoS", "Subsection", ___]] :> cells,
       Infinity];
-    If[Length[groups] != 1, Print["Sección DoS inesperada: ", stadium]; Exit[1]];
+    If[Length[groups] != 1, Print["Sección DoS inesperada: ", stadium]; Return[$Failed]];
     outputs = Cases[First[groups],
       Cell[BoxData[boxes_], "Output", ___] :> boxes, Infinity];
+    If[Length[outputs] != 1, Print["Falta una salida DoS única: ", stadium, ". Evalúa y guarda el notebook antes de exportar."]; Return[$Failed]];
     plots = ReleaseHold[
       ToExpression[BoxData[First[outputs]], StandardForm, HoldComplete]];
     If[!ListQ[plots] || Length[plots] != Length[names],
-      Print["Lista de figuras inesperada: ", stadium]; Exit[1]];
+      Print["Lista de figuras inesperada: ", stadium]; Return[$Failed]];
 
     Do[
       coin = names[[i]];
       insetPlots = Cases[plots[[i]], Inset[g_Graphics, ___] :> g, Infinity];
       If[Length[insetPlots] != 2,
-        Print["No hay par DoS/Unfold: ", stadium, " ", coin]; Exit[1]];
+        Print["No hay par DoS/Unfold: ", stadium, " ", coin]; Return[$Failed]];
       bins = Table[
         Cases[insetPlots[[j]],
           Rectangle[{x_?NumericQ, 0}, {right_?NumericQ, height_?NumericQ}, ___] :>
             N[{x, right, height}], Infinity], {j, 2}];
       If[AnyTrue[bins, EmptyQ],
-        Print["Histograma vacío: ", stadium, " ", coin]; Exit[1]];
+        Print["Histograma vacío: ", stadium, " ", coin]; Return[$Failed]];
       AppendTo[records, <|"stadium" -> stadium, "coin" -> coin,
         "dos" -> bins[[1]], "unfold" -> bins[[2]]|>],
       {i, Length[names]}],

@@ -16,32 +16,11 @@ True si la preparacion tuvo exito. Si falla un kernel, no se inicia el \
 calculo. Una llamada usa solo los kernels que acaba de abrir y los cierra \
 incluso si se interrumpe el calculo.", "Text", ExpressionUUID -> 
           "3195a0c3-97c1-47ce-adbb-995b1daf4543"], 
-        Cell[BoxData["ClearAll[QuantumWalks`QWMisc`EjecutarEnNodo];\nQuantumW\
-alks`QWMisc`EjecutarEnNodo::args = \"Argumentos invalidos: usa nodo, cantidad \
-positiva, funcion pura, lista y preparacion opcional.\";\n(* --- Trabajos \
-independientes en kernels temporales de Mazinger --- \
-*)\nQuantumWalks`QWMisc`EjecutarEnNodo[nodo_String, \
-cantidad_Integer?Positive, proceso_Function,\n    entradas_List, \
-preparacion_Function : Function[True]] /;\n    MemberQ[{\"nodo1\", \"nodo2\", \
-\"nodo3\", \"nodo4\"}, nodo] :=\n  RemoteEvaluate[\"ssh://robot\",\n    \
-Module[{kernels = {}, estado},\n      WithCleanup[\n        kernels = \
-LaunchKernels[\n          KernelConfiguration[\"ssh://\" <> nodo, \
-\"KernelCount\" -> cantidad]],\n        If[! ListQ[kernels] || \
-Length[kernels] =!= cantidad,\n          Failure[\"KernelsNoDisponibles\", \
-<|\n            \"MessageTemplate\" -> \"No se pudieron abrir todos los \
-kernels solicitados.\",\n            \"Nodo\" -> nodo, \"Solicitados\" -> \
-cantidad,\n            \"Abiertos\" -> If[ListQ[kernels], Length[kernels], \
-0]|>],\n          estado = With[{iniciar = preparacion},\n            \
-ParallelEvaluate[iniciar[], kernels]];\n          If[! AllTrue[estado, \
-TrueQ],\n            Failure[\"PreparacionFallida\", <|\n              \
-\"MessageTemplate\" -> \"La preparacion no devolvio True en todos los \
-kernels.\",\n              \"Nodo\" -> nodo, \"EstadoPorKernel\" -> \
-estado|>],\n            ParallelMap[proceso, entradas, Method -> \
-\"FinestGrained\",\n              DistributedContexts -> None]\n          ]\n \
-       ],\n        If[ListQ[kernels], CloseKernels[kernels]]\n      ]\n    \
-],\n    IncludeDefinitions -> False\n  \
-];\n\nQuantumWalks`QWMisc`EjecutarEnNodo[___] :=\n  \
-(Message[QuantumWalks`QWMisc`EjecutarEnNodo::args]; $Failed);\n\n"], 
+        Cell[BoxData[RowBox[{RowBox[{"root", "=", RowBox[{"DirectoryName", 
+                "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}], ";", 
+            RowBox[{"Get", "[", RowBox[{"FileNameJoin", "[", RowBox[
+                 {"{", RowBox[{"root", ",", "\"scripts\"", ",", 
+                    "\"load_project.wl\""}], "}"}], "]"}], "]"}], ";"}]], 
          "Input"]}, Open]], Cell[CellGroupData[
        {Cell["2. Preparar QuantumWalks en cada kernel", "Section", 
          ExpressionUUID -> "827a4eaf-a485-4989-b8b3-1055defd343d"], 
@@ -54,18 +33,26 @@ no hay interfaz grafica en el nodo.", "Text", ExpressionUUID ->
         Cell[BoxData[RowBox[{RowBox[{"prepararQuantumWalks", " ", "=", " ", 
               RowBox[{"Function", "[", "\n", "  ", RowBox[{"Module", "[", 
                   RowBox[{RowBox[{"{", RowBox[{"ruta", " ", "=", " ", 
-                        "\"/home/saul/QW/JA_libs/QuantumWalks\""}], "}"}], 
-                    ",", "\n", "    ", RowBox[{"If", "[", RowBox[
-                       {RowBox[{"DirectoryQ", "[", "ruta", "]"}], ",", "\n", 
-                        "      ", RowBox[{RowBox[{"PacletDirectoryLoad", "[", 
-                          "ruta", "]"}], ";", "\n", "      ", RowBox[
-                          {"Needs", "[", "\"ForScience`\"", "]"}], ";", "\n", 
-                          "      ", RowBox[{"Block", "[", RowBox[{RowBox[
-                          {"{", RowBox[{"ForScience`PacletUtils`FormatUsage", 
-                          " ", "=", " ", "Identity"}], "}"}], ",", " ", 
-                          RowBox[{"Needs", "[", "\"QuantumWalks`\"", "]"}]}], 
-                          "]"}], ";", "\n", "      ", RowBox[{RowBox[
-                          {"MemberQ", "[", RowBox[{"$Packages", ",", " ", 
+                        RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[
+                          {RowBox[{"Replace", "[", RowBox[{RowBox[
+                          {"Environment", "[", "\"QW_PROJECT_ROOT\"", "]"}], 
+                          ",", RowBox[{RowBox[{"Except", "[", "_String", 
+                          "]"}], "\[RuleDelayed]", RowBox[{"FileNameJoin", 
+                          "[", RowBox[{"{", RowBox[{"$HomeDirectory", ",", 
+                          "\"QW\""}], "}"}], "]"}]}]}], "]"}], ",", 
+                          "\"JA_libs\"", ",", "\"QuantumWalks\""}], "}"}], 
+                          "]"}]}], "}"}], ",", "\n", "    ", RowBox[
+                     {"If", "[", RowBox[{RowBox[{"DirectoryQ", "[", "ruta", 
+                          "]"}], ",", "\n", "      ", RowBox[{RowBox[
+                          {"PacletDirectoryLoad", "[", "ruta", "]"}], ";", 
+                          "\n", "      ", RowBox[{"Needs", "[", 
+                          "\"ForScience`\"", "]"}], ";", "\n", "      ", 
+                          RowBox[{"Block", "[", RowBox[{RowBox[{"{", RowBox[
+                          {"ForScience`PacletUtils`FormatUsage", " ", "=", 
+                          " ", "Identity"}], "}"}], ",", " ", RowBox[
+                          {"Needs", "[", "\"QuantumWalks`\"", "]"}]}], "]"}], 
+                          ";", "\n", "      ", RowBox[{RowBox[{"MemberQ", 
+                          "[", RowBox[{"$Packages", ",", " ", 
                           "\"ForScience`\""}], "]"}], " ", "&&", "\n", 
                           "        ", RowBox[{RowBox[{"Length", "[", RowBox[
                           {"DownValues", "[", 
@@ -73,8 +60,7 @@ no hay interfaz grafica en el nodo.", "Text", ExpressionUUID ->
                           "]"}], "]"}], " ", ">", " ", "0"}]}]}], ",", "\n", 
                         "      ", "False"}], "\n", "    ", "]"}]}], "\n", 
                   "  ", "]"}], "\n", "]"}]}], ";"}]], "Input", 
-         CellLabel -> "In[28]:=", ExpressionUUID -> 
-          "e742d6cf-3546-429f-b26f-ce4680c22822"]}, Open]], 
+         ExpressionUUID -> "e742d6cf-3546-429f-b26f-ce4680c22822"]}, Open]], 
      Cell[CellGroupData[
        {Cell["3. Definir una diagonalizacion por cada rectangulo", "Section", 
          ExpressionUUID -> "99d8627b-45a3-4b98-85ae-0c66cb36f132"], 
@@ -127,8 +113,8 @@ quepa en la memoria del nodo.", "Text", ExpressionUUID ->
                           "[", RowBox[{"Abs", "[", RowBox[{RowBox[{"Abs", 
                           "[", "vals", "]"}], " ", "-", " ", "1"}], "]"}], 
                           "]"}]}]}], "|>"}]}]}], "\n", "  ", "]"}]}], "\n", 
-                "]"}]}], ";"}]], "Input", CellLabel -> "In[29]:=", 
-         ExpressionUUID -> "67277348-97be-4ddf-a7a0-68ed62b6bee3"]}, Open]], 
+                "]"}]}], ";"}]], "Input", ExpressionUUID -> 
+          "67277348-97be-4ddf-a7a0-68ed62b6bee3"]}, Open]], 
      Cell[CellGroupData[{Cell["4. Ejecutar cuatro trabajos en dos kernels", 
          "Section", ExpressionUUID -> 
           "aa5d9380-f56f-4eb1-8488-8ab5fa6a59ec"], 
@@ -142,13 +128,12 @@ quepa en la memoria del nodo.", "Text", ExpressionUUID ->
                           "2"}], "}"}], ",", " ", RowBox[{"{", RowBox[
                          {"6", ",", " ", "2"}], "}"}]}], "}"}], ",", " ", 
                   "prepararQuantumWalks"}], "]"}]}], ";"}]], "Input", 
-         CellLabel -> "In[30]:=", ExpressionUUID -> 
-          "e6a9e072-4e2f-4244-b0b0-0b4a88e76d71"], Cell["Cada entrada se \
-calcula completa en un kernel. Los resultados regresan en el mismo orden de \
-la lista de entradas. Los identificadores de proceso permiten comprobar que \
-participaron dos kernels. ErrorModulo mide cuanto se aleja el modulo de cada \
-autovalor de 1.", "Text", ExpressionUUID -> 
-          "c54e56f8-0e8d-41ad-b691-cb10d78787ac"], 
+         ExpressionUUID -> "e6a9e072-4e2f-4244-b0b0-0b4a88e76d71"], 
+        Cell["Cada entrada se calcula completa en un kernel. Los resultados \
+regresan en el mismo orden de la lista de entradas. Los identificadores de \
+proceso permiten comprobar que participaron dos kernels. ErrorModulo mide \
+cuanto se aleja el modulo de cada autovalor de 1.", "Text", 
+         ExpressionUUID -> "c54e56f8-0e8d-41ad-b691-cb10d78787ac"], 
         Cell[CellGroupData[{Cell[BoxData[RowBox[{"If", "[", RowBox[
                 {RowBox[{"ListQ", "[", "resultados", "]"}], ",", "\n", "  ", 
                  RowBox[{"resultados", "[", RowBox[{"[", RowBox[{"All", ",", 
@@ -156,8 +141,7 @@ autovalor de 1.", "Text", ExpressionUUID ->
                           "\"Nodo\"", ",", " ", "\"Proceso\"", ",", " ", 
                           "\"DimensionU\"", ",", " ", "\"ErrorModulo\""}], 
                          "}"}]}], "]"}], "]"}], ",", "\n", "  ", 
-                 "resultados"}], "\n", "]"}]], "Input", CellLabel -> 
-             "In[31]:=", ExpressionUUID -> 
+                 "resultados"}], "\n", "]"}]], "Input", ExpressionUUID -> 
              "865c8db7-807c-4de8-91c0-480e72e488f8"]}, Open]], 
         Cell[CellGroupData[{Cell[BoxData[RowBox[{"If", "[", RowBox[
                 {RowBox[{"ListQ", "[", "resultados", "]"}], ",", "\n", "  ", 
@@ -168,7 +152,7 @@ autovalor de 1.", "Text", ExpressionUUID ->
                        RowBox[{"resultados", "[", RowBox[{"[", RowBox[{"All", 
                           ",", " ", "\"Autovalores\""}], "]"}], "]"}]}]}], 
                    "}"}], ",", "\n", "  ", "resultados"}], "\n", "]"}]], 
-            "Input", CellLabel -> "In[32]:=", ExpressionUUID -> 
+            "Input", ExpressionUUID -> 
              "803535e0-03b9-4543-950b-99c08daa378f"]}, Open]]}, Open]], 
      Cell[CellGroupData[
        {Cell["5. Guardar en el Mac si quieres conservar los datos", 

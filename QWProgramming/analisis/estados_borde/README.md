@@ -2,11 +2,11 @@
 
 `AnalyzeBoundaryEigenstates`, `PlotBoundarySpectrum` y `EigenstateAtEnergy`
 son ahora funciones publicas del paquete QWMisc. Se cargan con
-`Get["/Users/saul/Desktop/QWProgramming/QWMisc.wl"]`, despues de la
-preparacion habitual de los paquetes. El archivo anterior
+`Get[FileNameJoin[{NotebookDirectory[], "scripts", "load_project.wl"}]]`
+desde `FunctionsTester.nb`. El archivo anterior
 `analizar_borde.wl` sigue siendo un cargador compatible del analisis de
-frontera; comparte sus definiciones con el paquete mediante
-`QWMisc/BoundarySpectrum.wl`.
+frontera. `QWMisc/BoundarySpectrum.wl` carga el paquete; la implementación
+interna vive en `QWMisc/Private/BoundarySpectrum.wl`.
 
 El IPR espacial mide concentracion, pero no indica su posicion. Para cada
 eigenvector normalizado se calcula la probabilidad espacial
@@ -31,13 +31,13 @@ no una definicion universal. Conviene revisar anchos y umbrales.
 ## Ejecutar despues de tu Eigensystem
 
 ```wolfram
-Get[FileNameJoin[{NotebookDirectory[], "QWMisc.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "scripts", "load_project.wl"}]];
 
 (* Coherente con U psi = Exp[-I epsilon] psi. *)
 eigenenergies = -Arg[eigenvals];
 
 borde = AnalyzeBoundaryEigenstates[grid, eigenvals, eigenvecs,
-  "BoundaryWidth" -> 2, "BoundaryThreshold" -> 0.6];
+  BoundaryWidth -> 2, BoundaryThreshold -> 0.6];
 
 Dataset[borde["Candidates"]]
 borde["CandidateEnergies"]
@@ -74,7 +74,7 @@ result = EigenstateAtEnergy[0.2, eigenvals, eigenvecs];
 result["Energy"]
 result["Distance"]
 DiscreteProbabilityPlot[grid, result["State"],
-  "InputType" -> "State", ImageSize -> Large]
+  InputType -> "State", ImageSize -> Large]
 ```
 
 La funcion selecciona el estado mas cercano de la lista suministrada,
@@ -82,8 +82,8 @@ usando distancia angular (identifica `-Pi` con `Pi`). No necesita la variable
 global `eigenenergies`, ni calcula nuevamente los eigenpares. Devuelve
 `Index`, `Energy`, `Distance`, `State` normalizado e `IPR` espacial.
 Si hay un empate, devuelve el primer indice. La dimension de moneda
-predeterminada es 4; para otra dimension usa la opcion de cadena
-`"CoinDimension" -> 2`, por ejemplo. La busqueda no filtra estados de borde;
+predeterminada es 4; para otra dimension usa la opcion simbólica
+`CoinDimension -> 2`, por ejemplo. La busqueda no filtra estados de borde;
 para inspeccionar uno de ellos se puede usar una energia de
 `borde["CandidateEnergies"]`.
 
@@ -95,7 +95,7 @@ las variables `grid`, `eigenvals` y `eigenvecs`:
 ```wolfram
 Quiet[Remove["Global`AnalyzeBoundaryEigenstates",
   "Global`PlotBoundarySpectrum", "Global`EigenstateAtEnergy"], Remove::rmnsm];
-Get["/Users/saul/Desktop/QWProgramming/QWMisc.wl"];
+Get[FileNameJoin[{NotebookDirectory[], "scripts", "load_project.wl"}]];
 ```
 
 Despues ejecuta la celda de analisis o seleccion. La celda de carga se
@@ -106,7 +106,7 @@ resuelvan al evaluar las siguientes celdas.
 If[borde["Candidates"] =!= {},
   candidato = First[MaximalBy[borde["Candidates"], #["BoundaryWeight"] &]];
   DiscreteProbabilityPlot[grid, eigenvecs[[candidato["Index"]]],
-    "InputType" -> "State",
+    InputType -> "State",
     PlotLabel -> Row[{"epsilon = ", candidato["Energy"],
       "; peso de borde = ", candidato["BoundaryWeight"]}],
     ImageSize -> Large]
@@ -152,9 +152,9 @@ la rutina no presupone una reduccion de simetria del operador completo.
 Si ya calculaste los eigenpares del Sinai, solo recarga la funcion:
 
 ```wolfram
-Get["/Users/saul/Desktop/QWProgramming/QWMisc.wl"];
+Get[FileNameJoin[{NotebookDirectory[], "scripts", "load_project.wl"}]];
 borde = AnalyzeBoundaryEigenstates[grid, eigenvals, eigenvecs,
-  "BoundaryWidth" -> 2, "BoundaryThreshold" -> 0.7];
+  BoundaryWidth -> 2, BoundaryThreshold -> 0.7];
 If[AssociationQ[borde],
   Column[{Dataset[borde["Candidates"]], borde["CandidateEnergies"],
     PlotBoundarySpectrum[borde]}]
@@ -182,7 +182,7 @@ de la version anterior. No se repitio la diagonalizacion de tu Sinai grande.
 
 La moneda se reproduce con `SeedRandom[23]` y el producto de Kronecker de
 dos muestras independientes de `CircularOrthogonalMatrixDistribution[2]`,
-la definicion de `RandomMatrix["oo"]` en `FunctionsTester.nb`.
+la definicion de `RandomMatrix["oo"]` en `QWMisc.wl`.
 
 Se obtuvieron 44 candidatos con dos capas y umbral 0.6. Algunos de los
 estados de mayor concentracion aparecen alrededor de las cuasienergias
