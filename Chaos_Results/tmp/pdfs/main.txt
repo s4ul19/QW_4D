@@ -1,0 +1,758 @@
+                          Discrete-time quantum walks in billiards
+                                       (Dated:)
+                                      CONTENTS
+         I. Generalidades                                                  2
+        II. Distribuci´on temporal promedio                                2
+          A. Comparaci´on de monedas en el rect´angulo                     2
+          B. Comparaci´on de monedas en el estadio de Sina´ı               3
+        III. Estad´ıstica espectral e IPR espacial                         6
+          A. DoS y unfolding                                               6
+          B. Distribuci´on de espaciamientos P(s)                          9
+          C. Distribuci´on P(r)                                           12
+          D. Factor de forma espectral (SFF)                              15
+          E. Comparaci´on del IPR espacial                                17
+            1. Estado inicial localizado en posici´on                     17
+            2. Estado inicial deslocalizado                               18
+        IV. Densidad espacial del IPR                                     19
+          A. Rect´angulo                                                  19
+          B. Sina´ı                                                       21
+        V. Entrelazamiento moneda–posici´on                               22
+          A. Estado inicial localizado                                    23
+          B. Estado inicial deslocalizado                                 25
+          Referencias                                                     26
+        A. Concentraci´on de la medida de la pureza de Choi               27
+           1. Constante de Lipschitz                                      27
+           2. Promedio Haar exacto                                        28
+           3. Concentraci´on                                              28
+                                                                                                                                                                  2
+                                                                          I.   GENERALIDADES
+                   El estado de un caminante pertenece al espacio de Hilbert H = H ⊗ H , siendo H y H los espacios de Hilbert
+                                                                                                       c      p              c      p
+                de la moneda y de la posici´on, respectivamente.
+                   La evoluci´on de un caminante viene descrita por el operador evoluci´on U tal que, si |ψ0⟩ es un estado inicial en el
+                tiempo t = 0, entonces:
+                                                                                 |ψ ⟩ = U |ψ ⟩                                                                 (1)
+                                                                                    1           0
+                representa el primer paso del estado inicial |ψ ⟩. Por inducci´on se deduce que, al n-´esimo paso:
+                                                                          0
+                                                                        |ψ ⟩ = U |ψ        ⟩ = Un|ψ ⟩.                                                         (2)
+                                                                           n           n−1             0
+                Como U es unitario, sus eigenvalores tienen m´odulo uno. La fase de un eigenvalor se denomina eigenfase.
+                   La forma de definir U que se seguir´a en estas notas es la siguiente:
+                                                                                   U =S·C.                                                                     (3)
+                donde S es un operador que desplaza al caminante segun´                   su estado de moneda y C es un operador que actua´ sobre
+                el estado de moneda del caminante.
+                   Las condiciones de frontera est´an codificadas en el operador S.
+                                                                                 ´
+                                                        II.   DISTRIBUCION TEMPORAL PROMEDIO
+                   Sea |α ⟩ = Ut|α ⟩ el estado del caminante despu´es de t pasos. La probabilidad de encontrarlo en el nodo v, sin
+                           t            0
+                distinguir su estado interno de moneda, es [1]
+                                                                                         4
+                                                                                        X                2
+                                                                        P (v | α ) =        |⟨c ,v|α ⟩| ,                                                      (4)
+                                                                         t       0             k      t
+                                                                                       k=1
+                             4
+                con {|ck⟩}        una base del espacio de moneda.
+                             k=1
+                   La distribuci´on temporal promedio durante los primeros T pasos se define como [1]
+                                                                         T−1                     T−1 4
+                                                                      1 X                     1 XX                        
+                                                                                                                     t      2
+                                                                                                                          
+                                                    P (v | α ) =              P (v | α ) =                  ⟨c ,v|U |α ⟩      .                                (5)
+                                                      T        0      T         t      0      T               k          0
+                                                                         t=0                     t=0 k=1
+                                                          A. Comparaci´on de monedas en el rect´angulo
+                   La figura 1 muestra la distribuci´on temporal promedio en un rect´angulo de dimensiones Lx = 100 y Ly = 87 para
+                las nueve monedas consideradas.
+                                                                                                                                    3
+             Figura 1. Distribuci´on temporal promedio en el rect´angulo de dimensiones 100 × 87 para las monedas p, oo, b, gpg, o, uoou,
+             ubu, u y upu. Cada escala de grises corresponde a la probabilidad promedio PT.
+                                            B.   Comparaci´on de monedas en el estadio de Sina´ı
+                La figura 2 muestra la distribuci´on temporal promedio en el estadio de Sina´ı con L = 120 y R = 90 para las mismas
+             nueve monedas. Los tres grupos de paneles comparten un unico´     nu´mero de figura.
+                                                               4
+       Figura 2. Distribuci´on temporal promedio en el estadio de Sina´ı con L = 120 y R = 90 para las monedas p, oo, b, gpg, o, uoou,
+       ubu, u y upu. Primera parte: p, oo y b. Las escalas de grises indican la probabilidad promedio PT de cada panel.
+                                                               5
+            Figura 2. Distribuci´on temporal promedio en el estadio de Sina´ı (continuaci´on): monedas gpg, o y uoou.
+            Figura 2. Distribuci´on temporal promedio en el estadio de Sina´ı (continuaci´on): monedas ubu, u y upu.
+                                                                                                                                                      6
+                                                                 ´
+                                                 III.   ESTADISTICA ESPECTRAL E IPR ESPACIAL
+                  Los siguientes paneles reunen´     los resultados de DoS y unfolding, P(s), P(r) y SFF para los estadios rectangular y
+               de Sina´ı. Los c´odigos de moneda se conservan como aparecen en las figuras originales. Cuando no existe una figura
+               guardada, se indica en el panel correspondiente.
+                                                                      A. DoS y unfolding
+                                                      Rect´angulo                                                      Sina´ı
+                                                 DoS                  Unfold x10^-4                            DoS                 Unfold x10^-4
+                                      0.2                   4.6                                    0.18                   4.1
+                    p                 0.1                   2.3                                    0.088                  2.1
+                                        0                     0                                       0                     0
+                                        -3.5      0        3.5 0       1400     2800                  -3.5      0        3.5 0       1500     3000
+                                                 DoS                  Unfold x10^-4                            DoS                 Unfold x10^-4
+                                      0.26                  4.3                                    0.35                     4
+                   gpg                0.13                  2.2                                    0.18                     2
+                                        0                     0                                       0                     0
+                                        -3.5      0        3.5 0       1400     2800                  -3.5      0        3.5 0       1500     3000
+                                                 DoS                  Unfold x10^-4                            DoS                 Unfold x10^-4
+                                      0.3                   4.1                                    0.22                   3.9
+                   upu                0.15                    2                                    0.11                   1.9
+                                        0                     0                                       0                     0
+                                        -3.5      0        3.5 0       1400     2800                  -3.5      0        3.5 -200    1400     3000
+               Figura 3. DoS y unfolding para las monedas p, gpg, upu, b, ubu, oo, uoou, o y u en los estadios rectangular y de Sina´ı. Los
+               paneles continuan´  en las p´aginas siguientes.
+                                                                                                                                                                                                    7
+                                                                      Rect´angulo                                                                           Sina´ı
+                                                                DoS                        Unfold x10^-4                                         DoS                        Unfold x10^-4
+                                                 0.24                            4                                                0.24                          3.9
+                           b                     0.12                            2                                                0.12                            2
+                                                    0                            0                                                   0                            0
+                                                     -3.5         0          3.5   0         1400        2800                         -3.5         0          3.5 -200        1400        3000
+                                                                DoS                        Unfold x10^-4                                         DoS                        Unfold x10^-4
+                                                 0.29                            4                                                0.27                          3.9
+                         ubu                     0.14                            2                                                0.14                            2
+                                                    0                            0                                                   0                            0
+                                                     -3.5         0          3.5   0         1400        2800                         -3.5         0          3.5   0         1500        3000
+                                                                DoS                        Unfold x10^-4                                         DoS                        Unfold x10^-4
+                                                 0.19                          4.2                                                0.21                          3.9
+                          oo                    0.097                          2.1                                                0.11                            2
+                                                    0                            0                                                   0                            0
+                                                     -3.5         0          3.5   0         1400        2800                         -3.5         0          3.5   0         1500        3000
+                                                                               Figura 3. DoS y unfolding (continuaci´on).
+                                                                                                                                                                                                    8
+                                                                      Rect´angulo                                                                           Sina´ı
+                                                                DoS                        Unfold x10^-4                                         DoS                        Unfold x10^-4
+                                                 0.37                          4.1                                                0.24                            4
+                        uoou                     0.18                          2.1                                                0.12                            2
+                                                    0                            0                                                   0                            0
+                                                     -3.5         0          3.5   0         1400        2800                         -3.5         0          3.5   0         1500        3000
+                                                                DoS                        Unfold x10^-4                                         DoS                        Unfold x10^-4
+                                                 0.22                            4                                                0.23                          3.9
+                           o                     0.11                            2                                                0.11                          1.9
+                                                    0                            0                                                   0                            0
+                                                     -3.5         0          3.5   0         1400        2800                         -3.5         0          3.5   0         1500        3000
+                                                                DoS                        Unfold x10^-4                                         DoS                        Unfold x10^-4
+                                                 0.29                            4                                                0.24                          3.9
+                           u                     0.14                            2                                                0.12                            2
+                                                    0                            0                                                   0                            0
+                                                     -3.5         0          3.5   0         1400        2800                         -3.5         0          3.5   0         1500        3000
+                                                                               Figura 3. DoS y unfolding (continuaci´on).
+                                                                                                                                                                                                                                                                        9
+                                                                                                      B.        Distribuci´on de espaciamientos P(s)
+                                                                                               Rect´angulo                                                                                                        Sina´ı
+                                                         1.0                                                                                                           10
+                                                         0.8                                                                                                            8
+                                                        )0.6                                                                                  Datos                  )  6                                                                                  Datos
+                                                        s                                                                                                            s
+                                                        (                                                                                                            (
+                                    p                   P                                                                                          Poisson           P                                                                                          Poisson
+                                                         0.4                                                                                       GOE/COE              4                                                                                       GOE/COE
+                                                                                                                                                   GUE/CUE                                                                                                      GUE/CUE
+                                                         0.2                                                                                                            2
+                                                         0.0                                                                                                            0
+                                                              0                  1                 2                  3                 4                                  0                 1                  2                  3                 4
+                                                                                                   s                                                                                                            s
+                                                                                                  Primer bin excluido: 96.74%                                                                                  Primer bin excluido: 49.61%
+                                                                 1.0                                                                                                          1.0
+                                                                 0.8                                                                                                          0.8
+                                                                filtrados0.6                                                                                                 filtrados0.6
+                              pModif                            datos                                                                                                        datos
+                                                                ,                                                                                                            ,
+                                                                +)                                                                                                           +)
+                                                                s                                                                                                            s
+                                                                (                                                                                                            (
+                                                                P                                                                                                            P
+                                                                 0.4                                                                                                          0.4
+                                                                 0.2                                                                                                          0.2
+                                                                 0.0                                                                                                          0.0
+                                                                     0                  1                  2                  3                   4                               0                  1                  2                   3                  4
+                                                                                                        s+ (media 1)                                                                                                 s+ (media 1)
+                                                         1.2                                                                                                           1.0
+                                                         1.0                                                                                                           0.8
+                                                        )0.8                                                                                                         ) 0.6
+                                                        s                                                                                     Datos                  s                                                                                     Datos
+                                                        (                                                                                                            (
+                                 gpg                    P0.6                                                                                       Poisson           P                                                                                          Poisson
+                                                                                                                                                   GOE/COE             0.4                                                                                      GOE/COE
+                                                         0.4                                                                                       GUE/CUE                                                                                                      GUE/CUE
+                                                         0.2                                                                                                           0.2
+                                                         0.0                                                                                                           0.0
+                                                              0                  1                 2                  3                 4                                  0                  1                 2                  3                 4
+                                                                                                   s                                                                                                            s
+                                                         1.0                                                                                                           1.0
+                                                         0.8                                                                                                           0.8
+                                                        )0.6                                                                                  Datos                  ) 0.6                                                                                 Datos
+                                                        s                                                                                                            s
+                                                        (                                                                                                            (
+                                 upu                    P                                                                                          Poisson           P                                                                                          Poisson
+                                                         0.4                                                                                       GOE/COE             0.4                                                                                      GOE/COE
+                                                                                                                                                   GUE/CUE                                                                                                      GUE/CUE
+                                                         0.2                                                                                                           0.2
+                                                         0.0                                                                                                           0.0
+                                                              0                  1                 2                  3                 4                                  0                  1                 2                  3                 4
+                                                                                                   s                                                                                                            s
+                          Figura 4. P(s) para las monedas p, gpg, upu, b, ubu, oo, uoou, o y u en los estadios rectangular y de Sina´ı. Las variantes pModif
+                          disponibles se muestran debajo de p. Los paneles continuan´                                                        en las p´aginas siguientes.
+                                                                                                                                                                       10
+                                                            Rect´angulo                                                               Sina´ı
+                                     1.0                                                                  1.0
+                                     0.8                                                                  0.8
+                                    )0.6                                                   Datos         )0.6                                                   Datos
+                                    s                                                                    s
+                                    (                                                                    (
+                       b            P                                                         Poisson    P                                                         Poisson
+                                     0.4                                                      GOE/COE     0.4                                                      GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.2                                                                  0.2
+                                     0.0                                                                  0.0
+                                        0           1          2           3           4                     0           1           2           3          4
+                                                               s                                                                     s
+                                     1.0                                                                  1.0
+                                     0.8                                                                  0.8
+                                    )0.6                                                   Datos         )0.6                                                   Datos
+                                    s                                                                    s
+                                    (                                                                    (
+                     ubu            P                                                         Poisson    P                                                         Poisson
+                                     0.4                                                      GOE/COE     0.4                                                      GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.2                                                                  0.2
+                                     0.0                                                                  0.0
+                                        0           1          2           3           4                     0           1           2           3          4
+                                                               s                                                                     s
+                                     3.0                                                                  1.0
+                                     2.5                                                                  0.8
+                                     2.0
+                                    )                                                      Datos         )0.6                                                   Datos
+                                    s                                                                    s
+                                    (1.5                                                                 (
+                      oo            P                                                         Poisson    P                                                         Poisson
+                                                                                              GOE/COE     0.4                                                      GOE/COE
+                                     1.0                                                      GUE/CUE                                                              GUE/CUE
+                                     0.5                                                                  0.2
+                                     0.0                                                                  0.0
+                                        0           1          2           3           4                     0           1           2           3          4
+                                                               s                                                                     s
+                                                                           Figura 4. P(s) (continuaci´on).
+                                                                                                                                                                       11
+                                                            Rect´angulo                                                               Sina´ı
+                                     1.0                                                                  1.0
+                                     0.8                                                                  0.8
+                                    )0.6                                                   Datos         )0.6                                                   Datos
+                                    s                                                                    s
+                                    (                                                                    (
+                     uoou           P                                                         Poisson    P                                                         Poisson
+                                     0.4                                                      GOE/COE     0.4                                                      GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.2                                                                  0.2
+                                     0.0                                                                  0.0
+                                        0           1          2           3           4                     0           1           2           3          4
+                                                               s                                                                     s
+                                     1.0                                                                  1.0
+                                     0.8                                                                  0.8
+                                    )0.6                                                   Datos         )0.6                                                   Datos
+                                    s                                                                    s
+                                    (                                                                    (
+                       o            P                                                         Poisson    P                                                         Poisson
+                                     0.4                                                      GOE/COE     0.4                                                      GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.2                                                                  0.2
+                                     0.0                                                                  0.0
+                                        0           1          2           3           4                     0           1           2           3          4
+                                                               s                                                                     s
+                                     1.0                                                                  1.0
+                                     0.8                                                                  0.8
+                                    )0.6                                                   Datos         )0.6                                                   Datos
+                                    s                                                                    s
+                                    (                                                                    (
+                       u            P                                                         Poisson    P                                                         Poisson
+                                     0.4                                                      GOE/COE     0.4                                                      GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.2                                                                  0.2
+                                     0.0                                                                  0.0
+                                        0           1          2           3           4                     0           1           2           3          4
+                                                               s                                                                     s
+                                                                           Figura 4. P(s) (continuaci´on).
+                                                                                                                                                                       12
+                                                                              C. Distribuci´on P(r)
+                                                            Rect´angulo                                                               Sina´ı
+                                     2.5                                                                  2.0
+                                     2.0                                                                  1.5
+                                    )1.5                                                   Datos         )                                                      Datos
+                                    r                                                                    r
+                                    (                                                         Poisson    (1.0                                                      Poisson
+                     gpg            P                                                         GOE/COE    P                                                         GOE/COE
+                                     1.0                                                      GUE/CUE                                                              GUE/CUE
+                                     0.5                                                      GSE/CSE     0.5                                                      GSE/CSE
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                                     2.0                                                                  2.0
+                                     1.5                                                                  1.5
+                                    )                                                      Datos         )                                                      Datos
+                                    r                                                                    r
+                                    (1.0                                                      Poisson    (1.0                                                      Poisson
+                     upu            P                                                         GOE/COE    P                                                         GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.5                                                      GSE/CSE     0.5                                                      GSE/CSE
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                 Figura 5. P(r) para las monedas gpg, upu, b, ubu, oo, uoou, o y u en los estadios rectangular y de Sina´ı. Los paneles continuan´
+                 en las p´aginas siguientes.
+                                                                                                                                                                       13
+                                                            Rect´angulo                                                               Sina´ı
+                                     2.0                                                                  2.0
+                                     1.5                                                                  1.5
+                                    )                                                      Datos         )                                                      Datos
+                                    r                                                                    r
+                                    (                                                         Poisson    (1.0                                                      Poisson
+                       b            P1.0                                                      GOE/COE    P                                                         GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.5                                                      GSE/CSE     0.5                                                      GSE/CSE
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                                     2.0                                                                  2.0
+                                     1.5                                                                  1.5
+                                    )                                                      Datos         )                                                      Datos
+                                    r                                                                    r
+                                    (1.0                                                      Poisson    (1.0                                                      Poisson
+                     ubu            P                                                         GOE/COE    P                                                         GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.5                                                      GSE/CSE     0.5                                                      GSE/CSE
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                                                                                                          2.0
+                                     2.5
+                                     2.0                                                                  1.5
+                                    )                                                      Datos         )                                                      Datos
+                                    r1.5                                                                 r
+                                    (                                                         Poisson    (1.0                                                      Poisson
+                      oo            P                                                         GOE/COE    P                                                         GOE/COE
+                                     1.0                                                      GUE/CUE                                                              GUE/CUE
+                                                                                              GSE/CSE     0.5                                                      GSE/CSE
+                                     0.5
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                                                                           Figura 5. P(r) (continuaci´on).
+                                                                                                                                                                       14
+                                                            Rect´angulo                                                               Sina´ı
+                                     2.0                                                                  2.0
+                                     1.5                                                                  1.5
+                                    )                                                      Datos         )                                                      Datos
+                                    r                                                                    r
+                                    (1.0                                                      Poisson    (1.0                                                      Poisson
+                     uoou           P                                                         GOE/COE    P                                                         GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.5                                                      GSE/CSE     0.5                                                      GSE/CSE
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                                                                                                          2.0
+                                                                                                          1.5
+                                                                                                         )                                                      Datos
+                                                                                                         r
+                                                                                                         (1.0                                                      Poisson
+                       o                                                                                 P                                                         GOE/COE
+                                                                                                                                                                   GUE/CUE
+                                                                                                          0.5                                                      GSE/CSE
+                                                                                                          0.0
+                                                                                                             0.0      0.2      0.4       0.6      0.8       1.0
+                                                                                                                                 r restringido
+                                     2.0                                                                  2.0
+                                     1.5                                                                  1.5
+                                    )                                                      Datos         )                                                      Datos
+                                    r                                                                    r
+                                    (1.0                                                      Poisson    (1.0                                                      Poisson
+                       u            P                                                         GOE/COE    P                                                         GOE/COE
+                                                                                              GUE/CUE                                                              GUE/CUE
+                                     0.5                                                      GSE/CSE     0.5                                                      GSE/CSE
+                                     0.0                                                                  0.0
+                                       0.0       0.2      0.4      0.6       0.8      1.0                    0.0      0.2      0.4       0.6      0.8       1.0
+                                                           r restringido                                                         r restringido
+                                                                           Figura 5. P(r) (continuaci´on).
+                                                                                                                                                                                                                                                             15
+                                                                                                      D. Factor de forma espectral (SFF)
+                                                                                            Rect´angulo                                                                                                    Sina´ı
+                                                       80
+                                                       60                                                                                                        15
+                                                      )                                                                                                        )
+                                                                                                                          Promedioentrerealizaciones           τ 10                                                                 Promedioentrerealizaciones
+                                                      τ                                                                                                        (
+                                                      (40                                                                                                      K
+                                   p                  K                                                                   Promedio+ventana(150puntos)                                                                               Promedio+ventana(150puntos)
+                                                                                                                          COE(RMT)                                5                                                                 COE(RMT)
+                                                       20
+                                                        0                                                                                                         0
+                                                        0.0           0.5           1.0           1.5            2.0                                              0.0           0.5           1.0           1.5           2.0
+                                                                                   τ = t/N                                                                                                   τ = t/N
+                                                       8
+                                                                                                                                                                 2.5
+                                                       6                                                                                                         2.0
+                                                      )                                                                                                        )
+                                                      τ
+                                                      (                                                                   Promedioentrerealizaciones           τ 1.5                                                                Promedioentrerealizaciones
+                                                      K4                                                                                                       (
+                                gpg                                                                                       Promedio+ventana(100puntos)          K                                                                    Promedio+ventana(150puntos)
+                                                                                                                          COE(RMT)                               1.0                                                                COE(RMT)
+                                                       2
+                                                                                                                                                                 0.5
+                                                       0                                                                                                         0.0
+                                                       0.0           0.5            1.0           1.5            2.0                                              0.0           0.5           1.0           1.5           2.0
+                                                                                  τ = t/N                                                                                                    τ = t/N
+                                                       2.0                                                                                                       1.2
+                                                       1.5                                                                                                       1.0
+                                                      )                                                                                                        ) 0.8
+                                                                                                                          Promedioentrerealizaciones           τ
+                                                      τ                                                                                                        (                                                                    Promedioentrerealizaciones
+                                                      (1.0                                                                                                     K 0.6
+                                upu                   K                                                                   Promedio+ventana(150puntos)                                                                               Promedio+ventana(150puntos)
+                                                       0.5                                                                COE(RMT)                               0.4                                                                COE(RMT)
+                                                                                                                                                                 0.2
+                                                       0.0                                                                                                       0.0
+                                                        0.0            0.5           1.0           1.5           2.0                                              0.0           0.5           1.0           1.5           2.0
+                                                                                   τ = t/N                                                                                                   τ = t/N
+                         Figura 6. SFF para las monedas p, gpg, upu, b, ubu, oo, uoou, o y u en los estadios rectangular y de Sina´ı. Los paneles continuan´
+                         en las p´aginas siguientes.
+                                                                                                                                                                                                                                         16
+                                                                                    Rect´angulo                                                                                            Sina´ı
+                                                                                                                                                    2.0
+                                                   1.5
+                                                                                                                                                    1.5
+                                                 ) 1.0                                                                                             )
+                                                 τ                                                              Promedioentrerealizaciones                                                                        Promedioentrerealizaciones
+                                                 (                                                                                                 τ
+                                                 K                                                                                                 (1.0
+                                b                                                                               Promedio+ventana(250puntos)        K                                                              Promedio+ventana(150puntos)
+                                                   0.5                                                          COE(RMT)                            0.5                                                           COE(RMT)
+                                                   0.0                                                                                              0.0
+                                                    0.0          0.5          1.0          1.5          2.0                                           0.0         0.5          1.0          1.5          2.0
+                                                                             τ = t/N                                                                                          τ = t/N
+                                                   1.2                                                                                              1.2
+                                                   1.0                                                                                              1.0
+                                                 ) 0.8                                                                                             )0.8
+                                                 τ                                                              Promedioentrerealizaciones         τ                                                              Promedioentrerealizaciones
+                                                 ( 0.6                                                                                             (
+                              ubu                K                                                              Promedio+ventana(150puntos)        K0.6                                                           Promedio+ventana(150puntos)
+                                                   0.4                                                          COE(RMT)                            0.4                                                           COE(RMT)
+                                                   0.2                                                                                              0.2
+                                                   0.0                                                                                              0.0
+                                                    0.0          0.5          1.0          1.5          2.0                                           0.0         0.5          1.0          1.5          2.0
+                                                   14                        τ = t/N                                                                                          τ = t/N
+                                                   12                                                                                               2.0
+                                                   10                                                                                               1.5
+                                                 )  8                                                                                              )
+                                                                                                                                                   τ
+                                                 τ                                                              Promedioentrerealizaciones         (                                                              Promedioentrerealizaciones
+                                                 (                                                                                                 K
+                               oo                K  6                                                           Promedio+ventana(100puntos)         1.0                                                           Promedio+ventana(150puntos)
+                                                    4                                                           COE(RMT)                                                                                          COE(RMT)
+                                                                                                                                                    0.5
+                                                    2
+                                                    0                                                                                               0.0
+                                                    0.0          0.5          1.0          1.5          2.0                                           0.0         0.5          1.0          1.5          2.0
+                                                                            τ = t/N                                                                                           τ = t/N
+                                                                                                         Figura 6. SFF (continuaci´on).
+                                                                                    Rect´angulo                                                                                            Sina´ı
+                                                   1.2                                                                                              1.2
+                                                   1.0                                                                                              1.0
+                                                 ) 0.8                                                                                             )0.8
+                                                 τ                                                              Promedioentrerealizaciones         τ                                                              Promedioentrerealizaciones
+                                                 (                                                                                                 (0.6
+                             uoou                K 0.6                                                          Promedio+ventana(150puntos)        K                                                              Promedio+ventana(150puntos)
+                                                   0.4                                                          COE(RMT)                            0.4                                                           COE(RMT)
+                                                   0.2                                                                                              0.2
+                                                   0.0                                                                                              0.0
+                                                    0.0          0.5          1.0          1.5          2.0                                           0.0         0.5          1.0          1.5          2.0
+                                                                             τ = t/N                                                                                          τ = t/N
+                                                   1.2                                                                                              1.2
+                                                   1.0                                                                                              1.0
+                                                 ) 0.8                                                                                             )0.8
+                                                 τ                                                              Promedioentrerealizaciones         τ                                                              Promedioentrerealizaciones
+                                                 ( 0.6                                                                                             (
+                                o                K                                                              Promedio+ventana(150puntos)        K0.6                                                           Promedio+ventana(150puntos)
+                                                   0.4                                                          COE(RMT)                            0.4                                                           COE(RMT)
+                                                   0.2                                                                                              0.2
+                                                   0.0                                                                                              0.0
+                                                    0.0          0.5          1.0          1.5          2.0                                           0.0         0.5          1.0          1.5          2.0
+                                                                             τ = t/N                                                                                          τ = t/N
+                                                   1.2                                                                                              1.2
+                                                   1.0                                                                                              1.0
+                                                 ) 0.8                                                                                             )0.8
+                                                 τ                                                              Promedioentrerealizaciones         τ                                                              Promedioentrerealizaciones
+                                                 (                                                                                                 (
+                                u                K 0.6                                                          Promedio+ventana(150puntos)        K0.6                                                           Promedio+ventana(150puntos)
+                                                   0.4                                                          COE(RMT)                            0.4                                                           COE(RMT)
+                                                   0.2                                                                                              0.2
+                                                   0.0                                                                                              0.0
+                                                    0.0          0.5          1.0          1.5          2.0                                           0.0         0.5          1.0          1.5          2.0
+                                                                             τ = t/N                                                                                          τ = t/N
+                                                                                                         Figura 6. SFF (continuaci´on).
+                                                                                                                                                                                                                  17
+                                                                                       E.      Comparaci´on del IPR espacial
+                         Con la probabilidad de posici´on P (v | α ) definida en (4), el IPR espacial en el paso t es
+                                                                                 t         0
+                                                                                           XP(v|α )2
+                                                                                                    t         0            X
+                                                                  esp                      v∈Ω                                                    2
+                                                            IPR (t|α )=                                          ! =              P (v | α )           si ⟨α |α ⟩ = 1.                                           (6)
+                                                                               0           X                        2               t         0                t    t
+                                                                                                 P (v | α )                v∈Ω
+                                                                                                    t         0
+                                                                                           v∈Ω
+                                                                                                      esp
+                     Para una distribuci´on uniforme en N nodos, IPR                                        =1/N.
+                                                                                       1.    Estado inicial localizado en posici´on
+                                                                                                        IPR
+                                                                          Comparacióndemonedas:integrabilidadycaos
+                                                1
+                                                                                                                       0.001
+                                            0.100                                                                     8×10-4                                          Integrables     Caóticas
+                                                                                                                      6×10-4                                                p               o
+                                                                                                                      4×10-4                                                oo              uoou
+                                                                                                                                                                            b               ubu
+                                                                                                                                                                            gpg             u
+                                          espacial0.010                                                               2×10-4                                                                upu
+                                          IPR                                                                              1500  1600   1700  1800   1900   2000      Referencias
+                                                                                                                                                                            Uniforme: 1/N
+                                                                                                                                                                            GUE:2/N
+                                            0.001                                                                                                                           GOE:3/N
+                                             10-4
+                                                    0                        500                        1000                       1500                       2000
+                                                                                                       Pasot
+                       Figura 7. Evoluci´on del IPR espacial para un estado inicial localizado en posici´on, en el rect´angulo de dimensiones 97 × 60.
+                                                                                                                                                                                                                                                                                                                               18
+                                                                                                                                                              IPR
+                                                                                                                 Comparacióndemonedas:integrabilidadycaos
+                                                                         1
+                                                                  0.100                                                                                                  3.5×10-4                                                                           Integrables              Caóticas
+                                                                                                                                                                         3.0×10-4                                                                                    p                        o
+                                                                                                                                                                         2.5×10-4                                                                                    oo                       uoou
+                                                                                                                                                                         2.0×10-4                                                                                    b                        ubu
+                                                                                                                                                                                                                                                                     gpg                      u
+                                                                espacial0.010                                                                                            1.5×10-41500   1600   1700  1800   1900   2000                                                                       upu
+                                                                IPR                                                                                                                                                                                         Referencias
+                                                                                                                                                                                                                                                                     Uniforme: 1/N
+                                                                                                                                                                                                                                                                     GUE:2/N
+                                                                  0.001                                                                                                                                                                                              GOE:3/N
+                                                                    10-4
+                                                                              0                                      500                                      1000                                     1500                                     2000
+                                                                                                                                                            Pasot
+                                Figura 8. Evoluci´on del IPR espacial para un estado inicial localizado en posici´on, en el estadio de Sina´ı con L = 140 y R = 100.
+                                                                                                                                              2.       Estado inicial deslocalizado
+                                                                                                                                                               IPR
+                                                                                                                  Comparacióndemonedas:integrabilidadycaos
+                                                                  5×10-4
+                                                                                                                                                           6×10-4
+                                                                                                                                                           5×10-4
+                                                                  4×10-4                                                                                   4×10-4
+                                                                                                                                                           3×10-4                                                                                           Integrables              Caóticas
+                                                                                                                                                           2×10-4                                                                                                    p                        o
+                                                                                                                                                                 1500   1600   1700  1800   1900   2000                                                              oo                       uoou
+                                                                           -4                                                                                                                                                                                        b                        ubu
+                                                                  3×10                                                                                                                                                                                               gpg                      u
+                                                                espacial                                                                                                                                                                                                                      upu
+                                                                IPR                                                                                                                                                                                         Referencias
+                                                                                                                                                                                                                                                                     Uniforme: 1/N
+                                                                                                                                                                                                                                                                     GUE:2/N
+                                                                  2×10-4                                                                                                                                                                                             GOE:3/N
+                                                                                 0                                      500                                    1000                                    1500                                     2000
+                                                                                                                                                              Pasot
+                                Figura 9. Evoluci´on del IPR espacial para un estado inicial deslocalizado en el rect´angulo de dimensiones 97×60, durante 2000
+                                pasos.
+                                                                                                                                                                                                                                                                                                                   19
+                                                                                                                                                          IPR
+                                                                                                              Comparacióndemonedas:integrabilidadycaos
+                                                                5×10-4
+                                                                                                                                                    3.5×10-4
+                                                                        -4                                                                          3.0×10-4
+                                                                4×10                                                                                2.5×10-4
+                                                                                                                                                    2.0×10-4                                                                                       Integrables            Caóticas
+                                                                                                                                                    1.5×10-4                                                                                                p                      o
+                                                                                                                                                           1500   1600  1700   1800  1900   2000                                                            oo                     uoou
+                                                                3×10-4                                                                                                                                                                                      b                      ubu
+                                                                                                                                                                                                                                                            gpg                    u
+                                                              espacial                                                                                                                                                                                                             upu
+                                                              IPR                                                                                                                                                                                  Referencias
+                                                                                                                                                                                                                                                            Uniforme: 1/N
+                                                                                                                                                                                                                                                            GUE:2/N
+                                                                2×10-4                                                                                                                                                                                      GOE:3/N
+                                                                              0                                    500                                   1000                                   1500                                   2000
+                                                                                                                                                        Pasot
+                               Figura 10. Evoluci´on del IPR espacial para un estado inicial deslocalizado en el estadio de Sina´ı con L = 140 y R = 100,
+                               durante 2000 pasos.
+                                                                                                                        IV.           DENSIDADESPACIALDELIPR
+                                    Para un eigenestado |ϕ ⟩ del operador de evoluci´on, su probabilidad en el nodo v es
+                                                                                            n
+                                                                                                                                                                      4
+                                                                                                                                                                   X                               2
+                                                                                                                                               p (v) =                      |⟨c,v|ϕ ⟩| .                                                                                                                          (7)
+                                                                                                                                                  n                                          n
+                                                                                                                                                                    c=1
+                               La contribuci´on de ese nodo al IPR espacial del eigenestado se define como
+                                                                                                                                                             2                                                  X
+                                                                                                                                                p (v)
+                                                                                                                                                  n                                               esp
+                                                                                                                I (v) =                                               ,                IPR               =              I (v).                                                                                   (8)
+                                                                                                                   n                   P                               2                          n                        n
+                                                                                                                                                       p (u)
+                                                                                                                                             u∈Ω n                                                             v∈Ω
+                                                                                                                                                   2
+                               Para un eigenestado normalizado, In(v) = pn(v) .
+                                                                                                                                                       A. Rect´angulo
+                                    Losmapassiguientesmuestranestadensidadenunrect´angulodedimensiones30×30.Encadaintervalodeeigenfase
+                               ε se presenta un eigenestado representativo; las anotaciones de los paneles indican su eigenfase, IPR total y residuo
+                               num´erico. Se us´o una moneda que la estad´ıstica espectral da integrabilidad.
+                                                                                                                         20
+            Figura 11. Densidad espacial I (v) del IPR en el rect´angulo 30 × 30 para eigenestados representativos de los intervalos de
+                                        n
+            eigenfase 4 al 15. Primera parte: intervalos 4 al 9. El tono oscuro indica mayor contribuci´on local al IPR; cada panel tiene su
+            propia escala.
+                                                                                                          21
+               Figura 11. Densidad espacial In(v) del IPR en el rect´angulo 30 × 30 (continuaci´on): intervalos de eigenfase 10 al 15.
+                                                       B.  Sina´ı
+             Los mapas siguientes muestran esta densidad en un Sinai de dimensiones L = 65,R = 25. En cada intervalo de
+           eigenfase ε se presenta un eigenestado representativo; las anotaciones de los paneles indican su eigenfase, IPR total y
+           residuo num´erico.
+                                                                                                                          22
+            Figura 12. Densidad espacial I (v) del IPR en el estadio de Sina´ı para eigenestados representativos de los intervalos de eigenfase
+                                       n
+            1 al 8. El tono oscuro indica mayor contribuci´on local al IPR.
+                                                                                            ´
+                                          V. ENTRELAZAMIENTOMONEDA–POSICION
+               Para cuantificar el entrelazamiento entre los grados de libertad de moneda y posici´on se considera la entrop´ıa de
+            von Neumann de la matriz de densidad reducida de la moneda,
+                                           S(t) = −Tr[ρ (t)lnρ (t)],     ρ (t) = Tr (|ψ ⟩⟨ψ |).                           (9)
+                                                        c      c          c        p   t   t
+            Como el espacio de moneda tiene dimensi´on cuatro, el valor m´aximo posible es Sm´ax = ln4, indicado mediante la
+            l´ınea horizontal punteada en las figuras. Las curvas corresponden a una evoluci´on de 1000 pasos para las monedas p,
+            oo, b, gpg, o, uoou, ubu, u y upu.
+                                                               23
+                            A. Estado inicial localizado
+       Figura 13. Evoluci´on de la entrop´ıa de entrelazamiento moneda–posici´on en el rect´angulo de dimensiones 80×50 para las nueve
+       monedas indicadas en la leyenda.
+                                                               24
+       Figura 14. Evoluci´on de la entrop´ıa de entrelazamiento moneda–posici´on en el estadio de Sina´ı con L = 120 y R = 90 para las
+       nueve monedas indicadas en la leyenda.
+                                                                                                          25
+                                             B.  Estado inicial deslocalizado
+           Figura 15. Evoluci´on de la entrop´ıa de entrelazamiento moneda–posici´on para un estado inicial deslocalizado en el rect´angulo
+           de dimensiones 80×50, durante 1000 pasos y para las nueve monedas indicadas en la leyenda.
+                                                               26
+       Figura 16. Evoluci´on de la entrop´ıa de entrelazamiento moneda–posici´on para un estado inicial deslocalizado en el estadio de
+       Sina´ı con L = 120 y R = 90, durante 1000 pasos y para las nueve monedas indicadas en la leyenda.
+       [1] D. Aharonov, A. Ambainis, J. Kempe, and U. Vazirani, Quantum walks on graphs (2001), arXiv:quant-ph/0012090 [quant-
+        ph].
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       27
+                                                                                                                                                                                          Ap´endice A: Concentraci´on de la medida de la pureza de Choi
+                                                                          JA: Esto surgi´o de una conversaci´on con ChatGPT, aun´                                                                                                                                                                                                                                     no est´a digerido por m´ı
+                                                                          Consideremos una DTQW con
+                                                                                                                                                                                                                                       H=Hc⊗Hp,                                                                                       dimHc =4,                                                                           dimHp =N,                                                                                                                                                                                                        (A1)
+                                                              donde N es el numero´                                                                                                 de sitios permitidos por la geometr´ıa del billar. La evoluci´on U = SC se mantiene fija y la
+                                                              unica´                         variable ser´a el estado inicial de posici´on
+                                                                                                                                                                                                                                                                                                                    N
+                                                                                                                                                                                                                                                                            |ψ⟩ =Xψ |a⟩ ,                                                                                                        ⟨ψ|ψ⟩ = 1.                                                                                                                                                                                                                                (A2)
+                                                                                                                                                                                                                                                                                           p                                             a                    p
+                                                                                                                                                                                                                                                                                                                a=1
+                                                              Al tiempo t, el canal reducido de la moneda es
+                                                                                                                                                                                                                                                                 E                  (ρ ) = Tr Ut(ρ ⊗|ψ⟩⟨ψ|)U−t.                                                                                                                                                                                                                                                                                                                          (A3)
+                                                                                                                                                                                                                                                                       ψ,t                     c                                   p                                    c
+                                                                          Usaremos la matriz de Choi normalizada
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    4
+                                                                                                                                                                                  J                      =(I ⊗E )(Φ ),                                                                                                    Φ =|Φ ⟩⟨Φ |,                                                                                          |Φ ⟩ = 1 X|µ⟩ |µ⟩ ,                                                                                                                                                                                        (A4)
+                                                                                                                                                                                        ψ,t                                  r                        ψ,t                           4                                             4                               4                       4                                                4                         2                                          r                    c
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                              µ=1
+                                                              de modo que TrJ                                                                                         =1. La cantidad de inter´es es
+                                                                                                                                                      ψ,t
+                                                                                                                                                                                                                                                                                                                  P (ψ) = Tr J2 .                                                                                                                                                                                                                                                                                                         (A5)
+                                                                                                                                                                                                                                                                                                                          t                                                            ψ,t
+                                                                                                                                                                                                                                                                                         1.                   Constante de Lipschitz
+                                                                          Es util´                            introducir el canal
+                                                                                                                                                                                                                                                Λ (ρ ) = Tr (I ⊗Ut)(Φ ⊗ρ )(I ⊗U−t),                                                                                                                                                                                                                                                                                                                                                      (A6)
+                                                                                                                                                                                                                                                        t             p                                   p                    r                                                4                        p                  r
+                                                              que es CPTP y satisface J                                                                                                                           =Λ(|ψ⟩⟨ψ|). Definamos
+                                                                                                                                                                                                  ψ,t                                 t
+                                                                                                                                                                                                                                                                                                                                                                     †
+                                                                                                                                                                                                                                                                                                                        Bψ,t = Λ (Jψ,t).                                                                                                                                                                                                                                                                                                   (A7)
+                                                                                                                                                                                                                                                                                                                                                                     t
+                                                              Como Λ† es unital y positivo, 0 ≤ B                                                                                                                                                                  ≤I, y adem´as
+                                                                                                       t                                                                                                                                           ψ,t
+                                                                                                                                                                                                                                                                                 ⟨ψ|B                                     |ψ⟩ = Tr(J2 ) = P (ψ).                                                                                                                                                                                                                                                                                           (A8)
+                                                                                                                                                                                                                                                                                                           ψ,t                                                                 ψ,t                                      t
+                                                                          Para una variaci´on tangente |δψ⟩ sobre la esfera de estados,
+                                                                                                                                                                                                                                                                                                  δP =4Re⟨δψ|B                                                                                            |ψ⟩,                                                                                                                                                                                                                             (A9)
+                                                                                                                                                                                                                                                                                                                t                                                                          ψ,t
+                                                              por lo que el gradiente tangencial es
+                                                                                                                                                                                                                                                                                     ∇ P =4(B −P(ψ)I)|ψ⟩.                                                                                                                                                                                                                                                                                                                             (A10)
+                                                                                                                                                                                                                                                                                               S t                                                   ψ,t                                t
+                                                              Por tanto, la constante de Lipschitz que aparece en el lema de L´evy es exactamente
+                                                                                                                                                                                                                                                                                                                               q                                     2                                                                       2
+                                                                                                                                                                                                                                                                           η =4sup ⟨ψ|B                                                                                            |ψ⟩−P (ψ) .                                                                                                                                                                                                                                        (A11)
+                                                                                                                                                                                                                                                                                 t                                                                                  ψ,t                                                 t
+                                                                                                                                                                                                                                                                                                                 ψ
+                                                              Su valor depende, en general, de U y de t. Sin embargo, B2                                                                                                                                                                                                                                                         ≤B implica
+                                                                                                                                                                                                                                                                                                                                                                 ψ,t                                  ψ,t
+                                                                                                                                                                                                                                                                                                                              2
+                                                                                                                                                                                                                                                                                       ∥∇ P ∥ ≤16P (1−P )≤4,                                                                                                                                                                                                                                                                                                                          (A12)
+                                                                                                                                                                                                                                                                                                      S t                                                             t                                   t
+                                                              y obtenemos la cota universal
+                                                                                                                                                                                                                                                                                                                                               η ≤2.                                                                                                                                                                                                                                                                                  (A13)
+                                                                                                                                                                                                                                                                                                                                                     t
+                                                              La igualdad no tiene por qu´e alcanzarse; por ejemplo, si el canal de la moneda es independiente de |ψ⟩, entonces
+                                                              η =0.
+                                                                    t
+                                                                                                                                       28
+                                                            2.   Promedio Haar exacto
+                Sea Wt = Ut y definamos los bloques de Wt sobre la base de posici´on,
+                                                                 K(t) = ⟨x|W |a⟩ ,                                                 (A14)
+                                                                   xa    p      t   p
+              que son operadores 4×4 sobre la moneda. Para |ψ⟩ = Paψa|a⟩, los operadores de Kraus del canal reducido son
+                                                                K (ψ)=Xψ K(t).                                                     (A15)
+                                                                   x            a  xa
+                                                                            a
+              La pureza de Choi puede escribirse como
+                                                                  1 X                    
+                                                                                †            2
+                                                        P (ψ) =         Tr   K (ψ)K (ψ)  .                                       (A16)
+                                                         t       16        c    x      y
+                                                                     x,y
+              Introduciendo las matrices N ×N                               h            i
+                                                            (M(t))   =Tr (K(t))†K(t) ,                                             (A17)
+                                                               xy ab      c     xa    yb
+              se tiene Tr[K†K ] = ⟨ψ|M(t)|ψ⟩. Para un estado Haar aleatorio en CN,
+                            x y           xy
+                                                         h           2i    Tr(MM†)+|TrM|2
+                                                     E |⟨ψ|M|ψ⟩|        =                        .                                 (A18)
+                                                       ψ                         N(N+1)
+              Adem´as, la unitariedad de W implica
+                                             t
+                                                                   TrM(t) = 4δ .                                                   (A19)
+                                                                         xy      xy
+              Por consiguiente, el promedio Haar de la pureza es exactamente
+                                                                1            1       X h (t)          (t))†i.
+                                           P =E P(ψ)=                +                   Tr M (M                                   (A20)
+                                             t    ψ t         N+1 16N(N+1)                     xy    xy
+                                                                                     x,y
+              Esta expresi´on es exacta para cualquier geometr´ıa, moneda y tiempo; toda la dependencia din´amica est´a contenida
+              en los bloques de Ut.
+                                                                 3.   Concentraci´on
+                Los estados puros de posici´on corresponden a la esfera real S2N−1. Usando la versi´on del lema de L´evy
+                                                               2C(d+1)ϵ2                   1                   −3
+                                   Pr(|f −Ef| ≥ ϵ) ≤ 2exp −           η2        ,     C=18π3 ≃1,79175×10 ,                         (A21)
+              con d = 2N −1, obtenemos
+                                                                                            2
+                                                     Pr |P (ψ)−P | ≥ ϵ ≤ 2exp −4CNϵ              .                                 (A22)
+                                                           t         t                    η2
+                                                                                            t
+              Finalmente, usando la cota universal ηt ≤ 2,
+                                                                                           2 
+                                                      Pr |P (ψ)−P | ≥ ϵ ≤ 2exp −Nϵ              .                                  (A23)
+                                                             t        t                  18π3
+              As´ı, para N ≫ 1, la pureza de Choi de casi todos los estados iniciales Haar de posici´on se concentra alrededor del
+              valor (A20), con fluctuaciones t´ıpicas que decrecen como N−1/2. La constante num´erica de L´evy es conservadora, por
+              lo que la concentraci´on observada num´ericamente puede ser considerablemente m´as fuerte que esta cota rigurosa.

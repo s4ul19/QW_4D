@@ -47,11 +47,25 @@
     \begin{minipage}{0.43\textwidth}\centering Rectángulo\end{minipage}\hfill
     \begin{minipage}{0.43\textwidth}\centering Sinaí\end{minipage}\par
 }
+% Las variantes modificadas se colocan debajo de p; solo se dibujan
+% los paneles disponibles (Pr pModif solo tiene una figura para Sinaí).
+\newcommand{\SpectralModifiedRow}[1]{%
+  \begin{minipage}[c]{0.09\textwidth}\centering\texttt{pModif}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering
+    \IfFileExists{Imgs/#1_pModif_Rect.pdf}{\SpectralPanel{#1}{Rect}{pModif}}{\strut}%
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering
+    \IfFileExists{Imgs/#1_pModif_Sinai.pdf}{\SpectralPanel{#1}{Sinai}{pModif}}{\strut}%
+  \end{minipage}\par
+}
 \newcommand{\SpectralGrid}[3][p]{%
   \begin{figure}[H]
     \centering
     \SpectralHeader
-    \if\relax\detokenize{#1}\relax\else\SpectralRow{#2}{#1}\fi
+    \if\relax\detokenize{#1}\relax\else
+      \SpectralRow{#2}{#1}%
+      \IfFileExists{Imgs/#2_pModif_Sinai.pdf}{\SpectralModifiedRow{#2}}{}%
+    \fi
     \SpectralRow{#2}{gpg}
     \SpectralRow{#2}{upu}
     \caption{#3 para las monedas
@@ -59,6 +73,10 @@
     \texttt{gpg}, \texttt{upu},
     \texttt{b}, \texttt{ubu}, \texttt{oo}, \texttt{uoou}, \texttt{o}
     y \texttt{u} en los estadios rectangular y de Sinaí.
+    \if\relax\detokenize{#1}\relax\else
+      \IfFileExists{Imgs/#2_pModif_Sinai.pdf}{Las variantes \texttt{pModif}
+      disponibles se muestran debajo de \texttt{p}.\space}{}%
+    \fi
     Los paneles continúan en las páginas siguientes.}
   \end{figure}
   \begin{figure}[H]
@@ -223,7 +241,7 @@ figura guardada, se indica en el panel correspondiente.
 
 % *}}}
 \subsection{Distribución \texorpdfstring{$P(r)$}{P(r)}} % {{{*
-\SpectralGrid{Pr}{$P(r)$}
+\SpectralGrid[]{Pr}{$P(r)$}
 
 % *}}}
 \subsection{Factor de forma espectral (SFF)} % {{{*

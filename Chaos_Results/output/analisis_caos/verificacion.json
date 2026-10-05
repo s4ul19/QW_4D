@@ -1,0 +1,40 @@
+{
+  "oo_rectangulo_guardado": {
+    "D": 3844,
+    "mean_r": 0.3750037926333391,
+    "boundary_candidates": 44
+  },
+  "sinai_L16_R12": {
+    "D": 352,
+    "samples": 128,
+    "mean_r": 0.5780014877668194,
+    "SE_between_coins": 0.0018943637476029889,
+    "max_difference_from_saved_ratios": 0.0
+  },
+  "sinai_L24_R18": {
+    "D": 736,
+    "samples": 64,
+    "mean_r": 0.5800435485160591,
+    "SE_between_coins": 0.002265817439535943,
+    "max_difference_from_saved_ratios": 0.0
+  },
+  "p_formula_exacta": {
+    "nx": 7,
+    "ny": 5,
+    "D": 140,
+    "max_phase_error": 2.831068712794149e-15,
+    "generic_distinct_eigenvalues": 24,
+    "generic_zero_spacing_fraction": 0.8285714285714285
+  },
+  "conjugacion_moneda": {
+    "coin_max_phase_error": 4.440892098500626e-16,
+    "abs_trace_U_squared_p": 0.0,
+    "abs_trace_U_squared_VpVdagger": 24.81453144381529
+  },
+  "simetria_antiunitaria_rectangulo_C_simetrica": {
+    "coin_symmetry_error": 0.0,
+    "PSP_minus_Sdagger": 0.0,
+    "Theta_squared_minus_identity": 7.083725558122287e-15,
+    "Theta_U_Theta_inverse_minus_Udagger": 7.0366938059038165e-15
+  }
+}

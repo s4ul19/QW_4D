@@ -1,0 +1,189 @@
+{BoxData["(orientationRoot = \
+NotebookDirectory[];\nGet[FileNameJoin[{orientationRoot, \"scripts\", \
+\"load_project.wl\"}]];\n)"], BoxData["(orientationConfig = <|\n  \"Lx\" -> \
+12, \"Ly\" -> 8,\n  \"Names\" -> {\"oo\", \"gpg\"}, \"Seeds\" -> {23, 47, \
+83},\n  \"RotationSeedOffset\" -> 100000,\n  \"Lambdas\" -> N[Subdivide[0, 1, \
+20]],\n  \"Alpha\" -> N[Pi/2], \"Tolerance\" -> 1/10^10,\n  \
+\"NumericalTolerance\" -> 1/10^8, \"CodeVersion\" -> \
+1\n|>;\nClearAll[orientationPath, orientationCoin, \
+orientationCoinErrors];\norientationPath[name_String, seed_Integer, \
+offset_Integer] := Module[{c0, a},\n  c0 = \
+N[QuantumWalks`QWMisc`RandomMatrix[name, \"RandomSeed\" -> seed]];\n  a = \
+BlockRandom[SeedRandom[seed + offset];\n    \
+RandomVariate[NormalDistribution[], {4, 4}]];\n  a = a - Transpose[a];\n  a = \
+a/Norm[a, 2];\n  <|\"Name\" -> name, \"Seed\" -> seed, \"RotationSeed\" -> \
+seed + offset,\n    \"C0\" -> c0, \"A\" -> \
+a|>\n];\norientationCoin[path_Association, lambda_?NumericQ, alpha_?NumericQ] \
+:=\n  With[{o = MatrixExp[lambda alpha path[\"A\"]]},\n    o . path[\"C0\"] . \
+Transpose[o]];\norientationCoinErrors[path_Association, lambda_, alpha_] := \
+Module[{o, c, ev0, ev, match},\n  o = MatrixExp[lambda alpha path[\"A\"]];\n  \
+c = orientationCoin[path, lambda, alpha];\n  ev0 = Eigenvalues[path[\"C0\"]]; \
+ev = Eigenvalues[c];\n  match = Min[Max[Abs[ev - #]] & /@ \
+Permutations[ev0]];\n  <|\"OrthogonalityError\" -> Norm[Transpose[o] . o - \
+IdentityMatrix[4], \"Frobenius\"],\n    \"RealityError\" -> Norm[Im[o], \
+\"Frobenius\"],\n    \"CoinSymmetryError\" -> Norm[c - Transpose[c], \
+\"Frobenius\"],\n    \"CoinUnitarityError\" -> Norm[ConjugateTranspose[c] . c \
+- IdentityMatrix[4], \"Frobenius\"],\n    \"CoinSpectrumError\" -> \
+match|>\n];\norientationPaths = Flatten[Table[\n  orientationPath[name, seed, \
+orientationConfig[\"RotationSeedOffset\"]],\n  {name, \
+orientationConfig[\"Names\"]}, {seed, orientationConfig[\"Seeds\"]}], \
+1];\nDataset[KeyTake[#, {\"Name\", \"Seed\", \"RotationSeed\"}] & /@ \
+orientationPaths]\n)"], BoxData["(ClearAll[orientationTRCheck];\norientationT\
+RCheck[path_Association, lambda_, alpha_] := Module[\n  {grid, coords, n, d, \
+r, c, cbig, s, u, q, targets},\n  grid = \
+QuantumWalks`Billiards`GenerateRectangleBasis[3, 2];\n  coords = \
+grid[\"Coords\"]; n = grid[\"Dimension\"]; d = 4 n;\n  targets = \
+Flatten[Table[\n    4 (First[FirstPosition[coords, {3, 2} - pos]] - 1) + \
+Range[4], {pos, coords}]];\n  r = SparseArray[Thread[Transpose[{targets, \
+Range[d]}] -> 1.], {d, d}];\n  c = orientationCoin[path, lambda, alpha];\n  \
+cbig = KroneckerProduct[IdentityMatrix[n, SparseArray], SparseArray[c]];\n  s \
+= QuantumWalks`QWMisc`QWEvolutionOperator[grid, IdentityMatrix[4]];\n  u = s \
+. cbig; q = ConjugateTranspose[cbig] . r;\n  <|\"ShiftReversalError\" -> \
+Norm[Normal[r . s . r - ConjugateTranspose[s]], \"Frobenius\"],\n    \
+\"ThetaSquaredError\" -> Norm[Normal[q . Conjugate[q] - IdentityMatrix[d]], \
+\"Frobenius\"],\n    \"TimeReversalError\" -> Norm[Normal[q . Conjugate[u] . \
+ConjugateTranspose[q] - ConjugateTranspose[u]], \
+\"Frobenius\"]|>\n];\norientationChecks = Flatten[Table[Join[\n  \
+KeyTake[path, {\"Name\", \"Seed\"}], <|\"Lambda\" -> lambda|>,\n  \
+orientationCoinErrors[path, lambda, orientationConfig[\"Alpha\"]],\n  \
+orientationTRCheck[path, lambda, orientationConfig[\"Alpha\"]]],\n  {path, \
+orientationPaths}, {lambda, {0., 0.5, 1.}}], 1];\norientationChecksPassed = \
+AllTrue[orientationChecks,\n  Max[Values[KeyDrop[#, {\"Name\", \"Seed\", \
+\"Lambda\"}]]] < orientationConfig[\"NumericalTolerance\"] \
+&];\nPrint[\"Invariantes correctas: \", \
+orientationChecksPassed];\nDataset[orientationChecks]\n)"], 
+ BoxData["(ClearAll[orientationPoint, orientationSave, \
+orientationRun];\norientationPoint[path_Association, lambda_, \
+cfg_Association, shift_] := Module[\n  {c, errors, n, u, vals, phases, data, \
+elapsed, modulusError},\n  c = orientationCoin[path, lambda, \
+cfg[\"Alpha\"]];\n  errors = orientationCoinErrors[path, lambda, \
+cfg[\"Alpha\"]];\n  If[Max[Values[errors]] >= cfg[\"NumericalTolerance\"],\n  \
+  Return[Failure[\"CoinInvariant\", <|\"Errors\" -> errors|>]]];\n  n = \
+Length[shift]/4;\n  {elapsed, vals} = AbsoluteTiming[\n    u = N[shift . \
+KroneckerProduct[IdentityMatrix[n, SparseArray], SparseArray[c]]];\n    \
+Eigenvalues[Normal[u]]];\n  If[!VectorQ[vals, NumericQ], \
+Return[Failure[\"Eigensystem\", <||>]]];\n  modulusError = Max[Abs[Abs[vals] \
+- 1]];\n  If[modulusError >= cfg[\"NumericalTolerance\"],\n    \
+Return[Failure[\"UnitCircle\", <|\"Error\" -> modulusError|>]]];\n  phases = \
+Sort[-Arg[vals]];\n  data = QuantumWalks`QWMisc`QWPr[phases, \"ReturnData\" \
+-> True,\n    \"AllowDegeneracies\" -> True, \"DegeneracyTolerance\" -> \
+cfg[\"Tolerance\"]];\n  If[!AssociationQ[data], Return[Failure[\"Ratios\", \
+<||>]]];\n  Join[KeyTake[path, {\"Name\", \"Seed\", \"RotationSeed\"}],\n    \
+<|\"Lambda\" -> lambda, \"D\" -> Length[vals], \"Coin\" -> c,\n      \
+\"Phases\" -> phases, \"Ratios\" -> data[\"Ratios\"],\n      \"MeanR\" -> \
+If[data[\"Ratios\"] === {}, Missing[\"Undefined\"], \
+Mean[data[\"Ratios\"]]],\n      \"ZeroSpacingCount\" -> \
+data[\"ZeroSpacingCount\"],\n      \"UndefinedRatioCount\" -> \
+data[\"UndefinedRatioCount\"],\n      \"EigenvalueModulusError\" -> \
+modulusError, \"Seconds\" -> elapsed|>, \
+errors]\n];\norientationSave[file_String, value_] := Module[{temporary = file \
+<> \".partial\", saved},\n  saved = Export[temporary, value, \"WXF\"];\n  \
+If[!StringQ[saved], Return[Failure[\"Export\", <|\"File\" -> file|>]]];\n  \
+RenameFile[temporary, file, OverwriteTarget -> \
+True]\n];\norientationRun[cfg_Association, paths_List, directory_String] := \
+Catch[Module[\n  {grid, shift, rows = {}, file, row, count = 0, total},\n  \
+grid = QuantumWalks`Billiards`GenerateRectangleBasis[cfg[\"Lx\"], \
+cfg[\"Ly\"]];\n  shift = QuantumWalks`QWMisc`QWEvolutionOperator[grid, \
+IdentityMatrix[4]];\n  If[shift === $Failed, Throw[Failure[\"Shift\", <||>], \
+\"orientation\"]];\n  total = Length[paths] Length[cfg[\"Lambdas\"]];\n  \
+Do[\n    file = FileNameJoin[{directory, path[\"Name\"] <> \"-seed\" <> \
+ToString[path[\"Seed\"]] <>\n      \"-point\" <> IntegerString[j, 10, 4] <> \
+\".wxf\"}];\n    row = If[FileExistsQ[file], Import[file, \"WXF\"],\n      \
+orientationPoint[path, cfg[\"Lambdas\"][[j]], cfg, shift]];\n    \
+If[!AssociationQ[row] || !(And @@ (KeyExistsQ[row, #] & /@\n      {\"Name\", \
+\"Seed\", \"Lambda\", \"Phases\", \"Ratios\", \"MeanR\", \
+\"ZeroSpacingCount\", \"UndefinedRatioCount\", \"D\"})),\n      \
+Throw[Failure[\"Point\", <|\"File\" -> file, \"Result\" -> row|>], \
+\"orientation\"]];\n    If[row[\"Name\"] =!= path[\"Name\"] || row[\"Seed\"] \
+=!= path[\"Seed\"] ||\n      row[\"Lambda\"] =!= cfg[\"Lambdas\"][[j]] || \
+row[\"D\"] =!= 4 grid[\"Dimension\"],\n      \
+Throw[Failure[\"CheckpointMismatch\", <|\"File\" -> file|>], \
+\"orientation\"]];\n    If[!FileExistsQ[file] && \
+!StringQ[orientationSave[file, row]],\n      Throw[Failure[\"Save\", \
+<|\"File\" -> file|>], \"orientation\"]];\n    AppendTo[rows, row]; \
+count++;\n    Print[count, \"/\", total, \"  \", path[\"Name\"], \" seed=\", \
+path[\"Seed\"],\n      \" lambda=\", row[\"Lambda\"], \"  <r>=\", \
+row[\"MeanR\"],\n      \"  ceros=\", row[\"ZeroSpacingCount\"], \"  0/0=\", \
+row[\"UndefinedRatioCount\"]],\n    {path, paths}, {j, \
+Length[cfg[\"Lambdas\"]]}];\n  rows\n], \"orientation\"];\n)"], 
+ BoxData["(If[!TrueQ[orientationChecksPassed],\n  Print[\"Ejecuta la seccion \
+3 y revisa los controles antes de continuar.\"],\n  orientationMetadata = \
+<|\"Config\" -> orientationConfig, \"Paths\" -> orientationPaths,\n    \
+\"WolframVersion\" -> $Version,\n    \"EnergyConvention\" -> \"U psi = Exp[-I \
+epsilon] psi; epsilon = -Arg[eigenvalue]\",\n    \"Sector\" -> \"Full \
+operator; no unitary symmetry resolution\"|>;\n  orientationDirectory = \
+FileNameJoin[{orientationRoot, \"results\", \"OrthogonalOrientation\",\n    \
+IntegerString[Hash[orientationMetadata, \"SHA256\"], 16, 64]}];\n  \
+If[!DirectoryQ[orientationDirectory],\n    \
+CreateDirectory[orientationDirectory, CreateIntermediateDirectories -> \
+True]];\n  If[!StringQ[orientationSave[FileNameJoin[{orientationDirectory, \
+\"metadata.wxf\"}], orientationMetadata]],\n    Print[\"No se pudo guardar \
+metadata.wxf; no se inicia el barrido.\"],\n    Print[\"Resultados: \", \
+orientationDirectory];\n    orientationResults = \
+orientationRun[orientationConfig, orientationPaths, orientationDirectory];\n  \
+  If[ListQ[orientationResults],\n      Print[\"Puntos disponibles: \", \
+Length[orientationResults]], orientationResults]\n  ]\n]\n)"], 
+ BoxData["(ClearAll[orientationSummarize];\norientationSummarize[rows_List] \
+:= Module[{groups},\n  groups = GatherBy[rows, {#[\"Name\"], #[\"Lambda\"]} \
+&];\n  SortBy[Map[Function[group, Module[{means, valid},\n    means = \
+Lookup[group, \"MeanR\"]; valid = Select[means, NumericQ];\n    <|\"Name\" -> \
+First[group][\"Name\"], \"Lambda\" -> First[group][\"Lambda\"],\n      \
+\"MeanR\" -> If[valid === {}, Missing[\"Undefined\"], Mean[valid]],\n      \
+\"SE\" -> If[Length[valid] < 2, Missing[\"TooFewRealizations\"], \
+StandardDeviation[valid]/Sqrt[Length[valid]]],\n      \"ValidRealizations\" \
+-> Length[valid], \"Realizations\" -> Length[group],\n      \
+\"MeanZeroFraction\" -> Mean[(#[\"ZeroSpacingCount\"]/#[\"D\"]) & /@ \
+group],\n      \"MeanUndefinedFraction\" -> \
+Mean[(#[\"UndefinedRatioCount\"]/#[\"D\"]) & /@ group]|>\n    ]], groups], \
+{#[\"Name\"], #[\"Lambda\"]} &]\n];\norientationSummary = \
+orientationSummarize[orientationResults];\nDataset[orientationSummary]\n)"], 
+ BoxData["(orientationRPlot = ListPlot[\n  \
+Table[Cases[Select[orientationSummary, #[\"Name\"] == name &],\n    \
+a_Association /; NumericQ[a[\"MeanR\"]] :>\n      {a[\"Lambda\"], \
+If[NumericQ[a[\"SE\"]], Around[a[\"MeanR\"], a[\"SE\"]], a[\"MeanR\"]]}],\n   \
+ {name, orientationConfig[\"Names\"]}],\n  Joined -> True, PlotMarkers -> \
+Automatic, IntervalMarkers -> \"Bars\",\n  PlotLegends -> \
+orientationConfig[\"Names\"], Frame -> True,\n  FrameLabel -> {\"lambda\", \
+\"<r> (media entre realizaciones)\"},\n  GridLines -> {None, {2 Log[2] - 1, \
+0.5307, 0.5996}},\n  PlotRange -> {{0, 1}, {0, 0.7}}, ImageSize -> Large,\n  \
+PlotLabel -> \"Referencias: Poisson 0.3863; ortogonal 0.5307; unitaria \
+0.5996\"];\norientationDegeneracyPlot = ListLinePlot[\n  Flatten[Table[{\n    \
+({#[\"Lambda\"], #[\"MeanZeroFraction\"]} & /@ Select[orientationSummary, \
+#[\"Name\"] == name &]),\n    ({#[\"Lambda\"], #[\"MeanUndefinedFraction\"]} \
+& /@ Select[orientationSummary, #[\"Name\"] == name &])},\n    {name, \
+orientationConfig[\"Names\"]}], 1],\n  PlotLegends -> Flatten[({# <> \" gaps \
+cero\", # <> \" pares 0/0\"} & /@ orientationConfig[\"Names\"])],\n  Frame -> \
+True, FrameLabel -> {\"lambda\", \"fraccion\"}, PlotRange -> All, ImageSize \
+-> Large];\nColumn[{orientationRPlot, orientationDegeneracyPlot}]\n)"], 
+ BoxData["(orientationSelectedName = \"oo\";\norientationSelectedSeed = \
+23;\norientationPhaseWindow = {-0.5, 0.5};\norientationSelected = \
+SortBy[Select[orientationResults,\n  #[\"Name\"] == orientationSelectedName \
+&& #[\"Seed\"] == orientationSelectedSeed &], #[\"Lambda\"] \
+&];\norientationSlices = DeleteDuplicates[Table[\n  \
+First[MinimalBy[orientationSelected, Abs[#[\"Lambda\"] - target] &]], \
+{target, {0., 0.5, 1.}}]];\nColumn[Table[With[{label = Row[{row[\"Name\"], \
+\", seed=\", row[\"Seed\"], \", lambda=\", row[\"Lambda\"]}]},\n  \
+QuantumWalks`QWMisc`QWPr[row[\"Phases\"], \"AllowDegeneracies\" -> True,\n    \
+\"DegeneracyTolerance\" -> orientationConfig[\"Tolerance\"], PlotLabel -> \
+label]],\n  {row, orientationSlices}]]\n)"], BoxData["(Column[Table[QuantumWa\
+lks`QWMisc`QWPs[row[\"Phases\"],\n  \"AllowDegeneracies\" -> True, \
+\"DegeneracyTolerance\" -> orientationConfig[\"Tolerance\"],\n  PlotLabel -> \
+Row[{row[\"Name\"], \", lambda=\", row[\"Lambda\"]}]],\n  {row, \
+orientationSlices}]]\n)"], BoxData["(orientationPhasePlot = \
+ListPlot[Flatten[Table[\n  ({row[\"Lambda\"], #} & /@ \
+Select[row[\"Phases\"],\n    orientationPhaseWindow[[1]] <= # <= \
+orientationPhaseWindow[[2]] &]),\n  {row, orientationSelected}], 1],\n  Frame \
+-> True, FrameLabel -> {\"lambda\", \"epsilon\"},\n  PlotRange -> {{0, 1}, \
+orientationPhaseWindow}, PlotStyle -> PointSize[0.003],\n  PlotLabel -> \
+\"Eigenfases: puntos sin seguimiento de eigenvectores\", ImageSize -> \
+Large];\norientationPhasePlot\n)"], BoxData["(orientationColumns = {\"Name\", \
+\"Lambda\", \"MeanR\", \"SE\", \"ValidRealizations\", \"Realizations\", \
+\"MeanZeroFraction\", \
+\"MeanUndefinedFraction\"};\nExport[FileNameJoin[{orientationDirectory, \
+\"summary.csv\"}],\n  Prepend[(Lookup[#, orientationColumns] & /@ \
+orientationSummary), orientationColumns], \
+\"CSV\"];\nExport[FileNameJoin[{orientationDirectory, \"mean_r.pdf\"}], \
+orientationRPlot];\nExport[FileNameJoin[{orientationDirectory, \
+\"degeneracies.pdf\"}], \
+orientationDegeneracyPlot];\nExport[FileNameJoin[{orientationDirectory, \
+\"eigenphases.pdf\"}], orientationPhasePlot];\norientationDirectory\n)"]}
