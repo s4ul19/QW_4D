@@ -29,7 +29,9 @@
   \vspace{1mm}\insertframetitle\par\vspace{1mm}
   {\color{acento}\hrule height .6pt}\vspace{1mm}}
 \setbeamertemplate{footline}{%
-  \hfill\usebeamerfont{footline}\usebeamercolor[fg]{footline}%
+  \hspace*{6mm}\usebeamerfont{footline}%
+  \hyperlink{indice}{\textcolor{acento}{\textbf{Índice}}}%
+  \hfill\usebeamercolor[fg]{footline}%
   \insertframenumber\hspace{6mm}\vspace{2mm}}
 \setbeamertemplate{itemize item}{\color{acento}\small$\bullet$}
 \setlength{\parskip}{3pt}
@@ -117,13 +119,37 @@
       \psi_c(v,t)\ket{v}\otimes\ket{c}
   \]
   \[
-    \boxed{\ket{\psi_{t+1}}=U\ket{\psi_t},\qquad
-      U=S\bigl(\mathbb I_p\otimes C_4\bigr)}
+    \boxed{\ket{\psi_{t+1}}=U_{evol}\ket{\psi_t},\qquad
+      U_{evol}=S\bigl(\mathbb I_p\otimes C_4\bigr)}
   \]
   \begin{itemize}
     \item $C_4$ mezcla las cuatro direcciones de movimiento.
     \item $S$ desplaza al caminante e incorpora la reflexión en la frontera.
   \end{itemize}
+\end{frame}
+
+\ifapendice
+  \def\IndiceContenido{%
+    \begin{columns}[T,onlytextwidth]
+      \begin{column}{.56\textwidth}
+        \textbf{Recorrido principal}\par\smallskip
+        \tableofcontents[sections={1-7},hideallsubsections]
+      \end{column}
+      \begin{column}{.40\textwidth}
+        \textbf{Apéndice}\par\smallskip
+        \hyperlink{ap-espectral}{\textcolor{acento}{Estadística espectral}}\par\medskip
+        \hyperlink{ap-temporal}{\textcolor{acento}{Promedio temporal}}\par\medskip
+        \hyperlink{ap-eigenestados}{\textcolor{acento}{Eigenestados}}\par\medskip
+        \hyperlink{ap-monedas}{\textcolor{acento}{Matrices de monedas}}
+      \end{column}
+    \end{columns}}
+\else
+  \def\IndiceContenido{%
+    \textbf{Recorrido principal}\par\smallskip
+    \tableofcontents[sections={1-7},hideallsubsections]}
+\fi
+\begin{frame}[t,label=indice]{Índice}
+  \IndiceContenido
 \end{frame}
 
 \begin{frame}[t]{Desplazamiento y geometrías}
@@ -155,20 +181,18 @@
   \begin{tabular}{@{}p{1.0cm}p{3.0cm}l@{}}
     \toprule
     Código & $C_4$ & Construcción\\\midrule
-    \coin{gpg} & $GPG^\dagger$ & Fases diagonales mezcladas con Grover\\
-    \coin{oo} & $O_1\otimes O_2$ & Producto de dos matrices COE de dimensión 2\\
-    \coin{uoou} & $U(O_1\otimes O_2)U^\dagger$ & Conjugación unitaria de \coin{oo}\\
+    \coin{p} & $P$ & Matriz diagonal de fases aleatorias\\
     \coin{o} & $O_4$ & Matriz del ensamble COE de dimensión 4\\
-    \coin{b} & $B$ & Matriz fija y dispersa\\
-    \coin{ubu} & $UBU^\dagger$ & Conjugación unitaria de \coin{b}\\
     \coin{u} & $U$ & Matriz del ensamble CUE de dimensión 4\\
+    \coin{b} & $B$ & Matriz unitaria de cambio de base de la base computacional a la base de bell.\\
+    \coin{oo} & $O_1\otimes O_2$ & Producto de dos matrices COE de dimensión 2\\
+    \coin{gpg} & $GPG^\dagger$ & Fases diagonales mezcladas con Grover\\
+    \coin{uoou} & $U(O_1\otimes O_2)U^\dagger$ & Conjugación unitaria de \coin{oo}\\
+    \coin{ubu} & $UBU^\dagger$ & Conjugación unitaria de \coin{b}\\
     \coin{upu} & $UPU^\dagger$ & Conjugación unitaria de las fases diagonales\\
-    \coin{p} & $P$ & Matriz diagonal de fases aleatorias\\\bottomrule
+    \bottomrule
   \end{tabular}}
-  \captionline{$P=\operatorname{diag}(e^{i\theta_1},\ldots,e^{i\theta_4})$, $\theta_j\sim\mathcal U[0,2\pi)$.
-  $G$ es Grover a $\pi/4$ y $U$ es una matriz CUE.\\
-  COE: ensamble circular ortogonal. CUE: ensamble circular unitario.}
-  \takeaway{Cambiar la base de la moneda puede cambiar la caminata: el desplazamiento $S$ permanece fijo.}
+  \takeaway{Cambiar la base de la moneda puede cambiar la caminata aunque el desplazamiento $S$ permanezca fijo.}
 \end{frame}
 
 % ----------------------------------------------------------------------
@@ -304,16 +328,17 @@
   \captionline{Ejemplos de concentración cerca de la frontera. Oscuro significa mayor contribución local al IPR. Las escalas y los tamaños son distintos.}
 \end{frame}
 
-\section{Discusión}
-\begin{frame}[t]{Resultados para discutir}
+\section{Conclusiones}
+\begin{frame}[t]{Conclusiones}
   \begin{itemize}
-    \setlength\itemsep{4mm}
-    \item La comparación entre geometrías requiere considerar también la moneda.
-    \item El estado inicial afecta la separación entre las curvas de IPR y entrelazamiento.
-    \item Los eigenestados permiten examinar dónde se concentra la probabilidad.
+    \setlength\itemsep{3.5mm}
+    \item Las condiciones de frontera impuestas por la geometría no son necesarias para la emergencia de caos cuántico.
+    \item El billar de Sinai presenta caos cuántico en todos los casos: \coin{gpg} y \coin{oo} siguen una estadística COE; las demás monedas, CUE.
+    \item En el rectángulo, los casos con caos cuántico parecen seguir una estadística COE.
+    \item Las monedas que producen integrabilidad muestran eigenestados más localizados que las monedas caóticas.
+    \item La mayoría de las monedas alcanza entropías cercanas a $\ln 4$; \coin{p} muestra caídas recurrentes.
+    \item Mediante el IPR espacial no es concluyente si sea posible identificar dinámicas caóticas de no caóticas.
   \end{itemize}
-  \vspace{3mm}
-
 \end{frame}
 
 % ----------------------------------------------------------------------
@@ -322,7 +347,7 @@
 \ifapendice
 \appendix
 \section{Apéndice espectral}
-\begin{frame}[t]{Apéndice: detalle de las comparaciones}
+\begin{frame}[t,label=ap-espectral]{Apéndice: detalle de las comparaciones}
   \textbf{Orden de monedas}\par
   \coin{gpg}, \coin{oo}, \coin{uoou}, \coin{o}, \coin{b}, \coin{ubu}, \coin{u}, \coin{upu}, \coin{p}.
   \vspace{4mm}
@@ -332,7 +357,24 @@
     \item SFF para las nueve monedas.
     \item Promedios temporales restantes y mapas completos de eigenestados.
   \end{itemize}
-  \captionline{El apéndice permite consultar el detalle sin alargar el recorrido principal.}
+\end{frame}
+
+\begin{frame}[t]{Indicadores de estadística espectral}
+  \vspace{3mm}
+  \[
+    \xi_n=\overline{\mathcal N}(\varepsilon_n),\qquad
+    s_n=\xi_{n+1}-\xi_n
+  \]
+  \vspace{4mm}
+  \[
+    \Delta_n=\varepsilon_{n+1}-\varepsilon_n,\qquad
+    r_n=\frac{\min(\Delta_n,\Delta_{n+1})}{\max(\Delta_n,\Delta_{n+1})}
+  \]
+  \vspace{4mm}
+  \[
+    K(t)=\frac1D\left|\sum_{n=1}^{D}e^{-it\varepsilon_n}\right|^2,
+    \qquad \tau=\frac{t}{D}
+  \]
 \end{frame}
 
 \SpectralPair{DoS y unfolding: \coin{gpg} y \coin{oo}}{DoS}{gpg}{oo}{Densidad de eigenfases y transformación de unfolding de las figuras originales.}
@@ -367,7 +409,7 @@
 \SpectralSingle{SFF: \coin{p}}{SFF}{p}{Las escalas verticales pueden cambiar entre paneles.}
 
 \section{Apéndice temporal}
-\begin{frame}[t]{Expresión del límite del promedio temporal}
+\begin{frame}[t,label=ap-temporal]{Expresión del límite del promedio temporal}
   \noindent{\small Sea $\Pi_\lambda$ el proyector sobre el subespacio de eigenvalor $\lambda$ de $U$.}\par
   \[
     \lim_{T\to\infty}\frac1T\sum_{t=0}^{T-1}
@@ -395,7 +437,7 @@
 \end{frame}
 
 \section{Apéndice de eigenestados}
-\begin{frame}[t]{Eigenestados: rectángulo, intervalos 4 a 9}
+\begin{frame}[t,label=ap-eigenestados]{Eigenestados: rectángulo, intervalos 4 a 9}
   \centering\includegraphics[width=\textwidth,height=5.7cm,keepaspectratio]{IPRDensity_Rect_Intervals04-09.pdf}
   \captionline{Cada panel indica eigenfase, IPR y residuo numérico. Cada mapa tiene su propia escala.}
 \end{frame}
@@ -409,7 +451,7 @@
 \end{frame}
 
 \section{Apéndice de monedas}
-\begin{frame}[t]{Matrices fijas de las monedas}
+\begin{frame}[t,label=ap-monedas]{Matrices fijas de las monedas}
   \[
     G=\frac12\begin{pmatrix}
       -1&1&1&1\\1&-1&1&1\\1&1&-1&1\\1&1&1&-1

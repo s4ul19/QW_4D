@@ -1,7 +1,7 @@
 # Presentación para el Dr. Juan Luis François Lacouture
 
 Proyecto Beamer en formato 16:9, en español. La presentación empieza
-directamente con el modelo matemático, sin portada ni índice.
+directamente con el modelo matemático y sigue con un índice navegable.
 
 ## Archivos
 
@@ -32,7 +32,7 @@ en el PDF principal, cambiar `\apendicetrue` por `\apendicefalse` en `main.tex`.
 
 Modelo y reflexión, monedas, estadística espectral, IPR espacial,
 entrelazamiento moneda-posición, promedio temporal y densidad espacial del
-IPR de eigenestados. Termina con preguntas para orientar la discusión.
+IPR de eigenestados. Termina con cinco conclusiones.
 
 Las columnas enfrentan rectángulo (izquierda) y Sinai (derecha). El orden es
 `gpg, oo, uoou, o, b, ubu, u, upu, p`. Las gráficas comparativas de IPR y
@@ -40,10 +40,15 @@ entropía conservan los colores y las leyendas de las figuras originales.
 
 El recorrido principal tiene 27 diapositivas y muestra P(s), P(r) y SFF,
 en ese orden y con las mismas parejas de monedas. El PDF completo tiene
-además 27 diapositivas de apoyo. Al final del bloque espectral se incluye
+además 28 diapositivas de apoyo. Al final del bloque espectral se incluye
 una tabla de lectura cualitativa de P(s) por geometría. El apéndice conserva
 DoS, P(r), SFF y los mapas adicionales, para consultar el detalle según la
 conversación.
+El apéndice espectral comienza con las fórmulas de P(s), P(r) y SFF.
+
+La segunda diapositiva es un índice con enlaces a cada sección. El enlace
+«Índice» del pie permite volver a ella desde cualquier diapositiva. La
+versión breve omite las entradas del apéndice.
 
 ## Precisiones sobre las fuentes
 
