@@ -1,0 +1,284 @@
+Cell[CellGroupData[
+  {
+   Cell["Orientacion ortogonal de la moneda: espectro fijo y simetria \
+antiunitaria", "Title", ExpressionUUID -> 
+     "0a09f0b8-c881-44c2-951e-dc28b50f4812"], Cell["Objetivo: variar los \
+eigenvectores de oo y gpg sin cambiar los eigenvalores de la moneda ni romper \
+la simetria antiunitaria del rectangulo. \
+C(lambda)=O(lambda).C0.Transpose[O(lambda)], O(lambda)=MatrixExp[lambda alpha \
+A], A real antisimetrica. La moneda es homogenea y fija durante cada \
+evolucion. Ejecuta las secciones 1 a 7 en orden. El barrido se ejecuta \
+localmente en la seccion 5; cargar las definiciones no lo inicia.", "Text", 
+    ExpressionUUID -> "8066d4e6-203b-4354-949f-481267c174f0"], 
+   Cell["1. Cargar el proyecto", "Section", ExpressionUUID -> 
+     "7ff57e3b-741c-4f26-ae5e-06b1a6c8c0aa"], 
+   Cell[BoxData["(orientationRoot = \
+NotebookDirectory[];\nGet[FileNameJoin[{orientationRoot, \"scripts\", \
+\"load_project.wl\"}]];\n)"], "Input", ExpressionUUID -> 
+     "459f3428-caa5-4fb4-8b3a-b42bc7001972"], 
+   Cell["2. Parametros y realizaciones fijas", "Section", 
+    ExpressionUUID -> "cdc548c0-b630-4ddd-b919-63ac69dc3279"], 
+   Cell["Lx y Ly son coordenadas maximas: hay (Lx+1)(Ly+1) sitios y \
+D=4(Lx+1)(Ly+1) niveles. El piloto usa {12,8}, 3 semillas por familia y 21 \
+valores de lambda: 126 diagonalizaciones de dimension 468. Para escalar, \
+cambia Lx,Ly conservando razon de aspecto (por ejemplo {24,16}, {36,24}) y \
+aumenta semillas. alpha=Pi/2 fija la escala angular, con ||A||2=1; lambda=1 \
+es solo el extremo de este camino, no garantiza caos ni una rotacion Haar. La \
+rotacion se genera independientemente de la moneda y no se vuelve a sortear \
+en cada lambda.", "Text", ExpressionUUID -> 
+     "e88a6de7-7757-4f5d-a0c6-881473579f9c"], 
+   Cell[BoxData["(orientationConfig = <|\n  \"Lx\" -> 12, \"Ly\" -> 8,\n  \
+\"Names\" -> {\"oo\", \"gpg\"}, \"Seeds\" -> {23, 47, 83},\n  \
+\"RotationSeedOffset\" -> 100000,\n  \"Lambdas\" -> N[Subdivide[0, 1, 20]],\n \
+ \"Alpha\" -> N[Pi/2], \"Tolerance\" -> 1/10^10,\n  \"NumericalTolerance\" -> \
+1/10^8, \"CodeVersion\" -> 1\n|>;\nClearAll[orientationPath, orientationCoin, \
+orientationCoinErrors];\norientationPath[name_String, seed_Integer, \
+offset_Integer] := Module[{c0, a},\n  c0 = \
+N[QuantumWalks`QWMisc`RandomMatrix[name, \"RandomSeed\" -> seed]];\n  a = \
+BlockRandom[SeedRandom[seed + offset];\n    \
+RandomVariate[NormalDistribution[], {4, 4}]];\n  a = a - Transpose[a];\n  a = \
+a/Norm[a, 2];\n  <|\"Name\" -> name, \"Seed\" -> seed, \"RotationSeed\" -> \
+seed + offset,\n    \"C0\" -> c0, \"A\" -> \
+a|>\n];\norientationCoin[path_Association, lambda_?NumericQ, alpha_?NumericQ] \
+:=\n  With[{o = MatrixExp[lambda alpha path[\"A\"]]},\n    o . path[\"C0\"] . \
+Transpose[o]];\norientationCoinErrors[path_Association, lambda_, alpha_] := \
+Module[{o, c, ev0, ev, match},\n  o = MatrixExp[lambda alpha path[\"A\"]];\n  \
+c = orientationCoin[path, lambda, alpha];\n  ev0 = Eigenvalues[path[\"C0\"]]; \
+ev = Eigenvalues[c];\n  match = Min[Max[Abs[ev - #]] & /@ \
+Permutations[ev0]];\n  <|\"OrthogonalityError\" -> Norm[Transpose[o] . o - \
+IdentityMatrix[4], \"Frobenius\"],\n    \"RealityError\" -> Norm[Im[o], \
+\"Frobenius\"],\n    \"CoinSymmetryError\" -> Norm[c - Transpose[c], \
+\"Frobenius\"],\n    \"CoinUnitarityError\" -> Norm[ConjugateTranspose[c] . c \
+- IdentityMatrix[4], \"Frobenius\"],\n    \"CoinSpectrumError\" -> \
+match|>\n];\norientationPaths = Flatten[Table[\n  orientationPath[name, seed, \
+orientationConfig[\"RotationSeedOffset\"]],\n  {name, \
+orientationConfig[\"Names\"]}, {seed, orientationConfig[\"Seeds\"]}], \
+1];\nDataset[KeyTake[#, {\"Name\", \"Seed\", \"RotationSeed\"}] & /@ \
+orientationPaths]\n)"], "Input", ExpressionUUID -> 
+     "25185633-fc06-4e96-b39e-610a443b35b9"], 
+   Cell["3. Verificar las invariantes antes del barrido", "Section", 
+    ExpressionUUID -> "d4a2efa4-188a-4789-adc4-d68eeb7e034d"], 
+   Cell["R invierte solo la posicion respecto al centro del rectangulo. Para \
+este shift, R.S.R=S adjunto. Como C es simetrica, Theta=(I tensor C \
+adjunto).R.K satisface Theta^2=I y Theta.U.Theta^-1=U adjunto. La \
+comprobacion completa se hace en un rectangulo pequeno para evitar \
+multiplicaciones densas costosas en el barrido. Las invariantes 4x4 se \
+revisan en cada punto. Estos controles no prueban caos ni eliminan otras \
+simetrias unitarias.", "Text", ExpressionUUID -> 
+     "ced2ce61-0080-4f08-9086-b659f9deaba0"], 
+   Cell[BoxData["(ClearAll[orientationTRCheck];\norientationTRCheck[path_Asso\
+ciation, lambda_, alpha_] := Module[\n  {grid, coords, n, d, r, c, cbig, s, \
+u, q, targets},\n  grid = QuantumWalks`Billiards`GenerateRectangleBasis[3, \
+2];\n  coords = grid[\"Coords\"]; n = grid[\"Dimension\"]; d = 4 n;\n  \
+targets = Flatten[Table[\n    4 (First[FirstPosition[coords, {3, 2} - pos]] - \
+1) + Range[4], {pos, coords}]];\n  r = SparseArray[Thread[Transpose[{targets, \
+Range[d]}] -> 1.], {d, d}];\n  c = orientationCoin[path, lambda, alpha];\n  \
+cbig = KroneckerProduct[IdentityMatrix[n, SparseArray], SparseArray[c]];\n  s \
+= QuantumWalks`QWMisc`QWEvolutionOperator[grid, IdentityMatrix[4]];\n  u = s \
+. cbig; q = ConjugateTranspose[cbig] . r;\n  <|\"ShiftReversalError\" -> \
+Norm[Normal[r . s . r - ConjugateTranspose[s]], \"Frobenius\"],\n    \
+\"ThetaSquaredError\" -> Norm[Normal[q . Conjugate[q] - IdentityMatrix[d]], \
+\"Frobenius\"],\n    \"TimeReversalError\" -> Norm[Normal[q . Conjugate[u] . \
+ConjugateTranspose[q] - ConjugateTranspose[u]], \
+\"Frobenius\"]|>\n];\norientationChecks = Flatten[Table[Join[\n  \
+KeyTake[path, {\"Name\", \"Seed\"}], <|\"Lambda\" -> lambda|>,\n  \
+orientationCoinErrors[path, lambda, orientationConfig[\"Alpha\"]],\n  \
+orientationTRCheck[path, lambda, orientationConfig[\"Alpha\"]]],\n  {path, \
+orientationPaths}, {lambda, {0., 0.5, 1.}}], 1];\norientationChecksPassed = \
+AllTrue[orientationChecks,\n  Max[Values[KeyDrop[#, {\"Name\", \"Seed\", \
+\"Lambda\"}]]] < orientationConfig[\"NumericalTolerance\"] \
+&];\nPrint[\"Invariantes correctas: \", \
+orientationChecksPassed];\nDataset[orientationChecks]\n)"], "Input", 
+    ExpressionUUID -> "ce5d383c-0e2c-437f-bb7f-0500d0aee8ef"], 
+   Cell["4. Definir el calculo de cada punto y el guardado", "Section", 
+    ExpressionUUID -> "96095427-18d4-47f3-a2ac-efb881f212dc"], 
+   Cell["Se conserva todo el espectro, sin unfolding para r y sin eliminar \
+niveles repetidos. QWPr conserva ratios cero y omite solamente pares 0/0; los \
+dos contadores se guardan. Las fases, moneda y errores numericos permiten \
+revisar cada punto. Los espectros pertenecen al operador completo: cualquier \
+simetria unitaria adicional debe separarse antes de atribuir universalidad a \
+un sector. Cada punto terminado se guarda en WXF mediante reemplazo atomico. \
+Reevaluar la seccion 5 con los mismos parametros y realizaciones reutiliza \
+los archivos completos; el punto interrumpido se recalcula.", "Text", 
+    ExpressionUUID -> "2d45e2e3-10dd-4578-b9f6-c1ca40d1806d"], 
+   Cell[BoxData["(ClearAll[orientationPoint, orientationSave, \
+orientationRun];\norientationPoint[path_Association, lambda_, \
+cfg_Association, shift_] := Module[\n  {c, errors, n, u, vals, phases, data, \
+elapsed, modulusError},\n  c = orientationCoin[path, lambda, \
+cfg[\"Alpha\"]];\n  errors = orientationCoinErrors[path, lambda, \
+cfg[\"Alpha\"]];\n  If[Max[Values[errors]] >= cfg[\"NumericalTolerance\"],\n  \
+  Return[Failure[\"CoinInvariant\", <|\"Errors\" -> errors|>]]];\n  n = \
+Length[shift]/4;\n  {elapsed, vals} = AbsoluteTiming[\n    u = N[shift . \
+KroneckerProduct[IdentityMatrix[n, SparseArray], SparseArray[c]]];\n    \
+Eigenvalues[Normal[u]]];\n  If[!VectorQ[vals, NumericQ], \
+Return[Failure[\"Eigensystem\", <||>]]];\n  modulusError = Max[Abs[Abs[vals] \
+- 1]];\n  If[modulusError >= cfg[\"NumericalTolerance\"],\n    \
+Return[Failure[\"UnitCircle\", <|\"Error\" -> modulusError|>]]];\n  phases = \
+Sort[-Arg[vals]];\n  data = QuantumWalks`QWMisc`QWPr[phases, \"ReturnData\" \
+-> True,\n    \"AllowDegeneracies\" -> True, \"DegeneracyTolerance\" -> \
+cfg[\"Tolerance\"]];\n  If[!AssociationQ[data], Return[Failure[\"Ratios\", \
+<||>]]];\n  Join[KeyTake[path, {\"Name\", \"Seed\", \"RotationSeed\"}],\n    \
+<|\"Lambda\" -> lambda, \"D\" -> Length[vals], \"Coin\" -> c,\n      \
+\"Phases\" -> phases, \"Ratios\" -> data[\"Ratios\"],\n      \"MeanR\" -> \
+If[data[\"Ratios\"] === {}, Missing[\"Undefined\"], \
+Mean[data[\"Ratios\"]]],\n      \"ZeroSpacingCount\" -> \
+data[\"ZeroSpacingCount\"],\n      \"UndefinedRatioCount\" -> \
+data[\"UndefinedRatioCount\"],\n      \"EigenvalueModulusError\" -> \
+modulusError, \"Seconds\" -> elapsed|>, \
+errors]\n];\norientationSave[file_String, value_] := Module[{temporary = file \
+<> \".partial\", saved},\n  saved = Export[temporary, value, \"WXF\"];\n  \
+If[!StringQ[saved], Return[Failure[\"Export\", <|\"File\" -> file|>]]];\n  \
+RenameFile[temporary, file, OverwriteTarget -> \
+True]\n];\norientationRun[cfg_Association, paths_List, directory_String] := \
+Catch[Module[\n  {grid, shift, rows = {}, file, row, count = 0, total},\n  \
+grid = QuantumWalks`Billiards`GenerateRectangleBasis[cfg[\"Lx\"], \
+cfg[\"Ly\"]];\n  shift = QuantumWalks`QWMisc`QWEvolutionOperator[grid, \
+IdentityMatrix[4]];\n  If[shift === $Failed, Throw[Failure[\"Shift\", <||>], \
+\"orientation\"]];\n  total = Length[paths] Length[cfg[\"Lambdas\"]];\n  \
+Do[\n    file = FileNameJoin[{directory, path[\"Name\"] <> \"-seed\" <> \
+ToString[path[\"Seed\"]] <>\n      \"-point\" <> IntegerString[j, 10, 4] <> \
+\".wxf\"}];\n    row = If[FileExistsQ[file], Import[file, \"WXF\"],\n      \
+orientationPoint[path, cfg[\"Lambdas\"][[j]], cfg, shift]];\n    \
+If[!AssociationQ[row] || !(And @@ (KeyExistsQ[row, #] & /@\n      {\"Name\", \
+\"Seed\", \"Lambda\", \"Phases\", \"Ratios\", \"MeanR\", \
+\"ZeroSpacingCount\", \"UndefinedRatioCount\", \"D\"})),\n      \
+Throw[Failure[\"Point\", <|\"File\" -> file, \"Result\" -> row|>], \
+\"orientation\"]];\n    If[row[\"Name\"] =!= path[\"Name\"] || row[\"Seed\"] \
+=!= path[\"Seed\"] ||\n      row[\"Lambda\"] =!= cfg[\"Lambdas\"][[j]] || \
+row[\"D\"] =!= 4 grid[\"Dimension\"],\n      \
+Throw[Failure[\"CheckpointMismatch\", <|\"File\" -> file|>], \
+\"orientation\"]];\n    If[!FileExistsQ[file] && \
+!StringQ[orientationSave[file, row]],\n      Throw[Failure[\"Save\", \
+<|\"File\" -> file|>], \"orientation\"]];\n    AppendTo[rows, row]; \
+count++;\n    Print[count, \"/\", total, \"  \", path[\"Name\"], \" seed=\", \
+path[\"Seed\"],\n      \" lambda=\", row[\"Lambda\"], \"  <r>=\", \
+row[\"MeanR\"],\n      \"  ceros=\", row[\"ZeroSpacingCount\"], \"  0/0=\", \
+row[\"UndefinedRatioCount\"]],\n    {path, paths}, {j, \
+Length[cfg[\"Lambdas\"]]}];\n  rows\n], \"orientation\"];\n)"], "Input", 
+    ExpressionUUID -> "e583afc7-8fc8-47e0-aa9a-219efe1de8f4"], 
+   Cell["5. Ejecutar o reanudar el barrido local", "Section", 
+    ExpressionUUID -> "08db1387-0899-4e23-9cec-b0a5b7534c99"], 
+   Cell["Esta celda inicia las diagonalizaciones. La carpeta se identifica \
+por un hash de parametros, matrices fijas y version de Wolfram. Puedes \
+abortar y reevaluar: los puntos terminados se conservan. Para leer resultados \
+de otra sesion sin calcular, importa metadata.wxf y los archivos *-point*.wxf \
+de la carpeta impresa. No se envia ningun trabajo a Mazinger.", "Text", 
+    ExpressionUUID -> "be4cecff-c471-406e-a8e7-89e679726786"], 
+   Cell[BoxData["(If[!TrueQ[orientationChecksPassed],\n  Print[\"Ejecuta la \
+seccion 3 y revisa los controles antes de continuar.\"],\n  \
+orientationMetadata = <|\"Config\" -> orientationConfig, \"Paths\" -> \
+orientationPaths,\n    \"WolframVersion\" -> $Version,\n    \
+\"EnergyConvention\" -> \"U psi = Exp[-I epsilon] psi; epsilon = \
+-Arg[eigenvalue]\",\n    \"Sector\" -> \"Full operator; no unitary symmetry \
+resolution\"|>;\n  orientationDirectory = FileNameJoin[{orientationRoot, \
+\"results\", \"OrthogonalOrientation\",\n    \
+IntegerString[Hash[orientationMetadata, \"SHA256\"], 16, 64]}];\n  \
+If[!DirectoryQ[orientationDirectory],\n    \
+CreateDirectory[orientationDirectory, CreateIntermediateDirectories -> \
+True]];\n  If[!StringQ[orientationSave[FileNameJoin[{orientationDirectory, \
+\"metadata.wxf\"}], orientationMetadata]],\n    Print[\"No se pudo guardar \
+metadata.wxf; no se inicia el barrido.\"],\n    Print[\"Resultados: \", \
+orientationDirectory];\n    orientationResults = \
+orientationRun[orientationConfig, orientationPaths, orientationDirectory];\n  \
+  If[ListQ[orientationResults],\n      Print[\"Puntos disponibles: \", \
+Length[orientationResults]], orientationResults]\n  ]\n]\n)"], "Input", 
+    ExpressionUUID -> "dcfb2622-c860-4c35-ba79-44eb2b1c4fb2"], 
+   Cell["6. Resumen y graficas de r y degeneraciones", "Section", 
+    ExpressionUUID -> "d44e0ece-a24a-44bd-8d9b-c07427c99a03"], 
+   Cell["La media asigna el mismo peso a cada realizacion; el error estandar \
+se estima entre las medias de las realizaciones, nunca tratando todos los \
+gaps como independientes. El piloto de tres realizaciones solo orienta. Un \
+promedio con menos realizaciones validas se marca por ValidRealizations. Las \
+referencias son aproximadamente 0.3863 (Poisson), 0.5307 (ortogonal) y 0.5996 \
+(unitaria); la simetria conservada apunta a la ortogonal si se alcanza \
+universalidad y se resuelven los sectores adicionales.", "Text", 
+    ExpressionUUID -> "72337b11-6901-4b51-8eb9-3471cfe96563"], 
+   Cell[BoxData["(ClearAll[orientationSummarize];\norientationSummarize[rows_\
+List] := Module[{groups},\n  groups = GatherBy[rows, {#[\"Name\"], \
+#[\"Lambda\"]} &];\n  SortBy[Map[Function[group, Module[{means, valid},\n    \
+means = Lookup[group, \"MeanR\"]; valid = Select[means, NumericQ];\n    \
+<|\"Name\" -> First[group][\"Name\"], \"Lambda\" -> \
+First[group][\"Lambda\"],\n      \"MeanR\" -> If[valid === {}, \
+Missing[\"Undefined\"], Mean[valid]],\n      \"SE\" -> If[Length[valid] < 2, \
+Missing[\"TooFewRealizations\"], \
+StandardDeviation[valid]/Sqrt[Length[valid]]],\n      \"ValidRealizations\" \
+-> Length[valid], \"Realizations\" -> Length[group],\n      \
+\"MeanZeroFraction\" -> Mean[(#[\"ZeroSpacingCount\"]/#[\"D\"]) & /@ \
+group],\n      \"MeanUndefinedFraction\" -> \
+Mean[(#[\"UndefinedRatioCount\"]/#[\"D\"]) & /@ group]|>\n    ]], groups], \
+{#[\"Name\"], #[\"Lambda\"]} &]\n];\norientationSummary = \
+orientationSummarize[orientationResults];\nDataset[orientationSummary]\n)"], 
+    "Input", ExpressionUUID -> "31aa540f-c18c-4852-898e-5540b32ec852"], 
+   Cell[BoxData["(orientationRPlot = ListPlot[\n  \
+Table[Cases[Select[orientationSummary, #[\"Name\"] == name &],\n    \
+a_Association /; NumericQ[a[\"MeanR\"]] :>\n      {a[\"Lambda\"], \
+If[NumericQ[a[\"SE\"]], Around[a[\"MeanR\"], a[\"SE\"]], a[\"MeanR\"]]}],\n   \
+ {name, orientationConfig[\"Names\"]}],\n  Joined -> True, PlotMarkers -> \
+Automatic, IntervalMarkers -> \"Bars\",\n  PlotLegends -> \
+orientationConfig[\"Names\"], Frame -> True,\n  FrameLabel -> {\"lambda\", \
+\"<r> (media entre realizaciones)\"},\n  GridLines -> {None, {2 Log[2] - 1, \
+0.5307, 0.5996}},\n  PlotRange -> {{0, 1}, {0, 0.7}}, ImageSize -> Large,\n  \
+PlotLabel -> \"Referencias: Poisson 0.3863; ortogonal 0.5307; unitaria \
+0.5996\"];\norientationDegeneracyPlot = ListLinePlot[\n  Flatten[Table[{\n    \
+({#[\"Lambda\"], #[\"MeanZeroFraction\"]} & /@ Select[orientationSummary, \
+#[\"Name\"] == name &]),\n    ({#[\"Lambda\"], #[\"MeanUndefinedFraction\"]} \
+& /@ Select[orientationSummary, #[\"Name\"] == name &])},\n    {name, \
+orientationConfig[\"Names\"]}], 1],\n  PlotLegends -> Flatten[({# <> \" gaps \
+cero\", # <> \" pares 0/0\"} & /@ orientationConfig[\"Names\"])],\n  Frame -> \
+True, FrameLabel -> {\"lambda\", \"fraccion\"}, PlotRange -> All, ImageSize \
+-> Large];\nColumn[{orientationRPlot, orientationDegeneracyPlot}]\n)"], 
+    "Input", ExpressionUUID -> "b7832c19-3ecb-4cb8-bd51-9aee3c35cf59"], 
+   Cell["7. P(r), P(s) y movimiento de eigenfases para una realizacion", 
+    "Section", ExpressionUUID -> "8d9cfb93-2b1c-4b59-a655-f2ec5006e1b9"], 
+   Cell["Selecciona familia y semilla. Los paneles de P(r) usan las fases \
+originales; P(s) usa el unfolding existente y puede fallar si no es monotono. \
+No suprimas niveles para forzar un ajuste. El diagrama de eigenfases usa \
+puntos sin unir: ordenar las fases en cada lambda no sigue la identidad de \
+los eigenestados. Para resolver cruces evitados, estrecha la ventana y \
+densifica lambda; una malla de 21 puntos solo permite exploracion.", "Text", 
+    ExpressionUUID -> "ff4921b1-8152-4c2d-8c1b-f6e9eee6058f"], 
+   Cell[BoxData["(orientationSelectedName = \"oo\";\norientationSelectedSeed \
+= 23;\norientationPhaseWindow = {-0.5, 0.5};\norientationSelected = \
+SortBy[Select[orientationResults,\n  #[\"Name\"] == orientationSelectedName \
+&& #[\"Seed\"] == orientationSelectedSeed &], #[\"Lambda\"] \
+&];\norientationSlices = DeleteDuplicates[Table[\n  \
+First[MinimalBy[orientationSelected, Abs[#[\"Lambda\"] - target] &]], \
+{target, {0., 0.5, 1.}}]];\nColumn[Table[With[{label = Row[{row[\"Name\"], \
+\", seed=\", row[\"Seed\"], \", lambda=\", row[\"Lambda\"]}]},\n  \
+QuantumWalks`QWMisc`QWPr[row[\"Phases\"], \"AllowDegeneracies\" -> True,\n    \
+\"DegeneracyTolerance\" -> orientationConfig[\"Tolerance\"], PlotLabel -> \
+label]],\n  {row, orientationSlices}]]\n)"], "Input", 
+    ExpressionUUID -> "2c099a86-3990-472e-9591-33eadd7d8151"], 
+   Cell[BoxData["(Column[Table[QuantumWalks`QWMisc`QWPs[row[\"Phases\"],\n  \
+\"AllowDegeneracies\" -> True, \"DegeneracyTolerance\" -> \
+orientationConfig[\"Tolerance\"],\n  PlotLabel -> Row[{row[\"Name\"], \", \
+lambda=\", row[\"Lambda\"]}]],\n  {row, orientationSlices}]]\n)"], "Input", 
+    ExpressionUUID -> "0dd2b66f-aa18-48c9-baeb-038a7c08fb51"], 
+   Cell[BoxData["(orientationPhasePlot = ListPlot[Flatten[Table[\n  \
+({row[\"Lambda\"], #} & /@ Select[row[\"Phases\"],\n    \
+orientationPhaseWindow[[1]] <= # <= orientationPhaseWindow[[2]] &]),\n  {row, \
+orientationSelected}], 1],\n  Frame -> True, FrameLabel -> {\"lambda\", \
+\"epsilon\"},\n  PlotRange -> {{0, 1}, orientationPhaseWindow}, PlotStyle -> \
+PointSize[0.003],\n  PlotLabel -> \"Eigenfases: puntos sin seguimiento de \
+eigenvectores\", ImageSize -> Large];\norientationPhasePlot\n)"], "Input", 
+    ExpressionUUID -> "1f3ed4cf-640c-4292-925d-163ff4e1e07b"], 
+   Cell["8. Exportar resumen y figuras (opcional)", "Section", 
+    ExpressionUUID -> "73b5522e-937d-4e3f-9a09-6e0f8a39ee7d"], 
+   Cell[BoxData["(orientationColumns = {\"Name\", \"Lambda\", \"MeanR\", \
+\"SE\", \"ValidRealizations\", \"Realizations\", \"MeanZeroFraction\", \
+\"MeanUndefinedFraction\"};\nExport[FileNameJoin[{orientationDirectory, \
+\"summary.csv\"}],\n  Prepend[(Lookup[#, orientationColumns] & /@ \
+orientationSummary), orientationColumns], \
+\"CSV\"];\nExport[FileNameJoin[{orientationDirectory, \"mean_r.pdf\"}], \
+orientationRPlot];\nExport[FileNameJoin[{orientationDirectory, \
+\"degeneracies.pdf\"}], \
+orientationDegeneracyPlot];\nExport[FileNameJoin[{orientationDirectory, \
+\"eigenphases.pdf\"}], orientationPhasePlot];\norientationDirectory\n)"], 
+    "Input", ExpressionUUID -> "7f8407d2-2577-4f3c-addf-feeebf3ba4d7"], 
+   Cell["Interpretacion: si C0 y C(lambda) tienen el mismo espectro y \
+conservan la simetria antiunitaria, pero cambia P(r), la orientacion respecto \
+al shift influye en las correlaciones. Esto aun puede deberse a ruptura de \
+otras simetrias unitarias: antes de afirmar caos, separar esos sectores y \
+comprobar escalamiento en tamano. No se espera monotonicidad en lambda para \
+un camino individual.", "Text", ExpressionUUID -> 
+     "3e8d4456-eb60-4605-a210-fa8dedc4bba7"]}, Open]]

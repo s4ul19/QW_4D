@@ -20,16 +20,20 @@
 \definecolor{jacolor}{RGB}{200,40,0}
 \FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
 
-% Paneles de estadística espectral provenientes de estadistica_espectral.tex.
-% Se prefiere PNG cuando existen ambas versiones, igual que en el original.
+% Ps, Pr y SFF usan el orden observable_moneda_geometría.
+% DoS conserva el orden observable_geometría_moneda.
 \newcommand{\SpectralPanel}[3]{%
-  \IfFileExists{Imgs/#1_#2_#3.pdf}{%
-    \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
+  \IfFileExists{Imgs/#1_#3_#2.pdf}{%
+    \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#3_#2.pdf}%
   }{%
-    \IfFileExists{Imgs/#1_#2_#3.pdf}{%
-      \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
+    \IfFileExists{Imgs/#1_#3_#2.png}{%
+      \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#3_#2.png}%
     }{%
-      \fbox{\parbox[c][3.8cm][c]{0.88\linewidth}{\centering\small Sin figura guardada}}%
+      \IfFileExists{Imgs/#1_#2_#3.pdf}{%
+        \includegraphics[width=\linewidth,height=4.2cm,keepaspectratio]{Imgs/#1_#2_#3.pdf}%
+      }{%
+        \fbox{\parbox[c][3.8cm][c]{0.88\linewidth}{\centering\small Sin figura guardada}}%
+      }%
     }%
   }
 }
@@ -43,35 +47,55 @@
     \begin{minipage}{0.43\textwidth}\centering Rectángulo\end{minipage}\hfill
     \begin{minipage}{0.43\textwidth}\centering Sinaí\end{minipage}\par
 }
-\newcommand{\SpectralGrid}[2]{%
+% Las variantes modificadas se colocan debajo de p; solo se dibujan
+% los paneles disponibles (Pr pModif solo tiene una figura para Sinaí).
+\newcommand{\SpectralModifiedRow}[1]{%
+  \begin{minipage}[c]{0.09\textwidth}\centering\texttt{pModif}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering
+    \IfFileExists{Imgs/#1_pModif_Rect.pdf}{\SpectralPanel{#1}{Rect}{pModif}}{\strut}%
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering
+    \IfFileExists{Imgs/#1_pModif_Sinai.pdf}{\SpectralPanel{#1}{Sinai}{pModif}}{\strut}%
+  \end{minipage}\par
+}
+\newcommand{\SpectralGrid}[3][p]{%
   \begin{figure}[H]
     \centering
     \SpectralHeader
-    \SpectralRow{#1}{p}
-    \SpectralRow{#1}{gpg}
-    \SpectralRow{#1}{upu}
-    \caption{#2 para las monedas \texttt{p}, \texttt{gpg}, \texttt{upu},
+    \if\relax\detokenize{#1}\relax\else
+      \SpectralRow{#2}{#1}%
+      \IfFileExists{Imgs/#2_pModif_Sinai.pdf}{\SpectralModifiedRow{#2}}{}%
+    \fi
+    \SpectralRow{#2}{gpg}
+    \SpectralRow{#2}{upu}
+    \caption{#3 para las monedas
+    \if\relax\detokenize{#1}\relax\else\texttt{#1}, \fi
+    \texttt{gpg}, \texttt{upu},
     \texttt{b}, \texttt{ubu}, \texttt{oo}, \texttt{uoou}, \texttt{o}
     y \texttt{u} en los estadios rectangular y de Sinaí.
+    \if\relax\detokenize{#1}\relax\else
+      \IfFileExists{Imgs/#2_pModif_Sinai.pdf}{Las variantes \texttt{pModif}
+      disponibles se muestran debajo de \texttt{p}.\space}{}%
+    \fi
     Los paneles continúan en las páginas siguientes.}
   \end{figure}
   \begin{figure}[H]
     \ContinuedFloat
     \centering
     \SpectralHeader
-    \SpectralRow{#1}{b}
-    \SpectralRow{#1}{ubu}
-    \SpectralRow{#1}{oo}
-    \caption[]{#2 (continuación).}
+    \SpectralRow{#2}{b}
+    \SpectralRow{#2}{ubu}
+    \SpectralRow{#2}{oo}
+    \caption[]{#3 (continuación).}
   \end{figure}
   \begin{figure}[H]
     \ContinuedFloat
     \centering
     \SpectralHeader
-    \SpectralRow{#1}{uoou}
-    \SpectralRow{#1}{o}
-    \SpectralRow{#1}{u}
-    \caption[]{#2 (continuación).}
+    \SpectralRow{#2}{uoou}
+    \SpectralRow{#2}{o}
+    \SpectralRow{#2}{u}
+    \caption[]{#3 (continuación).}
   \end{figure}%
 }
 
@@ -217,7 +241,7 @@ figura guardada, se indica en el panel correspondiente.
 
 % *}}}
 \subsection{Distribución \texorpdfstring{$P(r)$}{P(r)}} % {{{*
-\SpectralGrid{Pr}{$P(r)$}
+\SpectralGrid[]{Pr}{$P(r)$}
 
 % *}}}
 \subsection{Factor de forma espectral (SFF)} % {{{*

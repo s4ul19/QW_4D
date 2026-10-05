@@ -1,0 +1,15 @@
+base = DirectoryName[$InputFileName];
+old = Get[FileNameJoin[{base,"original.nb"}]];
+updated = Get[FileNameJoin[{base,"FunctionsTester.nb"}]];
+If[Head[updated] =!= Notebook, Print["FAIL parse"]; Quit[1]];
+If[Most[updated[[1]]] =!= old[[1]], Print["FAIL existing cells changed"]; Quit[2]];
+If[Rest[List @@ updated] =!= Rest[List @@ old], Print["FAIL notebook options changed"]; Quit[3]];
+added = Last[updated[[1]]];
+If[Cases[added, CellGroupData[c_List, ___] /; !AllTrue[c, MatchQ[#, _Cell] &], Infinity] =!= {}, Quit[4]];
+inputs = Cases[added, Cell[b_BoxData,"Input",___] :> b, Infinity];
+If[Length[inputs] =!= 11, Quit[5]];
+Scan[If[ToExpression[#,StandardForm,HoldComplete] === $Failed, Quit[6]] &, inputs];
+If[Cases[added, Cell[_,"Output"|"Print"|"Message",___],Infinity] =!= {}, Quit[7]];
+Print["PASS: Notebook parses; all prior cells and notebook options preserved; 28 added cells, 11 executable inputs, no stored outputs in added section."];
+Put[inputs, FileNameJoin[{base,"boxed_inputs.wl"}]];
+Quit[0];
