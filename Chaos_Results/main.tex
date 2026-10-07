@@ -42,6 +42,11 @@
   \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Rect}{#2}\end{minipage}\hfill
   \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Sinai}{#2}\end{minipage}\par
 }
+\newcommand{\SpectralGroverRow}[1]{%
+  \begin{minipage}[c]{0.09\textwidth}\centering\texttt{g}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Rect}{Grover}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Sinai}{Grover}\end{minipage}\par
+}
 \newcommand{\SpectralHeader}{%
     \begin{minipage}{0.09\textwidth}\strut\end{minipage}\hfill
     \begin{minipage}{0.43\textwidth}\centering Rectángulo\end{minipage}\hfill
@@ -72,7 +77,8 @@
     \if\relax\detokenize{#1}\relax\else\texttt{#1}, \fi
     \texttt{gpg}, \texttt{upu},
     \texttt{b}, \texttt{ubu}, \texttt{oo}, \texttt{uoou}, \texttt{o}
-    y \texttt{u} en los estadios rectangular y de Sinaí.
+    y \texttt{u}\IfFileExists{Imgs/#2_Grover_Rect.pdf}{, además de \texttt{g} (Grover)}{}
+    en los estadios rectangular y de Sinaí.
     \if\relax\detokenize{#1}\relax\else
       \IfFileExists{Imgs/#2_pModif_Sinai.pdf}{Las variantes \texttt{pModif}
       disponibles se muestran debajo de \texttt{p}.\space}{}%
@@ -95,6 +101,7 @@
     \SpectralRow{#2}{uoou}
     \SpectralRow{#2}{o}
     \SpectralRow{#2}{u}
+    \IfFileExists{Imgs/#2_Grover_Rect.pdf}{\SpectralGroverRow{#2}}{}%
     \caption[]{#3 (continuación).}
   \end{figure}%
 }
@@ -280,6 +287,34 @@ Los siguientes paneles reúnen los resultados de DoS y unfolding, $P(s)$,
 $P(r)$ y SFF para los estadios rectangular y de Sinaí. Los códigos de moneda
 se conservan como aparecen en las figuras originales. Cuando no existe una
 figura guardada, se indica en el panel correspondiente.
+
+La tabla siguiente resume la tendencia espectral que
+se observa al comparar $P(s)$, $P(r)$ y SFF con las referencias de Poisson,
+COE y CUE. La clasificación es cualitativa: una curva próxima a una
+referencia no demuestra por sí sola la clase de simetría del operador.
+La aparente repulsión de \texttt{pModif} se obtiene tras excluir
+espaciamientos pequeños y no clasifica el espectro completo de \texttt{p}.
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabular}{@{}p{0.30\linewidth}p{0.30\linewidth}p{0.30\linewidth}@{}}
+    \hline\hline
+    Moneda & Rectángulo & Sinaí \\
+    \hline
+    \texttt{g} (Grover) & Próxima a Poisson & Compatible con COE \\
+    \texttt{gpg} & Próxima a Poisson & Compatible con COE \\
+    \texttt{oo} & Próxima a Poisson & Compatible con COE \\
+    \texttt{b} & Próxima a Poisson & Compatible con CUE \\
+    \texttt{uoou} & Compatible con COE & Compatible con CUE \\
+    \texttt{o} & Compatible con COE & Compatible con CUE \\
+    \texttt{ubu} & Compatible con COE & Compatible con CUE \\
+    \texttt{u} & Compatible con COE & Compatible con CUE \\
+    \texttt{upu} & Compatible con COE & Compatible con CUE \\
+    \texttt{p} & Poisson
+      & Poisson \\
+    \hline\hline
+  \end{tabular}
+\end{table}
 
 \subsection{DoS y unfolding} % {{{*
 \SpectralGrid{DoS}{DoS y unfolding}
