@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% Compilar con: latexmk -pdf main.tex
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{cite}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue,plainpages=false]{hyperref}
+
+\geometry{margin=2.5cm}
+\onehalfspacing
+\graphicspath{{Imgs/}}
+
+% Datos de portada: editar según las indicaciones finales de la ECFM.
+\newcommand{\tituloTesis}{Caminatas cuánticas con una moneda en 4D}
+\newcommand{\autorTesis}{Saúl Estuardo Nájera Allara}
+\newcommand{\carneTesis}{202107506}
+\newcommand{\fechaTesis}{Octubre 2026}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  {\Large\bfseries UNIVERSIDAD DE SAN CARLOS DE GUATEMALA\par}
+  \vspace{0.4cm}
+  {\Large\bfseries ESCUELA DE CIENCIAS FÍSICAS Y MATEMÁTICAS\par}
+  \vfill
+  {\large Tesis de licenciatura\par}
+  \vspace{0.5cm}
+  {\LARGE\bfseries \tituloTesis\par}
+  \vfill
+  {\large\bfseries \autorTesis\par}
+  {\large Carné: \carneTesis\par}
+  \vspace{0.9cm}
+  {\large Licenciatura en Física Aplicada\par}
+  \vspace{0.9cm}
+  {\bfseries Asesorado por:\par}
+  M.Sc. José Alfredo de León (IF-UNAM)\par
+  Dr. Carlos Francisco Pineda Zorrilla (IF-UNAM)\par
+  Ing. Rodolfo Samayoa (ECFM-USAC)\par
+  \vfill
+  {\fechaTesis\par}
+\end{titlepage}
+
+\pagenumbering{arabic}
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+
+Un estudio reciente ha mostrado señales de caos cuántico en un modelo de caminata cuántica discreta en el tiempo (DTQW) con un grado de libertad interno de dimensión dos empleando billares bidimensionales. Dicho estudio sugiere que la geometría de los billares es el único factor que determina la emergencia de caos cuántico.
+Sin embargo, no está claro si esta relación se mantiene en modelos con un grado de libertad interno de dimensión mayor que dos. En este trabajo se estudia bajo qué condiciones emerge el caos cuántico en una DTQW cuyo grado interno es de dimensión 4.
+Se consideran dos billares: un rectángulo y un octavo del estadio de Sinaí.
+Los resultados muestran que la geometría de los billares, por sí sola, no es una condición necesaria ni suficiente para la aparición de caos cuántico.
+
+\end{document}
