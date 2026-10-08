@@ -72,6 +72,15 @@
     \GeoHeader\vspace{6mm}\SpectralRow{#2}{#3}
     \vspace{5mm}\captionline{#4}
   \end{frame}}
+\newcommand{\SpectralGroverRow}[1]{%
+  \noindent\begin{minipage}[c][2.9cm][c]{.055\textwidth}\centering\small\coin{g}\end{minipage}%
+  \begin{minipage}[c][2.9cm][c]{.445\textwidth}\centering\SpectralImage{#1}{Rect}{Grover}\end{minipage}\hfill
+  \begin{minipage}[c][2.9cm][c]{.445\textwidth}\centering\SpectralImage{#1}{Sinai}{Grover}\end{minipage}\par}
+\newcommand{\SpectralGroverSingle}[3]{%
+  \begin{frame}[t]{#1}
+    \GeoHeader\vspace{6mm}\SpectralGroverRow{#2}
+    \vspace{5mm}\captionline{#3}
+  \end{frame}}
 
 \newcommand{\ComparePlots}[4]{%
   \begin{columns}[T,onlytextwidth]
@@ -173,19 +182,20 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Las nueve monedas que se han trabajado}
+\begin{frame}[t]{Las monedas que se han trabajado}
   \noindent{\small La moneda permanece fija durante la evolución y es la misma en todos los sitios.}\par
   \vspace{1mm}
   \centering
-  {\small\renewcommand{\arraystretch}{1.11}
-  \begin{tabular}{@{}p{1.0cm}p{3.0cm}l@{}}
+  {\small\renewcommand{\arraystretch}{1.04}
+  \begin{tabular}{@{}p{1.0cm}p{3.0cm}p{8.8cm}@{}}
     \toprule
     Código & $C_4$ & Construcción\\\midrule
     \coin{p} & $P$ & Matriz diagonal de fases aleatorias\\
     \coin{o} & $O_4$ & Matriz del ensamble COE de dimensión 4\\
     \coin{u} & $U$ & Matriz del ensamble CUE de dimensión 4\\
-    \coin{b} & $B$ & Matriz unitaria de cambio de base de la base computacional a la base de bell.\\
+    \coin{b} & $B$ & Cambio de base de la base computacional a la base de Bell\\
     \coin{oo} & $O_1\otimes O_2$ & Producto de dos matrices COE de dimensión 2\\
+    \coin{g} & $G$ & Moneda de Grover\\
     \coin{gpg} & $GPG^\dagger$ & Fases diagonales mezcladas con Grover\\
     \coin{uoou} & $U(O_1\otimes O_2)U^\dagger$ & Conjugación unitaria de \coin{oo}\\
     \coin{ubu} & $UBU^\dagger$ & Conjugación unitaria de \coin{b}\\
@@ -199,7 +209,27 @@
 % 2. Estadística espectral
 % ----------------------------------------------------------------------
 \section{Estadística espectral}
+\subsection{Reducción a caminatas unidimensionales}
+\begin{frame}[t]{Espectro de cada segmento con reflexión}
+  \noindent Para un segmento de $n$ sitios y un bloque unitario
+  \[
+    C_1=e^{i\alpha}\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
+    \qquad |a|^2+|b|^2=1,
+  \]
+  \noindent los $2(n-1)$ autovalores de banda y los dos aislados son
+  \[
+    \lambda_{m,\pm}=e^{i\alpha}e^{\pm i\omega_m},\qquad
+    \cos\omega_m=|a|\cos\frac{\pi m}{n},\quad m=1,\ldots,n-1,
+  \]
+  \[
+    \lambda_{\mathrm{ais},\pm}=e^{i\alpha}
+    \left(\pm\sqrt{1-(\operatorname{Im}b)^2}+i\operatorname{Im}b\right).
+  \]
+  \captionline{El artículo compara esta descomposición con ambos espectros numéricos y reporta una discrepancia máxima del orden de $10^{-15}$.}
+\end{frame}
 
+\SpectralGroverSingle{Espaciamientos: \coin{g} (Grover)}{Ps}
+  {Rectángulo: tendencia a Poisson. Sinai: comportamiento compatible con COE.}
 \SpectralPair{Espaciamientos: \coin{gpg} y \coin{oo}}{Ps}{gpg}{oo}
   {Rectángulo: tendencia a Poisson. Sinai: repulsión de niveles.}
 \SpectralPair{Espaciamientos: \coin{uoou} y \coin{o}}{Ps}{uoou}{o}
@@ -215,6 +245,8 @@
 \end{frame}
 
 % P(r) y SFF siguen las mismas parejas y columnas que P(s).
+\SpectralGroverSingle{Razones de espaciamientos: \coin{g} (Grover)}{Pr}
+  {$r\in[0,1]$. Las razones usan los espaciamientos originales, sin unfolding.}
 \SpectralPair{Razones de espaciamientos: \coin{gpg} y \coin{oo}}{Pr}{gpg}{oo}
   {$r\in[0,1]$. Las razones usan los espaciamientos originales, sin unfolding.}
 \SpectralPair{Razones de espaciamientos: \coin{uoou} y \coin{o}}{Pr}{uoou}{o}
@@ -226,6 +258,8 @@
 \SpectralSingle{Razones de espaciamientos: \coin{p}}{Pr}{p}
   {$r\in[0,1]$. Las razones usan los espaciamientos originales, sin unfolding.}
 
+\SpectralGroverSingle{SFF: \coin{g} (Grover)}{SFF}
+  {Cada panel conserva sus ejes y sus referencias originales.}
 \SpectralPair{SFF: \coin{gpg} y \coin{oo}}{SFF}{gpg}{oo}
   {Gris: promedio entre realizaciones. Azul: promedio con ventana temporal. Punteado: COE.}
 \SpectralPair{SFF: \coin{uoou} y \coin{o}}{SFF}{uoou}{o}
@@ -244,7 +278,7 @@
   \begin{tabular}{@{}p{2.0cm}p{6.0cm}p{5.8cm}@{}}
     \textbf{Monedas} & \textbf{Rectángulo} & \textbf{Sinai}\\
     \midrule
-    \coin{gpg}, \coin{oo} & Comportamiento próximo a Poisson\newline visto en P(s), P(r) y SFF.
+    \coin{g}, \coin{gpg}, \coin{oo} & Comportamiento próximo a Poisson\newline visto en P(s), P(r) y SFF.
       & La estadística sugiere que sigue COE.\\
     \coin{b} & Los resultados sugieren que su espectro sigue \newline una estadística de Poisson.
       & La estadística sugiere que sigue CUE\\
@@ -333,7 +367,7 @@
   \begin{itemize}
     \setlength\itemsep{3.5mm}
     \item Las condiciones de frontera impuestas por la geometría no son necesarias para la emergencia de caos cuántico.
-    \item El billar de Sinai presenta caos cuántico en todos los casos: \coin{gpg} y \coin{oo} siguen una estadística COE; las demás monedas, CUE.
+    \item En Sinai, \coin{g}, \coin{gpg} y \coin{oo} son compatibles con COE; \coin{b}, \coin{uoou}, \coin{o}, \coin{ubu}, \coin{u} y \coin{upu}, con CUE.
     \item En el rectángulo, los casos con caos cuántico parecen seguir una estadística COE.
     \item Las monedas que producen integrabilidad muestran eigenestados más localizados que las monedas caóticas.
     \item La mayoría de las monedas alcanza entropías cercanas a $\ln 4$; \coin{p} muestra caídas recurrentes.
@@ -349,12 +383,12 @@
 \section{Apéndice espectral}
 \begin{frame}[t,label=ap-espectral]{Apéndice: detalle de las comparaciones}
   \textbf{Orden de monedas}\par
-  \coin{gpg}, \coin{oo}, \coin{uoou}, \coin{o}, \coin{b}, \coin{ubu}, \coin{u}, \coin{upu}, \coin{p}.
+  \coin{g}, \coin{gpg}, \coin{oo}, \coin{uoou}, \coin{o}, \coin{b}, \coin{ubu}, \coin{u}, \coin{upu}, \coin{p}.
   \vspace{4mm}
   \begin{itemize}
     \item DoS y unfolding para las nueve monedas.
-    \item $P(r)$ para las nueve monedas.
-    \item SFF para las nueve monedas.
+    \item $P(r)$ para las diez monedas.
+    \item SFF para las diez monedas.
     \item Promedios temporales restantes y mapas completos de eigenestados.
   \end{itemize}
 \end{frame}
@@ -383,6 +417,8 @@
 \SpectralPair{DoS y unfolding: \coin{u} y \coin{upu}}{DoS}{u}{upu}{Cada panel conserva sus ejes originales.}
 \SpectralSingle{DoS y unfolding: \coin{p}}{DoS}{p}{Cada panel conserva sus ejes originales.}
 
+\SpectralGroverSingle{Razones de espaciamientos: \coin{g} (Grover)}{Pr}
+  {$r\in[0,1]$. Las razones usan los espaciamientos originales, sin unfolding.}
 \SpectralPair{Razones de espaciamientos: \coin{gpg} y \coin{oo}}{Pr}{gpg}{oo}{$r\in[0,1]$. Las razones usan los espaciamientos originales, sin unfolding.}
 \SpectralPair{Razones de espaciamientos: \coin{uoou} y \coin{o}}{Pr}{uoou}{o}{Comparación con las referencias indicadas en las leyendas.}
 \SpectralPair{Razones de espaciamientos: \coin{b} y \coin{ubu}}{Pr}{b}{ubu}{Comparación con las referencias indicadas en las leyendas.}
@@ -402,6 +438,8 @@
   \end{itemize}
   \captionline{El eje de las figuras usa $N$ para el número de niveles. Aquí se llama $D$ para distinguirlo del número de sitios.}
 \end{frame}
+\SpectralGroverSingle{SFF: \coin{g} (Grover)}{SFF}
+  {Cada panel conserva sus ejes y sus referencias originales.}
 \SpectralPair{SFF: \coin{gpg} y \coin{oo}}{SFF}{gpg}{oo}{Gris: promedio entre realizaciones. Azul: promedio con ventana temporal. Punteado: COE.}
 \SpectralPair{SFF: \coin{uoou} y \coin{o}}{SFF}{uoou}{o}{Las escalas verticales pueden cambiar entre paneles.}
 \SpectralPair{SFF: \coin{b} y \coin{ubu}}{SFF}{b}{ubu}{Las escalas verticales pueden cambiar entre paneles.}

@@ -53,6 +53,12 @@ def main():
                     missing.append(stem)
     if missing:
         raise RuntimeError(f"Faltan figuras espectrales: {missing}")
+    for observable in ("Ps", "Pr", "SFF"):
+        for geometry in ("Rect", "Sinai"):
+            filename = f"{observable}_Grover_{geometry}.pdf"
+            if not (SOURCE / filename).exists():
+                raise RuntimeError(f"Falta figura de Grover: {filename}")
+            files.add(filename)
     for geometry in ("Rect", "Sinai"):
         files.add(f"Ps_pModif_{geometry}.pdf")
 
