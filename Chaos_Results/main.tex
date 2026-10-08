@@ -20,6 +20,9 @@
 \definecolor{jacolor}{RGB}{200,40,0}
 \FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
 
+\definecolor{sncolor}{rgb}{0.35,0.67,0.67}
+\FXRegisterAuthor{sn}{asn}{\color{sncolor}SN}
+
 % Ps, Pr y SFF usan el orden observable_moneda_geometría.
 % DoS conserva el orden observable_geometría_moneda.
 \newcommand{\SpectralPanel}[3]{%
@@ -165,7 +168,7 @@ directions. The one-step evolution operator is therefore
 \begin{equation}
     U=S\qty(C\otimes\mathbb{I}_p),
 \end{equation}
-where $C$ acts only on the coin space and $\mathbb{I}_p$ is the identity
+where $C$ \snnote{comentar que el operador es unitario} acts only on the coin space and $\mathbb{I}_p$ is the identity
 on the position space. The shift $S$ moves each amplitude in its coin
 direction. The corresponding displacements are
 $\boldsymbol\delta_R=(1,0)$, $\boldsymbol\delta_L=(-1,0)$,
@@ -203,7 +206,9 @@ the available displacements and the reflections at the boundary.
 y considerar comparar las diferencias con el modelo de Alonso-Lobo~\cite{alonso-lobo_2025_Simplest}}
 % *}}}
 \section{Chaotic signatures in split-step-like DTQWs} % {{{*
-
+A similar model of a DTQW has been studied in billiards and the statistical behaviour has been observed to deviate 
+from what is expected from RMT. We revisit here such model and show that if the unfolding is carried properly, the 
+predictions from RMT are obtained.  
 \begin{equation}\label{eq:coin_AL}
 C(\theta) =
 \begin{pmatrix}

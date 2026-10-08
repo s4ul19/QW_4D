@@ -81,7 +81,13 @@
     \GeoHeader\vspace{6mm}\SpectralGroverRow{#2}
     \vspace{5mm}\captionline{#3}
   \end{frame}}
-
+\newcommand{\LoneFrame}[4][]{%
+  \begin{frame}[t]{L1: #2, $L_1\in #3$}
+    \if\relax\detokenize{#1}\relax\else\hypertarget{#1}{}\fi
+    \centering
+    \includegraphics[width=\textwidth,height=6.25cm,keepaspectratio]{#4}
+    \captionline{Muestras del COE seleccionadas por el intervalo de $L_1$.}
+  \end{frame}}
 \newcommand{\ComparePlots}[4]{%
   \begin{columns}[T,onlytextwidth]
     \begin{column}{.485\textwidth}\centering
@@ -116,7 +122,7 @@
 % 1. Modelo y monedas
 % ----------------------------------------------------------------------
 \section{Modelo y monedas}
-\begin{frame}[t]{Caminata cuántica en billares}
+\begin{frame}[t,label=sec-modelo]{Caminata cuántica en billares}
   \captionline{\Large El modelo a trabajar: }
   \vspace{2mm}
   \[
@@ -137,25 +143,35 @@
   \end{itemize}
 \end{frame}
 
+\newcommand{\MainIndexLinks}{%
+  \hyperlink{sec-modelo}{\textcolor{acento}{Modelo y monedas}}\par\vspace{2.5mm}
+  \hyperlink{sec-estadistica}{\textcolor{acento}{Estadística espectral}}\par\vspace{2.5mm}
+  \hyperlink{sec-ipr}{\textcolor{acento}{IPR espacial}}\par\vspace{2.5mm}
+  \hyperlink{sec-entrelazamiento}{\textcolor{acento}{Entrelazamiento}}\par\vspace{2.5mm}
+  \hyperlink{sec-temporal}{\textcolor{acento}{Promedio temporal}}\par\vspace{2.5mm}
+  \hyperlink{sec-eigenestados}{\textcolor{acento}{Eigenestados}}\par\vspace{2.5mm}
+  \hyperlink{sec-l1}{\textcolor{acento}{L1}}\par\vspace{2.5mm}
+  \hyperlink{sec-conclusiones}{\textcolor{acento}{Conclusiones}}\par}
 \ifapendice
   \def\IndiceContenido{%
     \begin{columns}[T,onlytextwidth]
       \begin{column}{.56\textwidth}
         \textbf{Recorrido principal}\par\smallskip
-        \tableofcontents[sections={1-7},hideallsubsections]
+        {\small\MainIndexLinks}
       \end{column}
       \begin{column}{.40\textwidth}
         \textbf{Apéndice}\par\smallskip
         \hyperlink{ap-espectral}{\textcolor{acento}{Estadística espectral}}\par\medskip
         \hyperlink{ap-temporal}{\textcolor{acento}{Promedio temporal}}\par\medskip
         \hyperlink{ap-eigenestados}{\textcolor{acento}{Eigenestados}}\par\medskip
+        \hyperlink{ap-l1}{\textcolor{acento}{L1: intervalos intermedios}}\par\medskip
         \hyperlink{ap-monedas}{\textcolor{acento}{Matrices de monedas}}
       \end{column}
     \end{columns}}
 \else
   \def\IndiceContenido{%
     \textbf{Recorrido principal}\par\smallskip
-    \tableofcontents[sections={1-7},hideallsubsections]}
+    {\small\MainIndexLinks}}
 \fi
 \begin{frame}[t,label=indice]{Índice}
   \IndiceContenido
@@ -210,7 +226,7 @@
 % ----------------------------------------------------------------------
 \section{Estadística espectral}
 \subsection{Reducción a caminatas unidimensionales}
-\begin{frame}[t]{Espectro de cada segmento con reflexión}
+\begin{frame}[t,label=sec-estadistica]{Espectro de cada segmento con reflexión}
   \noindent Para un segmento de $n$ sitios y un bloque unitario
   \[
     C_1=e^{i\alpha}\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
@@ -225,7 +241,7 @@
     \lambda_{\mathrm{ais},\pm}=e^{i\alpha}
     \left(\pm\sqrt{1-(\operatorname{Im}b)^2}+i\operatorname{Im}b\right).
   \]
-  \captionline{El artículo compara esta descomposición con ambos espectros numéricos y reporta una discrepancia máxima del orden de $10^{-15}$.}
+  \captionline{Tanto para el rectángulo como al Sinaí se llevo a cabo el análisis y se encontro una discrepancia máxima del orden de $10^{-14}$.}
 \end{frame}
 
 \SpectralGroverSingle{Espaciamientos: \coin{g} (Grover)}{Ps}
@@ -295,7 +311,7 @@
 % 3. Localización espacial y entrelazamiento
 % ----------------------------------------------------------------------
 \section{IPR espacial}
-\begin{frame}[t]{IPR espacial: estado inicial localizado}
+\begin{frame}[t,label=sec-ipr]{IPR espacial: estado inicial localizado}
   \[
     P_t(v)=\sum_{c=1}^{4}|\psi_c(v,t)|^2,
     \qquad \mathrm{IPR}_{\mathrm{esp}}(t)=\sum_{v\in\Omega}P_t(v)^2.
@@ -314,7 +330,7 @@
 \end{frame}
 
 \section{Entrelazamiento}
-\begin{frame}[t]{Entrelazamiento: estado inicial localizado}
+\begin{frame}[t,label=sec-entrelazamiento]{Entrelazamiento: estado inicial localizado}
   \[
     \rho_c(t)=\operatorname{Tr}_p\ket{\psi_t}\bra{\psi_t},
     \qquad S_c(t)=-\operatorname{Tr}[\rho_c(t)\ln\rho_c(t)].
@@ -335,7 +351,7 @@
 % 4. Promedio temporal y eigenestados
 % ----------------------------------------------------------------------
 \section{Promedio temporal}
-\begin{frame}[t]{Promedio y límite temporal}
+\begin{frame}[t,label=sec-temporal]{Promedio y límite temporal}
   \noindent{\small
   $\displaystyle\overline P_T(v)=\frac1T\sum_{t=0}^{T-1}P_t(v),
   \qquad \pi(v)=\lim_{T\to\infty}\overline P_T(v).$}\par
@@ -345,7 +361,7 @@
 \end{frame}
 
 \section{Eigenestados}
-\begin{frame}[t]{Densidad espacial del IPR de los eigenestados}
+\begin{frame}[t,label=sec-eigenestados]{Densidad espacial del IPR de los eigenestados}
   \noindent{\small
   $\displaystyle p_n(v)=\sum_c|\langle v,c|\phi_n\rangle|^2,
   \qquad I_n(v)=p_n(v)^2,\qquad\mathrm{IPR}_n=\sum_v I_n(v).$}\par
@@ -362,8 +378,16 @@
   \captionline{Ejemplos de concentración cerca de la frontera. Oscuro significa mayor contribución local al IPR. Las escalas y los tamaños son distintos.}
 \end{frame}
 
+\section{L1}
+\subsection{Rectángulo}
+\LoneFrame[sec-l1]{rectángulo}{(0,0.1)}{Mixing_Rect_Interval_0_01.pdf}
+\LoneFrame{rectángulo}{(0.9,1)}{Mixing_Rect_Interval_09_10.pdf}
+\subsection{Sinaí}
+\LoneFrame{Sinaí}{(0,0.1)}{Mixing_Sinai_Interval_00_01.pdf}
+\LoneFrame{Sinaí}{(0.9,1)}{Mixing_Sinai_Interval_09_10.pdf}
+
 \section{Conclusiones}
-\begin{frame}[t]{Conclusiones}
+\begin{frame}[t,label=sec-conclusiones]{Conclusiones}
   \begin{itemize}
     \setlength\itemsep{3.5mm}
     \item Las condiciones de frontera impuestas por la geometría no son necesarias para la emergencia de caos cuántico.
@@ -487,6 +511,30 @@
   \centering\includegraphics[width=\textwidth,height=5.7cm,keepaspectratio]{IPRDensity_Sinai_Intervals01-08.pdf}
   \captionline{Cada panel indica eigenfase, IPR y residuo numérico. Cada mapa tiene su propia escala.}
 \end{frame}
+
+\section{Apéndice L1}
+\subsection{Rectángulo}
+\LoneFrame[ap-l1]{rectángulo}{(0,0.1)}{Mixing_Rect_Interval_0_01.pdf}
+\LoneFrame{rectángulo}{(0.1,0.2)}{Mixing_Rect_Interval_01_02.pdf}
+\LoneFrame{rectángulo}{(0.2,0.3)}{Mixing_Rect_Interval_02_03.pdf}
+\LoneFrame{rectángulo}{(0.3,0.4)}{Mixing_Rect_Interval_03_04.pdf}
+\LoneFrame{rectángulo}{(0.4,0.5)}{Mixing_Rect_Interval_04_05.pdf}
+\LoneFrame{rectángulo}{(0.5,0.6)}{Mixing_Rect_Interval_05_06.pdf}
+\LoneFrame{rectángulo}{(0.6,0.7)}{Mixing_Rect_Interval_06_07.pdf}
+\LoneFrame{rectángulo}{(0.7,0.8)}{Mixing_Rect_Interval_07_08.pdf}
+\LoneFrame{rectángulo}{(0.8,0.9)}{Mixing_Rect_Interval_08_09.pdf}
+\LoneFrame{rectángulo}{(0.9,1)}{Mixing_Rect_Interval_09_10.pdf}
+\subsection{Sinaí}
+\LoneFrame{Sinaí}{(0,0.1)}{Mixing_Sinai_Interval_00_01.pdf}
+\LoneFrame{Sinaí}{(0.1,0.2)}{Mixing_Sinai_Interval_01_02.pdf}
+\LoneFrame{Sinaí}{(0.2,0.3)}{Mixing_Sinai_Interval_02_03.pdf}
+\LoneFrame{Sinaí}{(0.3,0.4)}{Mixing_Sinai_Interval_03_04.pdf}
+\LoneFrame{Sinaí}{(0.4,0.5)}{Mixing_Sinai_Interval_04_05.pdf}
+\LoneFrame{Sinaí}{(0.5,0.6)}{Mixing_Sinai_Interval_05_06.pdf}
+\LoneFrame{Sinaí}{(0.6,0.7)}{Mixing_Sinai_Interval_06_07.pdf}
+\LoneFrame{Sinaí}{(0.7,0.8)}{Mixing_Sinai_Interval_07_08.pdf}
+\LoneFrame{Sinaí}{(0.8,0.9)}{Mixing_Sinai_Interval_08_09.pdf}
+\LoneFrame{Sinaí}{(0.9,1)}{Mixing_Sinai_Interval_09_10.pdf}
 
 \section{Apéndice de monedas}
 \begin{frame}[t,label=ap-monedas]{Matrices fijas de las monedas}
