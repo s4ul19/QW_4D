@@ -195,6 +195,25 @@ the available displacements and the reflections at the boundary.
 \janote{Tal vez agregar una figura mostrando la distribución de probabilidad 
 y considerar comparar las diferencias con el modelo de Alonso-Lobo~\cite{alonso-lobo_2025_Simplest}}
 % *}}}
+\section{Chaotic signatures in split-step-like DTQWs} % {{{*
+
+\begin{equation}\label{eq:coin_AL}
+C(\theta) =
+\begin{pmatrix}
+\cos\theta & \sin\theta \\
+-e^{i\pi/4}\sin\theta & e^{i\pi/4}\cos\theta
+\end{pmatrix}.
+\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.49\columnwidth]{DOS_rectangle_SyC2SxC1.pdf}
+    \includegraphics[width=0.49\columnwidth]{DOS_bunimovich_SyC2SxC1.pdf}
+    \includegraphics[width=0.49\columnwidth]{spacings_rectangle_SyC2SxC1.pdf}
+    \includegraphics[width=0.49\columnwidth]{spacings_bunimovich_SyC2SxC1.pdf}
+    \caption{Left column: DoS (upper row) and level spacing distribution (bottom row) for the rectangular billiard of lengths $L_x=27$ and $L_y=43$. Right column:  DoS (upper row) and level spacing distribution (bottom row) for the Bunimovich stadium of length $L=27$ and radius $R=25$. Both billiards have the unitary step evolution $U = S_y C(\beta) S_x C(\alpha)$ with the coin operator of Eq.~\eqref{eq:coin_AL}, $\alpha=\pi/4$ and $\beta=\pi/3$. \janote{Put the DoS as insets of the level spacing figures}}
+\end{figure}
+% *}}}
 \end{otherlanguage}
 \section{Distribución temporal promedio} % {{{*
 Sea $\ket{\alpha_t}=U^t\ket{\alpha_0}$ el estado del caminante después de
