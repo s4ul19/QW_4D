@@ -31,18 +31,22 @@ en el PDF principal, cambiar `\apendicetrue` por `\apendicefalse` en `main.tex`.
 ## Recorrido
 
 Modelo y reflexión, monedas, estadística espectral, IPR espacial,
-entrelazamiento moneda-posición, promedio temporal y densidad espacial del
-IPR de eigenestados. Termina con cinco conclusiones.
+entrelazamiento moneda-posición, promedio temporal, densidad espacial del
+IPR de eigenestados y L1. Termina con las conclusiones.
 
-Las columnas enfrentan rectángulo (izquierda) y Sinai (derecha). El orden es
-`gpg, oo, uoou, o, b, ubu, u, upu, p`. Las gráficas comparativas de IPR y
+Las columnas enfrentan rectángulo (izquierda) y Sinai (derecha). El orden espectral es
+`g, gpg, oo, uoou, o, b, ubu, u, upu, p`. Las gráficas comparativas de IPR y
 entropía conservan los colores y las leyendas de las figuras originales.
 
-El recorrido principal tiene 27 diapositivas y muestra P(s), P(r) y SFF,
-en ese orden y con las mismas parejas de monedas. El PDF completo tiene
-además 28 diapositivas de apoyo. Al final del bloque espectral se incluye
-una tabla de lectura cualitativa de P(s) por geometría. El apéndice conserva
-DoS, P(r), SFF y los mapas adicionales, para consultar el detalle según la
+El recorrido principal tiene 35 diapositivas. Incluye la sección III.A del
+artículo, «Reducción a caminatas unidimensionales», y muestra P(s), P(r) y SFF
+para la moneda de Grover `g` en ambos estadios. La sección L1 muestra los
+intervalos `(0,0.1)` y `(0.9,1)`, primero para rectángulo y después para Sinaí. El PDF completo tiene
+además 50 diapositivas de apoyo, con los diez intervalos de L1
+ordenados de menor a mayor dentro de cada geometría: primero todo el
+rectángulo y después todo Sinaí. Al final del bloque espectral se incluye
+una tabla de lectura cualitativa de los indicadores espectrales por geometría. El apéndice conserva
+DoS para nueve monedas, P(r) y SFF para diez, y los mapas adicionales, para consultar el detalle según la
 conversación.
 El apéndice espectral comienza con las fórmulas de P(s), P(r) y SFF.
 
@@ -53,15 +57,16 @@ versión breve omite las entradas del apéndice.
 ## Precisiones sobre las fuentes
 
 - Texto y resultados: `../main.tex` y `../Imgs/`.
-- Definiciones de monedas: `../../QWProgramming/QWMisc.wl`, función
-  `RandomMatrix`. Las conjugaciones son `V C V†`.
+- Definiciones de las nueve monedas aleatorias: `../../QWProgramming/QWMisc.wl`,
+  función `RandomMatrix`. La moneda `g` es la matriz fija de Grover `G`.
+  Las conjugaciones son `V C V†`.
 - Regla de reflexión y orden de direcciones: implementación de
   `BuildShiftOperators4State` en `QuantumWalks/Billiards/Common.wl`.
 - Se usa el orden tensorial posición ⊗ moneda, como en el código. Las notas
   originales escriben moneda ⊗ posición. Ambos se relacionan por el cambio
   de orden de los factores, siempre que se cambien los operadores de forma
   consistente.
-- P(s), P(r) y SFF incluyen las nueve monedas. La diapositiva P(s) de `p`
+- P(s), P(r) y SFF incluyen las diez monedas. La diapositiva P(s) de `p`
   muestra debajo `Ps_pModif`, tanto para rectángulo como para Sinai.
   Estas figuras excluyen el primer bin (96.74% y 49.61%, respectivamente)
   y muestran los espaciamientos restantes con media 1, según sus rótulos.

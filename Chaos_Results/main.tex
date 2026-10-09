@@ -20,6 +20,9 @@
 \definecolor{jacolor}{RGB}{200,40,0}
 \FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
 
+\definecolor{sncolor}{rgb}{0.35,0.67,0.67}
+\FXRegisterAuthor{sn}{asn}{\color{sncolor}SN}
+
 % Ps, Pr y SFF usan el orden observable_moneda_geometría.
 % DoS conserva el orden observable_geometría_moneda.
 \newcommand{\SpectralPanel}[3]{%
@@ -41,6 +44,11 @@
   \begin{minipage}[c]{0.09\textwidth}\centering\texttt{#2}\end{minipage}\hfill
   \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Rect}{#2}\end{minipage}\hfill
   \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Sinai}{#2}\end{minipage}\par
+}
+\newcommand{\SpectralGroverRow}[1]{%
+  \begin{minipage}[c]{0.09\textwidth}\centering\texttt{g}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Rect}{Grover}\end{minipage}\hfill
+  \begin{minipage}[c]{0.43\textwidth}\centering\SpectralPanel{#1}{Sinai}{Grover}\end{minipage}\par
 }
 \newcommand{\SpectralHeader}{%
     \begin{minipage}{0.09\textwidth}\strut\end{minipage}\hfill
@@ -72,7 +80,8 @@
     \if\relax\detokenize{#1}\relax\else\texttt{#1}, \fi
     \texttt{gpg}, \texttt{upu},
     \texttt{b}, \texttt{ubu}, \texttt{oo}, \texttt{uoou}, \texttt{o}
-    y \texttt{u} en los estadios rectangular y de Sinaí.
+    y \texttt{u}\IfFileExists{Imgs/#2_Grover_Rect.pdf}{, además de \texttt{g} (Grover)}{}
+    en los estadios rectangular y de Sinaí.
     \if\relax\detokenize{#1}\relax\else
       \IfFileExists{Imgs/#2_pModif_Sinai.pdf}{Las variantes \texttt{pModif}
       disponibles se muestran debajo de \texttt{p}.\space}{}%
@@ -95,6 +104,7 @@
     \SpectralRow{#2}{uoou}
     \SpectralRow{#2}{o}
     \SpectralRow{#2}{u}
+    \IfFileExists{Imgs/#2_Grover_Rect.pdf}{\SpectralGroverRow{#2}}{}%
     \caption[]{#3 (continuación).}
   \end{figure}%
 }
@@ -158,7 +168,7 @@ directions. The one-step evolution operator is therefore
 \begin{equation}
     U=S\qty(C\otimes\mathbb{I}_p),
 \end{equation}
-where $C$ acts only on the coin space and $\mathbb{I}_p$ is the identity
+where $C$ \snnote{comentar que el operador es unitario} acts only on the coin space and $\mathbb{I}_p$ is the identity
 on the position space. The shift $S$ moves each amplitude in its coin
 direction. The corresponding displacements are
 $\boldsymbol\delta_R=(1,0)$, $\boldsymbol\delta_L=(-1,0)$,
@@ -194,6 +204,27 @@ the available displacements and the reflections at the boundary.
 
 \janote{Tal vez agregar una figura mostrando la distribución de probabilidad 
 y considerar comparar las diferencias con el modelo de Alonso-Lobo~\cite{alonso-lobo_2025_Simplest}}
+% *}}}
+\section{Chaotic signatures in split-step-like DTQWs} % {{{*
+A similar model of a DTQW has been studied in billiards and the statistical behaviour has been observed to deviate 
+from what is expected from RMT. We revisit here such model and show that if the unfolding is carried properly, the 
+predictions from RMT are obtained.  
+\begin{equation}\label{eq:coin_AL}
+C(\theta) =
+\begin{pmatrix}
+\cos\theta & \sin\theta \\
+-e^{i\pi/4}\sin\theta & e^{i\pi/4}\cos\theta
+\end{pmatrix}.
+\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.49\columnwidth]{Imgs/DOS_rectangle_SyC2SxC1.pdf}
+    \includegraphics[width=0.49\columnwidth]{Imgs/DOS_bunimovich_SyC2SxC1.pdf}
+    \includegraphics[width=0.49\columnwidth]{Imgs/spacings_rectangle_SyC2SxC1.pdf}
+    \includegraphics[width=0.49\columnwidth]{Imgs/spacings_bunimovich_SyC2SxC1.pdf}
+    \caption{Left column: DoS (upper row) and level spacing distribution (bottom row) for the rectangular billiard of lengths $L_x=27$ and $L_y=43$. Right column:  DoS (upper row) and level spacing distribution (bottom row) for the Bunimovich stadium of length $L=27$ and radius $R=25$. Both billiards have the unitary step evolution $U = S_y C(\beta) S_x C(\alpha)$ with the coin operator of Eq.~\eqref{eq:coin_AL}, $\alpha=\pi/4$ and $\beta=\pi/3$. \janote{Put the DoS as insets of the level spacing figures}}
+\end{figure}
 % *}}}
 \end{otherlanguage}
 \section{Distribución temporal promedio} % {{{*
@@ -280,6 +311,59 @@ Los siguientes paneles reúnen los resultados de DoS y unfolding, $P(s)$,
 $P(r)$ y SFF para los estadios rectangular y de Sinaí. Los códigos de moneda
 se conservan como aparecen en las figuras originales. Cuando no existe una
 figura guardada, se indica en el panel correspondiente.
+
+La tabla siguiente resume la tendencia espectral que
+se observa al comparar $P(s)$, $P(r)$ y SFF con las referencias de Poisson,
+COE y CUE. La clasificación es cualitativa: una curva próxima a una
+referencia no demuestra por sí sola la clase de simetría del operador.
+La aparente repulsión de \texttt{pModif} se obtiene tras excluir
+espaciamientos pequeños y no clasifica el espectro completo de \texttt{p}.
+\begin{table}[H]
+  \centering
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabular}{@{}p{0.30\linewidth}p{0.30\linewidth}p{0.30\linewidth}@{}}
+    \hline\hline
+    Moneda & Rectángulo & Sinaí \\
+    \hline
+    \texttt{g} (Grover) & Próxima a Poisson & Compatible con COE \\
+    \texttt{gpg} & Próxima a Poisson & Compatible con COE \\
+    \texttt{oo} & Próxima a Poisson & Compatible con COE \\
+    \texttt{b} & Próxima a Poisson & Compatible con CUE \\
+    \texttt{uoou} & Compatible con COE & Compatible con CUE \\
+    \texttt{o} & Compatible con COE & Compatible con CUE \\
+    \texttt{ubu} & Compatible con COE & Compatible con CUE \\
+    \texttt{u} & Compatible con COE & Compatible con CUE \\
+    \texttt{upu} & Compatible con COE & Compatible con CUE \\
+    \texttt{p} & Poisson
+      & Poisson \\
+    \hline\hline
+  \end{tabular}
+\end{table}
+
+
+\subsection{Reducción a caminatas unidimensionales}
+Si la moneda es diagonal por bloques en el orden $(R,L,U,D)$,
+$C=C_{RL}\oplus C_{UD}$, el desplazamiento con reflexión conserva por
+separado cada fila y cada columna (o cada segmento conexo de ellas).
+Así, el espectro bidimensional es la unión de los espectros de esas
+caminatas unidimensionales. Para un segmento de $n$ sitios con rebote en
+los extremos y bloque
+\begin{equation}
+ C_1=e^{i\alpha}\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
+ \qquad |a|^2+|b|^2=1,
+\end{equation}
+los $2(n-1)$ autovalores de banda y los dos aislados son
+\begin{equation}
+ \lambda_{m,\pm}=e^{i\alpha}e^{\pm i\omega_m},\quad
+ \cos\omega_m=|a|\cos\frac{\pi m}{n},\quad m=1,\ldots,n-1;
+ \qquad
+ \lambda_{\mathrm{ais},\pm}=e^{i\alpha}
+ \left(\pm\sqrt{1-(\operatorname{Im}b)^2}
+       +i\operatorname{Im}b\right).
+\end{equation}
+La comparación con los espectros numéricos del rectángulo y del estadio
+de Sinaí verifica esta descomposición, con discrepancia máxima del orden
+de $10^{-15}$.
 
 \subsection{DoS y unfolding} % {{{*
 \SpectralGrid{DoS}{DoS y unfolding}
@@ -467,6 +551,157 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 \end{figure}
 
 % *}}}
+
+\clearpage
+\section{L1}
+Se tomaron muestras del COE que satisfacen que su $L_1$ estuviera en
+un intervalo entre $0$ y $1$. Los intervalos correspondientes se indican
+al pie de cada figura para los billares rectangular y de Sinaí.
+
+\subsection{Rectángulo}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_0_01.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0,0.1)}$ en el billar rectangular.}
+    \label{fig:l1-rect-0-01}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_01_02.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.1,0.2)}$ en el billar rectangular.}
+    \label{fig:l1-rect-01-02}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_02_03.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.2,0.3)}$ en el billar rectangular.}
+    \label{fig:l1-rect-02-03}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_03_04.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.3,0.4)}$ en el billar rectangular.}
+    \label{fig:l1-rect-03-04}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_04_05.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.4,0.5)}$ en el billar rectangular.}
+    \label{fig:l1-rect-04-05}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_05_06.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.5,0.6)}$ en el billar rectangular.}
+    \label{fig:l1-rect-05-06}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_06_07.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.6,0.7)}$ en el billar rectangular.}
+    \label{fig:l1-rect-06-07}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_07_08.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.7,0.8)}$ en el billar rectangular.}
+    \label{fig:l1-rect-07-08}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_08_09.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.8,0.9)}$ en el billar rectangular.}
+    \label{fig:l1-rect-08-09}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Rect_Interval_09_10.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.9,1)}$ en el billar rectangular.}
+    \label{fig:l1-rect-09-10}
+\end{figure}
+
+\clearpage
+\subsection{Sinaí}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_00_01.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0,0.1)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-00-01}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_01_02.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.1,0.2)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-01-02}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_02_03.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.2,0.3)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-02-03}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_03_04.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.3,0.4)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-03-04}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_04_05.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.4,0.5)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-04-05}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_05_06.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.5,0.6)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-05-06}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_06_07.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.6,0.7)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-06-07}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_07_08.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.7,0.8)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-07-08}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_08_09.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.8,0.9)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-08-09}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{Imgs/Mixing_Sinai_Interval_09_10.pdf}
+    \caption{Muestras del COE con $L_1\in\text{(0.9,1)}$ en el billar de Sinaí.}
+    \label{fig:l1-sinai-09-10}
+\end{figure}
 
 \bibliographystyle{apsrev4-2}
 \bibliography{ref}

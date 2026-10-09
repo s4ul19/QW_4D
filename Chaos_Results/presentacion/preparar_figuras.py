@@ -12,6 +12,18 @@ ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT.parent / "Imgs"
 DEST = ROOT / "Imgs"
 ORDER = ("gpg", "oo", "uoou", "o", "b", "ubu", "u", "upu", "p")
+L1_INTERVALS = (
+    ("0_01", "00_01"),
+    ("01_02", "01_02"),
+    ("02_03", "02_03"),
+    ("03_04", "03_04"),
+    ("04_05", "04_05"),
+    ("05_06", "05_06"),
+    ("06_07", "06_07"),
+    ("07_08", "07_08"),
+    ("08_09", "08_09"),
+    ("09_10", "09_10"),
+)
 
 
 def page_size(filename):
@@ -53,6 +65,12 @@ def main():
                     missing.append(stem)
     if missing:
         raise RuntimeError(f"Faltan figuras espectrales: {missing}")
+    for observable in ("Ps", "Pr", "SFF"):
+        for geometry in ("Rect", "Sinai"):
+            filename = f"{observable}_Grover_{geometry}.pdf"
+            if not (SOURCE / filename).exists():
+                raise RuntimeError(f"Falta figura de Grover: {filename}")
+            files.add(filename)
     for geometry in ("Rect", "Sinai"):
         files.add(f"Ps_pModif_{geometry}.pdf")
 
@@ -61,6 +79,13 @@ def main():
         for suffix in ("", "_Deslocalizado"):
             files.add(f"IPR_Comparacion_{geometry}{suffix}.pdf")
             files.add(f"EntanglementEntropy_{geometry}{suffix}.pdf")
+
+    for rect_suffix, sinai_suffix in L1_INTERVALS:
+        for geometry, suffix in (("Rect", rect_suffix), ("Sinai", sinai_suffix)):
+            filename = f"Mixing_{geometry}_Interval_{suffix}.pdf"
+            if not (SOURCE / filename).exists():
+                raise RuntimeError(f"Falta figura de L1: {filename}")
+            files.add(filename)
 
     time_rect = {
         "p": ("TimeAverage_Rect_p-uoou.pdf", 0, 0, 3, 2),
