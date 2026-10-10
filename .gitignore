@@ -1,5 +1,6 @@
 # Ignorar todos los archivos con extensión .log o .aux
 qw_reflectante.pdf
+tmp
 *.synctex*
 main.pdf
 *.log
