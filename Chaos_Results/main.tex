@@ -427,6 +427,55 @@ Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
 
 % *}}}
 % *}}}
+\clearpage
+\section{Caos cuántico en el círculo con la moneda de Grover} % {{{*
+Consideramos una caminata de cuatro direcciones con la moneda de Grover
+$G_4=2\ketbra{s}{s}-I_4$, donde
+$\ket{s}=(\ket{R}+\ket{L}+\ket{U}+\ket{D})/2$. El círculo discreto
+utilizado en el cálculo es una máscara de columnas redondeadas,
+\begin{equation}
+ \Omega_R=\left\{(x,y)\in\mathbb Z^2:\ -R\leq x\leq R,\quad
+ |y|\leq\operatorname{Round}\!\left(\sqrt{R^2-x^2}\right)\right\}.
+\end{equation}
+Para $R=48$ contiene $7333$ sitios. La máscara conserva las reflexiones
+$x\mapsto-x$ e $y\mapsto-y$; el redondeo, en general, no conserva la
+rotación de $90^\circ$. Al intercambiar también las direcciones
+$R\leftrightarrow L$ o $U\leftrightarrow D$, respectivamente, ambas
+reflexiones conmutan con el operador de evolución. Por ello, el espectro
+se analiza por separado en los cuatro sectores de paridad
+$(p_x,p_y)\in\{(+,+),(+,-),(-,+),(-,-)\}$.
+
+La moneda mezcla las cuatro direcciones, pero esta propiedad por sí sola
+no establece caos cuántico. Para $P(s)$, $P(r)$ y SFF se excluyen
+los niveles planos en $\pm1$ y se toma una rama de fases dispersivas
+positivas, $0.4\leq\theta/\pi<0.7$, dentro de cada sector. Las
+figuras~\ref{fig:grover-circle-pp} y~\ref{fig:grover-circle-mm} muestran
+la distribución de fases, $P(s)$, $P(r)$ y el factor de forma espectral
+para los sectores $(+,+)$ y $(-,-)$. Los cocientes medios reportados para
+esta ventana son $\langle r\rangle_{++}=0.53330$ y
+$\langle r\rangle_{--}=0.52582$. Junto con la repulsión de niveles y
+la tendencia del factor de forma, estos resultados son compatibles con
+correlaciones de tipo COE en los sectores resueltos, aunque se observan
+desviaciones a tiempos cortos. La comparación no prueba por sí sola
+universalidad ni permite clasificar el espectro sin separar sus simetrías.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.98\textwidth]{Imgs/Grover_Circle_++.pdf}
+ \caption{Círculo discreto con moneda de Grover en el sector de paridad
+ $(+,+)$. Se muestra la distribución de fases positivas; $P(s)$, $P(r)$
+ y SFF usan la ventana dispersiva $0.4\leq\theta/\pi<0.7$.}
+ \label{fig:grover-circle-pp}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.98\textwidth]{Imgs/Grover_Circle_--.pdf}
+ \caption{Las mismas estadísticas en el sector de paridad $(-,-)$ del
+ círculo discreto con moneda de Grover.}
+ \label{fig:grover-circle-mm}
+\end{figure}
+% *}}}
 \section{Densidad espacial del IPR} % {{{*
 Para un eigenestado $\ket{\phi_n}$ del operador de evolución, su
 probabilidad en el nodo $v$ es
