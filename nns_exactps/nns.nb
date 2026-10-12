@@ -1,0 +1,432 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     16180,        423]
+NotebookOptionsPosition[     14243,        393]
+NotebookOutlinePosition[     14557,        407]
+CellTagsIndexPosition[     14514,        404]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Espaciamientos a primeros vecinos: ExactPs contra Wigner surmise\
+\>", "Title",ExpressionUUID->"84fdeac3-c5b3-4552-9780-9006c6e4bfa9"],
+
+Cell["\<\
+Carga TheoreticalRMT (ExactPs = P(s) exacta tabulada, P = Wigner surmise) \
+\>", "Text",ExpressionUUID->"02211caf-cb5e-4390-b87a-79603cd083c1"],
+
+Cell[BoxData[
+ RowBox[{"<<", " ", "TheoreticalRMT`"}]], "Input",ExpressionUUID->"8c1d1436-4231-46a8-a385-98645107a3ee"],
+
+Cell["Parametros.", "Text",ExpressionUUID->"7b0106bc-cd03-4439-a73b-bbcfc193b440"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"n", " ", "=", " ", "200"}], ";"}], "        ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"tamano", " ", "de", " ", "las", " ", "matrices"}], " ", 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"reals", " ", "=", " ", "20000"}], ";"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"matrices", " ", "por", " ", "ensamble"}], ";", " ", 
+    RowBox[{
+    "la", " ", "figura", " ", "del", " ", "texto", " ", "usa", " ", "200000", 
+     " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"~", "2.5"}], " ", "min", " ", "en", " ", "64", " ", 
+       "nucleos"}], ")"}]}]}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"w", " ", "=", " ", "0.1"}], ";"}], "        ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"ancho", " ", "de", " ", "los", " ", "bins"}], " ", 
+   "*)"}]}]}], "Input",ExpressionUUID->"77feee07-d257-4fa1-b148-6725b85ae685"],
+
+Cell["Despliegue con la funcion de conteo del semicirculo.", "Text",ExpressionUUID->"e9954016-5679-4ac2-a641-b85423689b54"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"E", "|", "H_ij", "|", 
+     RowBox[{"^", "2"}]}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"1", "/", "2"}], " ", "fuera", " ", "de", " ", "la", " ", 
+      "diagonal", " ", "en", " ", "GOE", " ", "y", " ", 
+      RowBox[{"GUE", ":", " ", 
+       RowBox[{"semicirculo", " ", "de", " ", "radio", " ", "r"}]}]}], " ", "=",
+      " ", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"2", " ", "n"}], "]"}]}]}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"r", " ", "=", " ", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"2.", " ", "n"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"nCount", "[", "x_", "]"}], " ", ":=", " ", 
+     RowBox[{"n", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"1", "/", "2"}], " ", "+", " ", 
+        RowBox[{"x", " ", 
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"r", "^", "2"}], " ", "-", " ", 
+            RowBox[{"x", "^", "2"}]}], "]"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"Pi", " ", 
+            RowBox[{"r", "^", "2"}]}], ")"}]}]}], " ", "+", " ", 
+        RowBox[{
+         RowBox[{"ArcSin", "[", 
+          RowBox[{"x", "/", "r"}], "]"}], "/", "Pi"}]}], ")"}]}]}], 
+    ";"}]}]}]], "Input",ExpressionUUID->"130fa6c1-4b83-42c6-8629-\
+ca299587627c"],
+
+Cell["Matrices GOE (beta = 1) y GUE (beta = 2).", "Text",ExpressionUUID->"5daf9dcd-d579-4636-b06f-73ea6adbacf4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"matrix", "[", "1", "]"}], " ", ":=", " ", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", " ", "=", " ", 
+       RowBox[{"RandomVariate", "[", 
+        RowBox[{
+         RowBox[{"NormalDistribution", "[", "]"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", " ", "n"}], "}"}]}], "]"}]}], "}"}], ",", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"a", " ", "+", " ", 
+        RowBox[{"Transpose", "[", "a", "]"}]}], ")"}], "/", "2"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"matrix", "[", "2", "]"}], " ", ":=", " ", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"RandomVariate", "[", 
+         RowBox[{
+          RowBox[{"NormalDistribution", "[", 
+           RowBox[{"0", ",", " ", 
+            RowBox[{"1", "/", 
+             RowBox[{"Sqrt", "[", "2.", "]"}]}]}], "]"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"n", ",", " ", "n", ",", " ", "2"}], "}"}]}], "]"}], " ", ".",
+         " ", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", " ", "I"}], "}"}]}]}], "}"}], ",", "\n", "   ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"a", " ", "+", " ", 
+        RowBox[{"ConjugateTranspose", "[", "a", "]"}]}], ")"}], "/", "2"}]}], 
+    "]"}]}], ";"}]}], "Input",ExpressionUUID->"7d276195-dadb-436c-a0ac-\
+2028731a9093"],
+
+Cell["Espaciamientos de la mitad central del espectro.", "Text",ExpressionUUID->"a35ab8ab-a390-413a-8269-4afaba29cf7b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "espaciamientos", " ", "desplegados", " ", "de", " ", "la", " ", "mitad", " ",
+     "central", " ", "del", " ", "espectro"}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"spacings", "[", "beta_", "]"}], " ", ":=", " ", 
+    RowBox[{"Differences", "[", 
+     RowBox[{"nCount", " ", "/@", " ", 
+      RowBox[{
+       RowBox[{"Sort", "[", 
+        RowBox[{"Eigenvalues", "[", 
+         RowBox[{"matrix", "[", "beta", "]"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"n", "/", "4"}], " ", ";;", " ", 
+         RowBox[{"3", " ", 
+          RowBox[{"n", "/", "4"}]}]}], "]"}], "]"}]}], "]"}]}], 
+   ";"}]}]], "Input",ExpressionUUID->"ff4b5167-40c1-492e-8917-79c154676717"],
+
+Cell["Simulacion (~35 s con reals = 20000 en 64 nucleos).", "Text",ExpressionUUID->"7891c1e0-a7ca-4275-923e-3763bf2addca"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"s", "[", "1", "]"}], " ", "=", " ", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"spacings", "[", "1", "]"}], ",", " ", 
+      RowBox[{"{", "reals", "}"}]}], "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"s", "[", "2", "]"}], " ", "=", " ", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"spacings", "[", "2", "]"}], ",", " ", 
+      RowBox[{"{", "reals", "}"}]}], "]"}], "]"}]}], ";"}]}], "Input",Expressi\
+onUUID->"5ae3f2f3-4c9c-4e61-aff7-5b20e6097ce7"],
+
+Cell["Arriba: histograma y curvas.", "Text",ExpressionUUID->"dceabcdc-de6b-41be-a441-1e860f484fc1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"histPlot", "[", "beta_", "]"}], " ", ":=", " ", 
+   RowBox[{"Show", "[", "\n", "   ", 
+    RowBox[{
+     RowBox[{"Histogram", "[", 
+      RowBox[{
+       RowBox[{"s", "[", "beta", "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", " ", "4", ",", " ", "w"}], "}"}], ",", 
+       " ", "\"\<PDF\>\"", ",", " ", 
+       RowBox[{"ChartStyle", " ", "->", " ", "LightGray"}]}], "]"}], ",", 
+     "\n", "   ", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ExactPs", "[", 
+          RowBox[{"beta", ",", " ", "x"}], "]"}], ",", " ", 
+         RowBox[{"P", "[", 
+          RowBox[{"x", ",", " ", "beta"}], "]"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", " ", "0", ",", " ", "3.6"}], "}"}], ",", " ", 
+       RowBox[{"PlotStyle", " ", "->", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Thick", ",", " ", "Blue"}], "}"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"Thick", ",", " ", "Dashed", ",", " ", "Red"}], "}"}]}], 
+         "}"}]}]}], "]"}], ",", "\n", "   ", 
+     RowBox[{"Frame", " ", "->", " ", "True"}], ",", " ", 
+     RowBox[{"FrameLabel", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", " ", "\"\<P(s)\>\""}], "}"}]}], ",", " ", 
+     RowBox[{"PlotRange", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", "3.6"}], "}"}], ",", " ", "All"}], "}"}]}], ",",
+      "\n", "   ", 
+     RowBox[{"PlotLabel", " ", "->", " ", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"beta", " ", "==", " ", "1"}], ",", " ", "\"\<GOE, \>\"", ",",
+            " ", "\"\<GUE, \>\""}], "]"}], ",", " ", 
+         RowBox[{"Length", "[", 
+          RowBox[{"s", "[", "beta", "]"}], "]"}], ",", 
+         " ", "\"\< espaciamientos\>\""}], "}"}], "]"}]}]}], "]"}]}], 
+  ";"}]], "Input",ExpressionUUID->"829d234d-bf96-4050-84cf-ea2832a40307"],
+
+Cell["Abajo: diferencia respecto al Wigner surmise.", "Text",ExpressionUUID->"18c1408e-0d99-47bc-8550-04d3225c9262"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "histograma", " ", "menos", " ", "el", " ", "promedio", " ", "de", " ", 
+     "P", " ", "en", " ", "cada", " ", "bin"}], ",", " ", 
+    RowBox[{"con", " ", "error", " ", "de", " ", "Poisson"}]}], " ", "*)"}], 
+  "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"diffPlot", "[", "beta_", "]"}], " ", ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"m", " ", "=", " ", 
+         RowBox[{"Length", "[", 
+          RowBox[{"s", "[", "beta", "]"}], "]"}]}], ",", " ", 
+        RowBox[{"c", " ", "=", " ", 
+         RowBox[{"BinCounts", "[", 
+          RowBox[{
+           RowBox[{"s", "[", "beta", "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", " ", "4", ",", " ", "w"}], "}"}]}], "]"}]}], ",",
+         " ", 
+        RowBox[{"x0", " ", "=", " ", 
+         RowBox[{"Range", "[", 
+          RowBox[{
+           RowBox[{"w", "/", "2"}], ",", " ", 
+           RowBox[{"4", " ", "-", " ", 
+            RowBox[{"w", "/", "2"}]}], ",", " ", "w"}], "]"}]}]}], "}"}], ",",
+       "\n", "   ", 
+      RowBox[{"Show", "[", "\n", "    ", 
+       RowBox[{
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"ExactPs", "[", 
+            RowBox[{"beta", ",", " ", "x"}], "]"}], " ", "-", " ", 
+           RowBox[{"P", "[", 
+            RowBox[{"x", ",", " ", "beta"}], "]"}]}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", " ", "0", ",", " ", "3.6"}], "}"}], ",", " ", 
+          RowBox[{"PlotStyle", " ", "->", " ", 
+           RowBox[{"{", 
+            RowBox[{"Thick", ",", " ", "Blue"}], "}"}]}]}], "]"}], ",", "\n", 
+        "    ", 
+        RowBox[{"ListPlot", "[", 
+         RowBox[{
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{"x0", ",", " ", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Around", "[", 
+                   RowBox[{"#", ",", " ", 
+                    RowBox[{"Sqrt", "[", "#", "]"}]}], "]"}], " ", "&"}], " ",
+                  "/@", " ", "c"}], ")"}], "/", 
+               RowBox[{"(", 
+                RowBox[{"m", " ", "w"}], ")"}]}], " ", "-", "\n", "        ", 
+              
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"NIntegrate", "[", 
+                   RowBox[{
+                    RowBox[{"P", "[", 
+                    RowBox[{"x", ",", " ", "beta"}], "]"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", " ", 
+                    RowBox[{"#", " ", "-", " ", 
+                    RowBox[{"w", "/", "2"}]}], ",", " ", 
+                    RowBox[{"#", " ", "+", " ", 
+                    RowBox[{"w", "/", "2"}]}]}], "}"}]}], "]"}], "/", "w"}], 
+                 " ", "&"}], " ", "/@", " ", "x0"}], ")"}]}]}], "}"}], "]"}], 
+          ",", " ", 
+          RowBox[{"PlotStyle", " ", "->", " ", "Black"}]}], "]"}], ",", "\n", 
+        "    ", 
+        RowBox[{"Plot", "[", 
+         RowBox[{"0", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", " ", "0", ",", " ", "3.6"}], "}"}], ",", " ", 
+          RowBox[{"PlotStyle", " ", "->", " ", 
+           RowBox[{"{", 
+            RowBox[{"Thick", ",", " ", "Dashed", ",", " ", "Red"}], "}"}]}]}],
+          "]"}], ",", "\n", "    ", 
+        RowBox[{"Frame", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"FrameLabel", " ", "->", " ", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<s\>\"", ",", 
+           " ", "\"\<P(s) \[Minus] P_Wigner(s)\>\""}], "}"}]}], ",", " ", 
+        RowBox[{"PlotRange", " ", "->", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", " ", "3.6"}], "}"}], ",", " ", "All"}], 
+          "}"}]}]}], "]"}]}], "]"}]}], ";"}]}]], "Input",ExpressionUUID->\
+"5e03d5af-5aee-4eed-b0ab-59d2a8ac67b9"],
+
+Cell["Figura completa.", "Text",ExpressionUUID->"fb5b1383-a842-4fee-9248-2bcb5654105a"],
+
+Cell[BoxData[
+ RowBox[{"fig", " ", "=", " ", 
+  RowBox[{"Labeled", "[", 
+   RowBox[{
+    RowBox[{"GraphicsGrid", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"histPlot", "[", "1", "]"}], ",", " ", 
+          RowBox[{"histPlot", "[", "2", "]"}]}], "}"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"diffPlot", "[", "1", "]"}], ",", " ", 
+          RowBox[{"diffPlot", "[", "2", "]"}]}], "}"}]}], "}"}], ",", " ", 
+      RowBox[{"ImageSize", " ", "->", " ", "900"}]}], "]"}], ",", "\n", "  ", 
+    
+    RowBox[{"SwatchLegend", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "LightGray", ",", " ", "Blue", ",", " ", "Red", ",", " ", "Black"}], 
+       "}"}], ",", "\n", "   ", 
+      RowBox[{"{", 
+       RowBox[{"\"\<histograma\>\"", ",", " ", "\"\<ExactPs\>\"", ",", 
+        " ", "\"\<P (Wigner surmise)\>\"", ",", 
+        " ", "\"\<histograma \[Minus] P\>\""}], "}"}], ",", " ", 
+      RowBox[{"LegendLayout", " ", "->", " ", "\"\<Row\>\""}]}], "]"}], ",", 
+    " ", "Bottom"}], "]"}]}]], "Input",ExpressionUUID->"8656f9c8-ad6c-42ef-\
+886d-af9c6c97ce73"]
+},
+FrontEndVersion->"15.0 for Linux x86 (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2874f485-c679-4b9a-9b98-6ce1680b753f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 144, 2, 70, "Title",ExpressionUUID->"84fdeac3-c5b3-4552-9780-9006c6e4bfa9"],
+Cell[701, 24, 153, 2, 70, "Text",ExpressionUUID->"02211caf-cb5e-4390-b87a-79603cd083c1"],
+Cell[857, 28, 119, 1, 70, "Input",ExpressionUUID->"8c1d1436-4231-46a8-a385-98645107a3ee"],
+Cell[979, 31, 82, 0, 70, "Text",ExpressionUUID->"7b0106bc-cd03-4439-a73b-bbcfc193b440"],
+Cell[1064, 33, 892, 25, 70, "Input",ExpressionUUID->"77feee07-d257-4fa1-b148-6725b85ae685"],
+Cell[1959, 60, 123, 0, 70, "Text",ExpressionUUID->"e9954016-5679-4ac2-a641-b85423689b54"],
+Cell[2085, 62, 1361, 40, 70, "Input",ExpressionUUID->"130fa6c1-4b83-42c6-8629-ca299587627c"],
+Cell[3449, 104, 112, 0, 70, "Text",ExpressionUUID->"5daf9dcd-d579-4636-b06f-73ea6adbacf4"],
+Cell[3564, 106, 1441, 42, 70, "Input",ExpressionUUID->"7d276195-dadb-436c-a0ac-2028731a9093"],
+Cell[5008, 150, 119, 0, 70, "Text",ExpressionUUID->"a35ab8ab-a390-413a-8269-4afaba29cf7b"],
+Cell[5130, 152, 771, 20, 70, "Input",ExpressionUUID->"ff4b5167-40c1-492e-8917-79c154676717"],
+Cell[5904, 174, 122, 0, 70, "Text",ExpressionUUID->"7891c1e0-a7ca-4275-923e-3763bf2addca"],
+Cell[6029, 176, 611, 17, 70, "Input",ExpressionUUID->"5ae3f2f3-4c9c-4e61-aff7-5b20e6097ce7"],
+Cell[6643, 195, 99, 0, 70, "Text",ExpressionUUID->"dceabcdc-de6b-41be-a441-1e860f484fc1"],
+Cell[6745, 197, 2074, 53, 70, "Input",ExpressionUUID->"829d234d-bf96-4050-84cf-ea2832a40307"],
+Cell[8822, 252, 116, 0, 70, "Text",ExpressionUUID->"18c1408e-0d99-47bc-8550-04d3225c9262"],
+Cell[8941, 254, 4038, 103, 70, "Input",ExpressionUUID->"5e03d5af-5aee-4eed-b0ab-59d2a8ac67b9"],
+Cell[12982, 359, 87, 0, 70, "Text",ExpressionUUID->"fb5b1383-a842-4fee-9248-2bcb5654105a"],
+Cell[13072, 361, 1167, 30, 70, "Input",ExpressionUUID->"8656f9c8-ad6c-42ef-886d-af9c6c97ce73"]
+}
+]
+*)
+
+(* End of internal cache information *)
