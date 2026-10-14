@@ -11,6 +11,10 @@
 \usepackage{setspace}
 \usepackage{cite}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue,plainpages=false]{hyperref}
+\usepackage{xcolor}
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\definecolor{sncolor}{rgb}{0.35,0.67,0.67}
+\FXRegisterAuthor{sn}{asn}{\color{sncolor}SN}
 
 \geometry{margin=2.5cm}
 \onehalfspacing
@@ -23,6 +27,7 @@
 \newcommand{\fechaTesis}{Octubre 2026}
 
 \begin{document}
+\pagenumbering{gobble}
 
 \begin{titlepage}
   \centering
@@ -47,15 +52,33 @@
   {\fechaTesis\par}
 \end{titlepage}
 
-\pagenumbering{arabic}
+\pagenumbering{roman}
 \chapter*{Resumen}
+\phantomsection
 \addcontentsline{toc}{chapter}{Resumen}
 
-Un estudio reciente ha mostrado señales de caos cuántico en un modelo de caminata cuántica discreta en el tiempo (DTQW) con un grado de libertad interno de dimensión dos empleando billares bidimensionales. Dicho estudio sugiere que la geometría de los billares es el único factor que determina la emergencia de caos cuántico.
-Sin embargo, no está claro si esta relación se mantiene en modelos con un grado de libertad interno de dimensión mayor que dos. En este trabajo se estudia bajo qué condiciones emerge el caos cuántico en una DTQW cuyo grado interno es de dimensión 4.
-Se consideran dos billares: un rectángulo y un octavo del estadio de Sinaí.
-Los resultados muestran que la geometría de los billares, por sí sola, no es una condición necesaria ni suficiente para la aparición de caos cuántico.
+Las caminatas cuánticas discretas en el tiempo (DTQW) son análogos cuánticos de las caminatas aleatorias clásicas.
+Un estudio reciente de un modelo bidimensional con un qubit como grado de libertad interno encontró señales de caos cuántico sensibles a la geometría del billar~\cite{alonso-lobo2025simplest}. 
+En esta tesis se estudia un modelo de DTQW sobre billares bidimensionales con una moneda de cuatro dimensiones (un qudit). 
+Se comparan un rectángulo y un octavo del estadio de Sinaí, empleando distintas monedas y analizando las estadísticas espectrales y la dinámica espacial de la caminata.
 
-Añadir unos resultados interesantes (mixing, integrabilidad de los billares 2D cuando la moneda es diagonal por bloques y varias monedas)
+Los resultados muestran que la geometría del billar, por sí sola, no es una condición necesaria ni suficiente para observar señales de caos cuántico: 
+algunas monedas producen repulsión de niveles en el rectángulo, mientras que otras conservan una estructura espectral regular en el billar de Sinaí. 
+En particular, cuando la moneda es diagonal por bloques y no mezcla las direcciones horizontales con las verticales, la caminata bidimensional se descompone en caminatas unidimensionales a lo largo de filas y columnas. 
+La comparación entre monedas permite explorar cómo la mezcla de direcciones influye en la dinámica y en las correlaciones espectrales.
+
+\begin{itemize}
+  \item Caminatas cuánticas discretas (DTQWs) en billares.
+  \item Caos cuántico.
+  \item Caos en el billar rectángular e integrabilidad en el billar de Sinaí
+  \item Integrabilidad en los billares para cualquier geometría.
+  \item La mezcla de las direcciones del caminante como vía para inducir caos
+  \item Conclusiones.
+\end{itemize}
+\clearpage
+\tableofcontents
+
+\bibliographystyle{unsrt}
+\bibliography{ref}
 
 \end{document}
