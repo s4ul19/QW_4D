@@ -1,0 +1,201 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9333,        192]
+NotebookOptionsPosition[      7671,        165]
+NotebookOutlinePosition[      7985,        179]
+CellTagsIndexPosition[      7942,        176]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Caminata cu\[AAcute]ntica 1D con paredes reflectantes: espectro exacto\
+\>", "Title",ExpressionUUID->"a6968fed-4621-4cb6-b94d-a11570cd3b49"],
+
+Cell["\<\
+n sitios j = 0,\[Ellipsis],n\[Minus]1, moneda C \[Element] U(2) \
+homog\[EAcute]nea. Base posici\[OAcute]n \[CircleTimes] moneda, \
+\[IAcute]ndice = 2j + s, orden de la moneda {R, L} = {j+1, j\[Minus]1}. En \
+las paredes: S|n\[Minus]1,R\:27e9 = |n\[Minus]1,L\:27e9, S|0,L\:27e9 = |0,R\
+\:27e9 (se queda y se invierte, como en QWMisc). U = S\[CenterDot](\|01d7d9\
+\:2099 \[CircleTimes] C).\
+\>", "Text",ExpressionUUID->"a0eefde3-545f-4cea-a335-d0f961759d26"],
+
+Cell["\<\
+F\[OAcute]rmulas de qw_reflectante.tex. C = e^{i\[Alpha]}(a b; \[Minus]b* \
+a*). Banda: \[Lambda] = e^{i\[Alpha]} e^{\[PlusMinus]i\[Omega]_m}, cos \
+\[Omega]_m = |a| cos(\[Pi]m/n), m = 1,\[Ellipsis],n\[Minus]1. Aislados \
+(estados de borde): \[Lambda] = e^{i\[Alpha]}(\[PlusMinus]\[Sqrt](1 \[Minus] \
+(Im b)\.b2) + i Im b). Total 2(n\[Minus]1) + 2 = 2n.\
+\>", "Text",ExpressionUUID->"fe6c9784-ecd4-4f92-a697-2768e4833529"],
+
+Cell["Definiciones", "Section",ExpressionUUID->"d4800073-2908-49af-919a-8199e534844b"],
+
+Cell["\<\
+(* Shift con rebote; estados {j, s}, s = 1 (R), 2 (L) *)
+idx[j_, s_] := 2 j + s;
+shiftPared[n_] := SparseArray[Join[
+   Table[{idx[If[j < n - 1, j + 1, j], If[j < n - 1, 1, 2]], idx[j, 1]} -> 1, \
+{j, 0, n - 1}],
+   Table[{idx[If[j > 0, j - 1, j], If[j > 0, 2, 1]], idx[j, 2]} -> 1, {j, 0, \
+n - 1}]], {2 n, 2 n}];
+uPared[n_, c_] := shiftPared[n] . KroneckerProduct[IdentityMatrix[n], c];
+
+(* Moneda: C = e^{i al}(a, b; -conj(b), conj(a)), a = |a| e^{i pa}, b = \
+sqrt(1-|a|^2) e^{i pb} *)
+moneda[al_, aa_, pa_, pb_] := Module[{a = aa Exp[I pa], b = Sqrt[1 - aa^2] \
+Exp[I pb]},
+   Exp[I al] {{a, b}, {-Conjugate[b], Conjugate[a]}}];
+(* {al, |a|, pa, pb} de una moneda dada *)
+params[c_] := Module[{al = Arg[Det[c]]/2, a, b},
+   a = c[[1, 1]] Exp[-I al]; b = c[[1, 2]] Exp[-I al];
+   {al, Abs[a], Arg[a], Arg[b]}];
+monedaCUE[] := RandomVariate[CircularUnitaryMatrixDistribution[2]];
+
+(* Espectro exacto *)
+eigBanda[n_, {al_, aa_, _, _}] := Flatten[Table[Exp[I al] Exp[s I ArcCos[aa \
+Cos[Pi m/n]]], {m, 1, n - 1}, {s, {1, -1}}]];
+eigAislados[n_, {al_, aa_, pa_, pb_}] := Module[{imb = Sqrt[1 - aa^2] Sin[pb]},
+   Exp[I al] {Sqrt[1 - imb^2] + I imb, -Sqrt[1 - imb^2] + I imb}];
+eigAnalitico[n_, p_] := Join[eigBanda[n, p], eigAislados[n, p]];
+eigNumerico[n_, c_] := Eigenvalues[N[Normal[uPared[n, c]]]];
+dist[x_, y_] := Max[Min[Abs[# - y]] & /@ x];\
+\>", "Input",ExpressionUUID->"5ba9ece6-c32c-49b6-aff1-92b0fac6bb1d"],
+
+Cell["Verificaci\[OAcute]n: num\[EAcute]rico vs anal\[IAcute]tico", "Section",ExpressionUUID->"98f844bd-c2b5-47df-80c6-5aff20d364f4"],
+
+Cell["\<\
+(* error m\[AAcute]ximo para varias n y monedas CUE(2) *)
+Table[Module[{c = monedaCUE[], num, ana},
+   num = eigNumerico[n, c]; ana = eigAnalitico[n, params[c]];
+   {n, Max[dist[num, ana], dist[ana, num]]}], {n, {2, 3, 5, 8, 13, 40}}] // \
+TableForm\
+\>", "Input",ExpressionUUID->"f5ee5023-e1e6-436b-83fe-966b6e5fa851"],
+
+Cell["Espectro y estados de borde: jugar con la moneda", "Section",ExpressionUUID->"47ebc5e0-2d24-48b4-9a3f-87fb2a1882da"],
+
+Cell["\<\
+Izquierda: c\[IAcute]rculo unitario. Puntos azules = banda, rombos naranjas = \
+aislados, c\[IAcute]rculos rojos = diagonalizaci\[OAcute]n num\[EAcute]rica. \
+Arco gris = banda para n \[RightArrow] \[Infinity]. Derecha: |\[Psi]_j|\.b2 \
+(sumado sobre la moneda) del eigenvector num\[EAcute]rico m\[AAcute]s cercano \
+al aislado elegido. Si Re b = 0 (p_b = \[PlusMinus]\[Pi]/2) los estados \
+aislados dejan de estar localizados. \[CurlyPhi]_a no cambia nada; p_b solo \
+entra v\[IAcute]a Im b.\
+\>", "Text",ExpressionUUID->"65aea850-f2aa-46ae-88c1-0bc0ac3ed918"],
+
+Cell["\<\
+Manipulate[
+ Module[{c = moneda[al, aa, pa, pb], p = {al, aa, pa, pb}, es, num, vecs, \
+ais, k, psi, w0 = ArcCos[aa]},
+  {num, vecs} = Eigensystem[N[Normal[uPared[n, c]]]];
+  ais = eigAislados[n, p][[cual]];
+  k = First[Ordering[Abs[num - ais], 1]];
+  psi = Total[Partition[Abs[vecs[[k]]]^2, 2], {2}];
+  Row[{
+    Graphics[{LightGray, Circle[],
+      {Gray, Thickness[0.012], Circle[{0, 0}, 1, {al + w0, al + Pi - w0}], \
+Circle[{0, 0}, 1, {al - Pi + w0, al - w0}]},
+      Blue, PointSize[0.018], Point[ReIm /@ eigBanda[n, p]],
+      Orange, EdgeForm[Black], Polygon[# + 0.05 {{1, 0}, {0, 1}, {-1, 0}, {0, \
+-1}}] & /@ (ReIm /@ eigAislados[n, p]),
+      Red, Circle[#, 0.045] & /@ (ReIm /@ num)},
+     Axes -> True, PlotRange -> 1.15, ImageSize -> 320],
+    ListPlot[psi, Joined -> True, Mesh -> All, PlotRange -> {0, All}, Frame \
+-> True,
+     FrameLabel -> {\"j\", \"|\[Psi]_j|\.b2\"}, PlotLabel -> Row[{\"\[Lambda] \
+= \", NumberForm[num[[k]], 3]}], ImageSize -> 380]}]],
+ {{n, 20}, 2, 120, 1, Appearance -> \"Labeled\"},
+ {{al, 0., \"\[Alpha]\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{aa, 0.7, \"|a|\"}, 0.01, 0.99, Appearance -> \"Labeled\"},
+ {{pa, 0., \"\[CurlyPhi]_a\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{pb, 0.5, \"p_b\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{cual, 1, \"aislado\"}, {1 -> \"+\", 2 -> \"\[Minus]\"}},
+ Button[\"moneda CUE(2) aleatoria\", {al, aa, pa, pb} = params[monedaCUE[]]],
+ TrackedSymbols :> {n, al, aa, pa, pb, cual}]\
+\>", "Input",ExpressionUUID->"33eb660f-d709-4883-a286-51c43f6054a8"],
+
+Cell["Comparaci\[OAcute]n con el anillo", "Section",ExpressionUUID->"6fbb3ae9-3983-4cca-a1b7-044309d3c599"],
+
+Cell["\<\
+Desplegado, el shift con rebote es un ciclo de 2n estados. Por eso la banda \
+usa q = \[Pi]m/n (la malla de un anillo de 2n sitios) y no 2\[Pi]m/n. Para b \
+= 0 el espectro es exactamente e^{i\[Alpha]} e^{i\[Pi]m/n}, m = \
+0,\[Ellipsis],2n\[Minus]1.\
+\>", "Text",ExpressionUUID->"63464b1c-b4ab-4b1b-9a08-88db990539f7"],
+
+Cell["\<\
+With[{n = 6}, Sort[Arg[eigNumerico[n, moneda[0, 1, 0, 0]]]] / (Pi/n)] // Chop\
+\
+\>", "Input",ExpressionUUID->"6aadb4ca-4f99-42e0-8100-c825149cb536"],
+
+Cell["Espaciamientos sin unfolding", "Section",ExpressionUUID->"df6d9064-172f-415f-b1cb-cb5333bd3234"],
+
+Cell["\<\
+Niveles de banda en el dominio fundamental (m \[LessEqual] n/2; las simetr\
+\[IAcute]as antiunitarias emparejan el resto). Espaciamientos \[Omega]_{m+1} \
+\[Minus] \[Omega]_m en unidades de \[Pi]/n, D \[TildeTilde] n/2 niveles, sin \
+unfolding. Curva roja: P(s) = (2/\[Pi])(|b|/|a|)/((1 \[Minus] s\.b2)\[Sqrt](1 \
+\[Minus] s\.b2/|a|\.b2)), 0 \[LessEqual] s < |a|, de las notas. Con unfolding \
+exacto todo colapsa a P(s) = \[Delta](s \[Minus] 1) (picket fence).\
+\>", "Text",ExpressionUUID->"06e0b811-c16a-4095-8015-ea3fbcf06bfa"],
+
+Cell["\<\
+Manipulate[
+ Module[{w = Table[ArcCos[aa Cos[Pi m/n]], {m, 1, Floor[n/2]}], s},
+  s = Differences[w]/(Pi/n);
+  Show[Histogram[s, {0, aa, aa/40}, \"PDF\"],
+   Plot[(2/Pi) (Sqrt[1 - aa^2]/aa)/((1 - x^2) Sqrt[1 - x^2/aa^2]), {x, 0, \
+aa}, PlotStyle -> Red],
+   Frame -> True, FrameLabel -> {\"s (unidades de \[Pi]/n)\", \"P(s)\"}, \
+PlotRange -> {{0, 1}, All}, ImageSize -> 420]],
+ {{n, 2000}, 20, 20000, 1, Appearance -> \"Labeled\"},
+ {{aa, 0.7, \"|a|\"}, 0.05, 0.99, Appearance -> \"Labeled\"}]\
+\>", "Input",ExpressionUUID->"4e93edba-f023-45db-9986-b97a4867cddb"]
+},
+FrontEndVersion->"15.0 for Linux x86 (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"cd732e2c-f407-4dfa-9547-f466fe768e03"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 150, 2, 70, "Title",ExpressionUUID->"a6968fed-4621-4cb6-b94d-a11570cd3b49"],
+Cell[707, 24, 467, 7, 70, "Text",ExpressionUUID->"a0eefde3-545f-4cea-a335-d0f961759d26"],
+Cell[1177, 33, 432, 6, 70, "Text",ExpressionUUID->"fe6c9784-ecd4-4f92-a697-2768e4833529"],
+Cell[1612, 41, 86, 0, 70, "Section",ExpressionUUID->"d4800073-2908-49af-919a-8199e534844b"],
+Cell[1701, 43, 1427, 29, 70, "Input",ExpressionUUID->"5ba9ece6-c32c-49b6-aff1-92b0fac6bb1d"],
+Cell[3131, 74, 133, 0, 70, "Section",ExpressionUUID->"98f844bd-c2b5-47df-80c6-5aff20d364f4"],
+Cell[3267, 76, 329, 6, 70, "Input",ExpressionUUID->"f5ee5023-e1e6-436b-83fe-966b6e5fa851"],
+Cell[3599, 84, 122, 0, 70, "Section",ExpressionUUID->"47ebc5e0-2d24-48b4-9a3f-87fb2a1882da"],
+Cell[3724, 86, 571, 8, 70, "Text",ExpressionUUID->"65aea850-f2aa-46ae-88c1-0bc0ac3ed918"],
+Cell[4298, 96, 1541, 29, 70, "Input",ExpressionUUID->"33eb660f-d709-4883-a286-51c43f6054a8"],
+Cell[5842, 127, 107, 0, 70, "Section",ExpressionUUID->"6fbb3ae9-3983-4cca-a1b7-044309d3c599"],
+Cell[5952, 129, 328, 5, 70, "Text",ExpressionUUID->"63464b1c-b4ab-4b1b-9a08-88db990539f7"],
+Cell[6283, 136, 159, 3, 70, "Input",ExpressionUUID->"6aadb4ca-4f99-42e0-8100-c825149cb536"],
+Cell[6445, 141, 102, 0, 70, "Section",ExpressionUUID->"df6d9064-172f-415f-b1cb-cb5333bd3234"],
+Cell[6550, 143, 540, 7, 70, "Text",ExpressionUUID->"06e0b811-c16a-4095-8015-ea3fbcf06bfa"],
+Cell[7093, 152, 574, 11, 70, "Input",ExpressionUUID->"4e93edba-f023-45db-9986-b97a4867cddb"]
+}
+]
+*)
+
+(* End of internal cache information *)

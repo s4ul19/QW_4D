@@ -38,7 +38,11 @@ $U(2)$. Mostramos que el \emph{shift} con rebote es equivalente a una traslació
 en un anillo de $2n$ sitios y obtenemos el espectro exacto del operador de
 evolución: $2(n-1)$ eigenfases de banda dadas por
 $\cos\omega_m=|a|\cos(\pi m/n)$ y dos eigenvalores aislados, asociados a
-estados de borde, que dependen sólo de $\im b$. Identificamos las simetrías del
+estados de borde, que dependen sólo de $\im b$. Cada estado de banda es la
+superposición, con igual peso, de las dos ondas planas de la cadena sin
+paredes con la misma cuasienergía; su densidad es una onda estacionaria cuyo
+contraste es el traslape de los espinores de moneda de esas dos ondas. Los
+estados de borde son una sola onda plana con momento complejo. Identificamos las simetrías del
 operador (dos antiunitarias que emparejan niveles y una unitaria que existe
 para una familia particular de monedas) y calculamos la distribución de
 espaciamientos a primeros vecinos $P(s)$: sin \emph{unfolding} tiene forma
@@ -237,6 +241,216 @@ huecos espectrales.}
 \label{fig:eigen}
 \end{figure}
 
+\section{Eigenfunciones: dos ondas planas}\label{sec:eigfun}
+
+La demostración de la proposición~\ref{prop:espectro} construye cada
+eigenfunción con ondas planas $z^j=e^{ikj}$. Aquí hacemos explícita esa
+relación. Todo estado de banda es la superposición de las dos ondas planas de la
+cadena sin paredes que tienen la misma cuasienergía; las paredes las convierten
+una en la otra. Los estados de borde son una sola onda plana con momento
+complejo. En esta sección $\mu=e^{-i\alpha}\lambda=e^{i\omega}$ y
+$\psi_j=(R_j,L_j)^T$.
+
+\subsection{Ondas planas sin paredes}
+
+En la cadena infinita, $\psi_j=e^{ikj}u$ es eigenvector de $U_0$ si y sólo si
+\begin{equation}
+U_0(k)\,u=\mu\,u,\qquad
+U_0(k)=\begin{pmatrix}e^{-ik}&0\\0&e^{ik}\end{pmatrix}C_0 .
+\end{equation}
+Como $\det U_0(k)=1$ y $\operatorname{tr}U_0(k)=ae^{-ik}+a^*e^{ik}=2|a|\cos(k-\varphi_a)$,
+la relación de dispersión es
+\begin{equation}
+\cos\omega=|a|\cos(k-\varphi_a),
+\label{eq:disp}
+\end{equation}
+y el espinor de moneda (primer renglón de $U_0(k)u=\mu u$) es
+\begin{equation}
+u(k)=\bigl(b,\ \mu e^{ik}-a\bigr)^T .
+\label{eq:espinor}
+\end{equation}
+Cada $\omega$ dentro de la banda tiene \emph{dos} momentos,
+\begin{equation}
+k_\pm=\varphi_a\pm q,\qquad \cos\omega=|a|\cos q,
+\end{equation}
+simétricos respecto a $\varphi_a$, no respecto a $0$
+(figura~\ref{fig:ondas}a). Son las raíces $z_{1,2}=e^{ik_\pm}$ de la
+ecuación~\eqref{eq:cuadratica}.
+
+\subsection{Estados de banda}
+
+\paragraph{Forma.} Por la demostración de la proposición~\ref{prop:espectro},
+\begin{equation}
+\psi_j=c_+\,e^{ik_+j}\,u_+ + c_-\,e^{ik_-j}\,u_-
+=e^{i\varphi_a j}\bigl(c_+e^{iqj}u_+ + c_-e^{-iqj}u_-\bigr),
+\label{eq:psibanda}
+\end{equation}
+con $u_\pm=u(k_\pm)$, $c_+=-f(z_2)/z_2$, $c_-=f(z_1)/z_1$ y
+$q=\pi m/n$. Las paredes reflejan la onda $k_+$ en la onda $k_-$ y fijan el
+cociente $c_-/c_+$. Es la misma física que la de una partícula en una caja:
+en el anillo de $n$ sitios cada eigenestado es una sola onda con
+$k=2\pi m/n$; con paredes es una onda estacionaria hecha de dos ondas, y la
+malla se vuelve $q=\pi m/n$. La transformada de Fourier de un eigenestado
+numérico tiene exactamente dos picos, en $k_+$ y $k_-$
+(figura~\ref{fig:ondas}b). El factor común $e^{i\varphi_a j}$ no cambia
+$|\psi_j|^2$; por eso ni el espectro ni las densidades dependen de $\varphi_a$.
+
+\paragraph{Flujo nulo.}
+\begin{proposicion}\label{prop:flujo}
+Toda eigenfunción cumple $|L_j|=|R_{j+1}|$ para $j=0,\dots,n-2$. En
+consecuencia, $P_j\equiv|R_j|^2+|L_j|^2=|R_j|^2+|R_{j+1}|^2$.
+\end{proposicion}
+\begin{proof}
+En un eigenestado la probabilidad en los sitios $0,\dots,j$ no cambia con el
+tiempo. En un paso sale de ese conjunto la parte que, después de la moneda,
+apunta a la derecha en el sitio $j$, $|r_j|^2$, y entra la que apunta a la
+izquierda en $j+1$, $|l_{j+1}|^2$. Entonces $|r_j|=|l_{j+1}|$. Las ecuaciones de
+eigenvalores dan $r_j=\lambda R_{j+1}$ y $l_{j+1}=\lambda L_j$, con $|\lambda|=1$.
+\end{proof}
+
+\paragraph{Las dos ondas pesan lo mismo.} Sean
+$w_\pm=\mu e^{ik_\pm}-a$, $N_\pm=\|u_\pm\|^2=|b|^2+|w_\pm|^2$ y
+$J_\pm=|b|^2-|w_\pm|^2$, el flujo por sitio de una sola onda. Usando
+$\mu e^{ik_\pm}a^*=|a|e^{i(\omega\pm q)}$:
+\begin{equation}
+N_\pm=2\bigl(1-|a|\cos(\omega\pm q)\bigr),\qquad
+J_\pm=2|a|\bigl(\cos(\omega\pm q)-|a|\bigr).
+\end{equation}
+Sumamos $|R_{j+1}|^2-|L_j|^2=0$ sobre $j=0,\dots,n-1$; el término $j=n-1$ vale
+por la condición de frontera $R_n=L_{n-1}$. Los términos cruzados son
+proporcionales a $\sum_je^{2iqj}=0$, porque $q=\pi m/n$ con $1\le m\le n-1$.
+Queda
+\begin{equation}
+|c_+|^2J_+ + |c_-|^2J_-=0 .
+\label{eq:flujo}
+\end{equation}
+Además, $J_+/N_+=-J_-/N_-$. Para verlo basta desarrollar
+$(\cos(\omega+q)-|a|)(1-|a|\cos(\omega-q))+(\cos(\omega-q)-|a|)(1-|a|\cos(\omega+q))$
+y usar $\cos(\omega+q)\cos(\omega-q)=\cos^2\omega-\sin^2q$ y
+$\cos\omega=|a|\cos q$: el resultado es cero. Con~\eqref{eq:flujo},
+\begin{equation}
+|c_+|^2N_+=|c_-|^2N_- ,
+\end{equation}
+siempre que $J_\pm\neq0$. Es decir, la pared refleja todo: las dos ondas
+tienen el mismo peso. Numéricamente, $J_\pm/N_\pm=d\varepsilon/dk$ con
+$\varepsilon=-\omega$, la velocidad de grupo, que sólo se anula en los bordes de
+la banda [verificado numéricamente, no derivado].
+
+\paragraph{Interferencia.}
+\begin{proposicion}\label{prop:contraste}
+La densidad de un estado de banda es una onda estacionaria,
+\begin{equation}
+P_j=A_0\bigl[1+D\cos(2qj+\delta)\bigr],\qquad
+D=\bigl|\langle\hat u_-|\hat u_+\rangle\bigr|=\frac{|b|\,|\cos q|}{\sqrt{1-|a|^2\cos^2q}},
+\label{eq:contraste}
+\end{equation}
+con $\hat u_\pm=u_\pm/\|u_\pm\|$. El contraste $D$ sólo depende de $|a|$ y de $q$.
+\end{proposicion}
+\begin{proof}
+De~\eqref{eq:psibanda},
+$P_j=|c_+|^2N_++|c_-|^2N_-+2\re\bigl(c_+c_-^*\,\langle u_-|u_+\rangle\,e^{2iqj}\bigr)$.
+Con pesos iguales, $D=|\langle u_-|u_+\rangle|/\sqrt{N_+N_-}$. El traslape es
+\begin{equation}
+\langle u_-|u_+\rangle=|b|^2+w_+w_-^*
+=1+e^{2iq}-2|a|e^{iq}\cos\omega=2e^{iq}|b|^2\cos q ,
+\end{equation}
+y el producto de normas,
+$N_+N_-=4\bigl[1-2|a|\cos\omega\cos q+|a|^2(\cos^2\omega-\sin^2q)\bigr]=4|b|^2\sin^2\omega$.
+Dividiendo, $D=|b||\cos q|/|\sin\omega|$, que es~\eqref{eq:contraste}.
+\end{proof}
+
+El contraste es el traslape de los estados de moneda de las dos ondas. Cerca de
+los bordes de la banda ($q\to0,\pi$), $k_+\to k_-$, los espinores coinciden y
+$D\to1$: la onda estacionaria tiene nodos, como en una caja. En el centro de la
+banda ($q=\pi/2$, $\omega=\pi/2$), los espinores son ortogonales, no interfieren
+y $P_j$ es plana (figuras~\ref{fig:alfombra} y~\ref{fig:interferencia}). En
+general $P_j$ no es simétrica bajo $j\to n-1-j$; sólo lo es cuando existe la
+paridad $P$ (sección siguiente). No calculamos la fase $\delta$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{figs/ondas_planas.pdf}
+\caption{Un eigenestado con paredes es la suma de dos ondas planas. (a) Bandas
+de la cadena sin paredes,~\eqref{eq:disp}; los puntos son los $q=\pi m/n$
+permitidos por las paredes ($n=12$). Las paredes acoplan los dos momentos
+$k_\pm=\varphi_a\pm q$ con la misma $\omega$ (amarillo). Los rombos son los
+estados de borde, que viven en los huecos con $k$ complejo. (b) Transformada de
+Fourier de las componentes $R_j$ y $L_j$ de un eigenestado numérico ($n=40$,
+$m=7$): dos picos, en $k_+$ y $k_-$. (c) Su densidad $P_j$ (puntos) y la
+suma de las dos ondas planas~\eqref{eq:psibanda} (línea). La franja marca
+$A_0(1\pm D)$ y la línea punteada, la densidad de cada onda sola, $A_0/2$.
+Moneda genérica de la figura~\ref{fig:eigen}.}
+\label{fig:ondas}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.85\linewidth]{figs/alfombra.pdf}
+\caption{Los $2n$ eigenestados a la vez ($n=50$, moneda genérica). Cada renglón
+es $P_j/\max_jP_j$ de un nivel, ordenados por $\omega$ y equiespaciados en el eje
+vertical. Las franjas son las ondas estacionarias: el número de máximos crece
+con $m$ y el contraste se apaga en el centro de cada banda. Los dos renglones
+naranjas son los estados de borde, pegados a una pared. Derecha: el
+contraste~\eqref{eq:contraste} de cada nivel.}
+\label{fig:alfombra}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{figs/interferencia.pdf}
+\caption{(a) Contraste $D(q)$: curvas, la fórmula~\eqref{eq:contraste}; puntos,
+el ajuste de $P_j$ numérico a $A_0[1+D\cos(2qj+\delta)]$ ($n=30$). (b) Los espinores
+$\hat u(k)$ de la banda $\omega>0$ en la esfera de Bloch (azul) y tres pares
+$\hat u_\pm$. Cuanto más separados están, menor es el traslape $D$; en $q=\pi/2$
+son antipodales y $D=0$.}
+\label{fig:interferencia}
+\end{figure}
+
+\subsection{Estados de borde: una onda plana con momento complejo}
+
+Los dos eigenvalores aislados caen en los huecos, donde
+$|\cos\omega|>|a|$, de modo que~\eqref{eq:disp} sólo tiene soluciones con $k$
+complejo:
+\begin{equation}
+k=\varphi_a\pm i\kappa\quad(\cos\omega>0),\qquad
+k=\varphi_a+\pi\pm i\kappa\quad(\cos\omega<0),\qquad
+\cosh\kappa=\frac{|\cos\omega|}{|a|}.
+\end{equation}
+Con $|\cos\omega|=\sqrt{1-(\im b)^2}=\sqrt{|a|^2+(\re b)^2}$ queda
+\begin{equation}
+\kappa=\operatorname{arcsinh}\frac{|\re b|}{|a|},
+\end{equation}
+que coincide con $|z_\pm|=e^{\pm\kappa}$ de la demostración. Aquí basta una sola
+onda: con $f(z)=0$ el espinor~\eqref{eq:espinor} es $u=b\,(1,z)$, así que
+$L_j=R_{j+1}$ exactamente y las dos paredes se cumplen sin reflexión. La
+densidad es $P_j\propto e^{\pm2\kappa j}$: el estado decae desde una pared con
+longitud $1/(2\kappa)$ (figura~\ref{fig:bordes}). Si $\re b>0$, $\lambda_+$ vive
+en la pared derecha y $\lambda_-$ en la izquierda; si $\re b<0$, al revés. La
+posición en el círculo unitario depende sólo de $\im b$ y la localización sólo
+de $\re b/|a|$.
+
+Si $\re b=0$, entonces $\kappa=0$ y $|\cos\omega|=|a|$: el estado de borde cae
+justo en el borde de la banda, donde la velocidad de grupo es cero. Es una onda
+plana real que no transporta probabilidad ($|w|=|b|$, $J=0$), por eso una sola
+onda llena la caja con $P_j$ constante.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{figs/bordes.pdf}
+\caption{Estados de borde. (a) $P_j$ del estado $\lambda_+$ para varios
+$\re b/|a|$ ($|a|=0.25$, $n=30$); puntos, diagonalización numérica; líneas,
+$e^{2\kappa j}$. Con $\re b=0$ el estado es plano. (b) $\kappa$ contra
+$\re b/|a|$ para 40 monedas aleatorias: la mitad de la pendiente de
+$\log P_j$ (puntos) sigue $\operatorname{arcsinh}(\re b/|a|)$.}
+\label{fig:bordes}
+\end{figure}
+
+\paragraph{Verificación numérica.} Para seis monedas aleatorias y
+$8\le n\le40$: la forma~\eqref{eq:psibanda} reproduce los eigenvectores
+($1-|\langle\psi_{\rm teo}|\psi\rangle|\sim10^{-16}$); la
+proposición~\ref{prop:flujo} y la igualdad de pesos se cumplen a $\sim10^{-14}$;
+el contraste~\eqref{eq:contraste} coincide con el ajuste a $\sim10^{-13}$.
+
 \section{Simetrías}
 
 Usamos tres operadores:
@@ -380,6 +594,56 @@ proposición~\ref{prop:espectro}.
 alternancia de paridad.
 \item \texttt{plot\_tex.py}, \texttt{ps\_tex.py}: generan las
 figuras~\ref{fig:eigen} y~\ref{fig:nns}.
+\item \texttt{fig\_eigfun.py}: genera las figuras~\ref{fig:ondas}--\ref{fig:bordes}
+y las figuras~\ref{fig:adendaRL} y~\ref{fig:adendaF}.
 \end{itemize}
+
+\clearpage
+\section{Adenda: los $2n$ eigenestados para $n=20$}
+
+Las figuras~\ref{fig:adendaRL} y~\ref{fig:adendaF} muestran los 40 eigenestados
+de $U$ para $n=20$, con la moneda genérica de la figura~\ref{fig:eigen},
+ordenados por $\omega$ (de izquierda a derecha y de arriba abajo). La
+figura~\ref{fig:adendaRL} separa las dos componentes de moneda y la
+figura~\ref{fig:adendaF}, sus transformadas de Fourier
+$\tilde R(k)=\sum_jR_je^{-ikj}$ y $\tilde L(k)=\sum_jL_je^{-ikj}$.
+
+Tres cosas se leen directamente:
+\begin{itemize}
+\item La barra verde del sitio $j$ mide lo mismo que la azul del sitio $j+1$:
+es la proposición~\ref{prop:flujo}, $|L_j|=|R_{j+1}|$.
+\item Cada componente por separado oscila con contraste alto aun cuando $P_j$ es
+casi plana. En $m=10$ ($q=\pi/2$), $|R_j|^2$ alterna de sitio a sitio y
+$|L_j|^2$ alterna en contrafase, de modo que $P_j=|R_j|^2+|R_{j+1}|^2$ es
+constante. El contraste $D$ de la sección~\ref{sec:eigfun} es el de la suma, no
+el de cada componente.
+\item Cada transformada de un estado de banda tiene dos picos, en $k_\pm=\varphi_a\pm q$
+(líneas amarillas), y su ancho, $\sim2\pi/n$, viene de la caja finita. Los pesos
+de $\tilde R$ y $\tilde L$ en cada pico son distintos: son $|c_\pm b|^2$ y
+$|c_\pm w_\pm|^2$. Los estados de borde dan un solo pico ancho, centrado en
+$\re k$ ($\varphi_a$ o $\varphi_a+\pi$), cuyo ancho crece con $\kappa$.
+\end{itemize}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth,height=.92\textheight,keepaspectratio]{figs/adenda_RL.pdf}
+\caption{$|R_j|^2$ (azul) y $|L_j|^2$ (verde) de los $2n=40$ eigenestados para
+$n=20$. Barras: diagonalización numérica. Marcas horizontales: la suma de las dos
+ondas planas~\eqref{eq:psibanda} para los estados de banda y $|z|^{2j}$ para los
+dos estados de borde (títulos naranjas). La teoría se dibuja sólo en los sitios:
+cerca de $q=\pi/2$ el periodo es de unos dos sitios y una curva continua
+engañaría.}
+\label{fig:adendaRL}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth,height=.92\textheight,keepaspectratio]{figs/adenda_fourier.pdf}
+\caption{Transformadas de Fourier $|\tilde R(k)|^2$ (azul) y $|\tilde L(k)|^2$
+(verde) de los mismos 40 eigenestados. Líneas amarillas: los momentos
+$k_\pm=\varphi_a\pm q$ de las dos ondas planas. Líneas naranjas, en los estados
+de borde: $\re k=\arg z$.}
+\label{fig:adendaF}
+\end{figure}
 
 \end{document}

@@ -1,0 +1,200 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9288,        191]
+NotebookOptionsPosition[      7534,        163]
+NotebookOutlinePosition[      7848,        177]
+CellTagsIndexPosition[      7805,        174]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Caminata cu\[AAcute]ntica 1D en un anillo: espectro en el espacio de momento\
+\>", "Title",ExpressionUUID->"69a5a36e-bab5-4ffc-b7ad-892fcdf83213"],
+
+Cell["\<\
+Anillo de n sitios (condiciones peri\[OAcute]dicas), moneda C \[Element] \
+U(2). Base posici\[OAcute]n \[CircleTimes] moneda, \[IAcute]ndice = 2(x\
+\[Minus]1) + c. Orden de la moneda: {R, L} = {x+1, x\[Minus]1}. U = S\
+\[CenterDot](\|01d7d9\:2099 \[CircleTimes] C).\
+\>", "Text",ExpressionUUID->"e5790373-4902-424c-899e-4157be237f2f"],
+
+Cell["\<\
+Resultado anal\[IAcute]tico: U = \[CirclePlus]\:2096 |k\:27e9\:27e8k| \
+\[CircleTimes] U(k), U(k) = diag(e^{\[Minus]ik}, e^{ik})\[CenterDot]C, k = 2\
+\[Pi]m/n. Con C = e^{i\[CurlyPhi]}(\[Alpha] \[Beta]; \[Minus]\[Beta]* \
+\[Alpha]*), \[Alpha] = |\[Alpha]|e^{i\[Theta]}: \[Lambda]\[PlusMinus](k) = \
+e^{i(\[CurlyPhi] \[PlusMinus] \[Omega]_k)}, cos \[Omega]_k = |\[Alpha]| cos(k \
+\[Minus] \[Theta]). Cuasienerg\[IAcute]a \[CurlyEpsilon] = \[Minus]arg \
+\[Lambda].\
+\>", "Text",ExpressionUUID->"a4142c60-c685-45de-8c7d-5e84e93d5b93"],
+
+Cell["Definiciones", "Section",ExpressionUUID->"4d330efb-16bb-4cf2-a16e-2126bd49148d"],
+
+Cell["\<\
+(* Traslaci\[OAcute]n T|x> = |x+1> en el anillo *)
+trasl[n_] := SparseArray[RotateRight[IdentityMatrix[n]]];
+(* Shift condicional: R -> x+1, L -> x-1 *)
+shift[n_] := KroneckerProduct[trasl[n], {{1, 0}, {0, 0}}] + \
+KroneckerProduct[Transpose[trasl[n]], {{0, 0}, {0, 1}}];
+uMat[n_, c_] := shift[n] . KroneckerProduct[IdentityMatrix[n], c];
+
+(* Moneda general de U(2). chi = fase de beta: no afecta el espectro *)
+moneda[phi_, theta_, a_, chi_] := Exp[I phi] {{a Exp[I theta], Sqrt[1 - a^2] \
+Exp[I chi]}, {-Sqrt[1 - a^2] Exp[-I chi], a Exp[-I theta]}};
+(* Par\[AAcute]metros {phi, theta, |alpha|, chi} de una moneda dada *)
+params[c_] := Module[{phi = Arg[Det[c]]/2, al, be},
+  al = c[[1, 1]] Exp[-I phi]; be = c[[1, 2]] Exp[-I phi];
+  {phi, Arg[al], Abs[al], Arg[be]}];
+monedaCUE[] := RandomVariate[CircularUnitaryMatrixDistribution[2]];
+
+(* Espectro anal\[IAcute]tico *)
+omega[k_, theta_, a_] := ArcCos[a Cos[k - theta]];
+eigAnalitico[n_, {phi_, theta_, a_, _}] := Flatten[Table[Exp[I (phi + s \
+omega[2 Pi m/n, theta, a])], {m, 0, n - 1}, {s, {1, -1}}]];
+eigNumerico[n_, c_] := Eigenvalues[N[Normal[uMat[n, c]]]];
+cuasi[lam_] := -Arg[lam];\
+\>", "Input",ExpressionUUID->"8d1bd2db-8992-4cc8-952b-ecebb16defd4"],
+
+Cell["Verificaci\[OAcute]n: num\[EAcute]rico vs anal\[IAcute]tico", "Section",ExpressionUUID->"3d2af777-b4d1-468c-9fd8-7059d4313a70"],
+
+Cell["\<\
+n = 30; c = monedaCUE[];
+num = eigNumerico[n, c]; ana = eigAnalitico[n, params[c]];
+(* distancia m\[AAcute]xima de cada eigenvalor al m\[AAcute]s cercano del \
+otro conjunto *)
+{Max[Min[Abs[# - num]] & /@ ana], Max[Min[Abs[# - ana]] & /@ num]}\
+\>", "Input",ExpressionUUID->"a91b1892-6e78-4acb-9461-d2f441f4d3af"],
+
+Cell["\<\
+Show[Graphics[{LightGray, Circle[]}],
+ ListPlot[{ReIm /@ num, ReIm /@ ana}, PlotStyle -> {PointSize[0.012], {Red, \
+PointSize[0.006]}},
+  PlotLegends -> {\"num\[EAcute]rico\", \"anal\[IAcute]tico\"}],
+ AspectRatio -> 1, PlotRange -> 1.1, Axes -> True]\
+\>", "Input",ExpressionUUID->"6205f950-e3ee-4c17-a147-b7f5de5929f9"],
+
+Cell["Bandas y espectro: jugar con la moneda", "Section",ExpressionUUID->"4fd457ac-df0b-4bfa-b7d5-9550e97b18c8"],
+
+Cell["\<\
+\[CurlyPhi] rota todo el espectro, \[Theta] corre k, |\[Alpha]| fija el ancho \
+de banda, \[Chi] no hace nada. Las curvas son las bandas continuas \
+\[CurlyEpsilon]\[PlusMinus](k); los puntos, los k = 2\[Pi]m/n permitidos; los \
+c\[IAcute]rculos, la diagonalizaci\[OAcute]n num\[EAcute]rica (solo si n \
+\[LessEqual] 80).\
+\>", "Text",ExpressionUUID->"8bd15ac4-629c-4451-b634-0a8e06fd2cc4"],
+
+Cell["\<\
+Manipulate[
+ Module[{c = moneda[phi, theta, a, chi], ks = 2 Pi Range[0, n - 1]/n, wrap, \
+bandas, puntos, circ},
+  wrap[x_] := Mod[x + Pi, 2 Pi] - Pi;
+  bandas = Plot[{wrap[-phi - omega[k, theta, a]], wrap[-phi + omega[k, theta, \
+a]]}, {k, 0, 2 Pi},
+    PlotStyle -> {Blue, Orange}, Exclusions -> None, PlotRange -> {-Pi, Pi},
+    Frame -> True, FrameLabel -> {\"k\", \"\[CurlyEpsilon]\"}, ImageSize -> \
+380];
+  puntos = ListPlot[{Table[{k, wrap[-phi - omega[k, theta, a]]}, {k, ks}], \
+Table[{k, wrap[-phi + omega[k, theta, a]]}, {k, ks}]},
+    PlotStyle -> {{Blue, PointSize[0.015]}, {Orange, PointSize[0.015]}}];
+  circ = Show[Graphics[{LightGray, Circle[]}],
+    ListPlot[ReIm /@ eigAnalitico[n, {phi, theta, a, chi}], PlotStyle -> \
+PointSize[0.015]],
+    If[n <= 80, Graphics[{Red, Circle[#, 0.04] & /@ (ReIm /@ eigNumerico[n, \
+c])}], Graphics[{}]],
+    AspectRatio -> 1, PlotRange -> 1.15, Axes -> True, ImageSize -> 300];
+  Row[{Show[bandas, puntos], circ}]],
+ {{n, 20}, 2, 200, 1, Appearance -> \"Labeled\"},
+ {{phi, 0., \"\[CurlyPhi]\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{theta, 0., \"\[Theta]\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{a, 0.7, \"|\[Alpha]|\"}, 0, 1, Appearance -> \"Labeled\"},
+ {{chi, 0., \"\[Chi]\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ Button[\"moneda CUE(2) aleatoria\", {phi, theta, a, chi} = \
+params[monedaCUE[]]],
+ TrackedSymbols :> {n, phi, theta, a, chi}]\
+\>", "Input",ExpressionUUID->"3ea33261-2078-43ad-9aee-0509b7e59973"],
+
+Cell["Distribuci\[OAcute]n de |\[Alpha]| para C ~ CUE(2)", "Section",ExpressionUUID->"62496f82-0acd-4faa-ad10-27ef53358c86"],
+
+Cell["Esperado: |\[Alpha]|\.b2 uniforme en [0,1], o sea densidad \
+2|\[Alpha]|.", "Text",ExpressionUUID->"182cb6f5-6a31-4a0b-aeea-875067cf52cd"],
+
+Cell["\<\
+as = Table[Abs[monedaCUE[][[1, 1]]], {10^4}];
+Show[Histogram[as, {0, 1, 0.05}, \"PDF\"], Plot[2 x, {x, 0, 1}, PlotStyle -> \
+Red], Frame -> True, FrameLabel -> {\"|\[Alpha]|\", \"P\"}]\
+\>", "Input",ExpressionUUID->"66d4e30e-7734-416a-bdc8-5b025cd48b83"],
+
+Cell["Espaciamientos de una sola moneda", "Section",ExpressionUUID->"79da9261-e28b-4c75-ae6c-079e20509faa"],
+
+Cell["\<\
+Sin unfolding: espaciamientos de \[CurlyEpsilon] normalizados por el medio 2\
+\[Pi]/D, D = 2n niveles. La densidad de \[CurlyEpsilon] no es uniforme \
+(depende de |\[Alpha]|), as\[IAcute] que esto es solo cualitativo. Las bandas \
+son sim\[EAcute]tricas: \[Omega](k) = \[Omega](2\[Theta] \[Minus] k). Si 2\
+\[Theta] es m\[UAcute]ltiplo de 2\[Pi]/n, hay degeneraciones exactas (prueba \
+\[Theta] = 0).\
+\>", "Text",ExpressionUUID->"de5e0afb-77bd-44d5-9cd6-733bf2da4eea"],
+
+Cell["\<\
+Manipulate[
+ Module[{eps = Sort[Mod[cuasi /@ eigAnalitico[n, {phi, theta, a, 0}], 2 Pi]], \
+s},
+  s = Differences[Append[eps, First[eps] + 2 Pi]]/(2 Pi/(2 n));
+  Show[Histogram[s, {0, 4, 0.1}, \"PDF\"], Plot[Exp[-x], {x, 0, 4}, PlotStyle \
+-> Red],
+   Frame -> True, FrameLabel -> {\"s\", \"P(s)\"}, PlotRange -> {{0, 4}, \
+All}, ImageSize -> 400]],
+ {{n, 500}, 10, 5000, 1, Appearance -> \"Labeled\"},
+ {{phi, 0., \"\[CurlyPhi]\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{theta, 0.3, \"\[Theta]\"}, -Pi, Pi, Appearance -> \"Labeled\"},
+ {{a, 0.7, \"|\[Alpha]|\"}, 0, 1, Appearance -> \"Labeled\"}]\
+\>", "Input",ExpressionUUID->"8450a572-201c-4255-a654-246d8a8c4bb3"]
+},
+FrontEndVersion->"15.0 for Linux x86 (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"10aca56e-e206-4932-a498-9cee129ad398"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 156, 2, 70, "Title",ExpressionUUID->"69a5a36e-bab5-4ffc-b7ad-892fcdf83213"],
+Cell[713, 24, 344, 5, 70, "Text",ExpressionUUID->"e5790373-4902-424c-899e-4157be237f2f"],
+Cell[1060, 31, 541, 8, 70, "Text",ExpressionUUID->"a4142c60-c685-45de-8c7d-5e84e93d5b93"],
+Cell[1604, 41, 86, 0, 70, "Section",ExpressionUUID->"4d330efb-16bb-4cf2-a16e-2126bd49148d"],
+Cell[1693, 43, 1221, 23, 70, "Input",ExpressionUUID->"8d1bd2db-8992-4cc8-952b-ecebb16defd4"],
+Cell[2917, 68, 133, 0, 70, "Section",ExpressionUUID->"3d2af777-b4d1-468c-9fd8-7059d4313a70"],
+Cell[3053, 70, 323, 6, 70, "Input",ExpressionUUID->"a91b1892-6e78-4acb-9461-d2f441f4d3af"],
+Cell[3379, 78, 331, 6, 70, "Input",ExpressionUUID->"6205f950-e3ee-4c17-a147-b7f5de5929f9"],
+Cell[3713, 86, 112, 0, 70, "Section",ExpressionUUID->"4fd457ac-df0b-4bfa-b7d5-9550e97b18c8"],
+Cell[3828, 88, 400, 6, 70, "Text",ExpressionUUID->"8bd15ac4-629c-4451-b634-0a8e06fd2cc4"],
+Cell[4231, 96, 1485, 28, 70, "Input",ExpressionUUID->"3ea33261-2078-43ad-9aee-0509b7e59973"],
+Cell[5719, 126, 124, 0, 70, "Section",ExpressionUUID->"62496f82-0acd-4faa-ad10-27ef53358c86"],
+Cell[5846, 128, 144, 1, 70, "Text",ExpressionUUID->"182cb6f5-6a31-4a0b-aeea-875067cf52cd"],
+Cell[5993, 131, 264, 4, 70, "Input",ExpressionUUID->"66d4e30e-7734-416a-bdc8-5b025cd48b83"],
+Cell[6260, 137, 107, 0, 70, "Section",ExpressionUUID->"79da9261-e28b-4c75-ae6c-079e20509faa"],
+Cell[6370, 139, 479, 7, 70, "Text",ExpressionUUID->"de5e0afb-77bd-44d5-9cd6-733bf2da4eea"],
+Cell[6852, 148, 678, 13, 70, "Input",ExpressionUUID->"8450a572-201c-4255-a654-246d8a8c4bb3"]
+}
+]
+*)
+
+(* End of internal cache information *)
