@@ -417,6 +417,8 @@ Para una distribución uniforme en $N$ nodos, $\mathrm{IPR}^{\mathrm{esp}}=1/N$.
     \label{fig:ipr-rect-deslocalizado}
 \end{figure}
 
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\textwidth]{Imgs/IPR_Comparacion_Sinai_Deslocalizado.pdf}
@@ -602,10 +604,20 @@ monedas \texttt{p}, \texttt{oo}, \texttt{b}, \texttt{gpg}, \texttt{o},
 % *}}}
 
 \clearpage
-\section{L1}
-Se tomaron muestras del COE que satisfacen que su $L_1$ estuviera en
-un intervalo entre $0$ y $1$. Los intervalos correspondientes se indican
-al pie de cada figura para los billares rectangular y de Sinaí.
+\section{Poder coherente $L_1$}
+Para una moneda unitaria $C$ de dimensión cuatro, cada columna $j$ es el
+estado resultante de aplicar $C$ al estado de base $j$. La definición usada
+en \texttt{CoheringPowerL1} es
+\begin{equation}
+ \mathrm{CoheringPowerL1}(C)=L_1(C)=\frac{1}{3}\,\frac{1}{4}\sum_{j=1}^{4}
+ \left[\left(\sum_{i=1}^{4}|C_{ij}|\right)^2-1\right].
+\end{equation}
+El factor $1/4$ promedia las columnas y $1/3$ normaliza el máximo. Su valor
+va de $0$ (sin superposición creada, como para la identidad) a $1$
+(amplitudes de módulo $1/2$ en cada columna). Depende de la base y no mide
+por sí solo la dinámica ni el entrelazamiento. Se tomaron
+muestras del COE en distintos intervalos de $L_1$ para los billares
+rectangular y de Sinaí, indicados al pie de cada figura.
 
 \subsection{Rectángulo}
 
