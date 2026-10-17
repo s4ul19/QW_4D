@@ -18,8 +18,13 @@ VerificationTest[Module[{grid = GenerateRectangleBasis[1, 1], coin = N[FourierMa
   True, TestID -> "Documented two-state split-step order"]
 
 VerificationTest[QWEigenphases[GenerateRectangleBasis[0, 0], Exp[-I/5] IdentityMatrix[4]],
-  Sort[{1/5 - Pi, 1/5 - Pi, 1/5, 1/5}], SameTest -> testClose,
+  {1/5 - Pi, 1/5 - Pi, 1/5, 1/5}, SameTest -> testClose,
   TestID -> "Quasienergy minus Arg convention"]
+
+VerificationTest[Module[{grid = GenerateRectangleBasis[8, 8], b = RandomMatrix["b"], phases},
+  phases = TimeConstrained[QWEigenphases[grid, b], 10, $Aborted];
+  Precision[phases] === MachinePrecision && testClose[phases, QWEigenphases[grid, N[b]]]],
+  True, TestID -> "Exact coin gives numeric quasienergies"]
 
 VerificationTest[Quiet[QWEvolutionOperator[<|"Coords" -> {{0, 0}}, "Dimension" -> 2|>, testCoin]],
   $Failed, TestID -> "Invalid grid"]

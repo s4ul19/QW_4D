@@ -271,7 +271,7 @@ QWEvolutionOperator[grid_, coin_, opts : OptionsPattern[]] := Module[
 Options[QWEigenphases] = Options[QWEvolutionOperator];
 QWEigenphases[grid_, coin_, opts : OptionsPattern[]] := Module[{evolution},
   evolution = QWEvolutionOperator[grid, coin, opts];
-  If[evolution === $Failed, $Failed, Sort[-Arg[Eigenvalues[Normal[evolution]]]]]
+  If[evolution === $Failed, $Failed, Sort[-Arg[Eigenvalues[N[Normal[evolution]]]]]]
 ];
 
 Options[RandomMatrix] = Options[RandomDelocalizedState];
