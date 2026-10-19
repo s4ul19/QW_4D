@@ -16,6 +16,7 @@
 \definecolor{sncolor}{rgb}{0.35,0.67,0.67}
 \FXRegisterAuthor{sn}{asn}{\color{sncolor}SN}
 
+
 \geometry{margin=2.5cm}
 \onehalfspacing
 \graphicspath{{Imgs/}}
@@ -57,26 +58,64 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Resumen}
 
-Las caminatas cuánticas discretas en el tiempo (DTQW) son análogos cuánticos de las caminatas aleatorias clásicas.
-Un estudio reciente de un modelo bidimensional con un qubit como grado de libertad interno encontró señales de caos cuántico sensibles a la geometría del billar~\cite{alonso-lobo2025simplest}. 
-En esta tesis se estudia un modelo de DTQW sobre billares bidimensionales con una moneda de cuatro dimensiones (un qudit). 
-Se comparan un rectángulo y un octavo del estadio de Sinaí, empleando distintas monedas y analizando las estadísticas espectrales y la dinámica espacial de la caminata.
+En una caminata cuántica discreta en el tiempo (DTQW), la moneda determina cómo se combinan las direcciones de movimiento y las condiciones de frontera establecen la inversión de dirección al llegar al borde del billar. Un trabajo previo con una moneda de dos dimensiones encontró firmas de caos cuántico sensibles a la geometría del billar~\cite{alonso-lobo2025simplest}. En esta tesis se pregunta si la geometría y las condiciones de frontera bastan para determinar la aparición de dichas firmas cuando la moneda tiene cuatro dimensiones.
 
-Los resultados muestran que la geometría del billar, por sí sola, no es una condición necesaria ni suficiente para observar señales de caos cuántico: 
-algunas monedas producen repulsión de niveles en el rectángulo, mientras que otras conservan una estructura espectral regular en el billar de Sinaí. 
-En particular, cuando la moneda es diagonal por bloques y no mezcla las direcciones horizontales con las verticales, la caminata bidimensional se descompone en caminatas unidimensionales a lo largo de filas y columnas. 
-La comparación entre monedas permite explorar cómo la mezcla de direcciones influye en la dinámica y en las correlaciones espectrales.
+Se estudian caminatas sobre un rectángulo y un octavo del billar de Sinaí y se comparan distintas monedas unitarias de cuatro dimensiones. La dinámica se examina mediante distribuciones de espaciamientos, el factor de forma espectral y observables de la dinámica espacial (IPR).
 
-\begin{itemize}
-  \item Caminatas cuánticas discretas (DTQWs) en billares.
-  \item Caos cuántico.
-  \item Caos en el billar rectángular e integrabilidad en el billar de Sinaí
-  \item Integrabilidad en los billares para cualquier geometría.
-  \item La mezcla de las direcciones del caminante como vía para inducir caos
-  \item Conclusiones.
-\end{itemize}
+Los resultados muestran que, en los casos estudiados, la geometría no determina por sí sola las firmas espectrales de caos cuántico: algunas monedas producen repulsión de niveles en el rectángulo, mientras que otras mantienen espectros con degeneraciones o sin repulsión universal en el billar de Sinaí. Para monedas diagonales por bloques que no acoplan las direcciones horizontales con las verticales, se demuestra que la caminata se descompone en caminatas unidimensionales sobre filas y columnas. En conjunto, las comparaciones muestran que las firmas espectrales dependen tanto de la moneda elegida como de la geometría del billar.
+
+
 \clearpage
 \tableofcontents
+
+\clearpage
+\pagenumbering{arabic}
+
+\chapter{Introducción}
+
+\chapter{Caminatas cuánticas discretas en billares}
+
+\chapter{Caos cuántico e indicadores espectrales}
+
+\chapter{Firmas de caos cuántico, comparación entre geometrías y monedas}
+
+\section{Configuraciones estudiadas}
+
+Se describen las geometrías y las monedas unitarias de cuatro dimensiones empleadas en las simulaciones.
+
+\section{Resultados espectrales en el billar rectangular}
+
+Se presentan las distribuciones de cuasifases, la distribución de espaciamientos $P(s)$ y el factor de forma espectral para las distintas monedas en el rectángulo. Se distinguen los casos con repulsión de niveles de aquellos con degeneraciones o estadísticas próximas a Poisson.
+
+\section{Resultados espectrales en el billar de Sinaí}
+
+Se presentan los mismos indicadores para las distintas monedas en el billar de Sinaí. Se distinguen los casos con estadísticas compatibles con COE o CUE de aquellos que conservan degeneraciones o no muestran repulsión de niveles claras.
+
+\section{Comparación entre geometrías y monedas}
+
+Se discuten los resultados para una misma moneda en ambas geometrías para un caso donde ambos estadios presenten caos y para un caso donde solo el Sinaí vea caos. Se examina el acoplamiento entre las direcciones horizontales y verticales como posible factor de las diferencias observadas.
+\section{IPR espacial en la evolución y en los eigenestados}
+
+Se estudia la evolución temporal del IPR espacial para estados iniciales localizados y deslocalizados. También se presenta el IPR espacial de los eigenestados del operador de evolución en función de sus cuasifases, para comparar su concentración espacial entre monedas con comportamientos espectrales distintos. El IPR se interpreta como una medida complementaria y no como una prueba independiente de caos cuántico.
+
+\chapter{Monedas con dinámica reducible a caminatas unidimensionales}
+
+\section{Monedas que conservan los subespacios horizontal y vertical}
+
+Se consideran monedas diagonales por bloques en la base de direcciones $(R,L,U,D)$, de la forma $C=C_{RL}\oplus C_{UD}$. Se muestra que esta estructura conserva por separado el movimiento horizontal y el vertical.
+\section{Descomposición de la caminata en segmentos unidimensionales}
+
+Se demuestra que, para estas monedas de la sección pasada, el operador de evolución se descompone en caminatas sobre las filas y columnas. La geometría determina las longitudes y multiplicidades de dichos segmentos.
+
+\section{Espectro de un segmento con fronteras reflectantes}
+
+Se obtiene el espectro de una caminata sobre un segmento finito con una moneda unitaria de dos dimensiones y reflexión en los extremos. Este resultado proporciona los espectros que forman la caminata bidimensional reducible; el caso de moneda diagonal permite examinar allí mismo las degeneraciones asociadas con segmentos de igual longitud.
+
+\section{Verificación numérica en el rectángulo y en el billar de Sinaí}
+
+Se comparan los espectros calculados a partir de la descomposición analítica con los obtenidos numéricamente en ambas geometrías. La concordancia corrobora las expresiones derivadas y permite interpretar los casos de moneda diagonal dentro de los resultados del capítulo anterior.
+
+\chapter{Conclusiones}
 
 \bibliographystyle{unsrt}
 \bibliography{ref}
