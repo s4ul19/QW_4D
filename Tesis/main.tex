@@ -7,6 +7,7 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{cite}
@@ -58,14 +59,14 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Resumen}
 
-En una caminata cuántica discreta en el tiempo (DTQW), la moneda determina cómo se combinan las direcciones de movimiento y las condiciones de frontera establecen la inversión de dirección al llegar al borde del billar. Un trabajo previo con una moneda de dos dimensiones encontró firmas de caos cuántico sensibles a la geometría del billar~\cite{alonso-lobo2025simplest}. En esta tesis se pregunta si la geometría y las condiciones de frontera bastan para determinar la aparición de dichas firmas cuando la moneda tiene cuatro dimensiones.
+En una caminata cuántica discreta en el tiempo (DTQW) sobre billares, la moneda determina cómo se combinan las direcciones de movimiento y las condiciones de frontera establecen la inversión de dirección al llegar al borde del billar. Un trabajo previo con una moneda de dos dimensiones encontró firmas de caos cuántico sensibles a la geometría del billar~\cite{alonso-lobo2025simplest}. En esta tesis se investiga cómo emerge el caos cuántico en las DTQW sobre billares cuando la moneda tiene cuatro dimensiones.
 
-Se estudian caminatas sobre un rectángulo y un octavo del billar de Sinaí y se comparan distintas monedas unitarias de cuatro dimensiones. La dinámica se examina mediante distribuciones de espaciamientos, el factor de forma espectral y observables de la dinámica espacial (IPR).
+Se estudian caminatas sobre un rectángulo y un octavo del billar de Sinaí y se comparan distintas monedas. La dinámica se examina mediante distribuciones de espaciamientos, el factor de forma espectral y el IPR espacial.
 
-Los resultados muestran que, en los casos estudiados, la geometría no determina por sí sola las firmas espectrales de caos cuántico: algunas monedas producen repulsión de niveles en el rectángulo, mientras que otras mantienen espectros con degeneraciones o sin repulsión universal en el billar de Sinaí. Para monedas diagonales por bloques que no acoplan las direcciones horizontales con las verticales, se demuestra que la caminata se descompone en caminatas unidimensionales sobre filas y columnas. En conjunto, las comparaciones muestran que las firmas espectrales dependen tanto de la moneda elegida como de la geometría del billar.
-
+Los resultados muestran que las firmas espectrales de caos cuántico dependen tanto de la moneda como de la geometría del billar: algunas monedas producen repulsión de niveles en el rectángulo, mientras que otras mantienen espectros sin repulsión universal en el billar de Sinaí. En particular, con monedas diagonales por bloques, la caminata se reduce a caminatas unidimensionales sobre filas y columnas.
 
 \clearpage
+
 \tableofcontents
 
 \clearpage
@@ -77,43 +78,204 @@ Los resultados muestran que, en los casos estudiados, la geometría no determina
 
 \chapter{Caos cuántico e indicadores espectrales}
 
-\chapter{Firmas de caos cuántico, comparación entre geometrías y monedas}
+\chapter{Integrabilidad con monedas diagonales por bloques}
+\section{Descomposición de la caminata bidimensional en caminatas unidimensionales}
 
-\section{Configuraciones estudiadas}
+Se presenta la moneda diagonal por bloques y se muestra que la caminata resultante no mezcla las direcciones verticales con las horizontales.
+Se muestra que el operador de evolución se descompone en una suma directa de caminatas unidimensionales independientes, una por cada segmento de fila o columna.
+Concluir la sección comentando que el espectro de la caminata bidimensional es la unión de los espectros de esos segmentos. La geometría determina sus longitudes y multiplicidades.
 
-Se describen las geometrías y las monedas unitarias de cuatro dimensiones empleadas en las simulaciones.
+\begin{equation}
+  C_{\mathrm{2D}}=C_1\oplus C_2
+  =\begin{pmatrix}C_1&0\\0&C_2\end{pmatrix},
+  \qquad C_1,C_2\in U(2),
+  \label{eq:moneda-diagonal-bloques}
+\end{equation}
+\begin{equation}
+  U
+  =\bigoplus_{r\in V}U_{|r|}(C_1)
+   \oplus\bigoplus_{r\in H}U_{|r|}(C_2).
+  \label{eq:descomposicion-en-tramos}
+\end{equation}
+\newpage
+\section{Derivación del espectro 1D y ausencia de firmas caóticas}
 
-\section{Resultados espectrales en el billar rectangular}
+En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
+Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos cuántico.
 
-Se presentan las distribuciones de cuasifases, la distribución de espaciamientos $P(s)$ y el factor de forma espectral para las distintas monedas en el rectángulo. Se distinguen los casos con repulsión de niveles de aquellos con degeneraciones o estadísticas próximas a Poisson.
+\begin{equation}
+  C=e^{i\alpha}
+  \begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
+  \qquad |a|^2+|b|^2=1.
+  \label{eq:moneda-tramo-reflectante}
+\end{equation}
+\begin{equation}
+  \lambda_{m,\pm}=e^{i\alpha}
+  \exp\!\left[\pm i\arccos\!\left(|a|\cos\frac{\pi m}{n}\right)\right],
+  \qquad m=1,\ldots,n-1,
+  \label{eq:espectro-banda-tramo}
+\end{equation}
+\begin{equation}
+  \lambda_{\mathrm{ext},\pm}
+  =e^{i\alpha}\left(i\operatorname{Im}b
+  \pm\sqrt{1-(\operatorname{Im}b)^2}\right).
+  \label{eq:espectro-extremos-tramo}
+\end{equation}
 
-\section{Resultados espectrales en el billar de Sinaí}
+Donde $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{ext,\pm}$ los eigenvalores de los bordes.
 
-Se presentan los mismos indicadores para las distintas monedas en el billar de Sinaí. Se distinguen los casos con estadísticas compatibles con COE o CUE de aquellos que conservan degeneraciones o no muestran repulsión de niveles claras.
+\chapter{Firmas de caos cuántico en billares}
 
-\section{Comparación entre geometrías y monedas}
+\section{Configuraciones y monedas seleccionadas}
 
-Se discuten los resultados para una misma moneda en ambas geometrías para un caso donde ambos estadios presenten caos y para un caso donde solo el Sinaí vea caos. Se examina el acoplamiento entre las direcciones horizontales y verticales como posible factor de las diferencias observadas.
-\section{IPR espacial en la evolución y en los eigenestados}
+Se inicia comentando que la dinámica de la caminata es sensible a la elección del operador moneda. En este trabajo se consideran dos monedas: la de Grover (\texttt{g}) y una matriz diagonal rotada metidante una matriz unitaria del CUE (\texttt{upu}).
 
-Se estudia la evolución temporal del IPR espacial para estados iniciales localizados y deslocalizados. También se presenta el IPR espacial de los eigenestados del operador de evolución en función de sus cuasifases, para comparar su concentración espacial entre monedas con comportamientos espectrales distintos. El IPR se interpreta como una medida complementaria y no como una prueba independiente de caos cuántico.
+\section{Estadística espectral en los dos billares}
 
-\chapter{Monedas con dinámica reducible a caminatas unidimensionales}
+La comparación de las monedas en cada billar permite examinar si la geometría basta para determinar las firmas espectrales de caos cuántico. Se mostrarán, para cada billar considerado, los resultados correspondientes a las monedas seleccionadas.
+\subsection{Billar rectangular}
 
-\section{Monedas que conservan los subespacios horizontal y vertical}
+En el rectángulo, una misma geometría presenta estadísticas espectrales diferentes según la moneda empleada. Mostrar las figuras de $P(s)$, DoS y SFF e incluir las siguientes observaciones:
+\begin{itemize}
+  \item Para \texttt{g}, las estadísticas son próximas a Poisson.
+  \item Para \texttt{upu} se observa repulsión de niveles y una tendencia cercana a COE.
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{DoSOriginal_Grover_Rect.pdf}\par\smallskip
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{Ps_Grover_Rect.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{SFF_Grover_Rect.pdf}
+  \end{minipage}
+  \caption{Estadística espectral de la caminata con moneda de Grover en el rectángulo. Arriba: densidad de estados (DoS); abajo: distribución de espaciamientos $P(s)$ (izquierda) y factor de forma espectral (derecha).}
+  \label{fig:espectro-grover-rect}
+\end{figure}
 
-Se consideran monedas diagonales por bloques en la base de direcciones $(R,L,U,D)$, de la forma $C=C_{RL}\oplus C_{UD}$. Se muestra que esta estructura conserva por separado el movimiento horizontal y el vertical.
-\section{Descomposición de la caminata en segmentos unidimensionales}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{DoSOriginal_upu_Rect.pdf}\par\smallskip
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{Ps_upu_Rect.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{SFF_upu_Rect.pdf}
+  \end{minipage}
+  \caption{Estadística espectral de la caminata con moneda \texttt{upu} en el rectángulo. Arriba: densidad de estados (DoS); abajo: distribución de espaciamientos $P(s)$ (izquierda) y factor de forma espectral (derecha).}
+  \label{fig:espectro-upu-rect}
+\end{figure}
 
-Se demuestra que, para estas monedas de la sección pasada, el operador de evolución se descompone en caminatas sobre las filas y columnas. La geometría determina las longitudes y multiplicidades de dichos segmentos.
+Acabar la subsección destacando que el rectángulo no fija por sí solo una estadística espectral.
 
-\section{Espectro de un segmento con fronteras reflectantes}
+\clearpage
 
-Se obtiene el espectro de una caminata sobre un segmento finito con una moneda unitaria de dos dimensiones y reflexión en los extremos. Este resultado proporciona los espectros que forman la caminata bidimensional reducible; el caso de moneda diagonal permite examinar allí mismo las degeneraciones asociadas con segmentos de igual longitud.
+\subsection{Billar de Sinaí}
 
-\section{Verificación numérica en el rectángulo y en el billar de Sinaí}
+En el billar de Sinaí, la elección de moneda también cambia la estadística a la que se aproximan los espectros. Mostrar las figuras de $P(s)$, DoS y SFF e incluir las siguientes observaciones:
+\begin{itemize}
+  \item Para \texttt{g}, las estadísticas son próximas a COE.
+  \item Para \texttt{upu} las estadísticas son próximas a CUE.
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{DoSOriginal_Grover_Sinai.pdf}\par\smallskip
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{Ps_Grover_Sinai.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{SFF_Grover_Sinai.pdf}
+  \end{minipage}
+  \caption{Estadística espectral de la caminata con moneda de Grover en el billar de Sinaí. Arriba: densidad de estados (DoS); abajo: distribución de espaciamientos $P(s)$ (izquierda) y factor de forma espectral (derecha).}
+  \label{fig:espectro-grover-sinai}
+\end{figure}
 
-Se comparan los espectros calculados a partir de la descomposición analítica con los obtenidos numéricamente en ambas geometrías. La concordancia corrobora las expresiones derivadas y permite interpretar los casos de moneda diagonal dentro de los resultados del capítulo anterior.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{DoSOriginal_upu_Sinai.pdf}\par\smallskip
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{Ps_upu_Sinai.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{SFF_upu_Sinai.pdf}
+  \end{minipage}
+  \caption{Estadística espectral de la caminata con moneda \texttt{upu} en el billar de Sinaí. Arriba: densidad de estados (DoS); abajo: distribución de espaciamientos $P(s)$ (izquierda) y factor de forma espectral (derecha).}
+  \label{fig:espectro-upu-sinai}
+\end{figure}
+
+Enfatizar que la elección de moneda influye sobre que ensamble de RMT se aproxima la estadística espectral de la caminata.
+
+\clearpage
+
+\section{Localización en DTQWs}
+
+Se empieza por motivar el uso del IPR: aporta información sobre la concentración espacial que no se obtiene de los indicadores espectrales. Se mostrará cómo varía el IPR durante la evolución de un estado dado y se presentará el IPR de los eigenestados del operador de evolución frente a sus eigenfases. La comparación permitirá discutir si las monedas con distintas firmas espectrales muestran también diferencias espaciales significativas (mayor localización en el rectángulo, mayor deslocalización en el sinaí), ademas de evaluar si este indicador, por sí solo, es capaz de diferenciar una dinámica integrable de una caótica.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{IPR_Grover_Rect.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{IPR_upu_Rect.pdf}
+  \end{minipage}
+  \caption{IPR espacial de los autoestados frente a sus eigenfases en el rectángulo. Izquierda: moneda de Grover; derecha: moneda \texttt{upu}.}
+  \label{fig:ipr-rect}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{IPR_Grover_Sinai.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering\includegraphics[width=\linewidth]{IPR_upu_Sinai.pdf}
+  \end{minipage}
+  \caption{IPR espacial de los autoestados frente a sus eigenfases en el billar de Sinaí. Izquierda: moneda de Grover; derecha: moneda \texttt{upu}.}
+  \label{fig:ipr-sinai}
+\end{figure}
+
+\clearpage
+
+\chapter{Poder coherente \texorpdfstring{$L_1$}{L1} de la moneda y firmas espectrales}
+
+Partiendo del resultado del capítulo 4, se examina si la capacidad de la moneda para generar superposiciones en la base de direcciones guarda relación con las firmas espectrales observadas. Para ello se emplea el poder coherente $L_1$.
+
+\section{Definición e interpretación de \texorpdfstring{$L_1$}{L1}}
+Se define $L_1$ como el promedio normalizado de la coherencia generada por la moneda a partir de los estados de la base de direcciones. Se interpreta a la $L_1$ como una forma de cuantificar el mezclado de direcciones que induce la moneda. Se explica también cómo se seleccionan monedas del ensamble COE en distintos intervalos de $L_1$ para analizar si la dinámica es sensible a este indicador.
+
+\section{Resultados sobre los billares}
+
+Se presentan $P(s)$ y SFF para los dos billares y para monedas del ensamble COE agrupadas en intervalos de $L_1$. Se muestran los intervalos $0\leq L_1<0.1$ y $0.9\leq L_1\leq 1$ para el rectángulo y el billar de Sinaí. Se discute cómo varían las estadísticas espectrales entre los intervalos: para valores de $L_1$ cercanos a 0 aparecen degeneraciones y, en el rectángulo, una semejanza con Poisson; para valores altos, las muestras estudiadas se aproximan a las referencias de RMT. A partir de los resultados mostrados, se afirma que la dinámica es sensible al valor de $L_1$ de la moneda. Sin embargo, el indicador no es suficiente por sí solo para diagnosticar caos, puesto que la moneda de Grover constituye un caso particular donde $L_1=1$
+(Considerar en un apéndice la discusión relacionada con la moneda de grover.)
+
+\begin{figure}[p]
+  \centering
+  {\small $0\leq L_1<0.1$\par\smallskip}
+  \includegraphics[width=0.49\textwidth,trim=0 218bp 456bp 0,clip]{Mixing_Rect_Interval_0_01.pdf}\hfill
+  \includegraphics[width=0.49\textwidth,trim=456bp 218bp 0 0,clip]{Mixing_Rect_Interval_0_01.pdf}\par\smallskip
+  \includegraphics[width=0.75\textwidth,trim=456bp 0 0 218bp,clip]{Mixing_Rect_Interval_0_01.pdf}\par\medskip
+  {\small $0.9\leq L_1\leq 1$\par\smallskip}
+  \includegraphics[width=0.49\textwidth,trim=0 213.5bp 456bp 0,clip]{Mixing_Rect_Interval_09_10.pdf}\hfill
+  \includegraphics[width=0.49\textwidth,trim=456bp 213.5bp 0 0,clip]{Mixing_Rect_Interval_09_10.pdf}\par\smallskip
+  \includegraphics[width=0.75\textwidth,trim=456bp 0 0 213.5bp,clip]{Mixing_Rect_Interval_09_10.pdf}
+  \caption{Estadística espectral de las caminatas en el rectángulo para los dos intervalos de $L_1$ indicados. En cada intervalo se muestran la distribución de fases, $P(s)$ y el factor de forma espectral.}
+  \label{fig:mezclado-rect-intervalos}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  {\small $0\leq L_1<0.1$\par\smallskip}
+  \includegraphics[width=0.49\textwidth,trim=0 213.5bp 456bp 0,clip]{Mixing_Sinai_Interval_00_01.pdf}\hfill
+  \includegraphics[width=0.49\textwidth,trim=456bp 213.5bp 0 0,clip]{Mixing_Sinai_Interval_00_01.pdf}\par\smallskip
+  \includegraphics[width=0.75\textwidth,trim=456bp 0 0 213.5bp,clip]{Mixing_Sinai_Interval_00_01.pdf}\par\medskip
+  {\small $0.9\leq L_1\leq 1$\par\smallskip}
+  \includegraphics[width=0.49\textwidth,trim=0 213.5bp 456bp 0,clip]{Mixing_Sinai_Interval_09_10.pdf}\hfill
+  \includegraphics[width=0.49\textwidth,trim=456bp 213.5bp 0 0,clip]{Mixing_Sinai_Interval_09_10.pdf}\par\smallskip
+  \includegraphics[width=0.75\textwidth,trim=456bp 0 0 213.5bp,clip]{Mixing_Sinai_Interval_09_10.pdf}
+  \caption{Estadística espectral de las caminatas en el billar de Sinaí para los dos intervalos de $L_1$ indicados. En cada intervalo se muestran la distribución de fases, $P(s)$ y el factor de forma espectral.}
+  \label{fig:mezclado-sinai-intervalos}
+\end{figure}
 
 \chapter{Conclusiones}
 
