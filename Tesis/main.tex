@@ -76,6 +76,59 @@ Los resultados muestran que las firmas espectrales de caos cuántico dependen ta
 
 \chapter{Caminatas cuánticas discretas en billares}
 
+Las caminatas cuánticas discretas en el tiempo (DTQW) describen la evolución de un caminante sobre un espacio discreto de posiciones mediante la aplicación sucesiva de un operador unitario. El caminante posee grados de libertad internos asociados a las direcciones de movimiento. Cada paso consta de dos operaciones: un operador moneda que actúa únicamente sobre el estado interno y un operador de desplazamiento que mueve al caminante según ese estado. Las amplitudes de probabilidad asociadas a los distintos recorridos pueden interferir, dando lugar a distribuciones de probabilidad diferentes de las de una caminata aleatoria clásica~\cite{aharonov2001quantum}.
+
+En este trabajo se consideran caminatas sobre una red cuadrada confinada a la geometría de un billar. Las posiciones accesibles forman el conjunto $\Omega\subset\mathbb Z^2$, con $N=|\Omega|$ sitios, y los cuatro estados de moneda corresponden a las direcciones derecha, izquierda, arriba y abajo. Los espacios de Hilbert de posición y moneda son, respectivamente,
+\begin{equation}
+  \mathcal H_p
+  = \operatorname{span}\{|v\rangle : v\in\Omega\}
+  \simeq \mathbb C^N,
+  \qquad
+  \mathcal H_c
+  = \operatorname{span}\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}
+  \simeq \mathbb C^4.
+\end{equation}
+El estado del caminante pertenece al espacio
+\begin{equation}
+  \mathcal H = \mathcal H_c\otimes\mathcal H_p,
+  \qquad \dim\mathcal H=4N,
+\end{equation}
+y puede escribirse como
+\begin{equation}
+  |\psi_t\rangle
+  = \sum_{v\in\Omega}\sum_{c\in\{R,L,U,D\}}
+    \psi_c(v,t)|c,v\rangle,
+  \qquad
+  \sum_{v,c}|\psi_c(v,t)|^2=1,
+\end{equation}
+donde $|c,v\rangle=|c\rangle\otimes|v\rangle$ y $\psi_c(v,t)$ es la amplitud de probabilidad asociada a la dirección $c$ en el sitio $v$.
+
+La evolución en cada paso consiste en aplicar primero el operador moneda y después el operador de desplazamiento. Por tanto,
+\begin{equation}
+  |\psi_{t+1}\rangle=U|\psi_t\rangle,
+  \qquad
+  U=S(C\otimes\mathbb I_p),
+\end{equation}
+donde $C\in U(4)$ actúa sobre el espacio de moneda y $\mathbb I_p$ es la identidad en el espacio de posición. Se emplea la misma moneda en todos los sitios y en cada paso temporal. El operador $S$ desplaza las amplitudes según los vectores
+\begin{equation}
+  \boldsymbol\delta_R=(1,0),\qquad
+  \boldsymbol\delta_L=(-1,0),\qquad
+  \boldsymbol\delta_U=(0,1),\qquad
+  \boldsymbol\delta_D=(0,-1).
+\end{equation}
+
+Para confinar la caminata al billar se imponen condiciones de frontera reflectantes. Si el desplazamiento conduce a otro sitio de $\Omega$, el caminante avanza conservando su dirección. Si conduce fuera del billar, permanece en el mismo sitio y su dirección se invierte. Denotando por $\overline c$ la dirección opuesta a $c$, la acción del operador de desplazamiento es
+\begin{equation}
+  S|c,v\rangle=
+  \begin{cases}
+    |c,v+\boldsymbol\delta_c\rangle,
+      &v+\boldsymbol\delta_c\in\Omega,\\[2pt]
+    |\overline c,v\rangle,
+      &v+\boldsymbol\delta_c\notin\Omega.
+  \end{cases}
+\end{equation}
+
+El operador $S$ es unitario porque permuta los estados de la base de posición y moneda. Como se emplea la misma moneda en todos los sitios y en cada paso temporal, la geometría del billar interviene en el operador de evolución $U$ únicamente a través de $S$, que determina tanto los desplazamientos permitidos como las reflexiones en la frontera.
 \chapter{Caos cuántico e indicadores espectrales}
 
 \chapter{Integrabilidad con monedas diagonales por bloques}
