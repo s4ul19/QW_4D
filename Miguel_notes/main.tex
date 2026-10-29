@@ -62,12 +62,10 @@ in a Rectangular Billiard\par}
 {\Large From the shift and the geometry\\
 to the coin and the full Floquet operator\par}
 \vspace{16mm}
-{\large Consolidated teaching notes\par}
-{\large From established constructions to correctly qualified spectra\par}
+{\large Notes on progress...\par}
 \vspace{3mm}
-{\large\color{accent} Revision: the 16-cell coin map and the routes out of exact solvability\par}
 \vfill
-\begin{lesson}{The question guiding the notes}
+\begin{lesson}{The guiding question:}
 Which structures are fixed by the shift and the rectangle, which of
 them survive a chosen coin, and what can those surviving structures
 tell us about exact solvability and spectral statistics?
@@ -81,7 +79,7 @@ tell us about exact solvability and spectral statistics?
 \chapter*{A reading guide for the student}
 \addcontentsline{toc}{chapter}{A reading guide for the student}
 
-A coin, a transport rule, and a domain play different roles. These notes
+A coin, the shift, and a domain play different roles. These notes
 construct the complete quantum walk in stages. The first four stages
 identify what is present before a coin has been selected; the last three
 read every coin through the same geometric lens and then ask how each
@@ -106,59 +104,12 @@ Stage & Question & Ingredients fixed so far\\\midrule
 \end{tabularx}
 \end{center}
 
-\textbf{What is new in this revision.}
-(i) Chapter~\ref{ch:sixteen} is new. It defines the coherent channels
-\(h_\pm,v_\pm\) (the combinations of two opposite directions that a wall
-returns as themselves) and the envelope of a state (its spatial profile).
-It shows why the question ``does a coin keep the standing waves of the
-rectangle?'' reduces to the sixteen entries of the coin matrix. It also
-states which bases may be used to draw that \(4\times4\) square: any
-basis gives a valid square, but only the coherent basis carries the
-allowed/forbidden reading. Every coin is then drawn in this form.
-(ii) The designed (modified) Fourier family is removed; the unperturbed
-Fourier coin is added, together with an explicit gauge transformation
-proving that its compass assignment is exactly solvable.
-(iii) Two Bell matrices are now distinguished: \(B_{\mathrm I}\), the
-matrix of the earlier report, and \(B_{\mathrm{II}}\), the matrix that
-reproduces the project's Bell IPR figure. The modified Bell family
-\(B_{\mathrm{II}}e^{-i\theta V}\) is explained.
-(iv) The latest results computed for this revision (IPR reproductions, the 31\(\times\)23
-Grover and Bell sweeps, symmetry searches) are included with their
-figures, collected in the folder \texttt{Figures}.
-(v) Chapter~\ref{ch:mechanisms} assembles the different routes to the
-breaking of integrability observed so far. Whether these routes are one
-mechanism in disguise, for the fixed geometry and shift, is stated as an
-open question and deliberately not resolved here.
-
-Chapters~\ref{ch:general}--\ref{ch:mechanisms} form the main teaching
-sequence. The appendices keep the wider established record: gauge
-equivalences, advanced diagnostics, supplementary tested constructions
-and the older random-coin interpolation.
-
-We assume finite-dimensional linear algebra, complex amplitudes, tensor
-products and elementary quantum mechanics. Direct sums, projectors,
-coherent coin combinations and antiunitary operations are explained where
-needed.
-
 \textbf{One main convention.} Directions are ordered \((R,L,U,D)\).
 The same \(4\times4\) coin acts first at every site; the shift acts
 second. On an existing link it keeps the direction label. On a blocked
 move it stays at the site and reverses direction with amplitude \(+1\).
 No periodic boundary or extra reflection phase is used. The older
 flip-flop/self-loop model is kept separate (Appendix~\ref{app:legacy}).
-
-\textbf{Evidence labels.} An \emph{exact result} is an algebraic identity
-or construction displayed in the text. A \emph{recorded numerical result}
-was reported as executed in an earlier project export, with its geometry,
-resolution and spectral selection. Results marked \emph{computed for this revision} were obtained with an
-independent Python/NumPy implementation of exactly the convention above;
-their sizes and filters are stated where they are used. A verified value of a statistic does not
-automatically verify a broader interpretation. The complete
-classification of either Bell walk remains open.
-
-\textbf{Scope.} The core domain is a nonsquare rectangle; square controls
-are labeled, disk and triangle results are outside scope.
-Appendix~\ref{app:sources} gives the source and figure inventory.
 
 \begingroup
 \setlength{\parskip}{0pt}
@@ -3915,13 +3866,6 @@ windows. They do not supply an all-size theorem, a universal threshold
 in either mixing measure, or a complete spectral-form-factor and
 eigenvector characterization. The long-range studies of other
 geometries in E4 do not fill that gap for the rectangle.
-
-The older selected-coin interpolation is not an ensemble-averaged curve
-or a proof of a universal crossover. E3's 30-seed endpoint scan is quoted
-separately; it is not an ensemble curve at every coupling. Proposed integrability-preserving
-phase offsets were not verified in those exports and are not adopted
-as established examples. No novelty claim is made in these teaching
-notes, and no new literature search was performed for it.
 
 \clearpage
 \begin{thebibliography}{9}
