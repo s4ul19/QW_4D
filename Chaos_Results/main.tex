@@ -764,6 +764,145 @@ rectangular y de Sinaí, indicados al pie de cada figura.
     \label{fig:l1-sinai-09-10}
 \end{figure}
 
+\section{Complejidad de Krylov de la caminata Hadamard en una línea finita} % {{{*
+\label{sec:krylov-hadamard-line}
+
+Consideramos $L$ sitios, $x=0,\ldots,L-1$, y dos estados de moneda,
+$\ket{R}$ y $\ket{L}$. Conservamos la reflexión del
+modelo de billares: al intentar salir, el caminante permanece en el mismo
+sitio e invierte su dirección. Un paso es
+\begin{equation}
+ U=S(H\otimes I_L),\qquad
+ H=\frac{1}{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix},\qquad
+ S\ket{R,x}=\begin{cases}\ket{R,x+1},&x<L-1,\\\ket{L,x},&x=L-1,\end{cases}
+ \quad
+ S\ket{L,x}=\begin{cases}\ket{L,x-1},&x>0,\\\ket{R,x},&x=0.\end{cases}
+ \label{eq:hadamard-line-walk}
+\end{equation}
+El espacio completo tiene dimensión $2L$. La complejidad depende también
+del estado inicial normalizado $\ket{\psi_0}$; a continuación damos una
+expresión exacta para cualquier estado, incluyendo una realización Haar
+en el espacio completo.
+
+\paragraph{Espectro y pesos iniciales.}
+Si $\ket{\phi_z}=\sum_x(r_x\ket{R,x}+\ell_x\ket{L,x})$ tiene autovalor $z$,
+las ecuaciones de evolución y las dos paredes dan
+\begin{equation}
+ \begin{pmatrix}r_{x+1}\\\ell_{x+1}\end{pmatrix}
+ =T(z)\begin{pmatrix}r_x\\\ell_x\end{pmatrix},\qquad
+ T(z)=\begin{pmatrix}
+ (\sqrt2 z)^{-1}&(\sqrt2 z)^{-1}\\
+ (\sqrt2 z)^{-1}&(\sqrt2 z)^{-1}-\sqrt2 z
+ \end{pmatrix},\qquad
+ \ell_0=(1-\sqrt2 z)r_0,\quad
+ r_{L-1}=(\sqrt2 z-1)\ell_{L-1}.
+ \label{eq:hadamard-line-transfer}
+\end{equation}
+En particular, con $v(z)=(1,1-\sqrt2 z)^T$, la condición secular es
+$v(z)^T T(z)^{L-1}v(z)=0$ (la transpuesta aquí no conjuga).
+Como $\det T=-1$, Cayley--Hamilton factoriza esta condición como
+\begin{equation}
+ v^T T^{L-1}v
+ =2(z^2-\sqrt2 z+1)(-i)^{L-1}
+ \mathsf U_{L-1}\!\left(\frac{z-z^{-1}}{i\sqrt2}\right),
+ \label{eq:hadamard-line-secular}
+\end{equation}
+con $\mathsf U_j$ el polinomio de Chebyshev de segunda especie.
+Por tanto, los $2L$ autovalores, todos distintos, son
+\begin{equation}
+ \boxed{\quad z_{\mathrm e,\pm}=e^{\pm i\pi/4},\qquad
+ z_{m,\pm}=\pm\sqrt{1-\tfrac12\cos^2 k_m}
+              +\frac{i}{\sqrt2}\cos k_m,\qquad
+ k_m=\frac{m\pi}{L},\quad m=1,\ldots,L-1.\quad}
+ \label{eq:hadamard-line-spectrum}
+\end{equation}
+Los autovectores normalizados se obtienen de
+$(r_x,\ell_x)^T=\mathcal N_z T(z)^x v(z)$.
+Así, los pesos $w_a=|\braket{\phi_{z_a}}{\psi_0}|^2$ y los momentos
+\begin{equation}
+ \mu_s=\bra{\psi_0}U^s\ket{\psi_0}
+      =\sum_a w_a z_a^s,\qquad
+ \mu_0=1,\quad\mu_{-s}=\mu_s^*,\quad s\in\mathbb Z,
+ \label{eq:hadamard-line-moments}
+\end{equation}
+quedan determinados por sumas finitas explícitas.
+
+\paragraph{Dependencia temporal exacta.}
+Ortonormalizamos $\ket{\psi_0},U\ket{\psi_0},\ldots$ en ese orden para
+obtener $\ket{K_n}$. Sea $d$ el número de pesos espectrales no nulos,
+es decir, la dimensión cíclica de Krylov. Definimos
+\begin{equation}
+ G_n=(\mu_{k-j})_{j,k=0}^{n-1},\quad
+ \Delta_n=\det G_n,\quad\Delta_0=1,\qquad
+ b_n=(\mu_{n-j})_{j=0}^{n-1},\quad
+ c_n(t)=(\mu_{t-j})_{j=0}^{n-1}.
+ \label{eq:hadamard-line-gram}
+\end{equation}
+La proyección ortogonal del vector $U^n\ket{\psi_0}$ sobre los anteriores
+deja una norma cuadrada $\Delta_{n+1}/\Delta_n$.
+Su solapamiento normalizado con $U^t\ket{\psi_0}$ es, por el complemento
+de Schur,
+\begin{equation}
+ \braket{K_n}{U^t\psi_0}
+ =\frac{\displaystyle\det
+   \begin{pmatrix}G_n&c_n(t)\\b_n^\dagger&\mu_{t-n}\end{pmatrix}}
+  {\sqrt{\Delta_n\Delta_{n+1}}}.
+ \label{eq:hadamard-line-amplitude}
+\end{equation}
+En consecuencia, para todo tiempo entero $t\geq0$,
+\begin{equation}
+ \boxed{\quad
+ K(t)=\sum_{n=1}^{d-1}\frac{n}{\Delta_n\Delta_{n+1}}
+ \left|\det\begin{pmatrix}
+ G_n&c_n(t)\\ b_n^\dagger&\mu_{t-n}
+ \end{pmatrix}\right|^2,\qquad
+ 0\leq K(t)\leq\min(t,d-1).
+ \quad}
+ \label{eq:hadamard-line-complexity}
+\end{equation}
+Las ecuaciones~\eqref{eq:hadamard-line-spectrum}--\eqref{eq:hadamard-line-complexity}
+son una expresión analítica finita de la evolución, sin propagar la
+caminata paso a paso. En particular, $K(0)=0$ y
+$K(1)=1-|\mu_1|^2$. Para $L=1$, si ambos autovalores tienen soporte,
+se reduce a $K(t)=4w_+w_-\sin^2(\pi t/4)$; un autoestado da $K(t)=0$.
+
+Para un estado Haar completo, $(w_1,\ldots,w_{2L})$ tiene distribución
+$\operatorname{Dirichlet}(1,\ldots,1)$ y $d=2L$ con probabilidad uno.
+La misma fórmula describe cada realización; el promedio Haar exige
+promediar la expresión completa, pues sustituir $w_a$ por $1/(2L)$
+no equivale a promediar $K(t)$: la base de Krylov depende de esos pesos.
+
+\paragraph{Estimación a tiempos largos.}
+El espectro no degenerado permite evaluar exactamente el promedio temporal
+$\overline K=\lim_{T\to\infty}T^{-1}\sum_{t=0}^{T-1}K(t)$ por desfasado:
+\begin{equation}
+ \frac{\overline K}{d}
+ =\frac{1}{d}\sum_{n=0}^{d-1}n\sum_{a=1}^{d}
+ w_a\left|\braket{\phi_{z_a}}{K_n}\right|^2.
+ \label{eq:hadamard-line-long-time}
+\end{equation}
+Para Haar completo, evaluamos esta expresión con pesos Dirichlet y la
+base de Krylov de cada realización. Con 128 muestras independientes por
+longitud, obtenemos
+\begin{equation}
+ \mathbb E_{\mathrm{Haar}}\!\left[\frac{\overline K}{2L}\right]
+ =\begin{cases}
+ 0.3703\pm0.0008,&L=128,\\
+ 0.3704\pm0.0006,&L=256,
+ \end{cases}
+ \qquad\Longrightarrow\qquad
+ \boxed{\;\overline K/d\simeq0.37\quad\text{para un estado Haar típico}.\;}
+ \label{eq:hadamard-line-plateau-estimate}
+\end{equation}
+Los errores son errores estándar de la media; la desviación entre
+realizaciones a $L=256$ es $0.0067$. Se trata de una estimación para estas
+longitudes, no de un límite asintótico demostrado. La normalización usa
+$d=2L$. Con pesos exactamente iguales, en cambio, la completitud daría
+$\overline K/d=(d-1)/(2d)\to1/2$, que no es el promedio Haar.
+En un sistema finito $K(t)$ puede seguir oscilando: el valor estimado
+corresponde al promedio temporal, no a un límite puntual.
+% *}}}
+
 \bibliographystyle{apsrev4-2}
 \bibliography{ref}
 % *}}}
