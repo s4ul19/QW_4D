@@ -16,7 +16,9 @@
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \definecolor{sncolor}{rgb}{0.35,0.67,0.67}
 \FXRegisterAuthor{sn}{asn}{\color{sncolor}SN}
-\FXRegisterAuthor{cp}{acp}{\color{green}CP}
+\FXRegisterAuthor{cp}{acp}{\color{blue}CP}
+\definecolor{jacolor}{HTML}{C82800}
+\FXRegisterAuthor{ja}{aja}{\color{jacolor}JA}
 
 
 \geometry{margin=2.5cm}
@@ -106,7 +108,6 @@ Concluir la sección comentando que el espectro de la caminata bidimensional es 
    \oplus\bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
   \label{eq:descomposicion-en-tramos-esquema}
 \end{equation}
-% *}}}
 \snnote{Inicio de sección:}
 
 Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes. Esta descomposición se mantiene para cualquier geometría del billar con las condiciones de frontera reflectantes. Para demostrarlo, se identifican los subespacios invariantes asociados a los tramos horizontales y verticales de la red y se muestra cómo se organiza el operador de evolución sobre ellos.
@@ -124,8 +125,11 @@ En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una
 El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$, mientras que $C_v$ actúa sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$. Cada bloque puede combinar las dos direcciones de su eje, pero los bloques nulos fuera de la diagonal impiden que la moneda transfiera amplitud entre los sectores horizontal y vertical.
 
 El operador de desplazamiento $S$ también conserva la separación entre los sectores horizontal y vertical. En el interior del billar, las componentes asociadas a $|R\rangle$ y $|L\rangle$ se desplazan sobre una misma fila, mientras que las asociadas a $|U\rangle$ y $|D\rangle$ lo hacen sobre una misma columna. Cuando un desplazamiento conduce fuera del billar, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. Por tanto, como la moneda y el desplazamiento conservan esta separación, el operador de evolución $U=S(C\otimes\mathbb I_p)$ no acopla los ejes de movimiento.
+\janote{Los últimos tres párrafos me parece que elaboran la idea principal de ``Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes''. Por lo cual, sugiero fusionarlos en un sólo párrafo}
 
-En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar. Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.
+\janote{Desde aquí, dejé de entender. No sé qué sugerir para arreglar, porque no entendí los pasos lógicos de la derivación}
+
+En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar\janote{No entiendo este enunciado, por favor explicame por acá o whatsapp}. Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.
 
 A cada tramo horizontal $r\in\mathcal R_h$ le corresponde el subespacio
 \begin{equation}
@@ -149,8 +153,9 @@ La moneda actúa en cada sitio sin cambiar el eje de movimiento, mientras que el
   \qquad
   U\mathcal H_s^{(v)}\subseteq\mathcal H_s^{(v)}.
 \end{equation}
+\janote{No entendí nada de este párrafo y sospecho que la notación y terminología (especícamente, `tramos') se está complicando innecesariamente. Por favor, explicame Saul}
 
-El operador de evolución actúa de forma independiente sobre cada uno de los tramos. Como los subespacios asociados son invariantes, mutuamente ortogonales y abarcan todos los estados de la base, $U$ se descompone en una suma directa:
+El operador de evolución actúa de forma independiente sobre cada uno de los tramos. Como los subespacios asociados son invariantes\janote{bajo qué operación?}, mutuamente ortogonales\janote{lo entiendo, pero es obvio. Agregar una ecuación inline} y abarcan todos los estados de la base, $U$ se descompone en una suma directa:
 \begin{equation}
   U
   =
@@ -160,7 +165,8 @@ El operador de evolución actúa de forma independiente sobre cada uno de los tr
   \label{eq:descomposicion-en-tramos}
 \end{equation}
 Aquí, $U_r^{(h)}$ describe la evolución de los estados contenidos en el tramo horizontal $r$, mientras que $U_s^{(v)}$ describe la de los estados contenidos en el tramo vertical $s$. Ambos operadores actúan del mismo modo que $U$ sobre los estados de sus respectivos tramos. La invariancia de estos subespacios garantiza que la evolución no transfiere amplitud de un tramo a otro.
-
+\janote{Los tramos son cada fila y columna del billar?}
+% *}}}
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
 \snnote{Resumen de la sección\\
@@ -186,9 +192,8 @@ Se presenta una derivación analítica del resultado y se construye con él el e
   \label{eq:espectro-extremos-tramo-esquema}
 \end{equation}
 Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},\pm}$ son los eigenvalores adicionales.
-% *}}}
 
-\snnote{Inicio de Sección}
+\snnote{Inicio de Sección}% {{{*
 
 La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus tramos unidimensionales. Considere un tramo de $n$ sitios, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores y de estas condiciones de frontera, se obtendrá el espectro en función de la moneda y de la longitud del tramo.
 
@@ -533,6 +538,7 @@ La misma construcción se aplica al billar de Sinaí, identificando las longitud
 Así, el problema espectral puede resolverse a partir de las longitudes de los tramos y de los dos bloques de la moneda, para cualquier geometría del billar con las condiciones de frontera consideradas. Esto establece la integrabilidad en el sentido de la solubilidad del espectro: la geometría modifica las longitudes y multiplicidades de las caminatas unidimensionales, pero conserva su evolución independiente y permite obtener el espectro completo mediante las expresiones analíticas anteriores.
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
+% *}}}
 % *}}}
 % *}}}
 
