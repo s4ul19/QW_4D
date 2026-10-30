@@ -71,63 +71,471 @@ Los resultados muestran que las firmas espectrales de caos cuántico dependen ta
 \clearpage
 \pagenumbering{arabic}
 % *}}}
+
 \chapter{Introducción} % {{{*
+
 % *}}}
+
 \chapter{Caminatas cuánticas discretas en billares} % {{{*
+
 % *}}}
+
 \chapter{Caos cuántico e indicadores espectrales} % {{{*
 % *}}}
+
 \chapter{Integrabilidad con monedas diagonales por bloques} % {{{*
+
 \section{Descomposición de la caminata bidimensional en caminatas unidimensionales} % {{{*
 
-Se presenta la moneda diagonal por bloques y se muestra que la caminata resultante no mezcla las direcciones verticales con las horizontales.
+\snnote{Resumen propuesto:
+  Se presenta la moneda diagonal por bloques y se muestra que la caminata resultante no mezcla las direcciones verticales con las horizontales.
 Se muestra que el operador de evolución se descompone en una suma directa de caminatas unidimensionales independientes, una por cada segmento de fila o columna.
-Concluir la sección comentando que el espectro de la caminata bidimensional es la unión de los espectros de esos segmentos. La geometría determina sus longitudes y multiplicidades.
+Concluir la sección comentando que el espectro de la caminata bidimensional es la unión de los espectros de esos segmentos. La geometría determina sus longitudes y multiplicidades.}
 
+
+\snnote{Ecuaciones que deben aparecer}
 \begin{equation}
-  C_{\mathrm{2D}}=C_1\oplus C_2
-  =\begin{pmatrix}C_1&0\\0&C_2\end{pmatrix},
-  \qquad C_1,C_2\in U(2),
-  \label{eq:moneda-diagonal-bloques}
+  C=C_h\oplus C_v
+  =\begin{pmatrix}C_h&0\\0&C_v\end{pmatrix},
+  \qquad C_h,C_v\in U(2),
+  \label{eq:moneda-diagonal-bloques-esquema}
 \end{equation}
 \begin{equation}
   U
-  =\bigoplus_{r\in V}U_{|r|}(C_1)
-   \oplus\bigoplus_{r\in H}U_{|r|}(C_2).
+  =\bigoplus_{r\in\mathcal R_h}U_r^{(h)}
+   \oplus\bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
+  \label{eq:descomposicion-en-tramos-esquema}
+\end{equation}
+% *}}}
+\snnote{Inicio de sección:}
+
+Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes. Esta descomposición se mantiene para cualquier geometría del billar con las condiciones de frontera reflectantes. Para demostrarlo, se identifican los subespacios invariantes asociados a los tramos horizontales y verticales de la red y se muestra cómo se organiza el operador de evolución sobre ellos.
+
+En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una moneda de la forma
+\begin{equation}
+  C=C_h\oplus C_v
+  =\begin{pmatrix}
+    C_h & 0\\
+    0 & C_v
+  \end{pmatrix},
+  \qquad C_h,C_v\in U(2).
+  \label{eq:moneda-diagonal-bloques}
+\end{equation}
+El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$, mientras que $C_v$ actúa sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$. Cada bloque puede combinar las dos direcciones de su eje, pero los bloques nulos fuera de la diagonal impiden que la moneda transfiera amplitud entre los sectores horizontal y vertical.
+
+El operador de desplazamiento $S$ también conserva la separación entre los sectores horizontal y vertical. En el interior del billar, las componentes asociadas a $|R\rangle$ y $|L\rangle$ se desplazan sobre una misma fila, mientras que las asociadas a $|U\rangle$ y $|D\rangle$ lo hacen sobre una misma columna. Cuando un desplazamiento conduce fuera del billar, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. Por tanto, como la moneda y el desplazamiento conservan esta separación, el operador de evolución $U=S(C\otimes\mathbb I_p)$ no acopla los ejes de movimiento.
+
+En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar. Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.
+
+A cada tramo horizontal $r\in\mathcal R_h$ le corresponde el subespacio
+\begin{equation}
+  \mathcal H_r^{(h)}
+  =\operatorname{span}
+  \{|R,v\rangle,|L,v\rangle:v\in r\},
+  \qquad
+  \dim\mathcal H_r^{(h)}=2|r|,
+\end{equation}
+y a cada tramo vertical $s\in\mathcal R_v$,
+\begin{equation}
+  \mathcal H_s^{(v)}
+  =\operatorname{span}
+  \{|U,v\rangle,|D,v\rangle:v\in s\},
+  \qquad
+  \dim\mathcal H_s^{(v)}=2|s|.
+\end{equation}
+La moneda actúa en cada sitio sin cambiar el eje de movimiento, mientras que el desplazamiento mueve las amplitudes dentro del tramo o invierte su dirección en los extremos. Ninguna de estas operaciones transfiere amplitud a otro tramo. Por tanto, estos subespacios son invariantes bajo el operador de evolución:
+\begin{equation}
+  U\mathcal H_r^{(h)}\subseteq\mathcal H_r^{(h)},
+  \qquad
+  U\mathcal H_s^{(v)}\subseteq\mathcal H_s^{(v)}.
+\end{equation}
+
+El operador de evolución actúa de forma independiente sobre cada uno de los tramos. Como los subespacios asociados son invariantes, mutuamente ortogonales y abarcan todos los estados de la base, $U$ se descompone en una suma directa:
+\begin{equation}
+  U
+  =
+  \bigoplus_{r\in\mathcal R_h}U_r^{(h)}
+  \oplus
+  \bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
   \label{eq:descomposicion-en-tramos}
 \end{equation}
-\newpage
-% *}}}
+Aquí, $U_r^{(h)}$ describe la evolución de los estados contenidos en el tramo horizontal $r$, mientras que $U_s^{(v)}$ describe la de los estados contenidos en el tramo vertical $s$. Ambos operadores actúan del mismo modo que $U$ sobre los estados de sus respectivos tramos. La invariancia de estos subespacios garantiza que la evolución no transfiere amplitud de un tramo a otro.
+
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
-En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
-Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos cuántico.
-
+\snnote{Resumen de la sección\\
+  En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
+Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos cuántico.}
+\snnote{Ecuaciones que deben aparecer}
 \begin{equation}
   C=e^{i\alpha}
   \begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
   \qquad |a|^2+|b|^2=1.
-  \label{eq:moneda-tramo-reflectante}
+  \label{eq:moneda-tramo-reflectante-esquema}
 \end{equation}
 \begin{equation}
   \lambda_{m,\pm}=e^{i\alpha}
   \exp\!\left[\pm i\arccos\!\left(|a|\cos\frac{\pi m}{n}\right)\right],
   \qquad m=1,\ldots,n-1,
-  \label{eq:espectro-banda-tramo}
+  \label{eq:espectro-banda-tramo-esquema}
 \end{equation}
 \begin{equation}
   \lambda_{\mathrm{ext},\pm}
   =e^{i\alpha}\left(i\operatorname{Im}b
   \pm\sqrt{1-(\operatorname{Im}b)^2}\right).
-  \label{eq:espectro-extremos-tramo}
+  \label{eq:espectro-extremos-tramo-esquema}
+\end{equation}
+Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},\pm}$ son los eigenvalores adicionales.
+% *}}}
+
+\snnote{Inicio de Sección}
+
+La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus tramos unidimensionales. Considere un tramo de $n$ sitios, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores y de estas condiciones de frontera, se obtendrá el espectro en función de la moneda y de la longitud del tramo.
+
+La moneda unitaria que actúa sobre las dos direcciones del tramo puede escribirse como
+\begin{equation}
+  C=e^{i\alpha}C_0,
+  \qquad
+  C_0=
+  \begin{pmatrix}
+    a&b\\
+    -b^*&a^*
+  \end{pmatrix},
+  \qquad
+  |a|^2+|b|^2=1,
+  \label{eq:moneda-tramo-reflectante}
+\end{equation}
+donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. El factor $e^{i\alpha}$ contiene la fase global de la moneda, mientras que $C_0\in SU(2)$.
+
+Para obtener el espectro se buscan los estados que satisfacen
+\begin{equation}
+  U_n(C)|\psi\rangle=\lambda|\psi\rangle,
+\end{equation}
+donde $U_n(C)$ es el operador de evolución del tramo de $n$ sitios. Cada estado se escribe en términos de sus amplitudes en las dos direcciones:
+\begin{equation}
+  |\psi\rangle
+  =\sum_{j=1}^{n}
+  \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
+\end{equation}
+Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$, respectivamente.
+
+La fase global de la moneda puede separarse también del operador de evolución:
+\begin{equation}
+  U_n(C)=S_n(C\otimes\mathbb I_n)
+  =e^{i\alpha}U_{n,0},
+  \qquad
+  U_{n,0}=S_n(C_0\otimes\mathbb I_n),
+\end{equation}
+donde $S_n$ es el desplazamiento reflectante sobre el tramo y $\mathbb I_n$ es la identidad en su espacio de posición. Por tanto, basta resolver
+\begin{equation}
+  U_{n,0}|\psi\rangle=\mu|\psi\rangle.
+\end{equation}
+Los eigenvalores del operador original se recuperan mediante
+\begin{equation}
+  \lambda=e^{i\alpha}\mu,
+\end{equation}
+y ambos operadores comparten los mismos eigenvectores.
+
+Para obtener las ecuaciones que satisfacen $R_j$ y $L_j$, se escribe explícitamente la acción de la moneda antes del desplazamiento:
+\begin{align}
+  U_{n,0}|\psi\rangle
+  &=S_n(C_0\otimes\mathbb I_n)
+  \sum_{j=1}^{n}
+  \left(R_j|R,j\rangle+L_j|L,j\rangle\right)
+  \notag\\
+  &=S_n\sum_{j=1}^{n}
+  \left[
+    (aR_j+bL_j)|R,j\rangle
+    +(-b^*R_j+a^*L_j)|L,j\rangle
+  \right].
+\end{align}
+Así, después de aplicar $C_0$, las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$ son, respectivamente,
+\begin{equation}
+  r_j=aR_j+bL_j,
+  \qquad
+  \ell_j=-b^*R_j+a^*L_j.
+  \label{eq:amplitudes-moneda-1d}
+\end{equation}
+El operador $S_n$ determina después el sitio y la dirección de destino de cada una de estas amplitudes.
+
+
+Cuando no hay reflexión, $r_j$ se desplaza al sitio $j+1$ conservando la dirección derecha, mientras que $\ell_j$ se desplaza al sitio $j-1$ conservando la dirección izquierda. Al comparar las amplitudes resultantes con las de $\mu|\psi\rangle$, se obtiene
+\begin{align}
+  \mu R_{j+1}&=aR_j+bL_j,
+  &&j=1,\ldots,n-1,
+  \label{eq:interior-derecha-1d}\\
+  \mu L_{j-1}&=-b^*R_j+a^*L_j,
+  &&j=2,\ldots,n.
+  \label{eq:interior-izquierda-1d}
+\end{align}
+
+En los extremos, las amplitudes que apuntan fuera del tramo se reflejan en el mismo sitio. En el extremo izquierdo, $\ell_1$ cambia a la dirección derecha y contribuye a $R_1$, de modo que
+\begin{equation}
+  \mu R_1=\ell_1=-b^*R_1+a^*L_1.
+  \label{eq:frontera-izquierda-1d}
+\end{equation}
+En el extremo derecho, $r_n$ cambia a la dirección izquierda y contribuye a $L_n$, por lo que
+\begin{equation}
+  \mu L_n=r_n=aR_n+bL_n.
+  \label{eq:frontera-derecha-1d}
 \end{equation}
 
-Donde $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{ext,\pm}$ los eigenvalores de los bordes.
-% *}}}
+Para escribir las ecuaciones del interior y de los extremos de una misma forma, se introducen las amplitudes auxiliares
+\begin{equation}
+  L_0=R_1,
+  \qquad
+  R_{n+1}=L_n.
+  \label{eq:amplitudes-auxiliares-1d}
+\end{equation}
+Estas amplitudes auxiliares codifican las condiciones de reflexión en ambos extremos y no añaden sitios físicos al tramo. Con estas definiciones, las ecuaciones anteriores pueden escribirse como
+\begin{equation}
+  \mu R_{j+1}=aR_j+bL_j,
+  \qquad
+  \mu L_{j-1}=-b^*R_j+a^*L_j,
+  \qquad j=1,\ldots,n.
+  \label{eq:recurrencias-uniformes-1d}
+\end{equation}
+
+Para $a\neq0$, se despeja $L_j$ de la segunda ecuación y se sustituye el resultado en la primera:
+\begin{align}
+  L_j&=\frac{b^*R_j+\mu L_{j-1}}{a^*},\\
+  R_{j+1}
+  &=\frac{aR_j+bL_j}{\mu}
+  =\frac{\mu^{-1}R_j+bL_{j-1}}{a^*},
+\end{align}
+donde se ha utilizado $|a|^2+|b|^2=1$. Estas expresiones muestran que conocer $R_j$ y $L_{j-1}$ permite calcular $R_{j+1}$ y $L_j$.
+
+Al agrupar las amplitudes en el vector
+\begin{equation}
+  w_j=
+  \begin{pmatrix}
+    R_j\\L_{j-1}
+  \end{pmatrix},
+  \qquad j=1,\ldots,n+1,
+\end{equation}
+se puede expresar la recurrencia como
+\begin{equation}
+  w_{j+1}=T(\mu)w_j,
+  \qquad
+  T(\mu)=\frac{1}{a^*}
+  \begin{pmatrix}
+    \mu^{-1}&b\\
+    b^*&\mu
+  \end{pmatrix},
+  \qquad j=1,\ldots,n.
+  \label{eq:matriz-transferencia-1d}
+\end{equation}
+La matriz de transferencia $T(\mu)$ permite reconstruir las amplitudes a lo largo del tramo para un valor dado de $\mu$, a partir del vector inicial $w_1$.
+
+La condición de frontera izquierda fija la forma del vector inicial. Como $L_0=R_1$, se tiene
+\begin{equation}
+  w_1=
+  \begin{pmatrix}
+    R_1\\L_0
+  \end{pmatrix}
+  =R_1e_+,
+  \qquad
+  e_+=
+  \begin{pmatrix}
+    1\\1
+  \end{pmatrix}.
+\end{equation}
+Para un eigenvector no nulo, $R_1\neq0$: si $R_1=0$, entonces $w_1=0$ y la recurrencia anularía todas las amplitudes del estado. Al aplicar sucesivamente la matriz de transferencia, se obtiene
+\begin{equation}
+  w_{n+1}=T(\mu)^nw_1
+  =R_1T(\mu)^ne_+.
+  \label{eq:transferencia-tramo-completo}
+\end{equation}
+Aparecen $n$ aplicaciones de $T(\mu)$ porque la recurrencia conecta los vectores $w_1$, $w_2$, $\ldots$, $w_{n+1}$, que incluyen las amplitudes auxiliares de ambos extremos.
+
+La condición de frontera derecha exige $R_{n+1}=L_n$, es decir, que las dos componentes de $w_{n+1}$ sean iguales. Esta condición puede expresarse como
+\begin{equation}
+  e_-^{\mathsf T}w_{n+1}=0,
+  \qquad
+  e_-=
+  \begin{pmatrix}
+    1\\-1
+  \end{pmatrix}.
+\end{equation}
+Sustituyendo la expresión de $w_{n+1}$ y dividiendo entre $R_1$, resulta
+\begin{equation}
+  e_-^{\mathsf T}T(\mu)^ne_+=0.
+  \label{eq:condicion-eigenvalores-1d}
+\end{equation}
+Por tanto, los eigenvalores se seleccionan al exigir que las amplitudes construidas desde la frontera izquierda satisfagan también la reflexión en la frontera derecha. Para cada solución $\mu\neq0$ de esta condición, la recurrencia permite reconstruir un estado no nulo que satisface las ecuaciones del interior y de ambos extremos.
+
+Para resolver la condición de frontera se necesita evaluar la potencia $T(\mu)^n$. El teorema de Cayley--Hamilton permite expresarla en términos de la propia matriz y de la identidad. Para aplicarlo, primero se escribe
+\begin{equation}
+  a=Ae^{i\phi},
+  \qquad A=|a|>0,
+\end{equation}
+y se separa la fase de la matriz de transferencia:
+\begin{equation}
+  T(\mu)=e^{i\phi}\widetilde T(\mu),
+  \qquad
+  \widetilde T(\mu)=\frac1A
+  \begin{pmatrix}
+    \mu^{-1}&b\\
+    b^*&\mu
+  \end{pmatrix}.
+\end{equation}
+La matriz resultante satisface
+\begin{equation}
+  \det\widetilde T
+  =\frac{1-|b|^2}{A^2}=1,
+  \qquad
+  \operatorname{tr}\widetilde T
+  =\frac{\mu+\mu^{-1}}{A}.
+\end{equation}
+Además, como $T^n=e^{in\phi}\widetilde T^n$ y la fase nunca se anula, la condición que selecciona los eigenvalores equivale a
+\begin{equation}
+  e_-^{\mathsf T}\widetilde T(\mu)^ne_+=0.
+\end{equation}
+
+Definiendo
+\begin{equation}
+  x=\frac{\mu+\mu^{-1}}{2A},
+\end{equation}
+el teorema de Cayley--Hamilton para $\widetilde T$ da
+\begin{equation}
+  \widetilde T^2-2x\widetilde T+\mathbb I_2=0.
+\end{equation}
+Al multiplicar esta identidad por potencias de $\widetilde T$, se obtiene la recurrencia
+\begin{equation}
+  \widetilde T^{k+1}
+  =2x\widetilde T^k-\widetilde T^{k-1},
+  \qquad k\geq1.
+\end{equation}
+Los coeficientes de estas potencias siguen la misma recurrencia que los polinomios de Chebyshev de segunda especie, denotados por $\mathsf U_k(x)$:
+\begin{equation}
+  \mathsf U_{-1}(x)=0,
+  \qquad
+  \mathsf U_0(x)=1,
+  \qquad
+  \mathsf U_{k+1}(x)
+  =2x\mathsf U_k(x)-\mathsf U_{k-1}(x).
+\end{equation}
+Por tanto, las potencias de la matriz pueden escribirse como
+\begin{equation}
+  \widetilde T^n
+  =\mathsf U_{n-1}(x)\widetilde T
+  -\mathsf U_{n-2}(x)\mathbb I_2,
+  \qquad n\geq1.
+  \label{eq:potencias-transferencia-chebyshev}
+\end{equation}
+
+Al sustituir esta expresión en la condición de frontera, resulta
+\begin{equation}
+  \mathsf U_{n-1}(x)e_-^{\mathsf T}\widetilde T e_+
+  -\mathsf U_{n-2}(x)e_-^{\mathsf T}e_+=0.
+\end{equation}
+El segundo término se anula porque $e_-^{\mathsf T}e_+=0$. Para el primero,
+\begin{equation}
+  e_-^{\mathsf T}\widetilde T e_+
+  =\frac{\mu^{-1}-\mu+b-b^*}{A}
+  =\frac{\mu^{-1}-\mu+2i\operatorname{Im}b}{A}.
+\end{equation}
+Como $A>0$, la condición final queda
+\begin{equation}
+  \mathsf U_{n-1}\!\left(
+    \frac{\mu+\mu^{-1}}{2|a|}
+  \right)
+  \left(\mu^{-1}-\mu+2i\operatorname{Im}b\right)=0.
+  \label{eq:condicion-factorizada-1d}
+\end{equation}
+La condición que contenía la potencia matricial se ha reducido a un producto de dos factores escalares. Los eigenvalores se obtienen al anular cada factor por separado.
+
+El primer factor de la condición anterior se anula en las raíces del polinomio de Chebyshev. Para $n\geq2$, estas raíces se obtienen de la identidad
+\begin{equation}
+  \mathsf U_{n-1}(\cos q)
+  =\frac{\sin(nq)}{\sin q},
+\end{equation}
+y corresponden a
+\begin{equation}
+  q_m=\frac{\pi m}{n},
+  \qquad m=1,\ldots,n-1.
+\end{equation}
+Por tanto,
+\begin{equation}
+  \frac{\mu+\mu^{-1}}{2|a|}=\cos q_m,
+\end{equation}
+o, equivalentemente,
+\begin{equation}
+  \mu^2-2|a|\cos q_m\,\mu+1=0.
+\end{equation}
+Sus soluciones son
+\begin{equation}
+  \mu_{m,\pm}
+  =|a|\cos q_m
+  \pm i\sqrt{1-|a|^2\cos^2q_m}.
+\end{equation}
+Al recuperar la fase global de la moneda, se obtienen los eigenvalores de banda:
+\begin{equation}
+  \lambda_{m,\pm}
+  =e^{i\alpha}
+  \exp\!\left[
+    \pm i\arccos\!\left(
+      |a|\cos\frac{\pi m}{n}
+    \right)
+  \right],
+  \qquad m=1,\ldots,n-1.
+  \label{eq:espectro-banda-tramo}
+\end{equation}
+Esta familia contiene $2(n-1)$ eigenvalores.
+
+Para anular el segundo factor de la condición de frontera se requiere
+\begin{equation}
+  \mu^{-1}-\mu+2i\operatorname{Im}b=0,
+\end{equation}
+que puede escribirse como
+\begin{equation}
+  \mu^2-2i\operatorname{Im}b\,\mu-1=0.
+\end{equation}
+De aquí se obtienen los dos eigenvalores adicionales:
+\begin{equation}
+  \lambda_{\mathrm{ext},\pm}
+  =e^{i\alpha}
+  \left[
+    i\operatorname{Im}b
+    \pm\sqrt{1-(\operatorname{Im}b)^2}
+  \right].
+  \label{eq:espectro-extremos-tramo}
+\end{equation}
+A diferencia de la familia de banda, estos valores no dependen de la longitud del tramo.
+
+El espectro obtenido para un tramo permite reconstruir el de la caminata bidimensional. Como se mostró en la sección anterior, el operador de evolución se descompone como
+\begin{equation}
+  U
+  =
+  \bigoplus_{r\in\mathcal R_h}U_r^{(h)}
+  \oplus
+  \bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
+\end{equation}
+Cada operador $U_r^{(h)}$ describe una caminata unidimensional reflectante de $|r|$ sitios con moneda $C_h$, mientras que cada $U_s^{(v)}$ describe una de $|s|$ sitios con moneda $C_v$. Por tanto, las expresiones analíticas obtenidas se aplican a cada tramo usando su longitud y la moneda correspondiente. El espectro completo es
+\begin{equation}
+  \operatorname{spec}(U)
+  =
+  \biguplus_{r\in\mathcal R_h}
+  \operatorname{spec}\!\left(U_r^{(h)}\right)
+  \;\biguplus\!
+  \biguplus_{s\in\mathcal R_v}
+  \operatorname{spec}\!\left(U_s^{(v)}\right),
+  \label{eq:espectro-billar-por-tramos}
+\end{equation}
+donde $\biguplus$ indica que se conservan las multiplicidades. Al aplicar las fórmulas del espectro, cada bloque de moneda conserva su propia fase global.
+
+La repetición de eigenvalores entre tramos produce degeneraciones en el espectro bidimensional. En particular, los tramos de igual longitud y con la misma moneda tienen espectros idénticos. Además, como los eigenvalores adicionales no dependen de la longitud, estos se repiten en todos los tramos que comparten la misma moneda, incluso si sus longitudes son diferentes.
+
+Por ejemplo, un billar rectangular de $L_x\times L_y$ sitios contiene $L_y$ tramos horizontales de longitud $L_x$ y $L_x$ tramos verticales de longitud $L_y$. Todos los operadores de los tramos horizontales tienen el mismo espectro, determinado por $L_x$ y $C_h$, y todos los de los verticales comparten el espectro determinado por $L_y$ y $C_v$. Por ello, cada eigenvalor del tramo horizontal contribuye al espectro con $L_y$ copias y cada eigenvalor del vertical con $L_x$ copias. Si un eigenvalor aparece en ambos sectores, sus multiplicidades se suman.
+
+La misma construcción se aplica al billar de Sinaí, identificando las longitudes de sus tramos horizontales y verticales. La comparación entre el espectro reconstruido analíticamente y el obtenido mediante diagonalización numérica del operador bidimensional, para las configuraciones estudiadas del rectángulo y de Sinaí, presenta una discrepancia máxima del orden de $10^{-15}$.
+
+Así, el problema espectral puede resolverse a partir de las longitudes de los tramos y de los dos bloques de la moneda, para cualquier geometría del billar con las condiciones de frontera consideradas. Esto establece la integrabilidad en el sentido de la solubilidad del espectro: la geometría modifica las longitudes y multiplicidades de las caminatas unidimensionales, pero conserva su evolución independiente y permite obtener el espectro completo mediante las expresiones analíticas anteriores.
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
 % *}}}
 % *}}}
+
 \chapter{Firmas de caos cuántico en billares} % {{{*
 \cpnote{quiza mejor Huellas?} 
 \section{Configuraciones y monedas seleccionadas} % {{{*
@@ -257,6 +665,7 @@ es capaz de diferenciar una dinámica integrable de una caótica.
 
 % *}}}
 % *}}}
+
 \chapter{Poder coherente \texorpdfstring{$L_1$}{L1} de la moneda y firmas espectrales} % {{{*
 \cpnote{Para que tanto comando en la L1 del titulo?}
 
@@ -303,6 +712,7 @@ Se presentan $P(s)$ y SFF para los dos billares y para monedas del ensamble COE 
 \end{figure} % *}}}
 % *}}}
 % *}}}
+
 \chapter{Conclusiones} % {{{*
 
 \bibliographystyle{unsrt}
