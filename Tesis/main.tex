@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{geometry}
 \usepackage{setspace}
+\usepackage{ulem}
 \usepackage{cite}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue,plainpages=false]{hyperref}
 \usepackage{xcolor}
@@ -110,9 +111,7 @@ Concluir la sección comentando que el espectro de la caminata bidimensional es 
 \end{equation}
 \snnote{Inicio de sección:}
 
-Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes. Esta descomposición se mantiene para cualquier geometría del billar con las condiciones de frontera reflectantes. Para demostrarlo, se identifican los subespacios invariantes asociados a los tramos horizontales y verticales de la red y se muestra cómo se organiza el operador de evolución sobre ellos.
-
-En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una moneda de la forma
+Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una moneda de la forma
 \begin{equation}
   C=C_h\oplus C_v
   =\begin{pmatrix}
@@ -122,15 +121,19 @@ En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una
   \qquad C_h,C_v\in U(2).
   \label{eq:moneda-diagonal-bloques}
 \end{equation}
-El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$, mientras que $C_v$ actúa sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$. Cada bloque puede combinar las dos direcciones de su eje, pero los bloques nulos fuera de la diagonal impiden que la moneda transfiera amplitud entre los sectores horizontal y vertical.
+El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$ y $C_v$ sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$, sin transferir amplitud entre ambos sectores. El operador de desplazamiento $S$ conserva esta separación: las amplitudes horizontales se desplazan sobre una misma fila y las verticales sobre una misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. Por tanto, ambas operaciones mantienen las amplitudes dentro de sus respectivos ejes, de modo que la reducción a caminatas unidimensionales se conserva para cualquier geometría del billar con estas condiciones de frontera.
 
-El operador de desplazamiento $S$ también conserva la separación entre los sectores horizontal y vertical. En el interior del billar, las componentes asociadas a $|R\rangle$ y $|L\rangle$ se desplazan sobre una misma fila, mientras que las asociadas a $|U\rangle$ y $|D\rangle$ lo hacen sobre una misma columna. Cuando un desplazamiento conduce fuera del billar, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. Por tanto, como la moneda y el desplazamiento conservan esta separación, el operador de evolución $U=S(C\otimes\mathbb I_p)$ no acopla los ejes de movimiento.
+\snnote{He juntado los tres párrafos en uno solo.}
 \janote{Los últimos tres párrafos me parece que elaboran la idea principal de ``Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes''. Por lo cual, sugiero fusionarlos en un sólo párrafo}
 
 \janote{Desde aquí, dejé de entender. No sé qué sugerir para arreglar, porque no entendí los pasos lógicos de la derivación}
 
-En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar\janote{No entiendo este enunciado, por favor explicame por acá o whatsapp}. Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.
 
+\janote{No entiendo este enunciado, por favor explicame por acá o whatsapp}.
+\snnote{He reescrito el enunciado}
+\sout{En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.}
+
+Para identificar las caminatas unidimensionales, primero se agrupan los sitios accesibles de cada fila y columna. En una fila, se parte de un sitio de $\Omega$ y se incluyen sucesivamente sus vecinos a la derecha y a la izquierda mientras pertenezcan a $\Omega$. La secuencia termina en cada sentido cuando el siguiente sitio está fuera del billar. Llamaremos tramo horizontal al conjunto de sitios así obtenido. Los tramos verticales se definen del mismo modo, siguiendo los vecinos de una columna. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.
 A cada tramo horizontal $r\in\mathcal R_h$ le corresponde el subespacio
 \begin{equation}
   \mathcal H_r^{(h)}
@@ -155,7 +158,7 @@ La moneda actúa en cada sitio sin cambiar el eje de movimiento, mientras que el
 \end{equation}
 \janote{No entendí nada de este párrafo y sospecho que la notación y terminología (especícamente, `tramos') se está complicando innecesariamente. Por favor, explicame Saul}
 
-El operador de evolución actúa de forma independiente sobre cada uno de los tramos. Como los subespacios asociados son invariantes\janote{bajo qué operación?}, mutuamente ortogonales\janote{lo entiendo, pero no es obvio. Agregar una ecuación inline} y abarcan todos los estados de la base, $U$ se descompone en una suma directa:
+El operador de evolución actúa de forma independiente sobre cada uno de los tramos. Los subespacios asociados son invariantes bajo la acción del operador de evolución $U$\snnote{he precisado bajo que operador}\janote{bajo qué operación?} y son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$\snnote{He agregado más detalle.}\janote{lo entiendo, pero no es obvio. Agregar una ecuación inline}. Como además abarcan todos los estados de la base, $U$ se descompone en una suma directa:
 \begin{equation}
   U
   =
@@ -164,8 +167,8 @@ El operador de evolución actúa de forma independiente sobre cada uno de los tr
   \bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
   \label{eq:descomposicion-en-tramos}
 \end{equation}
-Aquí, $U_r^{(h)}$ describe la evolución de los estados contenidos en el tramo horizontal $r$, mientras que $U_s^{(v)}$ describe la de los estados contenidos en el tramo vertical $s$. Ambos operadores actúan del mismo modo que $U$ sobre los estados de sus respectivos tramos. La invariancia de estos subespacios garantiza que la evolución no transfiere amplitud de un tramo a otro.
-\janote{Los tramos son cada fila y columna del billar?}
+Aquí, $U_r^{(h)}$ describe la evolución de los estados contenidos en el tramo horizontal $r$, mientras que $U_s^{(v)}$ describe la de los estados contenidos en el tramo vertical $s$. Ambos operadores actúan del mismo modo que $U$ sobre los estados de sus respectivos tramos.
+\snnote{Sí. Un tramo corresponde a una fila o una columna.}\janote{Los tramos son cada fila y columna del billar?}
 % *}}}
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
@@ -542,8 +545,8 @@ Así, el problema espectral puede resolverse a partir de las longitudes de los t
 % *}}}
 % *}}}
 
-\chapter{Firmas de caos cuántico en billares} % {{{*
-\cpnote{quiza mejor Huellas?} 
+\chapter{Huellas de caos cuántico en billares} % {{{*
+\snnote{Modficado.}\cpnote{quiza mejor Huellas?} 
 \section{Configuraciones y monedas seleccionadas} % {{{*
 
 Se inicia comentando que la dinámica de la caminata es sensible a la elección del operador moneda. En este trabajo se consideran dos monedas: la de Grover (\texttt{g}) y una matriz diagonal rotada metidante una matriz unitaria del CUE (\texttt{upu}).
@@ -553,7 +556,7 @@ La comparación de las monedas en cada billar permite examinar en que casos
 emergen las firmas espectrales de caos cuántico. Se mostrarán, para cada billar
 considerado, los resultados correspondientes a las monedas seleccionadas.
 
-\cpnote{Se me hace un poco repetitivo. Como qeu mucha figura para decir pocas cosas. Por ejemplo, creo que basta con dos conjuntos de densidades espectrales.} 
+\snnote{Okay, lo tendré en consideración}\cpnote{Se me hace un poco repetitivo. Como qeu mucha figura para decir pocas cosas. Por ejemplo, creo que basta con dos conjuntos de densidades espectrales.} 
 
 \subsection{Billar rectangular} % {{{*
 
@@ -633,7 +636,7 @@ Enfatizar que la elección de moneda influye sobre que ensamble de RMT se aproxi
 % *}}}
 \section{Localización en DTQWs} % {{{*
 
-\cpnote{Creo qeu también incluiría algunas de las eigenfunciones rpresentativas. Veo famlias interesantes, como totalmeten aleatorias, pero tambien veo una zona ordenada en grover de sinai. En fin, incluiría figuras de las eigenfunciones.}
+\snnote{Okay, las agrego entonces.}\cpnote{Creo qeu también incluiría algunas de las eigenfunciones rpresentativas. Veo famlias interesantes, como totalmeten aleatorias, pero tambien veo una zona ordenada en grover de sinai. En fin, incluiría figuras de las eigenfunciones.}
 
 Se empieza por motivar el uso del IPR: aporta información sobre la
 concentración espacial que no se obtiene de los indicadores espectrales. Se
@@ -673,9 +676,9 @@ es capaz de diferenciar una dinámica integrable de una caótica.
 % *}}}
 
 \chapter{Poder coherente \texorpdfstring{$L_1$}{L1} de la moneda y firmas espectrales} % {{{*
-\cpnote{Para que tanto comando en la L1 del titulo?}
+\snnote{Si no coloco eso me tira una advertencia rara el compilador.}\cpnote{Para que tanto comando en la L1 del titulo?}
 
-\cpnote{Creo que en esta parte si no me gustan las figuras. Es repetir lo mismo. Me gustaria pensar como sintetizar la info aca. Sin embargo creo qeu aun está cruda esta parte y toca hacer un poco mas de investigacion. }
+\snnote{Las figuras que agregue son provisionales, estoy de acuerdo en que toca hacer más investigacion}\cpnote{Creo que en esta parte si no me gustan las figuras. Es repetir lo mismo. Me gustaria pensar como sintetizar la info aca. Sin embargo creo qeu aun está cruda esta parte y toca hacer un poco mas de investigacion. }
 
 Partiendo del resultado del capítulo 4, se examina si la capacidad de la moneda para generar superposiciones en la base de direcciones guarda relación con las firmas espectrales observadas. Para ello se emplea el poder coherente $L_1$.
 
