@@ -82,6 +82,61 @@ Los resultados muestran que las firmas espectrales de caos cuántico dependen ta
 \chapter{Caminatas cuánticas discretas en billares} % {{{*
 
 % *}}}
+\snnote{Texto propuesto para este capitulo.}
+
+Las caminatas cuánticas discretas en el tiempo (DTQW) describen la evolución de un caminante sobre un espacio discreto de posiciones mediante la aplicación sucesiva de un operador unitario. El caminante posee grados de libertad internos asociados a las direcciones de movimiento. Cada paso consta de dos operaciones: un operador moneda que actúa únicamente sobre el estado interno y un operador de desplazamiento que mueve al caminante según ese estado. Las amplitudes de probabilidad asociadas a los distintos recorridos pueden interferir, dando lugar a distribuciones de probabilidad diferentes de las de una caminata aleatoria clásica~\cite{aharonov2001quantum}.
+
+En este trabajo se consideran caminatas sobre una red cuadrada confinada a la geometría de un billar. Las posiciones accesibles forman el conjunto $\Omega\subset\mathbb Z^2$, con $N=|\Omega|$ sitios, y los cuatro estados de moneda corresponden a las direcciones derecha, izquierda, arriba y abajo. Los espacios de Hilbert de posición y moneda son, respectivamente,
+\begin{equation}
+  \mathcal H_p
+  = \operatorname{span}\{|v\rangle : v\in\Omega\}
+  \simeq \mathbb C^N,
+  \qquad
+  \mathcal H_c
+  = \operatorname{span}\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}
+  \simeq \mathbb C^4.
+\end{equation}
+El estado del caminante pertenece al espacio
+\begin{equation}
+  \mathcal H = \mathcal H_c\otimes\mathcal H_p,
+  \qquad \dim\mathcal H=4N,
+\end{equation}
+y puede escribirse como
+\begin{equation}
+  |\psi_t\rangle
+  = \sum_{v\in\Omega}\sum_{c\in\{R,L,U,D\}}
+    \psi_c(v,t)|c,v\rangle,
+  \qquad
+  \sum_{v,c}|\psi_c(v,t)|^2=1,
+\end{equation}
+donde $|c,v\rangle=|c\rangle\otimes|v\rangle$ y $\psi_c(v,t)$ es la amplitud de probabilidad asociada a la dirección $c$ en el sitio $v$.
+
+La evolución en cada paso consiste en aplicar primero el operador moneda y después el operador de desplazamiento. Por tanto,
+\begin{equation}
+  |\psi_{t+1}\rangle=U|\psi_t\rangle,
+  \qquad
+  U=S(C\otimes\mathbb I_p),
+\end{equation}
+donde $C\in U(4)$ actúa sobre el espacio de moneda y $\mathbb I_p$ es la identidad en el espacio de posición. Se emplea la misma moneda en todos los sitios y en cada paso temporal. El operador $S$ desplaza las amplitudes según los vectores
+\begin{equation}
+  \boldsymbol\delta_R=(1,0),\qquad
+  \boldsymbol\delta_L=(-1,0),\qquad
+  \boldsymbol\delta_U=(0,1),\qquad
+  \boldsymbol\delta_D=(0,-1).
+\end{equation}
+
+Para confinar la caminata al billar se imponen condiciones de frontera reflectantes. Si el desplazamiento conduce a otro sitio de $\Omega$, el caminante avanza conservando su dirección. Si conduce fuera del billar, permanece en el mismo sitio y su dirección se invierte. Denotando por $\overline c$ la dirección opuesta a $c$, la acción del operador de desplazamiento es
+\begin{equation}
+  S|c,v\rangle=
+  \begin{cases}
+    |c,v+\boldsymbol\delta_c\rangle,
+      &v+\boldsymbol\delta_c\in\Omega,\\[2pt]
+    |\overline c,v\rangle,
+      &v+\boldsymbol\delta_c\notin\Omega.
+  \end{cases}
+\end{equation}
+
+El operador $S$ es unitario porque permuta los estados de la base de posición y moneda. Como se emplea la misma moneda en todos los sitios y en cada paso temporal, la geometría del billar interviene en el operador de evolución $U$ únicamente a través de $S$, que determina tanto los desplazamientos permitidos como las reflexiones en la frontera.
 
 \chapter{Caos cuántico e indicadores espectrales} % {{{*
 % *}}}
@@ -121,7 +176,7 @@ Una moneda diagonal por bloques que no acopla las direcciones horizontales con l
   \qquad C_h,C_v\in U(2).
   \label{eq:moneda-diagonal-bloques}
 \end{equation}
-El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$ y $C_v$ sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$, sin transferir amplitud entre ambos sectores. El operador de desplazamiento $S$ conserva esta separación: las amplitudes horizontales se desplazan sobre una misma fila y las verticales sobre una misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. Por tanto, ambas operaciones mantienen las amplitudes dentro de sus respectivos ejes, de modo que la reducción a caminatas unidimensionales se conserva para cualquier geometría del billar con estas condiciones de frontera.
+El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$ y $C_v$ sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$. El operador de desplazamiento $S$ conserva esta separación: las amplitudes horizontales se desplazan sobre una misma fila y las verticales sobre una misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. 
 
 \snnote{He juntado los tres párrafos en uno solo.}
 \janote{Los últimos tres párrafos me parece que elaboran la idea principal de ``Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes''. Por lo cual, sugiero fusionarlos en un sólo párrafo}
@@ -133,7 +188,7 @@ El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\r
 \snnote{He reescrito el enunciado}
 \sout{En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.}
 
-Para identificar las caminatas unidimensionales, primero se agrupan los sitios accesibles de cada fila y columna. En una fila, se parte de un sitio de $\Omega$ y se incluyen sucesivamente sus vecinos a la derecha y a la izquierda mientras pertenezcan a $\Omega$. La secuencia termina en cada sentido cuando el siguiente sitio está fuera del billar. Llamaremos tramo horizontal al conjunto de sitios así obtenido. Los tramos verticales se definen del mismo modo, siguiendo los vecinos de una columna. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.
+
 A cada tramo horizontal $r\in\mathcal R_h$ le corresponde el subespacio
 \begin{equation}
   \mathcal H_r^{(h)}
