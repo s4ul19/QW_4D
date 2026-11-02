@@ -81,7 +81,7 @@ Los resultados muestran que las firmas espectrales de caos cuántico dependen ta
 
 \chapter{Caminatas cuánticas discretas en billares} % {{{*
 
-% *}}}
+
 \snnote{Texto propuesto para este capitulo.}
 
 Las caminatas cuánticas discretas en el tiempo (DTQW) describen la evolución de un caminante sobre un espacio discreto de posiciones mediante la aplicación sucesiva de un operador unitario. El caminante posee grados de libertad internos asociados a las direcciones de movimiento. Cada paso consta de dos operaciones: un operador moneda que actúa únicamente sobre el estado interno y un operador de desplazamiento que mueve al caminante según ese estado. Las amplitudes de probabilidad asociadas a los distintos recorridos pueden interferir, dando lugar a distribuciones de probabilidad diferentes de las de una caminata aleatoria clásica~\cite{aharonov2001quantum}.
@@ -138,6 +138,8 @@ Para confinar la caminata al billar se imponen condiciones de frontera reflectan
 
 El operador $S$ es unitario porque permuta los estados de la base de posición y moneda. Como se emplea la misma moneda en todos los sitios y en cada paso temporal, la geometría del billar interviene en el operador de evolución $U$ únicamente a través de $S$, que determina tanto los desplazamientos permitidos como las reflexiones en la frontera.
 
+% *}}}
+
 \chapter{Caos cuántico e indicadores espectrales} % {{{*
 % *}}}
 
@@ -166,7 +168,7 @@ Concluir la sección comentando que el espectro de la caminata bidimensional es 
 \end{equation}
 \snnote{Inicio de sección:}
 
-Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una moneda de la forma
+Una moneda diagonal por bloques no acopla las direcciones horizontales con las verticales en la caminata sobre un billar. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una moneda de la forma
 \begin{equation}
   C=C_h\oplus C_v
   =\begin{pmatrix}
@@ -176,53 +178,60 @@ Una moneda diagonal por bloques que no acopla las direcciones horizontales con l
   \qquad C_h,C_v\in U(2).
   \label{eq:moneda-diagonal-bloques}
 \end{equation}
-El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$ y $C_v$ sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$. El operador de desplazamiento $S$ conserva esta separación: las amplitudes horizontales se desplazan sobre una misma fila y las verticales sobre una misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. 
+El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$ y $C_v$ sobre el subespacio vertical $\operatorname{span}\{|U\rangle,|D\rangle\}$. El operador de desplazamiento $S$ conserva esta separación: las amplitudes horizontales se desplazan sobre una misma fila y las verticales sobre una misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento. Por ejemplo, considere un estado localizado en el nodo $v$, $|\psi\rangle=|R,v\rangle$, cuyos dos vecinos horizontales pertenecen al billar. Si $C_h|R\rangle=\alpha|R\rangle+\beta|L\rangle$, después de un paso se obtiene
+\begin{equation}
+  U|\psi\rangle
+  =\alpha|R,v+\delta_R\rangle
+  +\beta|L,v+\delta_L\rangle.
+  \label{eq:subspace}
+\end{equation}
+Ambas componentes permanecen en la fila que contiene al nodo $v$.
 
-\snnote{He juntado los tres párrafos en uno solo.}
+\snnote{He juntado los tres párrafos en uno solo y he cambiado el orden de ideas. La discusión de la caminata que se separa en caminatas 1D se páso al siguiente párrafo.}
 \janote{Los últimos tres párrafos me parece que elaboran la idea principal de ``Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en el billar a un conjunto de caminatas unidimensionales independientes''. Por lo cual, sugiero fusionarlos en un sólo párrafo}
 
 \janote{Desde aquí, dejé de entender. No sé qué sugerir para arreglar, porque no entendí los pasos lógicos de la derivación}
 
-
 \janote{No entiendo este enunciado, por favor explicame por acá o whatsapp}.
-\snnote{He reescrito el enunciado}
+\snnote{He reescrito el enunciado, eliminado el uso de 'tramo'}
 \sout{En cada fila o columna, las amplitudes permanecen dentro de un conjunto de sitios consecutivos delimitado por la frontera del billar Se llama tramo a la secuencia completa de esos sitios. Los conjuntos de tramos horizontales y verticales se denotan por $\mathcal R_h$ y $\mathcal R_v$, respectivamente.}
 
+El mismo razonamiento se aplica a cualquier superposición de estados horizontales de una fila. Como la moneda y el desplazamiento conservan esa fila en cada paso, el estado permanece en ella durante toda la evolución. El argumento es análogo para los estados verticales de una columna.
 
-A cada tramo horizontal $r\in\mathcal R_h$ le corresponde el subespacio
+Para expresar este resultado, escribimos cada posición como $v=(x,y)$. A la fila de coordenada $y$ le corresponde el subespacio de estados horizontales
 \begin{equation}
-  \mathcal H_r^{(h)}
+  \mathcal H_y^{\text{horizontal}}
   =\operatorname{span}
-  \{|R,v\rangle,|L,v\rangle:v\in r\},
-  \qquad
-  \dim\mathcal H_r^{(h)}=2|r|,
+  \{|R,(x,y)\rangle,|L,(x,y)\rangle:(x,y)\in\Omega\},
 \end{equation}
-y a cada tramo vertical $s\in\mathcal R_v$,
+donde $y$ permanece fija y $x$ recorre los sitios de esa fila que pertenecen al billar. Del mismo modo, a la columna de coordenada $x$ le corresponde el subespacio de estados verticales
 \begin{equation}
-  \mathcal H_s^{(v)}
+  \mathcal H_x^{\text{vertical}}
   =\operatorname{span}
-  \{|U,v\rangle,|D,v\rangle:v\in s\},
-  \qquad
-  \dim\mathcal H_s^{(v)}=2|s|.
+  \{|U,(x,y)\rangle,|D,(x,y)\rangle:(x,y)\in\Omega\},
 \end{equation}
-La moneda actúa en cada sitio sin cambiar el eje de movimiento, mientras que el desplazamiento mueve las amplitudes dentro del tramo o invierte su dirección en los extremos. Ninguna de estas operaciones transfiere amplitud a otro tramo. Por tanto, estos subespacios son invariantes bajo el operador de evolución:
-\begin{equation}
-  U\mathcal H_r^{(h)}\subseteq\mathcal H_r^{(h)},
-  \qquad
-  U\mathcal H_s^{(v)}\subseteq\mathcal H_s^{(v)}.
-\end{equation}
-\janote{No entendí nada de este párrafo y sospecho que la notación y terminología (especícamente, `tramos') se está complicando innecesariamente. Por favor, explicame Saul}
+donde $x$ permanece fija y $y$ recorre los sitios accesibles de la columna. Cada subespacio tiene una dimensión igual al doble del número de sitios de la fila o columna correspondiente.
 
-El operador de evolución actúa de forma independiente sobre cada uno de los tramos. Los subespacios asociados son invariantes bajo la acción del operador de evolución $U$\snnote{he precisado bajo que operador}\janote{bajo qué operación?} y son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$\snnote{He agregado más detalle.}\janote{lo entiendo, pero no es obvio. Agregar una ecuación inline}. Como además abarcan todos los estados de la base, $U$ se descompone en una suma directa:
+\sout{La moneda actúa en cada sitio sin cambiar el eje de movimiento, mientras que el desplazamiento mueve las amplitudes dentro del tramo o invierte su dirección en los extremos. Ninguna de estas operaciones transfiere amplitud a otro tramo. Por tanto, estos subespacios son invariantes bajo el operador de evolución}
+\snnote{He removido el uso de la terminología 'tramos' y cambiado todo el párrafo}\janote{No entendí nada de este párrafo y sospecho que la notación y terminología (especícamente, `tramos') se está complicando innecesariamente. Por favor, explicame Saul}
+
+Después de aplicar $U$, los estados horizontales de una fila permanecen en esa fila y los estados verticales de una columna permanecen en esa columna. Por tanto,
+\begin{equation}
+  U\mathcal H_y^{\text{horizontal}}\subseteq\mathcal H_y^{\text{horizontal}},
+  \qquad
+  U\mathcal H_x^{\text{vertical}}\subseteq\mathcal H_x^{\text{vertical}}.
+\end{equation}
+
+Estos subespacios son invariantes bajo la acción del operador de evolución $U$\snnote{he precisado bajo que operador}\janote{bajo qué operación?} y son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$\snnote{He agregado más detalle.}\janote{lo entiendo, pero no es obvio. Agregar una ecuación inline}. Como todos los estados de la base pertenecen a alguno de estos subespacios, $U$ se descompone en una suma directa:
 \begin{equation}
   U
   =
-  \bigoplus_{r\in\mathcal R_h}U_r^{(h)}
+  \bigoplus_y U_y^{\text{horizontal}}
   \oplus
-  \bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
+  \bigoplus_x U_x^{\text{vertical}}.
   \label{eq:descomposicion-en-tramos}
 \end{equation}
-Aquí, $U_r^{(h)}$ describe la evolución de los estados contenidos en el tramo horizontal $r$, mientras que $U_s^{(v)}$ describe la de los estados contenidos en el tramo vertical $s$. Ambos operadores actúan del mismo modo que $U$ sobre los estados de sus respectivos tramos.
+Las sumas recorren las filas y columnas que contienen sitios del billar. Aquí, $U_y^{\text{horizontal}}$ describe la evolución de los estados horizontales de la fila $y$, mientras que $U_x^{\text{vertical}}$ describe la de los estados verticales de la columna $x$. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$, mientras que en cada columna solo varía $y$ y participan $U$ y $D$. Por tanto, cada bloque describe una caminata unidimensional sobre los sitios accesibles de la fila o columna correspondiente.
 \snnote{Sí. Un tramo corresponde a una fila o una columna.}\janote{Los tramos son cada fila y columna del billar?}
 % *}}}
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
