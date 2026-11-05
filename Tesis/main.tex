@@ -168,7 +168,7 @@ Concluir la sección comentando que el espectro de la caminata bidimensional es 
 \end{equation}
 \snnote{Inicio de sección:}
 
-Una moneda diagonal por bloques no acopla las direcciones horizontales con las verticales en la caminata sobre un billar. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, considere una moneda de la forma
+Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales permite descomponer la caminata sobre el billar en caminatas unidimensionales independientes. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, se considera una moneda de la forma
 \begin{equation}
   C=C_h\oplus C_v
   =\begin{pmatrix}
@@ -178,50 +178,96 @@ Una moneda diagonal por bloques no acopla las direcciones horizontales con las v
   \qquad C_h,C_v\in U(2).
   \label{eq:moneda-diagonal-bloques}
 \end{equation}
-El bloque $C_h$ actúa sobre el subespacio horizontal $\operatorname{span}\{|R\rangle,|L\rangle\}$ y $C_v$ sobre el subespacio vertical\janote{direcciones horizontales y verticales más bien} $\operatorname{span}\{|U\rangle,|D\rangle\}$. El operador de desplazamiento $S$ conserva esta separación: las amplitudes horizontales se desplazan\janote{las amplitudes no `se desplazan'. Cambiá el wording} sobre una misma fila y las verticales sobre una misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición ni el eje de movimiento\janote{qué es el eje de movimiento? Esto seguramente se puede decir de alguna forma más sencilla con terminología simple y estándar}. Por ejemplo, considere un estado localizado en el nodo $v$, $|\psi\rangle=|R,v\rangle$, cuyos dos vecinos horizontales pertenecen al billar. Si $C_h|R\rangle=\alpha|R\rangle+\beta|L\rangle$, después de un paso se obtiene
+El bloque $C_h$ actúa sobre los estados de moneda asociados a las direcciones horizontales, $|R\rangle$ y $|L\rangle$, mientras que $C_v$ actúa sobre los asociados a las direcciones verticales, $|U\rangle$ y $|D\rangle$. El operador de desplazamiento $S$ conserva esta separación: transforma cada estado de la base con dirección horizontal en otro de la misma fila y cada estado con dirección vertical en otro de la misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición. Por ejemplo, para un estado $|\psi\rangle=|R,v\rangle$, cuyos dos vecinos horizontales pertenecen al billar, y una moneda que satisface $C_h|R\rangle=\alpha|R\rangle+\beta|L\rangle$, después de un paso se obtiene
 \begin{equation}
   U|\psi\rangle
   =\alpha|R,v+\delta_R\rangle
   +\beta|L,v+\delta_L\rangle.
   \label{eq:subspace}
 \end{equation}
-Ambas componentes permanecen en la fila que contiene al nodo $v$.
+Ambas componentes pertenecen a la misma fila. Por linealidad, el resultado se extiende a cualquier superposición de estados horizontales de esa fila y se mantiene en cada paso de la evolución. El argumento es análogo para los estados verticales de una columna.
 
-El mismo razonamiento se aplica a cualquier superposición de estados horizontales de una fila. Como la moneda y el desplazamiento conservan esa fila en cada paso, el estado permanece en ella durante toda la evolución. El argumento es análogo para los estados verticales de una columna. \janote{Este párrafo es parte del párrafo anterior aún, fusionalos}
+Para representar esta separación, se construyen las bases de los estados horizontales de cada fila y de los verticales de cada columna. Escribiendo cada posición como $v=(x,y)$, para una fila fija $y=y_0$ y una columna fija $x=x_0$ se definen
+\begin{align}
+  \mathcal B_{y_0}^{\text{horizontal}}
+  &=
+  \bigl\{
+    |c,(x,y)\rangle:
+    c\in\{R,L\},\ (x,y)\in\Omega,\ y=y_0
+  \bigr\},
+  \\
+  \mathcal B_{x_0}^{\text{vertical}}
+  &=
+  \bigl\{
+    |c,(x,y)\rangle:
+    c\in\{U,D\},\ (x,y)\in\Omega,\ x=x_0
+  \bigr\}.
+\end{align}
+Los subespacios correspondientes son
+\begin{align}
+  \mathcal H_{y_0}^{\text{horizontal}}
+  &=\operatorname{span}\mathcal B_{y_0}^{\text{horizontal}},
+  \\
+  \mathcal H_{x_0}^{\text{vertical}}
+  &=\operatorname{span}\mathcal B_{x_0}^{\text{vertical}}.
+\end{align}
+Cada uno tiene una dimensión igual al doble del número de sitios de la fila o columna correspondiente.
 
-\janote{no hay un primer enunciado que me diga cuál es la idea principal}
-Para expresar este resultado, escribimos cada posición como $v=(x,y)$. A la fila de coordenada $y$ le corresponde el subespacio de estados horizontales
+Los subespacios son invariantes bajo $U$: para estados arbitrarios de cada subespacio, se cumple
 \begin{equation}
-  \mathcal H_y^{\text{horizontal}}
-  =\operatorname{span}
-  \{|R,(x,y)\rangle,|L,(x,y)\rangle:(x,y)\in\Omega\},
-\end{equation}\janote{aquí en la ecuación fala una condición que fije $y$. Así como está indica que es para cualquier $(x,y)$ en la geometría}
-donde $y$ permanece fija y $x$ recorre los sitios de esa fila que pertenecen al billar. Del mismo modo, a la columna de coordenada $x$ le corresponde el subespacio de estados verticales
-\begin{equation}
-  \mathcal H_x^{\text{vertical}}
-  =\operatorname{span}
-  \{|U,(x,y)\rangle,|D,(x,y)\rangle:(x,y)\in\Omega\},
-\end{equation}\janote{mismo comentario anterior}
-donde $x$ permanece fija y $y$ recorre los sitios accesibles de la columna. Cada subespacio tiene una dimensión igual al doble del número de sitios de la fila o columna correspondiente.
+  \begin{aligned}
+    |\psi_h\rangle\in\mathcal H_{y_0}^{\text{horizontal}}
+    &\;\Longrightarrow\;
+    U|\psi_h\rangle\in\mathcal H_{y_0}^{\text{horizontal}},
+    \\
+    |\psi_v\rangle\in\mathcal H_{x_0}^{\text{vertical}}
+    &\;\Longrightarrow\;
+    U|\psi_v\rangle\in\mathcal H_{x_0}^{\text{vertical}}.
+  \end{aligned}
+\end{equation}
+Además, los subespacios distintos son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$.
 
-Después de aplicar $U$, los estados horizontales de una fila permanecen en esa fila y los estados verticales de una columna permanecen en esa columna. Por tanto,
+Para mostrar la estructura matricial de esta descomposición, se ordenan los estados de cada base por su posición. En cada fila se sigue el orden creciente de $x$, colocando $|R,(x,y_0)\rangle$ seguido de $|L,(x,y_0)\rangle$ en cada sitio. En cada columna se sigue el orden creciente de $y$, colocando $|U,(x_0,y)\rangle$ seguido de $|D,(x_0,y)\rangle$. Sean $y_1,\ldots,y_m$ las coordenadas de las filas del billar y $x_1,\ldots,x_\ell$ las de sus columnas, enumeradas de menor a mayor. Se concatenan las bases ordenadas:
 \begin{equation}
-  U\mathcal H_y^{\text{horizontal}}\subseteq\mathcal H_y^{\text{horizontal}},
-  \qquad
-  U\mathcal H_x^{\text{vertical}}\subseteq\mathcal H_x^{\text{vertical}}.
-\end{equation}\janote{esto parece incorrecto. Estás aplicando un operador a un subespacio.. ¿?}
-Estos subespacios son invariantes bajo la acción del operador de evolución $U$ y son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$. Como todos los estados de la base pertenecen a alguno de estos subespacios, $U$ se descompone en una suma directa:
+  \mathcal B=
+  \bigl(
+    \mathcal B_{y_1}^{\text{horizontal}},
+    \ldots,
+    \mathcal B_{y_m}^{\text{horizontal}},
+    \mathcal B_{x_1}^{\text{vertical}},
+    \ldots,
+    \mathcal B_{x_\ell}^{\text{vertical}}
+  \bigr).
+\end{equation}
+Cada estado de la base de posición y moneda aparece exactamente una vez, por lo que $\mathcal B$ es una base completa.
+
+La invariancia implica que $U$ transforma cada estado de estas bases en una combinación lineal de estados del mismo subespacio. Por la ortogonalidad entre subespacios distintos,
+\begin{equation}
+  \langle b'|U|b\rangle=0
+\end{equation}
+si $|b\rangle$ y $|b'\rangle$ pertenecen a subespacios diferentes de la descomposición. Estos elementos nulos dan lugar a la estructura diagonal por bloques:
+\begin{equation}
+  [U]_{\mathcal B}
+  =
+  \begin{pmatrix}
+    U_{y_1}^{\text{horizontal}} & 0 & 0 & 0 & 0 & 0\\
+    0 & \ddots & 0 & 0 & 0 & 0\\
+    0 & 0 & U_{y_m}^{\text{horizontal}} & 0 & 0 & 0\\
+    0 & 0 & 0 & U_{x_1}^{\text{vertical}} & 0 & 0\\
+    0 & 0 & 0 & 0 & \ddots & 0\\
+    0 & 0 & 0 & 0 & 0 & U_{x_\ell}^{\text{vertical}}
+  \end{pmatrix}.
+\end{equation}
+Cada bloque representa la evolución sobre una fila o columna en su base correspondiente. Por tanto,
 \begin{equation}
   U
   =
   \bigoplus_y U_y^{\text{horizontal}}
   \oplus
-  \bigoplus_x U_x^{\text{vertical}}.
+  \bigoplus_x U_x^{\text{vertical}},
   \label{eq:descomposicion-en-tramos}
 \end{equation}
-Las sumas recorren las filas y columnas que contienen sitios del billar. Aquí, $U_y^{\text{horizontal}}$ describe la evolución de los estados horizontales de la fila $y$, mientras que $U_x^{\text{vertical}}$ describe la de los estados verticales de la columna $x$. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$, mientras que en cada columna solo varía $y$ y participan $U$ y $D$. Por tanto, cada bloque describe una caminata unidimensional sobre los sitios accesibles de la fila o columna correspondiente.
-
-\janote{Nunca mostrás matemáticamente la estructura diagonal por bloques en esta sección. Toda la sección fue repetir el mismo argumento del inicio de formas distintas. }
+donde las sumas recorren las filas y columnas que contienen sitios del billar. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$; en cada columna solo varía $y$ y participan $U$ y $D$. Así, cada bloque describe una caminata unidimensional independiente. El problema espectral del billar queda reducido a obtener el espectro de estas caminatas.
 % *}}}
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 

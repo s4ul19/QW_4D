@@ -1,0 +1,347 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern,amsmath,amssymb,mathtools,bm}
+\usepackage[margin=2.3cm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,fancyhdr,xcolor,hyperref,needspace}
+\definecolor{azul}{RGB}{28,67,100}
+\hypersetup{colorlinks=true,linkcolor=azul,urlcolor=azul,pdftitle={Recurrencias espectrales para la caminata 2D reflectante}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Recurrencias espectrales para la caminata 2D}
+\fancyhead[R]{\small 2 de noviembre de 2026}
+\fancyfoot[C]{\thepage}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.4em}
+\setlength{\emergencystretch}{2em}
+\AddToHook{cmd/section/before}{\Needspace{6\baselineskip}}
+\AddToHook{cmd/subsection/before}{\Needspace{5\baselineskip}}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\bra}[1]{\langle #1\rvert}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\Id}{\mathbb I}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\ran}{\operatorname{ran}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\T}{\mathcal T}
+\newcommand{\Uch}{\mathsf U}
+\numberwithin{equation}{section}
+\title{Del método de transferencia 1D a la caminata 2D\\[0.3em]
+\large Recurrencia por columnas para una moneda general y\\solución de Grover en el rectángulo con rebote local}
+\author{}\date{2 de noviembre de 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Se extiende la estrategia de la derivación 1D al modelo de cuatro direcciones de la tesis. Para una moneda uniforme general se obtiene una transferencia espacial de dimensión $2L_y$, una condición matricial de los bordes y una recurrencia de determinantes aplicable a geometrías irregulares. Para la moneda de Grover aparece una simplificación adicional: el espectro no trivial se reconstruye a partir de una matriz real simétrica de tamaño $N$, equivalente a un laplaciano discreto reflectante. En el rectángulo, dos recurrencias de segundo orden resuelven ese problema y proporcionan el espectro completo, incluidas las multiplicidades de $+1$ y $-1$. Las fórmulas se demuestran y se contrastan con operadores construidos directamente.
+\end{abstract}
+
+\section{Modelo y alcance de la extensión}
+Se toma exactamente el modelo del capítulo 2 de la tesis: moneda antes del desplazamiento, cuatro estados por sitio y reflexión que invierte la dirección en el mismo sitio, sin fase adicional. En la base $\{R,L,U,D\}$,
+\begin{equation}
+ U=S(C\otimes\Id_p),\qquad C\in U(4),\qquad
+ S\ket{c,v}=\begin{cases}
+ \ket{c,v+\delta_c},&v+\delta_c\in\Omega,\\
+ \ket{\bar c,v},&v+\delta_c\notin\Omega.
+ \end{cases}
+\end{equation}
+El orden de factores se permutará cuando se agrupen las amplitudes por sitios o columnas. Se denota por $\lambda$ al autovalor físico de $U$: no se extrae ninguna fase global de la moneda.
+
+En 1D se propagaba la pareja $(R_j,L_{j-1})$ y los bordes exigían $e_-^{\mathsf T}T^n e_+=0$. En 2D, para una moneda que mezcla los ejes, una amplitud horizontal puede convertirse en vertical y reaparecer a otra altura. Por eso no basta una pareja de escalares. La sustitución natural es una pareja de \emph{vectores de columna}.
+
+Hay dos resultados distintos: la transferencia matricial extiende el procedimiento a monedas generales; Grover permite, además, reducirlo a una recurrencia escalar. Disponer de una recurrencia exacta no garantiza, para una moneda general o una geometría irregular, un espectro explícito ni integrabilidad.
+
+\section{Moneda general: recurrencia por columnas en un rectángulo}
+Sea $\Omega=\{1,\ldots,n\}\times\{1,\ldots,m\}$, con $n=L_x$ y $m=L_y$. Se agrupan las amplitudes de la columna $x$ como
+\begin{equation}
+ r_x=(R_{x,1},\ldots,R_{x,m})^{\mathsf T},\quad
+ l_x=(L_{x,1},\ldots,L_{x,m})^{\mathsf T},\quad
+ h_x=\binom{r_x}{l_x},\quad v_x=\binom{u_x}{d_x}.
+\end{equation}
+Aquí $h_x,v_x\in\mathbb C^{2m}$. En el mismo orden, la moneda sobre una columna es
+\begin{equation}
+ \mathcal C=C\otimes\Id_m=
+ \begin{pmatrix}\mathcal C_{hh}&\mathcal C_{hv}\\
+ \mathcal C_{vh}&\mathcal C_{vv}\end{pmatrix}.
+\end{equation}
+Cada bloque mide $2m\times2m$. Sea $V_m$ el desplazamiento vertical reflectante sobre los $m$ sitios, en el orden $(u_1,\ldots,u_m,d_1,\ldots,d_m)$. La ecuación vertical es
+\begin{equation}
+ \lambda v_x=V_m(\mathcal C_{vh}h_x+\mathcal C_{vv}v_x).
+\end{equation}
+Definiendo
+\begin{equation}\label{eq:E}
+ E(\lambda)=\lambda\Id_{2m}-V_m\mathcal C_{vv},
+\end{equation}
+si $E(\lambda)$ es invertible se obtiene
+\begin{equation}\label{eq:v}
+ v_x=E(\lambda)^{-1}V_m\mathcal C_{vh}h_x.
+\end{equation}
+Por tanto, las amplitudes horizontales después de la moneda son $K(\lambda)h_x$, con
+\begin{equation}\label{eq:K}
+ \boxed{K(\lambda)=\mathcal C_{hh}
+ +\mathcal C_{hv}E(\lambda)^{-1}V_m\mathcal C_{vh}.}
+\end{equation}
+Este complemento de Schur incorpora las excursiones verticales dentro de la columna. Aunque la moneda original es local, $K$ puede mezclar alturas diferentes. Se divide en bloques $m\times m$:
+\begin{equation}
+ K=\begin{pmatrix}A&B\\D_1&D_2\end{pmatrix}.
+\end{equation}
+Las dos ecuaciones horizontales uniformes son
+\begin{equation}\label{eq:horizontal}
+ \lambda r_{x+1}=Ar_x+Bl_x,\qquad
+ \lambda l_{x-1}=D_1r_x+D_2l_x.
+\end{equation}
+En los bordes se usan las amplitudes auxiliares
+\begin{equation}\label{eq:ghost}
+ l_0=r_1,\qquad r_{n+1}=l_n,
+\end{equation}
+que son, componente a componente, las mismas condiciones de la derivación 1D.
+
+Si también $D_2$ es invertible, se despeja
+\begin{equation}
+ l_x=-D_2^{-1}D_1r_x+\lambda D_2^{-1}l_{x-1}.
+\end{equation}
+Sustituyendo en la otra ecuación y definiendo $W_x=(r_x,l_{x-1})^{\mathsf T}$:
+\begin{equation}\label{eq:T}
+ \boxed{W_{x+1}=\T(\lambda)W_x,\qquad
+ \T(\lambda)=\begin{pmatrix}
+ \lambda^{-1}(A-BD_2^{-1}D_1)&BD_2^{-1}\\
+ -D_2^{-1}D_1&\lambda D_2^{-1}
+ \end{pmatrix}.}
+\end{equation}
+Esta es la generalización directa de $w_{j+1}=T(\mu)w_j$. Su dimensión es $2m$, no $4nm$. Es una transferencia espacial dependiente del parámetro espectral; no es el operador de evolución temporal.
+
+\subsection{Los bordes seleccionan el espectro}
+Por el borde izquierdo, $W_1=(r_1,r_1)^{\mathsf T}$. El derecho exige
+\begin{equation}
+ \underbrace{\begin{pmatrix}\Id_m&-\Id_m\end{pmatrix}
+ \T(\lambda)^n\binom{\Id_m}{\Id_m}}_{F_n(\lambda)}r_1=0.
+\end{equation}
+Luego, en el dominio donde se han definido las inversas,
+\begin{equation}\label{eq:secular}
+ \boxed{\lambda\in\spec(U)\quad\Longleftrightarrow\quad
+ \det F_n(\lambda)=0.}
+\end{equation}
+La equivalencia se demuestra como en 1D. Un autovector proporciona una solución de la transferencia. Recíprocamente, un vector no nulo del núcleo de $F_n$ permite reconstruir $r_x,l_x$ con \eqref{eq:T} y $v_x$ con \eqref{eq:v}. Si $r_1=0$, el borde izquierdo da $W_1=0$ y la transferencia anula todas las amplitudes; por tanto, en este dominio todo autovector no nulo tiene $r_1\ne0$.
+
+Para reconstruir un estado se elige $r_1\in\ker F_n$, se propaga $W_x$, se lee $r_x=(W_x)_1$, $l_x=(W_{x+1})_2$ y se calcula $v_x$. Finalmente se normaliza la suma de las normas de todas las columnas.
+
+\subsection{Qué conserva y qué cambia de Cayley--Hamilton}
+Si
+\begin{equation}
+ \chi_{\T}(z)=z^{2m}+c_{2m-1}(\lambda)z^{2m-1}
+ +\cdots+c_0(\lambda),
+\end{equation}
+Cayley--Hamilton implica
+\begin{equation}\label{eq:CH}
+ \T^{k+2m}=-\sum_{j=0}^{2m-1}c_j(\lambda)\T^{k+j},\qquad k\ge0.
+\end{equation}
+El mismo tipo de recurrencia rige los bloques $F_k$. Así, la idea 1D sí se extiende, pero el orden pasa de dos a $2m$. No se ha demostrado que una moneda arbitraria permita descomponerla en transferencias $2\times2$. En particular, no es válido sustituir los escalares de los polinomios de Chebyshev por bloques no conmutativos sin una justificación adicional.
+
+Si $C=C_h\oplus C_v$, desaparecen los acoplamientos $\mathcal C_{hv}$ y $\mathcal C_{vh}$, y la transferencia horizontal se reduce a $T_h\otimes\Id_m$. Las cadenas verticales independientes aparecen en los valores donde $E$ es singular y deben incluirse por separado. Se recupera así la suma directa de la derivación 1D.
+
+\subsection{Valores excepcionales y geometrías irregulares}
+Las fórmulas \eqref{eq:T}--\eqref{eq:secular} no pueden utilizarse directamente si $\det E=0$ o $\det D_2=0$. Esos valores no deben descartarse: pueden contener autoestados físicos, especialmente sectores desacoplados y modos de Grover con $\lambda=\pm1$. Tampoco se pueden contar como autovalores todos los ceros obtenidos al multiplicar por denominadores.
+
+Una recurrencia alternativa se obtiene agrupando el problema original por columnas, sin eliminar las amplitudes verticales. Para cualquier $\Omega$ finito, $H(\lambda)=\lambda\Id-U$ es tridiagonal por bloques:
+\begin{equation}
+ H=\begin{pmatrix}
+ H_1&B_1&0&\cdots\\
+ A_2&H_2&B_2&\cdots\\
+ 0&A_3&H_3&\ddots\\
+ \vdots&\vdots&\ddots&\ddots
+ \end{pmatrix}.
+\end{equation}
+Una columna con $m_x$ sitios aporta $4m_x$ componentes, de modo que $A_x,B_x$ pueden ser rectangulares. Todos los rebotes se incorporan en $H_x$; los desplazamientos horizontales entre columnas están en $A_x,B_x$. Donde los pivotes son invertibles,
+\begin{equation}\label{eq:schur}
+ Q_1=H_1,\qquad Q_x=H_x-A_xQ_{x-1}^{-1}B_{x-1},\qquad
+ \boxed{\det(\lambda\Id-U)=\prod_x\det Q_x.}
+\end{equation}
+Como identidad racional, el producto coincide con el polinomio característico tras cancelar los factores removibles. Para un pivote singular se debe trabajar con la expresión polinómica cancelada o comprobar el sistema original; evaluar la fórmula con una inversa singular no está permitido.
+
+Esta recurrencia funciona en el octavo de Sinaí, con alturas variables y cualquier frontera discreta. En general no se obtiene una potencia de una misma matriz. Incluso si se usa una transferencia de ancho fijo mediante una representación ampliada, la geometría introduce matrices dependientes de $x$. Una recurrencia exacta, por sí sola, no elimina esa dificultad.
+
+\section{Grover: reducción exacta a una ecuación escalar}
+Ahora se supone específicamente
+\begin{equation}\label{eq:grover}
+ G=2\ket{s}\!\bra{s}-\Id_4=\tfrac12J_4-\Id_4,
+ \qquad s=\tfrac12(1,1,1,1)^{\mathsf T}.
+\end{equation}
+La reducción siguiente vale para cualquier dominio finito conectado de la red cuadrada con el rebote de la tesis, no solamente para un rectángulo.
+
+\subsection{La identidad que permite reducir el número de componentes}
+Sea $F$ la inversión local de direcciones, $R\leftrightarrow L$, $U\leftrightarrow D$, y sea
+\begin{equation}
+ a=\tfrac12(1,1,-1,-1)^{\mathsf T},\qquad
+ F=\begin{pmatrix}0&1&0&0\\1&0&0&0\\0&0&0&1\\0&0&1&0\end{pmatrix}.
+\end{equation}
+Una multiplicación directa da
+\begin{equation}\label{eq:key}
+ \boxed{FG=\Id_4-2aa^\dagger.}
+\end{equation}
+Se escribe $\mathcal F$ para su extensión a todos los sitios y $K=S\mathcal F$. Este $K$ es una involución unitaria: empareja direcciones opuestas en los extremos de cada enlace y deja fijas las direcciones cuyo vecino opuesto falta. Por ello $K^2=\Id$ y $K^\dagger=K$.
+
+Sea $Q:\mathbb C^N\to\mathbb C^{4N}$ la isometría que asigna $a f(v)$ al sitio $v$. Con $P=QQ^\dagger$,
+\begin{equation}\label{eq:factorGrover}
+ U_G=S(G\otimes\Id_p)=K(\Id-2P).
+\end{equation}
+El operador reducido es
+\begin{equation}\label{eq:discriminant}
+ D=Q^\dagger KQ
+ =\frac14\left[\mathsf A_\Omega+diag(4-d_v)\right],
+\end{equation}
+donde $\mathsf A_\Omega$ es la adyacencia entre vecinos accesibles y $d_v$ su número en el sitio $v$. Cada enlace aporta $1/4$ porque las dos componentes de $a$ sobre un mismo eje tienen el mismo signo. Cada dirección ausente aporta $1/4$ a la diagonal.
+
+En particular, $D$ es real simétrica, estocástica y mide $N\times N$. Es equivalente al laplaciano combinatorio $L_\Omega=\diag(d_v)-\mathsf A_\Omega$:
+\begin{equation}\label{eq:laplacian}
+ \boxed{D=\Id_N-\tfrac14L_\Omega.}
+\end{equation}
+No se está reemplazando el desplazamiento físico por otro: \eqref{eq:factorGrover} es una factorización exacta del mismo $U_G$.
+
+\subsection{Cómo se levantan los autovalores y autovectores}
+Si $Df=\tau f$, entonces
+\begin{equation}
+ U_GQf=-KQf,\qquad U_GKQf=Qf-2\tau KQf.
+\end{equation}
+Sobre el espacio generado por $Qf,KQf$, el problema queda reducido a
+\begin{equation}
+ \begin{pmatrix}0&1\\-1&-2\tau\end{pmatrix},\qquad
+ \boxed{\lambda^2+2\tau\lambda+1=0.}
+\end{equation}
+Para $-1<\tau<1$ aparecen dos autovalores físicos
+\begin{equation}\label{eq:lift}
+ \boxed{\lambda_\pm=-\tau\pm\ii\sqrt{1-\tau^2},\qquad
+ \psi_\pm=\frac{Qf+\lambda_\pm KQf}{\sqrt{2(1-\tau^2)}}.}
+\end{equation}
+La fórmula de norma supone $\|f\|=1$ y usa
+$\langle Qf,KQf\rangle=\tau$.
+
+Para un dominio finito conectado, $\tau=1$ es simple y su autovector es constante. Además, $D$ tiene al menos una entrada diagonal positiva en la frontera; la conectividad y ese lazo impiden $\tau=-1$. El modo $\tau=1$ aporta \emph{un solo} autovalor $\lambda=-1$, con autovector $Qf$. En este punto la fórmula \eqref{eq:lift} se anula y no debe utilizarse.
+
+La ecuación escalar equivalente, para los modos levantados no excepcionales, es
+\begin{equation}\label{eq:scalar}
+ \boxed{\sum_{w\sim v}f(w)+(4-d_v)f(v)
+ =-2(\lambda+\lambda^{-1})f(v).}
+\end{equation}
+Se puede interpretar asignando $f$ del sitio interior a cada vecino ficticio ausente: es una condición discreta de Neumann. Esta es una recurrencia 2D escalar que conserva explícitamente la geometría. El campo $f$ es auxiliar; las cuatro amplitudes físicas se recuperan con \eqref{eq:lift}. No es una probabilidad ni la suma de las cuatro amplitudes de moneda.
+
+Esta construcción es una aplicación al rebote concreto de la tesis del método de mapeo espectral de productos de reflexiones \cite{higuchi,konno}. La factorización \eqref{eq:key} explica por qué aquí puede usarse un solo campo escalar. Para una moneda genérica, como \texttt{upu}, $FC$ no tiene necesariamente esta estructura.
+
+\subsection{Modos adicionales y espectro completo}
+Para evitar perder modos hay que añadir el complemento
+\begin{equation}
+ \mathcal B=(\ran Q+\ran KQ)^\perp
+ =\{\psi:Q^\dagger\psi=0,\ Q^\dagger K\psi=0\}.
+\end{equation}
+En él, $U_G=K$, por lo que sólo hay autovalores $\pm1$. Sean $E_\Omega$ el número de enlaces no orientados entre sitios y $b=4N-2E_\Omega$ el número de direcciones ausentes. Como $K$ tiene $E_\Omega$ transposiciones y $b$ estados fijos,
+\begin{equation}
+ \dim\ker(K-\Id)=4N-E_\Omega,\qquad
+ \dim\ker(K+\Id)=E_\Omega.
+\end{equation}
+El espacio heredado $\ran Q+\ran KQ$ tiene dimensión $2N-1$: cada $\tau\ne1$ consume un vector de cada signo de $K$, y $\tau=1$ consume un vector de signo positivo. En consecuencia, las multiplicidades totales de $U_G$ son
+\begin{equation}\label{eq:flat}
+ \boxed{\operatorname{mult}_{U_G}(+1)=3N-E_\Omega,\qquad
+ \operatorname{mult}_{U_G}(-1)=E_\Omega-N+2.}
+\end{equation}
+La segunda incluye el modo heredado constante. Si $\tau_1=1,\tau_2,\ldots,\tau_N$ son los autovalores de $D$, se obtiene el polinomio característico completo:
+\begin{equation}\label{eq:fullpoly}
+ \boxed{\det(\lambda\Id-U_G)=
+ (\lambda-1)^{3N-E_\Omega}(\lambda+1)^{E_\Omega-N+2}
+ \prod_{j=2}^N(\lambda^2+2\tau_j\lambda+1).}
+\end{equation}
+Los exponentes suman $2N+2$; el producto tiene grado $2N-2$. En total hay $4N$ raíces con multiplicidad. Para varios componentes conexos, se aplica la fórmula a cada uno y se unen los espectros.
+
+Una base de los modos adicionales se obtiene resolviendo simultáneamente $K\psi=\pm\psi$ y $Q^\dagger\psi=0$. Esta condición también implica $Q^\dagger K\psi=0$. En el caso negativo se añade por separado el modo $Qf$ constante.
+
+\section{Rectángulo con Grover: dos recurrencias 1D y espectro explícito}
+En el rectángulo se separa $f_{x,y}=X_xY_y$. Se introducen
+\begin{equation}\label{eq:separated}
+ X_{x+1}=2\xi X_x-X_{x-1},\qquad
+ Y_{y+1}=2\eta Y_y-Y_{y-1},\qquad
+ \tau=\frac{\xi+\eta}{2}.
+\end{equation}
+Cada ecuación se propaga mediante la matriz unimodular
+\begin{equation}\label{eq:Tscalar}
+ \binom{X_{x+1}}{X_x}
+ =M(\xi)\binom{X_x}{X_{x-1}},\qquad
+ M(\xi)=\begin{pmatrix}2\xi&-1\\1&0\end{pmatrix},\quad \det M=1.
+\end{equation}
+Las condiciones reflectantes escalares son
+\begin{equation}
+ X_0=X_1,\quad X_{n+1}=X_n,\qquad
+ Y_0=Y_1,\quad Y_{m+1}=Y_m.
+\end{equation}
+Por tanto, se recupera exactamente la estructura de cuantización de 1D:
+\begin{equation}
+ (1,-1)M(\xi)^n\binom11=0.
+\end{equation}
+Cayley--Hamilton da $M^n=\Uch_{n-1}(\xi)M-\Uch_{n-2}(\xi)\Id$, con $\Uch_{-1}=0$. Como $(1,-1)\binom11=0$,
+\begin{equation}\label{eq:quantScalar}
+ \boxed{2(\xi-1)\Uch_{n-1}(\xi)=0.}
+\end{equation}
+El factor $\xi-1$ suministra el modo constante; las otras raíces son $\xi=\cos(\pi a/n)$, $a=1,\ldots,n-1$. Análogamente para $Y$:
+\begin{align}
+ \xi_a&=\cos\frac{\pi a}{n},& a&=0,\ldots,n-1,\\
+ \eta_b&=\cos\frac{\pi b}{m},& b&=0,\ldots,m-1.
+\end{align}
+Se pueden tomar
+\begin{equation}
+ X_x^{(a)}=\cos\!\left[\frac{\pi a}{n}\left(x-\frac12\right)\right],\qquad
+ Y_y^{(b)}=\cos\!\left[\frac{\pi b}{m}\left(y-\frac12\right)\right].
+\end{equation}
+Después de normalizar estos factores,
+\begin{equation}\label{eq:tauRect}
+ \tau_{ab}=\frac12\left(\cos\frac{\pi a}{n}+\cos\frac{\pi b}{m}\right).
+\end{equation}
+Para todo $(a,b)\ne(0,0)$, el espectro no excepcional es
+\begin{equation}\label{eq:bandRect}
+ \boxed{\lambda_{ab,\pm}=
+ \exp\!\left[\pm\ii\arccos\!\left(
+ -\frac{\cos(\pi a/n)+\cos(\pi b/m)}2\right)\right].}
+\end{equation}
+Hay $2(nm-1)$ valores con multiplicidad. El par $(0,0)$ no da dos modos: se trata por la excepción $\tau=1$ y ya está incluido en \eqref{eq:flat}.
+
+En el rectángulo, $N=nm$ y $E_\Omega=(n-1)m+n(m-1)=2nm-n-m$. Luego faltan precisamente
+\begin{equation}\label{eq:flatRect}
+ \boxed{+1\text{ con multiplicidad }nm+n+m,\qquad
+ -1\text{ con multiplicidad }nm-n-m+2.}
+\end{equation}
+Las ecuaciones \eqref{eq:bandRect} y \eqref{eq:flatRect} describen todo el espectro físico del operador completo. Si se multiplica Grover por una fase $e^{\ii\alpha}$, todos estos autovalores se multiplican por la misma fase. Si se restringe a un sector de simetría, hay que proyectar antes de contar multiplicidades; los conteos anteriores son para el espacio completo de $4nm$ estados.
+
+Por ejemplo, para $n=m=2$ hay ocho valores $+1$, dos valores $-1$, dos pares $e^{\pm2\pi\ii/3}$ y un par $\pm\ii$: dieciséis estados en total.
+
+\section{Consecuencias para Sinaí y para la interpretación de la tesis}
+En el octavo de Sinaí, Grover conserva \eqref{eq:scalar} y el polinomio completo \eqref{eq:fullpoly}. La frontera irregular impide, en general, escribir $f_{x,y}=X_xY_y$, pero sigue bastando diagonalizar el laplaciano real simétrico de $N$ sitios. Para cada valor $\nu$ de $L_\Omega$,
+\begin{equation}
+ \tau=1-\frac\nu4,\qquad
+ \cos\omega=-\tau=-1+\frac\nu4.
+\end{equation}
+No es una fórmula explícita de los $\nu$ para Sinaí. Es una reducción exacta del problema original y permite usar técnicas de ecuaciones en diferencias, transferencia por columnas y laplacianos discretos.
+
+Esto distingue dos mecanismos de solución: una moneda diagonal por bloques separa filas y columnas en cualquier geometría; Grover mezcla los ejes, pero admite un campo escalar que sólo se separa espacialmente en geometrías adecuadas, como el rectángulo. Así, es posible resolver Grover en el rectángulo sin suponer que su moneda sea diagonal por bloques.
+
+La presencia de degeneraciones extensas en $\lambda=\pm1$ debe tenerse presente al interpretar espaciamientos, IPR y factores de forma del espectro completo. La solución analítica del rectángulo no demuestra por sí misma una distribución de Poisson; la estadística depende de los sectores utilizados, degeneraciones y tratamiento de las fases. Tampoco la reducción a un laplaciano demuestra integrabilidad del billar de Sinaí.
+
+\section{Verificación reproducible y fuentes}
+El archivo \path{verificar.py} usa NumPy y semilla 271828; escribe los resultados en \path{verificacion.json}. Construye directamente la permutación reflectante $S$ y el operador $U$ sobre sitios, sin usar las fórmulas para construirlos. Se realizaron estas comprobaciones:
+\begin{itemize}
+ \item Grover en 18 dominios: ocho rectángulos, cuatro octavos de Sinaí y seis dominios conectados generados por crecimiento aleatorio. En Sinaí se usa exactamente $0\le y\le x\le L$ y $x^2+y^2\ge R^2$, como en la rutina local del proyecto.
+ \item Comparación del espectro completo con multiplicidades, identidades de factorización y reconstrucción de los modos $\tau\ne1$. El máximo error espectral fue $7.38\times10^{-15}$ y el máximo residuo de autovector normalizado fue $4.41\times10^{-15}$.
+ \item Transferencia general en cinco monedas complejas unitarias y cuatro tamaños, más tres casos de Grover. Se reconstruyeron 504 autoestados regulares, con residuo máximo $7.19\times10^{-11}$. El crecimiento de potencias de transferencia puede amplificar el error de redondeo.
+ \item Se detectaron 56 casos excepcionales de Grover que no se evaluaron mediante inversas singulares. Sus autovalores sí se incluyeron y comprobaron mediante la fórmula espectral completa.
+ \item La recurrencia de determinantes por bloques se contrastó en cinco geometrías irregulares con monedas generales y cuatro parámetros complejos por caso. El error relativo máximo fue $2.14\times10^{-14}$.
+\end{itemize}
+Estas verificaciones numéricas complementan las demostraciones; no sustituyen el análisis de los valores excepcionales.
+
+Como referencias locales se utilizaron \texttt{analítica1D/derivacion.tex} y su PDF; \path{EPS_QW/Tesis/main.pdf}, especialmente las ecuaciones (2.4)--(2.6) y (4.24)--(4.40); y las rutinas \path{JA_libs/QuantumWalks/Billiards/Common.wl} y \path{Sinai.wl} para contrastar el rebote, el orden interno del código y el dominio. El código usa $\{U,D,R,L\}$; aquí se permuta explícitamente al orden de la tesis, $\{R,L,U,D\}$.
+
+El argumento de productos de reflexiones y mapeo espectral es conocido. La contribución de esta nota es desarrollarlo con el rebote y las convenciones concretas de los documentos suministrados, junto con la extensión por columnas para monedas generales; no se afirma novedad bibliográfica.
+
+\begin{thebibliography}{9}
+\bibitem{higuchi} Y. Higuchi, E. Segawa y A. Suzuki,
+\emph{Spectral mapping theorem of an abstract quantum walk},
+\href{https://arxiv.org/abs/1506.06457}{arXiv:1506.06457}.
+\bibitem{konno} N. Konno, I. Sato, E. Segawa y Y. Shikano,
+\emph{Quantum walks driven by quantum coins with two multiple eigenvalues},
+Quantum Studies: Mathematics and Foundations \textbf{10}, 41--65 (2023),
+\href{https://arxiv.org/abs/2110.00716}{arXiv:2110.00716}.
+\end{thebibliography}
+\end{document}
