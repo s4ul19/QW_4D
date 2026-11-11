@@ -75,14 +75,10 @@ Los resultados muestran que las firmas espectrales de caos cuántico dependen ta
 \clearpage
 \pagenumbering{arabic}
 % *}}}
-
 \chapter{Introducción} % {{{*
 
 % *}}}
-
 \chapter{Caminatas cuánticas discretas en billares} % {{{*
-
-
 \snnote{Texto propuesto para este capitulo.}
 
 Las caminatas cuánticas discretas en el tiempo (DTQW) describen la evolución de un caminante sobre un espacio discreto de posiciones mediante la aplicación sucesiva de un operador unitario. El caminante posee grados de libertad internos asociados a las direcciones de movimiento. Cada paso consta de dos operaciones: un operador moneda que actúa únicamente sobre el estado interno y un operador de desplazamiento que mueve al caminante según ese estado. Las amplitudes de probabilidad asociadas a los distintos recorridos pueden interferir, dando lugar a distribuciones de probabilidad diferentes de las de una caminata aleatoria clásica~\cite{aharonov2001quantum}.
@@ -140,34 +136,35 @@ Para confinar la caminata al billar se imponen condiciones de frontera reflectan
 El operador $S$ es unitario porque permuta los estados de la base de posición y moneda. Como se emplea la misma moneda en todos los sitios y en cada paso temporal, la geometría del billar interviene en el operador de evolución $U$ únicamente a través de $S$, que determina tanto los desplazamientos permitidos como las reflexiones en la frontera.
 
 % *}}}
-
 \chapter{Caos cuántico e indicadores espectrales} % {{{*
 % *}}}
-
 \chapter{Integrabilidad con monedas diagonales por bloques} % {{{*
-
 \section{Descomposición de la caminata bidimensional en caminatas unidimensionales} % {{{*
 
-\snnote{Resumen propuesto:
-  Se presenta la moneda diagonal por bloques y se muestra que la caminata resultante no mezcla las direcciones verticales con las horizontales.
-Se muestra que el operador de evolución se descompone en una suma directa de caminatas unidimensionales independientes, una por cada segmento de fila o columna.
-Concluir la sección comentando que el espectro de la caminata bidimensional es la unión de los espectros de esos segmentos. La geometría determina sus longitudes y multiplicidades.}
+\cpnote{Esta bien estructurado. Tengo dos comentarios. Vale la pena poner al inicio de la seccion como un miniresumen, como un mapa de la seccion. Tambien creo qe debe haber un dibujo en una geometría complicada 
+como la del sinai. Otra cosa es que para una fila (o columna) pueden tener dos partes separadas, por ejemplo si el billar no es convexo. Necesitamos ver como explicamos es proqeu como está creo que se pierde ese detalle.}
 
 
-\snnote{Ecuaciones que deben aparecer}
-\begin{equation}
-  C=C_h\oplus C_v
-  =\begin{pmatrix}C_h&0\\0&C_v\end{pmatrix},
-  \qquad C_h,C_v\in U(2),
-  \label{eq:moneda-diagonal-bloques-esquema}
-\end{equation}
-\begin{equation}
-  U
-  =\bigoplus_{r\in\mathcal R_h}U_r^{(h)}
-   \oplus\bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
-  \label{eq:descomposicion-en-tramos-esquema}
-\end{equation}
-\snnote{Inicio de sección:}
+% \snnote{Resumen propuesto:
+%   Se presenta la moneda diagonal por bloques y se muestra que la caminata resultante no mezcla las direcciones verticales con las horizontales.
+% Se muestra que el operador de evolución se descompone en una suma directa de caminatas unidimensionales independientes, una por cada segmento de fila o columna.
+% Concluir la sección comentando que el espectro de la caminata bidimensional es la unión de los espectros de esos segmentos. La geometría determina sus longitudes y multiplicidades.}
+%
+%
+% \snnote{Ecuaciones que deben aparecer}
+% \begin{equation}
+%   C=C_h\oplus C_v
+%   =\begin{pmatrix}C_h&0\\0&C_v\end{pmatrix},
+%   \qquad C_h,C_v\in U(2),
+%   \label{eq:moneda-diagonal-bloques-esquema}
+% \end{equation}
+% \begin{equation}
+%   U
+%   =\bigoplus_{r\in\mathcal R_h}U_r^{(h)}
+%    \oplus\bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
+%   \label{eq:descomposicion-en-tramos-esquema}
+% \end{equation}
+% \snnote{Inicio de sección:}
 
 Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales permite descomponer la caminata sobre el billar en caminatas unidimensionales independientes. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, se considera una moneda de la forma
 \begin{equation}
@@ -296,6 +293,7 @@ Se presenta una derivación analítica del resultado y se construye con él el e
 \end{equation}
 Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},\pm}$ son los eigenvalores adicionales.
 
+% *}}}
 \snnote{Inicio de Sección}% {{{*
 
 La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus tramos unidimensionales. Considere un tramo de $n$ sitios, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores y de estas condiciones de frontera, se obtendrá el espectro en función de la moneda y de la longitud del tramo.
@@ -639,12 +637,11 @@ Por ejemplo, un billar rectangular de $L_x\times L_y$ sitios contiene $L_y$ tram
 La misma construcción se aplica al billar de Sinaí, identificando las longitudes de sus tramos horizontales y verticales. La comparación entre el espectro reconstruido analíticamente y el obtenido mediante diagonalización numérica del operador bidimensional, para las configuraciones estudiadas del rectángulo y de Sinaí, presenta una discrepancia máxima del orden de $10^{-15}$.
 
 Así, el problema espectral puede resolverse a partir de las longitudes de los tramos y de los dos bloques de la moneda, para cualquier geometría del billar con las condiciones de frontera consideradas. Esto establece la integrabilidad en el sentido de la solubilidad del espectro: la geometría modifica las longitudes y multiplicidades de las caminatas unidimensionales, pero conserva su evolución independiente y permite obtener el espectro completo mediante las expresiones analíticas anteriores.
+% *}}}
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
 % *}}}
 % *}}}
-% *}}}
-
 \chapter{Huellas de caos cuántico en billares} % {{{*
 \snnote{Modficado.}\cpnote{quiza mejor Huellas?} 
 \section{Configuraciones y monedas seleccionadas} % {{{*
@@ -774,7 +771,6 @@ es capaz de diferenciar una dinámica integrable de una caótica.
 
 % *}}}
 % *}}}
-
 \chapter{Poder coherente \texorpdfstring{$L_1$}{L1} de la moneda y firmas espectrales} % {{{*
 \snnote{Si no coloco eso me tira una advertencia rara el compilador.}\cpnote{Para que tanto comando en la L1 del titulo?}
 
@@ -821,11 +817,9 @@ Se presentan $P(s)$ y SFF para los dos billares y para monedas del ensamble COE 
 \end{figure} % *}}}
 % *}}}
 % *}}}
-
 \chapter{Conclusiones} % {{{*
 
 \bibliographystyle{unsrt}
 \bibliography{ref}
 % *}}}
-
 \end{document}
