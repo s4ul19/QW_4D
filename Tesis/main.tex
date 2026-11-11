@@ -296,9 +296,9 @@ Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},
 % *}}}
 \snnote{Inicio de Sección}% {{{*
 
-La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus tramos unidimensionales. Considere un tramo de $n$ sitios, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores y de estas condiciones de frontera, se obtendrá el espectro en función de la moneda y de la longitud del tramo.
+La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus tramos\janote{creo que ya es obsoleta la terminología `tramo'. Modificar en todas las instancias} unidimensionales. Considere un tramo de $n$ sitios, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores y de estas condiciones de frontera, se obtendrá el espectro en función de la moneda y de la longitud del tramo.
 
-La moneda unitaria que actúa sobre las dos direcciones del tramo puede escribirse como
+La moneda unitaria que actúa sobre las dos direcciones del tramo pueden escribirse como
 \begin{equation}
   C=e^{i\alpha}C_0,
   \qquad
@@ -312,18 +312,21 @@ La moneda unitaria que actúa sobre las dos direcciones del tramo puede escribir
   \label{eq:moneda-tramo-reflectante}
 \end{equation}
 donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. El factor $e^{i\alpha}$ contiene la fase global de la moneda, mientras que $C_0\in SU(2)$.
+\janote{Un párrafo sólo para introducir la ecuación de la moneda se siente innecesario. Voy a seguir leyendo y tal vez puedo hacer una sugerencia concreta}
 
 Para obtener el espectro se buscan los estados que satisfacen
 \begin{equation}
   U_n(C)|\psi\rangle=\lambda|\psi\rangle,
 \end{equation}
-donde $U_n(C)$ es el operador de evolución del tramo de $n$ sitios. Cada estado se escribe en términos de sus amplitudes en las dos direcciones:
+donde $U_n(C)$ es el operador de evolución del tramo de $n$ sitios\janote{para qué introducir $U_n(C)?$}. Cada estado se escribe en términos de sus amplitudes en las dos direcciones:
 \begin{equation}
   |\psi\rangle
   =\sum_{j=1}^{n}
   \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
 \end{equation}
-Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$, respectivamente.
+Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$, respectivamente.\janote{qué mensaje comunica este párrafo?}
+
+\janote{El resto de la sección es la derivación y no me queda claro cómo agrupar en párrafos eso. Por el momento creo que hace falta un párrafo que haga de outline y describa el procedimiento general para hacer la diagonalización.}
 
 La fase global de la moneda puede separarse también del operador de evolución:
 \begin{equation}
