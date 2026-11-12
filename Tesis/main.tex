@@ -141,6 +141,7 @@ El operador $S$ es unitario porque permuta los estados de la base de posición y
 \chapter{Integrabilidad con monedas diagonales por bloques} % {{{*
 \section{Descomposición de la caminata bidimensional en caminatas unidimensionales} % {{{*
 
+\snnote{He agregado un comentario acerca de las filas o columnas que no sean conexas y el miniresumen al inicio de la sección.}
 \cpnote{Esta bien estructurado. Tengo dos comentarios. Vale la pena poner al inicio de la seccion como un miniresumen, como un mapa de la seccion. Tambien creo qe debe haber un dibujo en una geometría complicada 
 como la del sinai. Otra cosa es que para una fila (o columna) pueden tener dos partes separadas, por ejemplo si el billar no es convexo. Necesitamos ver como explicamos es proqeu como está creo que se pierde ese detalle.}
 
@@ -165,8 +166,9 @@ como la del sinai. Otra cosa es que para una fila (o columna) pueden tener dos p
 %   \label{eq:descomposicion-en-tramos-esquema}
 % \end{equation}
 % \snnote{Inicio de sección:}
+En esta sección se demuestra que una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en un billar a caminatas unidimensionales independientes. Para ello, se identifican los subespacios asociados a las filas y columnas, se demuestra su invariancia bajo el operador de evolución y se construye una base en la que este presenta una estructura diagonal por bloques. El resultado es válido para cualquier geometría del billar con las condiciones de frontera reflectantes consideradas.
 
-Una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales permite descomponer la caminata sobre el billar en caminatas unidimensionales independientes. En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, se considera una moneda de la forma
+En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, se considera una moneda de la forma
 \begin{equation}
   C=C_h\oplus C_v
   =\begin{pmatrix}
@@ -185,7 +187,7 @@ El bloque $C_h$ actúa sobre los estados de moneda asociados a las direcciones h
 \end{equation}
 Ambas componentes pertenecen a la misma fila. Por linealidad, el resultado se extiende a cualquier superposición de estados horizontales de esa fila y se mantiene en cada paso de la evolución. El argumento es análogo para los estados verticales de una columna.
 
-Para representar esta separación, se construyen las bases de los estados horizontales de cada fila y de los verticales de cada columna. Escribiendo cada posición como $v=(x,y)$, para una fila fija $y=y_0$ y una columna fija $x=x_0$ se definen
+Los estados horizontales de cada fila y los verticales de cada columna forman subespacios invariantes bajo $U$. Para construir sus bases, se escribe cada posición como $v=(x,y)$. Para una fila fija $y=y_0$ y una columna fija $x=x_0$, se definen
 \begin{align}
   \mathcal B_{y_0}^{\text{horizontal}}
   &=
@@ -209,7 +211,8 @@ Los subespacios correspondientes son
   \mathcal H_{x_0}^{\text{vertical}}
   &=\operatorname{span}\mathcal B_{x_0}^{\text{vertical}}.
 \end{align}
-Cada uno tiene una dimensión igual al doble del número de sitios de la fila o columna correspondiente.
+Cada uno tiene una dimensión igual al doble del número de sitios de la fila o columna correspondiente. Si la fila o columna no es conexa, cada una de sus componentes conexas evoluciona de forma independiente, debido a la reflexión en sus extremos.
+
 
 Los subespacios son invariantes bajo $U$: para estados arbitrarios de cada subespacio, se cumple
 \begin{equation}
@@ -224,7 +227,7 @@ Los subespacios son invariantes bajo $U$: para estados arbitrarios de cada subes
   \end{aligned}
 \end{equation}
 Además, los subespacios distintos son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$.
-
+ 
 Para mostrar la estructura matricial de esta descomposición, se ordenan los estados de cada base por su posición. En cada fila se sigue el orden creciente de $x$, colocando $|R,(x,y_0)\rangle$ seguido de $|L,(x,y_0)\rangle$ en cada sitio. En cada columna se sigue el orden creciente de $y$, colocando $|U,(x_0,y)\rangle$ seguido de $|D,(x_0,y)\rangle$. Sean $y_1,\ldots,y_m$ las coordenadas de las filas del billar y $x_1,\ldots,x_\ell$ las de sus columnas, enumeradas de menor a mayor. Se concatenan las bases ordenadas:
 \begin{equation}
   \mathcal B=
@@ -267,6 +270,7 @@ Cada bloque representa la evolución sobre una fila o columna en su base corresp
 \end{equation}
 donde las sumas recorren las filas y columnas que contienen sitios del billar. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$; en cada columna solo varía $y$ y participan $U$ y $D$. Así, cada bloque describe una caminata unidimensional independiente. El problema espectral del billar queda reducido a obtener el espectro de estas caminatas.
 % *}}}
+
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
 \snnote{Resumen de la sección\\
