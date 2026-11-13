@@ -272,7 +272,7 @@ donde las sumas recorren las filas y columnas que contienen sitios del billar. E
 % *}}}
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
-%\snnote{Resumen de la sección\\
+%\snnote{Resumen de la sección\\ % {{{*
  % En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
 %Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se %incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos %cuántico.}
 %\snnote{Ecuaciones que deben aparecer}
@@ -299,25 +299,20 @@ donde las sumas recorren las filas y columnas que contienen sitios del billar. E
 % *}}}
 \snnote{Inicio de Sección}% {{{*
 
-La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus caminatas unidimensionales\snnote{cambiado}\janote{creo que ya es obsoleta la terminología `tramo'. Modificar en todas las instancias}. Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. Para obtener el espectro, se construye una matriz de transferencia a partir de las ecuaciones que satisfacen las amplitudes de los eigenestados. Las condiciones de frontera permiten obtener una ecuación para los eigenvalores, que se resuelve mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev.
+La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus caminatas unidimensionales. Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. Para obtener el espectro, se construye una matriz de transferencia\janote{una matriz de transferencia de qué?} a partir de las ecuaciones que satisfacen las amplitudes de los eigenestados\janote{esto suena a que el paso anterior es entonces encontrar una especie de ecuaciones de recurrencia, es correcto?}. Las condiciones de frontera permiten obtener una ecuación para los eigenvalores\janote{pero cómo la matriz de transferencia del enunciado anterior te permite obtener los eigenvalores?}, que se resuelve mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev.
 
-\sout{Para obtener el espectro se buscan los estados que satisfacen}
 Se resuelve la ecuación
-\sout{\mbox{$U_n(C)|\psi\rangle=\lambda|\psi\rangle$}}
 \begin{equation}
   U_{\mathrm{1D}}|\psi\rangle=\lambda|\psi\rangle,
 \end{equation}
-\sout{donde $U_n(C)$ es el operador de evolución del tramo de $n$ sitios}
-donde $U_{\mathrm{1D}}$ es el operador de evolución sobre los $n$ sitios considerados.\snnote{Cambie la notación, solo es para distinguir la $U$ de la que se trabajo para el caso 2D.}\janote{para qué introducir $U_n(C)?$}.
-\sout{Cada estado se escribe en términos de sus amplitudes en las dos direcciones:}
+donde $U_{\mathrm{1D}}$ es el operador de evolución sobre los $n$ sitios considerados
 y $|\psi\rangle$ el eigenestado asociado al eigenvalor $\lambda$ cuya forma se expresa según
 \begin{equation}
   |\psi\rangle
   =\sum_{j=1}^{n}
   \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
 \end{equation}
-Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$, respectivamente.\snnote{Establecer el punto de partida de la deducción.}\janote{qué mensaje comunica este párrafo?}
-\sout{La moneda unitaria que actúa sobre las dos direcciones del tramo pueden escribirse como}
+Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda\janote{y qué pasa si estás considerando una caminata sobre una columna?} en el sitio $j$, respectivamente.\janote{qué mensaje comunica este párrafo?}\snnote{Establecer el punto de partida de la deducción.}\janote{Entonces agregá un rimer enunciado del párrafo que comunique eso}
 La moneda unitaria que actúa sobre estas dos direcciones puede escribirse como
 \begin{equation}
   C=e^{i\alpha}C_0,
@@ -331,16 +326,12 @@ La moneda unitaria que actúa sobre estas dos direcciones puede escribirse como
   |a|^2+|b|^2=1,
   \label{eq:moneda-tramo-reflectante}
 \end{equation}
-\sout{donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. El factor $e^{i\alpha}$ contiene la fase global de la moneda, mientras que $C_0\in SU(2)$.}
 donde $\alpha\in\mathbb R$, $a,b\in\mathbb C$ y $C_0\in SU(2)$. Esta parametrización separa la fase global $e^{i\alpha}$ de la moneda.
-\snnote{Se puede unir el párrafo siguiente, que empieza por 'La fase global...' justamente despues de donde termina 'Esta parametrización separa\dots'}
 \janote{Un párrafo sólo para introducir la ecuación de la moneda se siente innecesario. Voy a seguir leyendo y tal vez puedo hacer una sugerencia concreta}
-
-\snnote{He agregado ese outline del proceso general al inicio de la sección.}
-\janote{El resto de la sección es la derivación y no me queda claro cómo agrupar en párrafos eso. Por el momento creo que hace falta un párrafo que haga de outline y describa el procedimiento general para hacer la diagonalización.}
+\snnote{Se puede unir el párrafo siguiente, que empieza por 'La fase global...' justamente despues de donde termina 'Esta parametrización separa\dots'}
 
 La fase global de la moneda puede separarse también del operador de evolución:
-\begin{equation}
+\begin{equation}\label{eq:aquí}
   \begin{aligned}
     U_{\mathrm{1D}}
     &=S_n(C\otimes\mathbb I_n)
@@ -625,6 +616,7 @@ De aquí se obtienen los dos eigenvalores adicionales:
   \label{eq:espectro-extremos-tramo}
 \end{equation}
 A diferencia de la familia de banda, estos valores no dependen del número de sitios de la caminata unidimensional.
+\janote{Honestamente, es difícil de leer esta derivación. Te hablo por whatsapp al respecto}
 
 El espectro obtenido para una caminata unidimensional permite reconstruir el de la caminata bidimensional. Como se mostró en la sección anterior, el operador de evolución se descompone como
 \begin{equation}
@@ -634,7 +626,8 @@ El espectro obtenido para una caminata unidimensional permite reconstruir el de 
   \oplus
   \bigoplus_x U_x^{\text{vertical}}.
 \end{equation}
-Cada operador $U_y^{\text{horizontal}}$ describe la evolución sobre la fila $y$ con moneda $C_h$, mientras que $U_x^{\text{vertical}}$ describe la evolución sobre la columna $x$ con moneda $C_v$. Las expresiones analíticas obtenidas se aplican usando el número de sitios y la moneda de cada fila o columna conexa. Si la fila o columna no es conexa, se aplican a cada componente conexa por separado. El espectro completo es
+\janote{si esta ecuación ya existe antes en el texto lo mejor es referenciarla, no volverla a colocar}
+Cada operador $U_y^{\text{horizontal}}$ describe la evolución sobre la fila $y$ con moneda $C_h$, mientras que $U_x^{\text{vertical}}$ describe la evolución sobre la columna $x$ con moneda $C_v$. Las expresiones analíticas obtenidas se aplican usando el número de sitios y la moneda de cada fila o columna conexa\janote{por qué conexa?}. Si la fila o columna no es conexa, se aplican a cada componente conexa por separado\janote{mm no entiendo esto. Porfa explicame por whatsapp}\janote{agregá referencias cruzadas a las ecuaciones que estés haciendo referencia que se aplican. Creo que en parte por eso no entiendo}. El espectro completo es
 \begin{equation}
   \operatorname{spec}(U)
   =
@@ -645,21 +638,20 @@ Cada operador $U_y^{\text{horizontal}}$ describe la evolución sobre la fila $y$
   \operatorname{spec}\!\left(U_x^{\text{vertical}}\right),
   \label{eq:espectro-billar-por-tramos}
 \end{equation}
-donde $\biguplus$ indica que se conservan las multiplicidades. Al aplicar las fórmulas del espectro, cada bloque de moneda conserva su propia fase global.
+donde $\biguplus$\janote{quitá ese símbolo. En todo caso la ecuacioń sería mejor decirla en palabras. Me gustaría que como regla general apliqués siempre preguntarte si es necesario introducir un símbolo matemático nuevo o podés decirlo/expresarlo de una forma distinta y más sencilla. Menos es más, siempre} indica que se conservan las multiplicidades. Al aplicar las fórmulas del espectro, cada bloque de moneda conserva su propia fase global\janote{cómo así? Todas las filas o columnas comparten la misma fase global, no?}.
 
-La repetición de eigenvalores entre las caminatas unidimensionales produce degeneraciones en el espectro bidimensional. En particular, las caminatas unidimensionales de igual longitud y con la misma moneda tienen espectros idénticos. Además, como los eigenvalores adicionales no dependen de la longitud, estos se repiten en todas las caminatas unidimensionales que comparten la misma moneda, incluso si sus longitudes son diferentes.
+La repetición de eigenvalores entre las caminatas unidimensionales produce degeneraciones en el espectro bidimensional\janote{modificá el wording. El espectro no es bidimensional}. En particular, las caminatas unidimensionales de igual longitud y con la misma moneda tienen espectros idénticos. Además, como los eigenvalores adicionales no dependen de la longitud, estos se repiten en todas las caminatas unidimensionales que comparten la misma moneda, incluso si sus longitudes son diferentes\janote{este resultado no lo había apreciado antes y explica bastantes cosas. Agregá un enunciado más que haga concreto con un ejemplo esto. Es decir, decí que en el Sinaí aunque las filas y columnas tienen distintas longitudes, el espectro completo va a tener tal eigenvalor con tal degeneración}.
 
-Por ejemplo, un billar rectangular de $L_x\times L_y$ sitios contiene $L_y$ filas de longitud $L_x$ y $L_x$ columnas de longitud $L_y$. Todos los operadores de las filas tienen el mismo espectro, determinado por $L_x$ y $C_h$, y todos los de las columnas comparten el espectro determinado por $L_y$ y $C_v$. Por ello, cada eigenvalor de la caminata sobre una fila contribuye al espectro con $L_y$ copias y cada eigenvalor de la caminata sobre una columna con $L_x$ copias. Si un eigenvalor aparece en ambos sectores, sus multiplicidades se suman.
+Por ejemplo, un billar rectangular de $L_x\times L_y$ sitios contiene $L_y$ filas de longitud $L_x$ y $L_x$ columnas de longitud $L_y$\janote{jaja por aquí empezás a decir lo mismo que sugerí antes. Este entonces no es un nuevo párrafo, esta elaborando la misma idea del párrafo anteior. Fusionalos}. Todos los operadores de las filas tienen el mismo espectro, determinado por $L_x$ y $C_h$, y todos los de las columnas comparten el espectro determinado por $L_y$ y $C_v$. Por ello, cada eigenvalor de la caminata sobre una fila contribuye al espectro con $L_y$ copias y cada eigenvalor de la caminata sobre una columna con $L_x$ copias. Si un eigenvalor aparece en ambos sectores, sus multiplicidades se suman.\janote{Igual creo que convieen agregar el ejemplo concreto del sinai porque es menos intuitivo que el rectángulo}
 
-La misma construcción se aplica al billar de Sinaí, identificando las longitudes de sus filas y columnas o de sus componentes conexas. La comparación entre el espectro reconstruido analíticamente y el obtenido mediante diagonalización numérica del operador bidimensional, para las configuraciones estudiadas del rectángulo y de Sinaí, presenta una discrepancia máxima del orden de $10^{-15}$.
+La misma construcción se aplica al billar de Sinaí, identificando las longitudes de sus filas y columnas o de sus componentes conexas. La comparación entre el espectro reconstruido analíticamente y el obtenido mediante diagonalización numérica del operador bidimensional, para las configuraciones estudiadas del rectángulo y de Sinaí, presenta una discrepancia máxima del orden de $10^{-15}$\janote{(1) creo que este párrafo sigue elaborando la misma idea de los dos párrafos anteriores y por tanto debería ser fusionado. (2) el último enunciado es bastante vacío, sólo estás diciendo 'la analítica está bien hecha porque la verifiqué con numérica'}.
 
-Así, el problema espectral puede resolverse a partir de las longitudes de las caminatas unidimensionales y de los dos bloques de la moneda, para cualquier geometría del billar con las condiciones de frontera consideradas. Esto establece la integrabilidad en el sentido de la solubilidad del espectro: la geometría modifica las longitudes y multiplicidades de las caminatas unidimensionales, pero conserva su evolución independiente y permite obtener el espectro completo mediante las expresiones analíticas anteriores.
+Así, el problema espectral puede resolverse a partir de las longitudes de las caminatas unidimensionales y de los dos bloques de la moneda, para cualquier geometría del billar con las condiciones de frontera consideradas. Esto establece la integrabilidad en el sentido de la solubilidad del espectro\janote{esto creo que debería ser el punto central del párrafo y que también sirve de outro de la sección. Tu primer enunciado me parece algo más secundario que este sentido de integrabilidad}: la geometría modifica las longitudes y multiplicidades de las caminatas unidimensionales, pero conserva su evolución independiente y permite obtener el espectro completo mediante las expresiones analíticas anteriores.
 % *}}}
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
 % *}}}
 % *}}}
-
 \chapter{Huellas de caos cuántico en billares} % {{{*
 \snnote{Modficado.}\cpnote{quiza mejor Huellas?} 
 \section{Configuraciones y monedas seleccionadas} % {{{*
