@@ -270,39 +270,55 @@ Cada bloque representa la evolución sobre una fila o columna en su base corresp
 \end{equation}
 donde las sumas recorren las filas y columnas que contienen sitios del billar. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$; en cada columna solo varía $y$ y participan $U$ y $D$. Así, cada bloque describe una caminata unidimensional independiente. El problema espectral del billar queda reducido a obtener el espectro de estas caminatas.
 % *}}}
-
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
-\snnote{Resumen de la sección\\
-  En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
-Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos cuántico.}
-\snnote{Ecuaciones que deben aparecer}
-\begin{equation}
-  C=e^{i\alpha}
-  \begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
-  \qquad |a|^2+|b|^2=1.
-  \label{eq:moneda-tramo-reflectante-esquema}
-\end{equation}
-\begin{equation}
-  \lambda_{m,\pm}=e^{i\alpha}
-  \exp\!\left[\pm i\arccos\!\left(|a|\cos\frac{\pi m}{n}\right)\right],
-  \qquad m=1,\ldots,n-1,
-  \label{eq:espectro-banda-tramo-esquema}
-\end{equation}
-\begin{equation}
-  \lambda_{\mathrm{ext},\pm}
-  =e^{i\alpha}\left(i\operatorname{Im}b
-  \pm\sqrt{1-(\operatorname{Im}b)^2}\right).
-  \label{eq:espectro-extremos-tramo-esquema}
-\end{equation}
-Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},\pm}$ son los eigenvalores adicionales.
+%\snnote{Resumen de la sección\\
+ % En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
+%Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se %incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos %cuántico.}
+%\snnote{Ecuaciones que deben aparecer}
+%\begin{equation}
+ % C=e^{i\alpha}
+  %\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
+  %\qquad |a|^2+|b|^2=1.
+  %label{eq:moneda-tramo-reflectante-esquema}
+%\end{equation}
+%\begin{equation}
+  %\lambda_{m,\pm}=e^{i\alpha}
+  %\exp\!\left[\pm i\arccos\!\left(|a|\cos\frac{\pi m}{n}\right)\right],
+  %\qquad m=1,\ldots,n-1,
+  %\label{eq:espectro-banda-tramo-esquema}
+%\end{equation}
+%\begin{equation}
+ % \lambda_{\mathrm{ext},\pm}
+ % =e^{i\alpha}\left(i\operatorname{Im}b
+  %\pm\sqrt{1-(\operatorname{Im}b)^2}\right).
+  %\label{eq:espectro-extremos-tramo-esquema}
+%\end{equation}
+%Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},\pm}$ son los eigenvalores adicionales.
 
 % *}}}
 \snnote{Inicio de Sección}% {{{*
 
-La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus tramos\janote{creo que ya es obsoleta la terminología `tramo'. Modificar en todas las instancias} unidimensionales. Considere un tramo de $n$ sitios, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores y de estas condiciones de frontera, se obtendrá el espectro en función de la moneda y de la longitud del tramo.
+La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus caminatas unidimensionales\snnote{cambiado}\janote{creo que ya es obsoleta la terminología `tramo'. Modificar en todas las instancias}. Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. Para obtener el espectro, se construye una matriz de transferencia a partir de las ecuaciones que satisfacen las amplitudes de los eigenestados. Las condiciones de frontera permiten obtener una ecuación para los eigenvalores, que se resuelve mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev.
 
-La moneda unitaria que actúa sobre las dos direcciones del tramo pueden escribirse como
+\sout{Para obtener el espectro se buscan los estados que satisfacen}
+Para obtener el espectro de la caminata unidimensional, se resuelve la ecuación
+\sout{\mbox{$U_n(C)|\psi\rangle=\lambda|\psi\rangle$}}
+\begin{equation}
+  U_{\mathrm{1D}}|\psi\rangle=\lambda|\psi\rangle,
+\end{equation}
+\sout{donde $U_n(C)$ es el operador de evolución del tramo de $n$ sitios}
+donde $U_{\mathrm{1D}}$ es el operador de evolución sobre los $n$ sitios considerados\snnote{Cambie la notación, solo es para distinguir la $U$ de la que se trabajo para el caso 2D.}\janote{para qué introducir $U_n(C)?$}.
+\sout{Cada estado se escribe en términos de sus amplitudes en las dos direcciones:}
+Cada eigenestado se expresa como
+\begin{equation}
+  |\psi\rangle
+  =\sum_{j=1}^{n}
+  \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
+\end{equation}
+Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$, respectivamente.\snnote{Aclarar la matemática.}\janote{qué mensaje comunica este párrafo?}
+\sout{La moneda unitaria que actúa sobre las dos direcciones del tramo pueden escribirse como}
+La moneda unitaria que actúa sobre estas dos direcciones puede escribirse como
 \begin{equation}
   C=e^{i\alpha}C_0,
   \qquad
@@ -315,22 +331,15 @@ La moneda unitaria que actúa sobre las dos direcciones del tramo pueden escribi
   |a|^2+|b|^2=1,
   \label{eq:moneda-tramo-reflectante}
 \end{equation}
-donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. El factor $e^{i\alpha}$ contiene la fase global de la moneda, mientras que $C_0\in SU(2)$.
+\sout{donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. El factor $e^{i\alpha}$ contiene la fase global de la moneda, mientras que $C_0\in SU(2)$.}
+donde $\alpha\in\mathbb R$, $a,b\in\mathbb C$ y $C_0\in SU(2)$. Esta parametrización separa la fase global $e^{i\alpha}$ de la moneda.
+\snnote{No se me ocurre otro modo de empezar}
 \janote{Un párrafo sólo para introducir la ecuación de la moneda se siente innecesario. Voy a seguir leyendo y tal vez puedo hacer una sugerencia concreta}
 
-Para obtener el espectro se buscan los estados que satisfacen
-\begin{equation}
-  U_n(C)|\psi\rangle=\lambda|\psi\rangle,
-\end{equation}
-donde $U_n(C)$ es el operador de evolución del tramo de $n$ sitios\janote{para qué introducir $U_n(C)?$}. Cada estado se escribe en términos de sus amplitudes en las dos direcciones:
-\begin{equation}
-  |\psi\rangle
-  =\sum_{j=1}^{n}
-  \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
-\end{equation}
-Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$, respectivamente.\janote{qué mensaje comunica este párrafo?}
-
+\snnote{He agregado ese outline del proceso general.}
 \janote{El resto de la sección es la derivación y no me queda claro cómo agrupar en párrafos eso. Por el momento creo que hace falta un párrafo que haga de outline y describa el procedimiento general para hacer la diagonalización.}
+
+
 
 La fase global de la moneda puede separarse también del operador de evolución:
 \begin{equation}
@@ -649,6 +658,7 @@ Así, el problema espectral puede resolverse a partir de las longitudes de los t
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
 % *}}}
 % *}}}
+
 \chapter{Huellas de caos cuántico en billares} % {{{*
 \snnote{Modficado.}\cpnote{quiza mejor Huellas?} 
 \section{Configuraciones y monedas seleccionadas} % {{{*
