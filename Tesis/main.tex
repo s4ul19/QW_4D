@@ -299,21 +299,15 @@ donde las sumas recorren las filas y columnas que contienen sitios del billar. E
 % *}}}
 \snnote{Inicio de Sección}% {{{*
 
-La descomposición del operador de evolución permite obtener el espectro de la caminata en el billar a partir de los espectros de sus caminatas unidimensionales. Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. Para obtener el espectro, se construye una matriz de transferencia\janote{una matriz de transferencia de qué?} a partir de las ecuaciones que satisfacen las amplitudes de los eigenestados\janote{esto suena a que el paso anterior es entonces encontrar una especie de ecuaciones de recurrencia, es correcto?}. Las condiciones de frontera permiten obtener una ecuación para los eigenvalores\janote{pero cómo la matriz de transferencia del enunciado anterior te permite obtener los eigenvalores?}, que se resuelve mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev.
+Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores se obtienen relaciones de recurrencia entre los coeficientes de los eigenvectores en sitios consecutivos. La recurrencia se expresa mediante una matriz de transferencia que permite reconstruir el estado a partir de una condición inicial compatible con la frontera izquierda. Al imponer también la condición de reflexión en el extremo derecho, se obtiene una ecuación para los eigenvalores que se factoriza mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev. Las soluciones de los factores resultantes proporcionan el espectro.
 
-Se resuelve la ecuación
-\begin{equation}
-  U_{\mathrm{1D}}|\psi\rangle=\lambda|\psi\rangle,
-\end{equation}
-donde $U_{\mathrm{1D}}$ es el operador de evolución sobre los $n$ sitios considerados
-y $|\psi\rangle$ el eigenestado asociado al eigenvalor $\lambda$ cuya forma se expresa según
+Para obtener las relaciones de recurrencia, se expresa el eigenestado en términos de sus coeficientes en cada sitio:
 \begin{equation}
   |\psi\rangle
   =\sum_{j=1}^{n}
   \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
 \end{equation}
-Aquí, $R_j$ y $L_j$ son las amplitudes asociadas a las direcciones derecha e izquierda\janote{y qué pasa si estás considerando una caminata sobre una columna?} en el sitio $j$, respectivamente.\janote{qué mensaje comunica este párrafo?}\snnote{Establecer el punto de partida de la deducción.}\janote{Entonces agregá un rimer enunciado del párrafo que comunique eso}
-La moneda unitaria que actúa sobre estas dos direcciones puede escribirse como
+Las etiquetas $R$ y $L$ designan los dos sentidos de movimiento. La moneda se escribe como
 \begin{equation}
   C=e^{i\alpha}C_0,
   \qquad
@@ -322,104 +316,46 @@ La moneda unitaria que actúa sobre estas dos direcciones puede escribirse como
     a&b\\
     -b^*&a^*
   \end{pmatrix},
-  \qquad
-  |a|^2+|b|^2=1,
+  \qquad |a|^2+|b|^2=1,
   \label{eq:moneda-tramo-reflectante}
 \end{equation}
-donde $\alpha\in\mathbb R$, $a,b\in\mathbb C$ y $C_0\in SU(2)$. Esta parametrización separa la fase global $e^{i\alpha}$ de la moneda.
-\janote{Un párrafo sólo para introducir la ecuación de la moneda se siente innecesario. Voy a seguir leyendo y tal vez puedo hacer una sugerencia concreta}
-\snnote{Se puede unir el párrafo siguiente, que empieza por 'La fase global...' justamente despues de donde termina 'Esta parametrización separa\dots'}
-
-La fase global de la moneda puede separarse también del operador de evolución:
-\begin{equation}\label{eq:aquí}
-  \begin{aligned}
-    U_{\mathrm{1D}}
-    &=S_n(C\otimes\mathbb I_n)
-    =e^{i\alpha}U_0,
-    \\
-    U_0
-    &=S_n(C_0\otimes\mathbb I_n),
-  \end{aligned}
-\end{equation}
-donde $S_n$ es el desplazamiento reflectante sobre los $n$ sitios considerados y $\mathbb I_n$ es la identidad en su espacio de posición. Por tanto, basta resolver
+donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. Al separar su fase global del operador de evolución,
 \begin{equation}
-  U_0|\psi\rangle=\mu|\psi\rangle.
-\end{equation}
-Los eigenvalores del operador original se recuperan mediante
-\begin{equation}
-  \lambda=e^{i\alpha}\mu,
-\end{equation}
-y ambos operadores comparten los mismos eigenvectores.
-
-Para obtener las ecuaciones que satisfacen $R_j$ y $L_j$, se escribe explícitamente la acción de la moneda antes del desplazamiento:
-\begin{align}
-  U_0|\psi\rangle
-  &=S_n(C_0\otimes\mathbb I_n)
-  \sum_{j=1}^{n}
-  \left(R_j|R,j\rangle+L_j|L,j\rangle\right)
-  \notag\\
-  &=S_n\sum_{j=1}^{n}
-  \left[
-    (aR_j+bL_j)|R,j\rangle
-    +(-b^*R_j+a^*L_j)|L,j\rangle
-  \right].
-\end{align}
-Así, después de aplicar $C_0$, las amplitudes asociadas a las direcciones derecha e izquierda en el sitio $j$ son, respectivamente,
-\begin{equation}
-  r_j=aR_j+bL_j,
+  U_{\mathrm{1D}}
+  =S_n(C\otimes\mathbb I_n)
+  =e^{i\alpha}U_0,
   \qquad
-  \ell_j=-b^*R_j+a^*L_j.
-  \label{eq:amplitudes-moneda-1d}
+  U_0=S_n(C_0\otimes\mathbb I_n),
+  \label{eq:aquí}
 \end{equation}
-El operador $S_n$ transforma después los estados $|R,j\rangle$ y $|L,j\rangle$, conservando sus coeficientes $r_j$ y $\ell_j$.
-
-Cuando no hay reflexión, los términos $r_j|R,j\rangle$ y $\ell_j|L,j\rangle$ se transforman en $r_j|R,j+1\rangle$ y $\ell_j|L,j-1\rangle$, respectivamente. Al comparar las amplitudes resultantes con las de $\mu|\psi\rangle$, se obtiene
+la ecuación $U_{\mathrm{1D}}|\psi\rangle=\lambda|\psi\rangle$ equivale a
+\begin{equation}
+  U_0|\psi\rangle=\mu|\psi\rangle,
+  \qquad \lambda=e^{i\alpha}\mu.
+\end{equation}
+Aquí, $S_n$ es el operador de desplazamiento y $\mathbb I_n$ la identidad en el espacio de posición. Al aplicar la moneda y el desplazamiento e igualar los coeficientes de los estados de la base, se obtiene
 \begin{align}
   \mu R_{j+1}&=aR_j+bL_j,
   &&j=1,\ldots,n-1,
   \label{eq:interior-derecha-1d}\\
   \mu L_{j-1}&=-b^*R_j+a^*L_j,
-  &&j=2,\ldots,n.
-  \label{eq:interior-izquierda-1d}
-\end{align}
-
-En los extremos, $S_n$ invierte la dirección de los estados cuyo siguiente sitio queda fuera del sistema, sin cambiar su posición. En el extremo izquierdo, $S_n|L,1\rangle=|R,1\rangle$, por lo que el coeficiente $\ell_1$ contribuye al estado $|R,1\rangle$ y se cumple
-\begin{equation}
-  \mu R_1=\ell_1=-b^*R_1+a^*L_1.
-  \label{eq:frontera-izquierda-1d}
-\end{equation}
-En el extremo derecho, $S_n|R,n\rangle=|L,n\rangle$, por lo que el coeficiente $r_n$ contribuye al estado $|L,n\rangle$ y se obtiene
-\begin{equation}
-  \mu L_n=r_n=aR_n+bL_n.
+  &&j=2,\ldots,n,
+  \label{eq:interior-izquierda-1d}\\
+  \mu R_1&=-b^*R_1+a^*L_1,
+  \label{eq:frontera-izquierda-1d}\\
+  \mu L_n&=aR_n+bL_n.
   \label{eq:frontera-derecha-1d}
-\end{equation}
+\end{align}
+Las dos primeras relaciones corresponden al interior. Las dos últimas incorporan la reflexión en los extremos, donde la dirección se invierte sin cambiar la posición ni introducir una fase adicional.
 
-Para escribir las ecuaciones del interior y de los extremos de una misma forma, se introducen las amplitudes auxiliares
+Las relaciones anteriores permiten calcular $R_{j+1}$ y $L_j$ a partir de $R_j$ y $L_{j-1}$. Para incluir ambos extremos en esta misma recurrencia, se definen los coeficientes auxiliares
 \begin{equation}
   L_0=R_1,
   \qquad
   R_{n+1}=L_n.
   \label{eq:amplitudes-auxiliares-1d}
 \end{equation}
-Estas amplitudes auxiliares codifican las condiciones de reflexión en ambos extremos y no añaden sitios físicos al sistema unidimensional. Con estas definiciones, las ecuaciones anteriores pueden escribirse como
-\begin{equation}
-  \mu R_{j+1}=aR_j+bL_j,
-  \qquad
-  \mu L_{j-1}=-b^*R_j+a^*L_j,
-  \qquad j=1,\ldots,n.
-  \label{eq:recurrencias-uniformes-1d}
-\end{equation}
-
-Para $a\neq0$, se despeja $L_j$ de la segunda ecuación y se sustituye el resultado en la primera:
-\begin{align}
-  L_j&=\frac{b^*R_j+\mu L_{j-1}}{a^*},\\
-  R_{j+1}
-  &=\frac{aR_j+bL_j}{\mu}
-  =\frac{\mu^{-1}R_j+bL_{j-1}}{a^*},
-\end{align}
-donde se ha utilizado $|a|^2+|b|^2=1$. Estas expresiones muestran que conocer $R_j$ y $L_{j-1}$ permite calcular $R_{j+1}$ y $L_j$.
-
-Al agrupar las amplitudes en el vector
+Agrupando los coeficientes en el vector
 \begin{equation}
   w_j=
   \begin{pmatrix}
@@ -427,7 +363,7 @@ Al agrupar las amplitudes en el vector
   \end{pmatrix},
   \qquad j=1,\ldots,n+1,
 \end{equation}
-se puede expresar la recurrencia como
+y, para $a\neq0$, despejando $L_j$ de la segunda recurrencia y sustituyendo en la primera, se obtiene
 \begin{equation}
   w_{j+1}=T(\mu)w_j,
   \qquad
@@ -436,100 +372,54 @@ se puede expresar la recurrencia como
     \mu^{-1}&b\\
     b^*&\mu
   \end{pmatrix},
-  \qquad j=1,\ldots,n.
+  \qquad j=1,\ldots,n,
   \label{eq:matriz-transferencia-1d}
 \end{equation}
-La matriz de transferencia $T(\mu)$ permite reconstruir las amplitudes en los $n$ sitios considerados para un valor dado de $\mu$, a partir del vector inicial $w_1$.
+donde se ha utilizado $|a|^2+|b|^2=1$. La matriz de transferencia $T(\mu)$ permite reconstruir los coeficientes en los sitios sucesivos, para un valor dado de $\mu$, a partir del vector inicial $w_1$.
 
-La condición de frontera izquierda fija la forma del vector inicial. Como $L_0=R_1$, se tiene
+Los eigenvalores deben ser compatibles con las condiciones de reflexión en ambos extremos. La frontera izquierda exige $L_0=R_1$, por lo que
 \begin{equation}
-  w_1=
-  \begin{pmatrix}
-    R_1\\L_0
-  \end{pmatrix}
-  =R_1e_+,
+  w_1=R_1e_+,
   \qquad
   e_+=
   \begin{pmatrix}
     1\\1
   \end{pmatrix}.
 \end{equation}
-Para un eigenvector no nulo, $R_1\neq0$: si $R_1=0$, entonces $w_1=0$ y la recurrencia anularía todas las amplitudes del estado. Al aplicar sucesivamente la matriz de transferencia, se obtiene
+Para un eigenestado no nulo, $R_1\neq0$; de lo contrario, la recurrencia produciría el estado nulo. Las $n$ aplicaciones de la matriz de transferencia que conectan $w_1$ con $w_{n+1}$ dan
 \begin{equation}
-  w_{n+1}=T(\mu)^nw_1
-  =R_1T(\mu)^ne_+.
+  w_{n+1}=R_1T(\mu)^ne_+.
   \label{eq:transferencia-tramo-completo}
 \end{equation}
-Aparecen $n$ aplicaciones de $T(\mu)$ porque la recurrencia conecta los vectores $w_1$, $w_2$, $\ldots$, $w_{n+1}$, que incluyen las amplitudes auxiliares de ambos extremos.
-
-La condición de frontera derecha exige $R_{n+1}=L_n$, es decir, que las dos componentes de $w_{n+1}$ sean iguales. Esta condición puede expresarse como
-\begin{equation}
-  e_-^{\mathsf T}w_{n+1}=0,
-  \qquad
-  e_-=
-  \begin{pmatrix}
-    1\\-1
-  \end{pmatrix}.
-\end{equation}
-Sustituyendo la expresión de $w_{n+1}$ y dividiendo entre $R_1$, resulta
+La frontera derecha exige $R_{n+1}=L_n$, es decir, que las dos componentes de $w_{n+1}$ sean iguales. Esta igualdad se expresa como $e_-^{\mathsf T}w_{n+1}=0$, con $e_-=(1,-1)^{\mathsf T}$. Sustituyendo la expresión anterior y dividiendo entre $R_1$, se obtiene
 \begin{equation}
   e_-^{\mathsf T}T(\mu)^ne_+=0.
   \label{eq:condicion-eigenvalores-1d}
 \end{equation}
-Por tanto, los eigenvalores se seleccionan al exigir que las amplitudes construidas desde la frontera izquierda satisfagan también la reflexión en la frontera derecha. Para cada solución $\mu\neq0$ de esta condición, la recurrencia permite reconstruir un estado no nulo que satisface las ecuaciones del interior y de ambos extremos.
+Esta ecuación selecciona los valores de $\mu$ para los que el estado reconstruido mediante la recurrencia satisface ambas condiciones de frontera.
 
-Para resolver la condición de frontera se necesita evaluar la potencia $T(\mu)^n$. El teorema de Cayley--Hamilton permite expresarla en términos de la propia matriz y de la identidad. Para aplicarlo, primero se escribe
+Para resolver la condición \eqref{eq:condicion-eigenvalores-1d}, se reduce la potencia de la matriz de transferencia mediante el teorema de Cayley--Hamilton. Primero se elimina su fase, que no altera las soluciones de dicha condición, definiendo
 \begin{equation}
-  a=Ae^{i\phi},
-  \qquad A=|a|>0,
-\end{equation}
-y se separa la fase de la matriz de transferencia:
-\begin{equation}
-  T(\mu)=e^{i\phi}\widetilde T(\mu),
-  \qquad
-  \widetilde T(\mu)=\frac1A
+  \widetilde T(\mu)
+  =\frac{a^*}{|a|}T(\mu)
+  =\frac1{|a|}
   \begin{pmatrix}
     \mu^{-1}&b\\
     b^*&\mu
   \end{pmatrix}.
 \end{equation}
-La matriz resultante satisface
-\begin{equation}
-  \det\widetilde T
-  =\frac{1-|b|^2}{A^2}=1,
-  \qquad
-  \operatorname{tr}\widetilde T
-  =\frac{\mu+\mu^{-1}}{A}.
-\end{equation}
-Además, como $T^n=e^{in\phi}\widetilde T^n$ y la fase nunca se anula, la condición que selecciona los eigenvalores equivale a
-\begin{equation}
-  e_-^{\mathsf T}\widetilde T(\mu)^ne_+=0.
-\end{equation}
-
-Definiendo
-\begin{equation}
-  x=\frac{\mu+\mu^{-1}}{2A},
-\end{equation}
-el teorema de Cayley--Hamilton para $\widetilde T$ da
-\begin{equation}
-  \widetilde T^2-2x\widetilde T+\mathbb I_2=0.
-\end{equation}
-Al multiplicar esta identidad por potencias de $\widetilde T$, se obtiene la recurrencia
+Esta matriz satisface $\det\widetilde T=1$ y $\operatorname{tr}\widetilde T=2x$, donde $x=(\mu+\mu^{-1})/(2|a|)$. Por Cayley--Hamilton, $\widetilde T^2-2x\widetilde T+\mathbb I_2=0$. Al multiplicar esta igualdad por $\widetilde T^{k-1}$, se obtiene
 \begin{equation}
   \widetilde T^{k+1}
   =2x\widetilde T^k-\widetilde T^{k-1},
   \qquad k\geq1.
 \end{equation}
-Los coeficientes de estas potencias siguen la misma recurrencia que los polinomios de Chebyshev de segunda especie, denotados por $\mathsf U_k(x)$:
+Esta recurrencia tiene la misma forma que la de los polinomios de Chebyshev de segunda especie,
 \begin{equation}
-  \mathsf U_{-1}(x)=0,
-  \qquad
-  \mathsf U_0(x)=1,
-  \qquad
   \mathsf U_{k+1}(x)
-  =2x\mathsf U_k(x)-\mathsf U_{k-1}(x).
+  =2x\mathsf U_k(x)-\mathsf U_{k-1}(x),
 \end{equation}
-Por tanto, las potencias de la matriz pueden escribirse como
+con $\mathsf U_{-1}(x)=0$ y $\mathsf U_0(x)=1$. Por ello, las potencias pueden escribirse como
 \begin{equation}
   \widetilde T^n
   =\mathsf U_{n-1}(x)\widetilde T
@@ -537,19 +427,7 @@ Por tanto, las potencias de la matriz pueden escribirse como
   \qquad n\geq1.
   \label{eq:potencias-transferencia-chebyshev}
 \end{equation}
-
-Al sustituir esta expresión en la condición de frontera, resulta
-\begin{equation}
-  \mathsf U_{n-1}(x)e_-^{\mathsf T}\widetilde T e_+
-  -\mathsf U_{n-2}(x)e_-^{\mathsf T}e_+=0.
-\end{equation}
-El segundo término se anula porque $e_-^{\mathsf T}e_+=0$. Para el primero,
-\begin{equation}
-  e_-^{\mathsf T}\widetilde T e_+
-  =\frac{\mu^{-1}-\mu+b-b^*}{A}
-  =\frac{\mu^{-1}-\mu+2i\operatorname{Im}b}{A}.
-\end{equation}
-Como $A>0$, la condición final queda
+Esta expresión reproduce $\widetilde T$ y $\widetilde T^2$ para $n=1$ y $n=2$, respectivamente, y satisface la misma recurrencia para las potencias siguientes. Al sustituirla en la condición de frontera y utilizar $e_-^{\mathsf T}e_+=0$, se obtiene
 \begin{equation}
   \mathsf U_{n-1}\!\left(
     \frac{\mu+\mu^{-1}}{2|a|}
@@ -557,33 +435,8 @@ Como $A>0$, la condición final queda
   \left(\mu^{-1}-\mu+2i\operatorname{Im}b\right)=0.
   \label{eq:condicion-factorizada-1d}
 \end{equation}
-La condición que contenía la potencia matricial se ha reducido a un producto de dos factores escalares. Los eigenvalores se obtienen al anular cada factor por separado.
 
-El primer factor de la condición anterior se anula en las raíces del polinomio de Chebyshev. Para $n\geq2$, estas raíces se obtienen de la identidad
-\begin{equation}
-  \mathsf U_{n-1}(\cos q)
-  =\frac{\sin(nq)}{\sin q},
-\end{equation}
-y corresponden a
-\begin{equation}
-  q_m=\frac{\pi m}{n},
-  \qquad m=1,\ldots,n-1.
-\end{equation}
-Por tanto,
-\begin{equation}
-  \frac{\mu+\mu^{-1}}{2|a|}=\cos q_m,
-\end{equation}
-o, equivalentemente,
-\begin{equation}
-  \mu^2-2|a|\cos q_m\,\mu+1=0.
-\end{equation}
-Sus soluciones son
-\begin{equation}
-  \mu_{m,\pm}
-  =|a|\cos q_m
-  \pm i\sqrt{1-|a|^2\cos^2q_m}.
-\end{equation}
-Al recuperar la fase global de la moneda, se obtienen los eigenvalores de banda:
+Los dos factores de \eqref{eq:condicion-factorizada-1d} proporcionan dos familias de eigenvalores. Para $n\geq2$, las raíces del polinomio de Chebyshev son $x=\cos(\pi m/n)$, con $m=1,\ldots,n-1$. Al resolver la ecuación correspondiente para $\mu$ y recuperar la fase global de la moneda, se obtienen los $2(n-1)$ eigenvalores de banda:
 \begin{equation}
   \lambda_{m,\pm}
   =e^{i\alpha}
@@ -595,58 +448,21 @@ Al recuperar la fase global de la moneda, se obtienen los eigenvalores de banda:
   \qquad m=1,\ldots,n-1.
   \label{eq:espectro-banda-tramo}
 \end{equation}
-Esta familia contiene $2(n-1)$ eigenvalores.
-
-Para anular el segundo factor de la condición de frontera se requiere
-\begin{equation}
-  \mu^{-1}-\mu+2i\operatorname{Im}b=0,
-\end{equation}
-que puede escribirse como
-\begin{equation}
-  \mu^2-2i\operatorname{Im}b\,\mu-1=0.
-\end{equation}
-De aquí se obtienen los dos eigenvalores adicionales:
+El segundo factor proporciona los dos eigenvalores adicionales,
 \begin{equation}
   \lambda_{\mathrm{ext},\pm}
   =e^{i\alpha}
   \left[
     i\operatorname{Im}b
     \pm\sqrt{1-(\operatorname{Im}b)^2}
-  \right].
+  \right],
   \label{eq:espectro-extremos-tramo}
 \end{equation}
-A diferencia de la familia de banda, estos valores no dependen del número de sitios de la caminata unidimensional.
-\janote{Honestamente, es difícil de leer esta derivación. Te hablo por whatsapp al respecto}
+que no dependen del número de sitios. Para $a\neq0$, ambas familias completan los $2n$ eigenvalores del operador. Si $n=1$, la familia de banda está vacía y solo permanecen los dos eigenvalores adicionales.
 
-El espectro obtenido para una caminata unidimensional permite reconstruir el de la caminata bidimensional. Como se mostró en la sección anterior, el operador de evolución se descompone como
-\begin{equation}
-  U
-  =
-  \bigoplus_y U_y^{\text{horizontal}}
-  \oplus
-  \bigoplus_x U_x^{\text{vertical}}.
-\end{equation}
-\janote{si esta ecuación ya existe antes en el texto lo mejor es referenciarla, no volverla a colocar}
-Cada operador $U_y^{\text{horizontal}}$ describe la evolución sobre la fila $y$ con moneda $C_h$, mientras que $U_x^{\text{vertical}}$ describe la evolución sobre la columna $x$ con moneda $C_v$. Las expresiones analíticas obtenidas se aplican usando el número de sitios y la moneda de cada fila o columna conexa\janote{por qué conexa?}. Si la fila o columna no es conexa, se aplican a cada componente conexa por separado\janote{mm no entiendo esto. Porfa explicame por whatsapp}\janote{agregá referencias cruzadas a las ecuaciones que estés haciendo referencia que se aplican. Creo que en parte por eso no entiendo}. El espectro completo es
-\begin{equation}
-  \operatorname{spec}(U)
-  =
-  \biguplus_y
-  \operatorname{spec}\!\left(U_y^{\text{horizontal}}\right)
-  \;\biguplus\!
-  \biguplus_x
-  \operatorname{spec}\!\left(U_x^{\text{vertical}}\right),
-  \label{eq:espectro-billar-por-tramos}
-\end{equation}
-donde $\biguplus$\janote{quitá ese símbolo. En todo caso la ecuacioń sería mejor decirla en palabras. Me gustaría que como regla general apliqués siempre preguntarte si es necesario introducir un símbolo matemático nuevo o podés decirlo/expresarlo de una forma distinta y más sencilla. Menos es más, siempre} indica que se conservan las multiplicidades. Al aplicar las fórmulas del espectro, cada bloque de moneda conserva su propia fase global\janote{cómo así? Todas las filas o columnas comparten la misma fase global, no?}.
+Las expresiones \eqref{eq:espectro-banda-tramo} y \eqref{eq:espectro-extremos-tramo} permiten reconstruir el espectro de la caminata en el billar mediante la descomposición \eqref{eq:descomposicion-en-tramos}. Se utiliza la moneda $C_h$ para las filas y $C_v$ para las columnas, junto con el número de sitios correspondiente. Si una fila o columna no es conexa, las fórmulas se aplican a cada componente por separado, pues cada una constituye una caminata entre dos extremos reflectantes. El espectro completo se obtiene reuniendo los eigenvalores de estas caminatas y sumando sus multiplicidades cuando coinciden. En particular, los eigenvalores adicionales se repiten entre caminatas con la misma moneda, aunque sus longitudes sean diferentes. Por ejemplo, para $C_h=C_v=\mathbb I_2$, la ecuación \eqref{eq:espectro-extremos-tramo} da $\lambda_{\mathrm{ext},\pm}=\pm1$. Cada uno de estos valores aparece una vez por cada caminata unidimensional independiente, de modo que su degeneración es igual al número total de estas caminatas, aunque sus longitudes sean distintas.
 
-La repetición de eigenvalores entre las caminatas unidimensionales produce degeneraciones en el espectro bidimensional\janote{modificá el wording. El espectro no es bidimensional}. En particular, las caminatas unidimensionales de igual longitud y con la misma moneda tienen espectros idénticos. Además, como los eigenvalores adicionales no dependen de la longitud, estos se repiten en todas las caminatas unidimensionales que comparten la misma moneda, incluso si sus longitudes son diferentes\janote{este resultado no lo había apreciado antes y explica bastantes cosas. Agregá un enunciado más que haga concreto con un ejemplo esto. Es decir, decí que en el Sinaí aunque las filas y columnas tienen distintas longitudes, el espectro completo va a tener tal eigenvalor con tal degeneración}.
-
-Por ejemplo, un billar rectangular de $L_x\times L_y$ sitios contiene $L_y$ filas de longitud $L_x$ y $L_x$ columnas de longitud $L_y$\janote{jaja por aquí empezás a decir lo mismo que sugerí antes. Este entonces no es un nuevo párrafo, esta elaborando la misma idea del párrafo anteior. Fusionalos}. Todos los operadores de las filas tienen el mismo espectro, determinado por $L_x$ y $C_h$, y todos los de las columnas comparten el espectro determinado por $L_y$ y $C_v$. Por ello, cada eigenvalor de la caminata sobre una fila contribuye al espectro con $L_y$ copias y cada eigenvalor de la caminata sobre una columna con $L_x$ copias. Si un eigenvalor aparece en ambos sectores, sus multiplicidades se suman.\janote{Igual creo que convieen agregar el ejemplo concreto del sinai porque es menos intuitivo que el rectángulo}
-
-La misma construcción se aplica al billar de Sinaí, identificando las longitudes de sus filas y columnas o de sus componentes conexas. La comparación entre el espectro reconstruido analíticamente y el obtenido mediante diagonalización numérica del operador bidimensional, para las configuraciones estudiadas del rectángulo y de Sinaí, presenta una discrepancia máxima del orden de $10^{-15}$\janote{(1) creo que este párrafo sigue elaborando la misma idea de los dos párrafos anteriores y por tanto debería ser fusionado. (2) el último enunciado es bastante vacío, sólo estás diciendo 'la analítica está bien hecha porque la verifiqué con numérica'}.
-
-Así, el problema espectral puede resolverse a partir de las longitudes de las caminatas unidimensionales y de los dos bloques de la moneda, para cualquier geometría del billar con las condiciones de frontera consideradas. Esto establece la integrabilidad en el sentido de la solubilidad del espectro\janote{esto creo que debería ser el punto central del párrafo y que también sirve de outro de la sección. Tu primer enunciado me parece algo más secundario que este sentido de integrabilidad}: la geometría modifica las longitudes y multiplicidades de las caminatas unidimensionales, pero conserva su evolución independiente y permite obtener el espectro completo mediante las expresiones analíticas anteriores.
+Estos resultados establecen la integrabilidad de la caminata con moneda diagonal por bloques, entendida como la solubilidad analítica de su espectro. Para cualquier geometría del billar con las condiciones de frontera consideradas, el problema se reduce a caminatas unidimensionales cuyos eigenvalores se conocen explícitamente. La geometría determina sus longitudes y multiplicidades, pero no introduce acoplamiento entre ellas.
 % *}}}
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
