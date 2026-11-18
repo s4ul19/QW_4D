@@ -141,7 +141,7 @@ El operador $S$ es unitario porque permuta los estados de la base de posición y
 \chapter{Integrabilidad con monedas diagonales por bloques} % {{{*
 \section{Descomposición de la caminata bidimensional en caminatas unidimensionales} % {{{*
 
-\snnote{He agregado un comentario acerca de las filas o columnas que no sean conexas y el miniresumen al inicio de la sección.}
+\snnote{He agregado un comentario acerca de las filas o columnas que no sean conexas y el miniresumen al inicio de la sección. También la imagen ha sido agregada}
 \cpnote{Esta bien estructurado. Tengo dos comentarios. Vale la pena poner al inicio de la seccion como un miniresumen, como un mapa de la seccion. Tambien creo qe debe haber un dibujo en una geometría complicada 
 como la del sinai. Otra cosa es que para una fila (o columna) pueden tener dos partes separadas, por ejemplo si el billar no es convexo. Necesitamos ver como explicamos es proqeu como está creo que se pierde ese detalle.}
 
@@ -185,7 +185,14 @@ El bloque $C_h$ actúa sobre los estados de moneda asociados a las direcciones h
   +\beta|L,v+\delta_L\rangle.
   \label{eq:subspace}
 \end{equation}
-Ambas componentes pertenecen a la misma fila. Por linealidad, el resultado se extiende a cualquier superposición de estados horizontales de esa fila y se mantiene en cada paso de la evolución. El argumento es análogo para los estados verticales de una columna.
+Ambas componentes pertenecen a la misma fila. Por linealidad, el resultado se extiende a cualquier superposición de estados horizontales de esa fila y se mantiene en cada paso de la evolución. El argumento es análogo para los estados verticales de una columna. La figura~\ref{fig:sinai-geometria} ilustra ambos casos en el billar de Sinaí.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.48\textwidth]{SinaiGeometry.pdf}
+  \caption{Red de sitios accesibles del billar de Sinaí. En azul se destaca la fila $y=35$, sobre la que evoluciona un estado con direcciones horizontales, y en naranja la columna $x=48$, sobre la que evoluciona un estado con direcciones verticales.}
+  \label{fig:sinai-geometria}
+\end{figure}
 
 Los estados horizontales de cada fila y los verticales de cada columna forman subespacios invariantes bajo $U$. Para construir sus bases, se escribe cada posición como $v=(x,y)$. Para una fila fija $y=y_0$ y una columna fija $x=x_0$, se definen
 \begin{align}
@@ -319,7 +326,7 @@ Las etiquetas $R$ y $L$ designan los dos sentidos de movimiento. La moneda se es
   \qquad |a|^2+|b|^2=1,
   \label{eq:moneda-tramo-reflectante}
 \end{equation}
-donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. Al separar su fase global del operador de evolución,
+donde $\alpha\in\mathbb R$ y $a,b\in\mathbb C$. Separando la fase global del operador de evolución,
 \begin{equation}
   U_{\mathrm{1D}}
   =S_n(C\otimes\mathbb I_n)
