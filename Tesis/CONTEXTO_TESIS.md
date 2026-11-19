@@ -34,6 +34,7 @@ Capítulo 4: 4.1 «Descomposición de la caminata bidimensional en caminatas uni
 
 - Sitios accesibles `Omega` subconjunto finito de Z², N sitios. Espacio total Hc tensor Hp, dimensión 4N; kets en orden moneda–posición: `|c,v>`.
 - Orden interno `{R,L,U,D}`. Coin homogénea y constante en el tiempo. Un paso: `U = S(C tensor I_p)`.
+- Convención tipográfica aprobada: etiquetas de dirección R, L, U y D en letra recta (`\mathrm`), al igual que los subíndices abreviados h y v de las monedas y estados. El operador U, la coordenada v y los coeficientes siguen en cursiva.
 - En el interior, S cambia la posición un sitio conservando dirección. Si el vecino está fuera de Omega, permanece en el mismo sitio e invierte dirección (`R <-> L`, `U <-> D`) sin fase adicional. No es una reflexión especular continua sobre una tangente curva.
 - Moneda por bloques en esa base: `C = C_h directsum C_v`, ambos en U(2). No intercambia sectores horizontal y vertical.
 - En 4.1 se usa `H_y^{horizontal}`, `H_x^{vertical}`, y bases B correspondientes, con coordenadas fijadas explícitamente (`y=y_0`, `x=x_0`). La base completa concatena las bases de todas las filas horizontales y luego de todas las columnas verticales.

@@ -90,7 +90,7 @@ En este trabajo se consideran caminatas sobre una red cuadrada confinada a la ge
   \simeq \mathbb C^N,
   \qquad
   \mathcal H_c
-  = \operatorname{span}\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}
+  = \operatorname{span}\{|\mathrm{R}\rangle,|\mathrm{L}\rangle,|\mathrm{U}\rangle,|\mathrm{D}\rangle\}
   \simeq \mathbb C^4.
 \end{equation}
 El estado del caminante pertenece al espacio
@@ -101,7 +101,7 @@ El estado del caminante pertenece al espacio
 y puede escribirse como
 \begin{equation}
   |\psi_t\rangle
-  = \sum_{v\in\Omega}\sum_{c\in\{R,L,U,D\}}
+  = \sum_{v\in\Omega}\sum_{c\in\{\mathrm{R},\mathrm{L},\mathrm{U},\mathrm{D}\}}
     \psi_c(v,t)|c,v\rangle,
   \qquad
   \sum_{v,c}|\psi_c(v,t)|^2=1,
@@ -116,10 +116,10 @@ La evolución en cada paso consiste en aplicar primero el operador moneda y desp
 \end{equation}
 donde $C\in U(4)$ actúa sobre el espacio de moneda y $\mathbb I_p$ es la identidad en el espacio de posición. Se emplea la misma moneda en todos los sitios y en cada paso temporal. El operador $S$ desplaza las amplitudes según los vectores
 \begin{equation}
-  \boldsymbol\delta_R=(1,0),\qquad
-  \boldsymbol\delta_L=(-1,0),\qquad
-  \boldsymbol\delta_U=(0,1),\qquad
-  \boldsymbol\delta_D=(0,-1).
+  \boldsymbol\delta_{\mathrm{R}}=(1,0),\qquad
+  \boldsymbol\delta_{\mathrm{L}}=(-1,0),\qquad
+  \boldsymbol\delta_{\mathrm{U}}=(0,1),\qquad
+  \boldsymbol\delta_{\mathrm{D}}=(0,-1).
 \end{equation}
 
 Para confinar la caminata al billar se imponen condiciones de frontera reflectantes. Si el desplazamiento conduce a otro sitio de $\Omega$, el caminante avanza conservando su dirección. Si conduce fuera del billar, permanece en el mismo sitio y su dirección se invierte. Denotando por $\overline c$ la dirección opuesta a $c$, la acción del operador de desplazamiento es
@@ -144,21 +144,21 @@ El operador $S$ es unitario porque permuta los estados de la base de posición y
 %
 En esta sección se demuestra que una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en un billar a caminatas unidimensionales independientes. Para ello, se identifican los subespacios asociados a las filas y columnas, se demuestra su invariancia bajo el operador de evolución y se construye una base en la que este presenta una estructura diagonal por bloques. El resultado es válido para cualquier geometría del billar con las condiciones de frontera reflectantes consideradas.
 
-En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, se considera una moneda de la forma
+En la base ordenada $\{|\mathrm{R}\rangle,|\mathrm{L}\rangle,|\mathrm{U}\rangle,|\mathrm{D}\rangle\}$, se considera una moneda de la forma
 \begin{equation}
-  C=C_h\oplus C_v
+  C=C_{\mathrm{h}}\oplus C_{\mathrm{v}}
   =\begin{pmatrix}
-    C_h & 0\\
-    0 & C_v
+    C_{\mathrm{h}} & 0\\
+    0 & C_{\mathrm{v}}
   \end{pmatrix},
-  \qquad C_h,C_v\in U(2).
+  \qquad C_{\mathrm{h}},C_{\mathrm{v}}\in U(2).
   \label{eq:moneda-diagonal-bloques}
 \end{equation}
-El bloque $C_h$ actúa sobre los estados de moneda asociados a las direcciones horizontales, $|R\rangle$ y $|L\rangle$, mientras que $C_v$ actúa sobre los asociados a las direcciones verticales, $|U\rangle$ y $|D\rangle$. El operador de desplazamiento $S$ conserva esta separación: transforma cada estado de la base con dirección horizontal en otro de la misma fila y cada estado con dirección vertical en otro de la misma columna. En la frontera, la reflexión invierte la dirección mediante $R\leftrightarrow L$ o $U\leftrightarrow D$, sin cambiar la posición. Por ejemplo, para un estado $|\psi\rangle=|R,v\rangle$, cuyos dos vecinos horizontales pertenecen al billar, y una moneda que satisface $C_h|R\rangle=\alpha|R\rangle+\beta|L\rangle$, después de un paso se obtiene
+El bloque $C_{\mathrm{h}}$ actúa sobre los estados de moneda asociados a las direcciones horizontales, $|\mathrm{R}\rangle$ y $|\mathrm{L}\rangle$, mientras que $C_{\mathrm{v}}$ actúa sobre los asociados a las direcciones verticales, $|\mathrm{U}\rangle$ y $|\mathrm{D}\rangle$. El operador de desplazamiento $S$ conserva esta separación: transforma cada estado de la base con dirección horizontal en otro de la misma fila y cada estado con dirección vertical en otro de la misma columna. En la frontera, la reflexión invierte la dirección mediante $\mathrm{R}\leftrightarrow \mathrm{L}$ o $\mathrm{U}\leftrightarrow \mathrm{D}$, sin cambiar la posición. Por ejemplo, para un estado $|\psi\rangle=|\mathrm{R},v\rangle$, cuyos dos vecinos horizontales pertenecen al billar, y una moneda que satisface $C_{\mathrm{h}}|\mathrm{R}\rangle=\alpha|\mathrm{R}\rangle+\beta|\mathrm{L}\rangle$, después de un paso se obtiene
 \begin{equation}
   U|\psi\rangle
-  =\alpha|R,v+\delta_R\rangle
-  +\beta|L,v+\delta_L\rangle.
+  =\alpha|\mathrm{R},v+\delta_{\mathrm{R}}\rangle
+  +\beta|\mathrm{L},v+\delta_{\mathrm{L}}\rangle.
   \label{eq:subspace}
 \end{equation}
 Ambas componentes pertenecen a la misma fila. Por linealidad, el resultado se extiende a cualquier superposición de estados horizontales de esa fila y se mantiene en cada paso de la evolución. El argumento es análogo para los estados verticales de una columna. La figura~\ref{fig:sinai-geometria} ilustra ambos casos en el billar de Sinaí.
@@ -176,14 +176,14 @@ Los estados horizontales de cada fila y los verticales de cada columna forman su
   &=
   \bigl\{
     |c,(x,y)\rangle:
-    c\in\{R,L\},\ (x,y)\in\Omega,\ y=y_0
+    c\in\{\mathrm{R},\mathrm{L}\},\ (x,y)\in\Omega,\ y=y_0
   \bigr\},
   \\
   \mathcal B_{x_0}^{\text{vertical}}
   &=
   \bigl\{
     |c,(x,y)\rangle:
-    c\in\{U,D\},\ (x,y)\in\Omega,\ x=x_0
+    c\in\{\mathrm{U},\mathrm{D}\},\ (x,y)\in\Omega,\ x=x_0
   \bigr\}.
 \end{align}
 Los subespacios correspondientes son
@@ -200,18 +200,18 @@ Cada uno tiene una dimensión igual al doble del número de sitios de la fila o 
 Los subespacios son invariantes bajo $U$: para estados arbitrarios de cada subespacio, se cumple
 \begin{equation}
   \begin{aligned}
-    |\psi_h\rangle\in\mathcal H_{y_0}^{\text{horizontal}}
+    |\psi_{\mathrm{h}}\rangle\in\mathcal H_{y_0}^{\text{horizontal}}
     &\;\Longrightarrow\;
-    U|\psi_h\rangle\in\mathcal H_{y_0}^{\text{horizontal}},
+    U|\psi_{\mathrm{h}}\rangle\in\mathcal H_{y_0}^{\text{horizontal}},
     \\
-    |\psi_v\rangle\in\mathcal H_{x_0}^{\text{vertical}}
+    |\psi_{\mathrm{v}}\rangle\in\mathcal H_{x_0}^{\text{vertical}}
     &\;\Longrightarrow\;
-    U|\psi_v\rangle\in\mathcal H_{x_0}^{\text{vertical}}.
+    U|\psi_{\mathrm{v}}\rangle\in\mathcal H_{x_0}^{\text{vertical}}.
   \end{aligned}
 \end{equation}
 Además, los subespacios distintos son mutuamente ortogonales, pues $\langle c,v|c',v'\rangle=\delta_{cc'}\delta_{vv'}$.
  
-Para mostrar la estructura matricial de esta descomposición, se ordenan los estados de cada base por su posición. En cada fila se sigue el orden creciente de $x$, colocando $|R,(x,y_0)\rangle$ seguido de $|L,(x,y_0)\rangle$ en cada sitio. En cada columna se sigue el orden creciente de $y$, colocando $|U,(x_0,y)\rangle$ seguido de $|D,(x_0,y)\rangle$. Sean $y_1,\ldots,y_m$ las coordenadas de las filas del billar y $x_1,\ldots,x_\ell$ las de sus columnas, enumeradas de menor a mayor. Se concatenan las bases ordenadas:
+Para mostrar la estructura matricial de esta descomposición, se ordenan los estados de cada base por su posición. En cada fila se sigue el orden creciente de $x$, colocando $|\mathrm{R},(x,y_0)\rangle$ seguido de $|\mathrm{L},(x,y_0)\rangle$ en cada sitio. En cada columna se sigue el orden creciente de $y$, colocando $|\mathrm{U},(x_0,y)\rangle$ seguido de $|\mathrm{D},(x_0,y)\rangle$. Sean $y_1,\ldots,y_m$ las coordenadas de las filas del billar y $x_1,\ldots,x_\ell$ las de sus columnas, enumeradas de menor a mayor. Se concatenan las bases ordenadas:
 \begin{equation}
   \mathcal B=
   \bigl(
@@ -251,14 +251,19 @@ Cada bloque representa la evolución sobre una fila o columna en su base corresp
   \bigoplus_x U_x^{\text{vertical}},
   \label{eq:descomposicion-en-tramos}
 \end{equation}
-donde las sumas recorren las filas y columnas que contienen sitios del billar. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$; en cada columna solo varía $y$ y participan $U$ y $D$. Así, cada bloque describe una caminata unidimensional independiente. El problema espectral del billar queda reducido a obtener el espectro de estas caminatas.
+donde las sumas recorren las filas y columnas que contienen sitios del billar. En cada fila solo varía la coordenada $x$ y participan las direcciones $\mathrm{R}$ y $\mathrm{L}$; en cada columna solo varía $y$ y participan $\mathrm{U}$ y $\mathrm{D}$. Así, cada bloque describe una caminata unidimensional independiente. El problema espectral del billar queda reducido a obtener el espectro de estas caminatas.
 
+\snnote{He hecho el cambio del font para distinguir.}
 \cpnote{La $U$ denota tanto el operador de evolucion como la direccion arriba up. Lo mismo con la $v$, que denota tanto vertical como un par $(x,y)$. Quizá con un cambio de font o algo asi se arregla}
 % *}}}
+
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
+\snnote{Párrafo añadido.}
 \cpnote{sugiero un parrafo conectando la seccion anterior con este, a pesar de la ultima frase de 
 la seccion anterior. quizá tambien explicando para que queremos esta seccion}
+
+En la sección anterior se mostró que, para una moneda diagonal por bloques, la caminata en el billar se descompone en caminatas unidimensionales independientes. Aquí se obtienen expresiones analíticas para los eigenvalores de una caminata unidimensional en función de su número de sitios y de su moneda. Estas expresiones permiten reconstruir el espectro del billar y explicar por qué algunos eigenvalores se repiten incluso entre caminatas de distinta longitud.
 
 Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores se obtienen relaciones de recurrencia entre los coeficientes de los eigenvectores en sitios consecutivos. La recurrencia se expresa mediante una matriz de transferencia que permite reconstruir el estado a partir de una condición inicial compatible con la frontera izquierda. Al imponer también la condición de reflexión en el extremo derecho, se obtiene una ecuación para los eigenvalores que se factoriza mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev. Las soluciones de los factores resultantes proporcionan el espectro.
 
@@ -266,9 +271,9 @@ Para obtener las relaciones de recurrencia, se expresa el eigenestado en términ
 \begin{equation}
   |\psi\rangle
   =\sum_{j=1}^{n}
-  \left(R_j|R,j\rangle+L_j|L,j\rangle\right).
+  \left(R_j|\mathrm{R},j\rangle+L_j|\mathrm{L},j\rangle\right).
 \end{equation}
-Las etiquetas $R$ y $L$ designan los dos sentidos de movimiento. La moneda se escribe como
+Las etiquetas $\mathrm{R}$ y $\mathrm{L}$ designan los dos sentidos de movimiento. La moneda se escribe como
 \begin{equation}
   C=e^{i\alpha}C_0,
   \qquad
@@ -421,7 +426,7 @@ El segundo factor proporciona los dos eigenvalores adicionales,
 \end{equation}
 que no dependen del número de sitios. Para $a\neq0$, ambas familias completan los $2n$ eigenvalores del operador. Si $n=1$, la familia de banda está vacía y solo permanecen los dos eigenvalores adicionales.
 
-Las expresiones \eqref{eq:espectro-banda-tramo} y \eqref{eq:espectro-extremos-tramo} permiten reconstruir el espectro de la caminata en el billar mediante la descomposición \eqref{eq:descomposicion-en-tramos}. Se utiliza la moneda $C_h$ para las filas y $C_v$ para las columnas, junto con el número de sitios correspondiente. Si una fila o columna no es conexa, las fórmulas se aplican a cada componente por separado, pues cada una constituye una caminata entre dos extremos reflectantes. El espectro completo se obtiene reuniendo los eigenvalores de estas caminatas y sumando sus multiplicidades cuando coinciden. En particular, los eigenvalores adicionales se repiten entre caminatas con la misma moneda, aunque sus longitudes sean diferentes. Por ejemplo, para $C_h=C_v=\mathbb I_2$, la ecuación \eqref{eq:espectro-extremos-tramo} da $\lambda_{\mathrm{ext},\pm}=\pm1$. Cada uno de estos valores aparece una vez por cada caminata unidimensional independiente, de modo que su degeneración es igual al número total de estas caminatas, aunque sus longitudes sean distintas.
+Las expresiones \eqref{eq:espectro-banda-tramo} y \eqref{eq:espectro-extremos-tramo} permiten reconstruir el espectro de la caminata en el billar mediante la descomposición \eqref{eq:descomposicion-en-tramos}. Se utiliza la moneda $C_{\mathrm{h}}$ para las filas y $C_{\mathrm{v}}$ para las columnas, junto con el número de sitios correspondiente. Si una fila o columna no es conexa, las fórmulas se aplican a cada componente por separado, pues cada una constituye una caminata entre dos extremos reflectantes. El espectro completo se obtiene reuniendo los eigenvalores de estas caminatas y sumando sus multiplicidades cuando coinciden. En particular, los eigenvalores adicionales se repiten entre caminatas con la misma moneda, aunque sus longitudes sean diferentes. Por ejemplo, para $C_{\mathrm{h}}=C_{\mathrm{v}}=\mathbb I_2$, la ecuación \eqref{eq:espectro-extremos-tramo} da $\lambda_{\mathrm{ext},\pm}=\pm1$. Cada uno de estos valores aparece una vez por cada caminata unidimensional independiente, de modo que su degeneración es igual al número total de estas caminatas, aunque sus longitudes sean distintas.
 
 Estos resultados establecen la integrabilidad de la caminata con moneda diagonal por bloques, entendida como la solubilidad analítica de su espectro. Para cualquier geometría del billar con las condiciones de frontera consideradas, el problema se reduce a caminatas unidimensionales cuyos eigenvalores se conocen explícitamente. La geometría determina sus longitudes y multiplicidades, pero no introduce acoplamiento entre ellas.
 % *}}}
