@@ -141,31 +141,7 @@ El operador $S$ es unitario porque permuta los estados de la base de posición y
 \chapter{Integrabilidad con monedas diagonales por bloques} % {{{*
 \section{Descomposición de la caminata bidimensional en caminatas unidimensionales} % {{{*
 
-\snnote{He agregado un comentario acerca de las filas o columnas que no sean conexas y el miniresumen al inicio de la sección. También la imagen ha sido agregada}
-\cpnote{Esta bien estructurado. Tengo dos comentarios. Vale la pena poner al inicio de la seccion como un miniresumen, como un mapa de la seccion. Tambien creo qe debe haber un dibujo en una geometría complicada 
-como la del sinai. Otra cosa es que para una fila (o columna) pueden tener dos partes separadas, por ejemplo si el billar no es convexo. Necesitamos ver como explicamos es proqeu como está creo que se pierde ese detalle.}
-
-
-% \snnote{Resumen propuesto:
-%   Se presenta la moneda diagonal por bloques y se muestra que la caminata resultante no mezcla las direcciones verticales con las horizontales.
-% Se muestra que el operador de evolución se descompone en una suma directa de caminatas unidimensionales independientes, una por cada segmento de fila o columna.
-% Concluir la sección comentando que el espectro de la caminata bidimensional es la unión de los espectros de esos segmentos. La geometría determina sus longitudes y multiplicidades.}
 %
-%
-% \snnote{Ecuaciones que deben aparecer}
-% \begin{equation}
-%   C=C_h\oplus C_v
-%   =\begin{pmatrix}C_h&0\\0&C_v\end{pmatrix},
-%   \qquad C_h,C_v\in U(2),
-%   \label{eq:moneda-diagonal-bloques-esquema}
-% \end{equation}
-% \begin{equation}
-%   U
-%   =\bigoplus_{r\in\mathcal R_h}U_r^{(h)}
-%    \oplus\bigoplus_{s\in\mathcal R_v}U_s^{(v)}.
-%   \label{eq:descomposicion-en-tramos-esquema}
-% \end{equation}
-% \snnote{Inicio de sección:}
 En esta sección se demuestra que una moneda diagonal por bloques que no acopla las direcciones horizontales con las verticales reduce la caminata en un billar a caminatas unidimensionales independientes. Para ello, se identifican los subespacios asociados a las filas y columnas, se demuestra su invariancia bajo el operador de evolución y se construye una base en la que este presenta una estructura diagonal por bloques. El resultado es válido para cualquier geometría del billar con las condiciones de frontera reflectantes consideradas.
 
 En la base ordenada $\{|R\rangle,|L\rangle,|U\rangle,|D\rangle\}$, se considera una moneda de la forma
@@ -187,12 +163,12 @@ El bloque $C_h$ actúa sobre los estados de moneda asociados a las direcciones h
 \end{equation}
 Ambas componentes pertenecen a la misma fila. Por linealidad, el resultado se extiende a cualquier superposición de estados horizontales de esa fila y se mantiene en cada paso de la evolución. El argumento es análogo para los estados verticales de una columna. La figura~\ref{fig:sinai-geometria} ilustra ambos casos en el billar de Sinaí.
 
-\begin{figure}[H]
+\begin{figure}[H] % {{{*
   \centering
   \includegraphics[width=0.48\textwidth]{SinaiGeometry.pdf}
   \caption{Red de sitios accesibles del billar de Sinaí. En azul se destaca la fila $y=35$, sobre la que evoluciona un estado con direcciones horizontales, y en naranja la columna $x=48$, sobre la que evoluciona un estado con direcciones verticales.}
   \label{fig:sinai-geometria}
-\end{figure}
+\end{figure}% *}}}
 
 Los estados horizontales de cada fila y los verticales de cada columna forman subespacios invariantes bajo $U$. Para construir sus bases, se escribe cada posición como $v=(x,y)$. Para una fila fija $y=y_0$ y una columna fija $x=x_0$, se definen
 \begin{align}
@@ -276,35 +252,13 @@ Cada bloque representa la evolución sobre una fila o columna en su base corresp
   \label{eq:descomposicion-en-tramos}
 \end{equation}
 donde las sumas recorren las filas y columnas que contienen sitios del billar. En cada fila solo varía la coordenada $x$ y participan las direcciones $R$ y $L$; en cada columna solo varía $y$ y participan $U$ y $D$. Así, cada bloque describe una caminata unidimensional independiente. El problema espectral del billar queda reducido a obtener el espectro de estas caminatas.
+
+\cpnote{La $U$ denota tanto el operador de evolucion como la direccion arriba up. Lo mismo con la $v$, que denota tanto vertical como un par $(x,y)$. Quizá con un cambio de font o algo asi se arregla}
 % *}}}
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
-%\snnote{Resumen de la sección\\ % {{{*
- % En esta sección se presenta el espectro analítico de eigenvalores de la caminata unidimensional con condiciones de frontera reflectantes.
-%Se presenta una derivación analítica del resultado y se construye con él el espectro de la caminata bidimensional. La comparación numérica con el rectángulo y el billar de Sinaí se %incorpora como comprobación. Concluir que, para cualquier billar, el espectro de fases es poissoniano y que la geometría, por sí sola, no garantiza la aparición de firmas de caos %cuántico.}
-%\snnote{Ecuaciones que deben aparecer}
-%\begin{equation}
- % C=e^{i\alpha}
-  %\begin{pmatrix}a&b\\-b^*&a^*\end{pmatrix},
-  %\qquad |a|^2+|b|^2=1.
-  %label{eq:moneda-tramo-reflectante-esquema}
-%\end{equation}
-%\begin{equation}
-  %\lambda_{m,\pm}=e^{i\alpha}
-  %\exp\!\left[\pm i\arccos\!\left(|a|\cos\frac{\pi m}{n}\right)\right],
-  %\qquad m=1,\ldots,n-1,
-  %\label{eq:espectro-banda-tramo-esquema}
-%\end{equation}
-%\begin{equation}
- % \lambda_{\mathrm{ext},\pm}
- % =e^{i\alpha}\left(i\operatorname{Im}b
-  %\pm\sqrt{1-(\operatorname{Im}b)^2}\right).
-  %\label{eq:espectro-extremos-tramo-esquema}
-%\end{equation}
-%Aquí, $\lambda_{m,\pm}$ son los eigenvalores de banda y $\lambda_{\mathrm{ext},\pm}$ son los eigenvalores adicionales.
-
-% *}}}
-\snnote{Inicio de Sección}% {{{*
+\cpnote{sugiero un parrafo conectando la seccion anterior con este, a pesar de la ultima frase de 
+la seccion anterior. quizá tambien explicando para que queremos esta seccion}
 
 Se considera una caminata sobre $n$ sitios consecutivos de una fila o columna, numerados de $1$ a $n$, con una moneda $C\in U(2)$ que es la misma en todos los sitios y en cada paso temporal. En ambos extremos, la condición de frontera invierte la dirección del caminante sin cambiar su posición ni introducir una fase adicional. A partir de la ecuación de eigenvalores se obtienen relaciones de recurrencia entre los coeficientes de los eigenvectores en sitios consecutivos. La recurrencia se expresa mediante una matriz de transferencia que permite reconstruir el estado a partir de una condición inicial compatible con la frontera izquierda. Al imponer también la condición de reflexión en el extremo derecho, se obtiene una ecuación para los eigenvalores que se factoriza mediante el teorema de Cayley--Hamilton y los polinomios de Chebyshev. Las soluciones de los factores resultantes proporcionan el espectro.
 
@@ -470,6 +424,7 @@ que no dependen del número de sitios. Para $a\neq0$, ambas familias completan l
 Las expresiones \eqref{eq:espectro-banda-tramo} y \eqref{eq:espectro-extremos-tramo} permiten reconstruir el espectro de la caminata en el billar mediante la descomposición \eqref{eq:descomposicion-en-tramos}. Se utiliza la moneda $C_h$ para las filas y $C_v$ para las columnas, junto con el número de sitios correspondiente. Si una fila o columna no es conexa, las fórmulas se aplican a cada componente por separado, pues cada una constituye una caminata entre dos extremos reflectantes. El espectro completo se obtiene reuniendo los eigenvalores de estas caminatas y sumando sus multiplicidades cuando coinciden. En particular, los eigenvalores adicionales se repiten entre caminatas con la misma moneda, aunque sus longitudes sean diferentes. Por ejemplo, para $C_h=C_v=\mathbb I_2$, la ecuación \eqref{eq:espectro-extremos-tramo} da $\lambda_{\mathrm{ext},\pm}=\pm1$. Cada uno de estos valores aparece una vez por cada caminata unidimensional independiente, de modo que su degeneración es igual al número total de estas caminatas, aunque sus longitudes sean distintas.
 
 Estos resultados establecen la integrabilidad de la caminata con moneda diagonal por bloques, entendida como la solubilidad analítica de su espectro. Para cualquier geometría del billar con las condiciones de frontera consideradas, el problema se reduce a caminatas unidimensionales cuyos eigenvalores se conocen explícitamente. La geometría determina sus longitudes y multiplicidades, pero no introduce acoplamiento entre ellas.
+% *}}}
 % *}}}
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
