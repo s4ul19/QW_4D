@@ -1,6 +1,6 @@
 # Contexto esencial de la tesis
 
-Actualizado: 2026-11-17. Resumen persistente de la conversación y comprobación del `main.tex` actual. Leer junto con `AGENTS.md` y `GUIA_ESCRITURA.md`.
+Actualizado: 2026-11-21. Resumen persistente de la conversación y comprobación del `main.tex` actual. Leer junto con `AGENTS.md` y `GUIA_ESCRITURA.md`.
 
 ## Proyecto y fuentes
 
@@ -28,7 +28,7 @@ Capítulos actuales, comprobados en `main.tex` (títulos aprobados; no cambiar p
 6. Poder coherente L1 de la moneda y firmas espectrales.
 7. Conclusiones.
 
-Capítulo 4: 4.1 «Descomposición de la caminata bidimensional en caminatas unidimensionales»; 4.2 «Derivación del espectro 1D y ausencia de firmas caóticas»; 4.3 «Análisis espectral», todavía con nota para desarrollar estadísticas con y sin unfolding. La sección 4.3 es una adición reciente del usuario/asesores: no eliminarla por antiguas discusiones sobre otras secciones numeradas 4.3.
+Capítulo 4: 4.1 «Descomposición de la caminata bidimensional en caminatas unidimensionales»; 4.2 «Derivación del espectro 1D y ausencia de firmas caóticas»; 4.3 «Análisis espectral», con resultados del rectángulo y Sinaí con y sin unfolding.
 
 ## Modelo y convenciones
 
@@ -42,7 +42,7 @@ Capítulo 4: 4.1 «Descomposición de la caminata bidimensional en caminatas uni
 - La invariancia se escribe mediante estados: `psi en H -> U psi en H`, porque al asesor le resulta incómoda la notación `U H subset H`.
 - Invariancia + ortogonalidad implican `⟨b'|U|b⟩=0` para estados de distintos subespacios; eso justifica los ceros de la matriz por bloques. La ortogonalidad por sí sola no basta para anular elementos de U.
 - Se aceptó una aclaración breve: «Si la fila o columna no es conexa, cada una de sus componentes conexas evoluciona de forma independiente, debido a la reflexión en sus extremos». La separación por filas/columnas sigue siendo válida; al usar el espectro de un intervalo reflectante, resolver cada componente conexa por separado. No centrar toda la sección en este detalle ni reintroducir una maquinaria formal de «tramos».
-- CP sugirió un miniresumen al inicio de 4.1 y una figura de la geometría de Sinaí. Saúl hará la figura con su propio código; no generarla sin petición.
+- La sección 4.1 ya incluye el miniresumen y la figura de la geometría de Sinaí solicitados por CP. La figura muestra una fila y una columna destacadas.
 
 ## Derivación 1D de 4.2
 
@@ -73,25 +73,27 @@ Espectro físico:
 - Banda: `lambda_{m,+/-}=exp(i alpha) exp(+/- i arccos(|a| cos(pi m/n)))`, m=1,...,n-1.
 - Adicionales: `lambda_{ext,+/-}=exp(i alpha) [i Im(b) +/- sqrt(1-Im(b)^2)]`, independientes de n.
 - Llamarlos «adicionales». No llamarlos universalmente «estados de borde»: su localización depende de la moneda.
-- Para a distinto de 0 hay 2n valores distintos. La completitud y los casos a=0 y n=1 necesitan revisión/inclusión expresa en la tesis; fueron propuestos en el chat, pero no quedaron incorporados en el último texto examinado. No afirmar que la transferencia cubre a=0, pues divide entre a*.
+- Para a distinto de 0 hay 2n valores distintos. El texto actual ya indica la completitud para a distinto de cero y que para n=1 solo quedan los adicionales. El caso a=0 se discutió en el chat mediante resolución directa y sigue pendiente en el documento. No afirmar que la transferencia cubre a=0, pues divide entre a*.
 - Para reconstruir el espectro del billar, reunir valores de filas/columnas (o sus componentes conexas) contando multiplicidades. Filas con el mismo bloque comparten su fase; C_h y C_v pueden tener fases distintas. Los valores adicionales se repiten entre componentes aunque cambien las longitudes.
 - «Integrabilidad» se usa por acuerdo con los asesores en el sentido de solubilidad espectral exacta. Esto no demuestra por sí solo estadística poissoniana universal. El análisis estadístico corresponde a los resultados que se aporten, incluyendo 4.3.
 
-## Estado de trabajo y próximos pasos
+## Estado comprobado del capítulo 4
 
-La etapa activa es la corrección de 4.2, progresivamente por párrafos. Se examinó la sección y se redactaron propuestas en el chat. El último trabajo antes de guardar esta memoria fue un overview breve: separar fase -> ecuaciones de amplitudes -> transferencia -> condiciones de ambos extremos -> Cayley–Hamilton/Chebyshev -> espectro 1D -> reconstrucción del billar.
+- La sección 4.2 contiene la versión condensada de la derivación, con referencias cruzadas y cierre sobre solubilidad espectral. La reconstrucción del espectro con multiplicidades se explica en palabras.
+- La sección 4.3 contiene cuatro figuras, dos por geometría, primero sin unfolding y luego con unfolding. Se conserva la multiplicidad de las eigenfases. Fracción de espaciamientos nulos en el rectángulo: 96,1 %. En Sinaí: 48,2 %. En el rectángulo se repiten espectros completos dentro de cada orientación; en Sinaí varían las longitudes, pero los eigenvalores adicionales siguen coincidiendo.
+- En el texto y los pies de figura, K=1 es el nivel de saturación para un espectro sin degeneraciones. Con la normalización K(t)=|sum_j exp(i t phi_j)|²/N, el promedio a tiempo largo sobre tiempos enteros para las eigenfases originales es sum_j m_j²/N, donde m_j es la multiplicidad de cada eigenfase distinta. Los gráficos muestran un promedio móvil en un intervalo finito.
+- Figuras en Imgs: BlockDiagonal_Rect_statistics_NOunfold.pdf, BlockDiagonal_Rect_statistics.pdf, BlockDiagonal_Sinai_statistics_NOunfold.pdf y BlockDiagonal_Sinai_statistics.pdf.
 
-La versión de `main.tex` leída el 2026-11-17 ya utiliza U_{1D}/U_0 y contiene comentarios NUEVOS que no se han resuelto aún en la conversación:
-- JA pide que el miniresumen explicite que primero se obtienen recurrencias y cómo T conecta ambas fronteras para seleccionar eigenvalores.
-- Pide un primer enunciado que comunique el propósito del párrafo que plantea la ecuación de eigenvalores.
-- Pregunta por la interpretación de R,L cuando la caminata corresponde a una columna: explicar el convenio local de dos sentidos (verticalmente se identifican con U,D) sin cambiar el orden tensorial.
-- Sugiere integrar la parametrización de moneda y la separación de fase en un párrafo con propósito común.
-- Señala dificultad global para leer la derivación, pide referencias cruzadas y evitar repetir la suma directa ya demostrada.
-- Pide sustituir el símbolo de unión con multiplicidades por una explicación en palabras; menos notación nueva. Esto es un comentario pendiente, no una modificación ya aplicada.
-- Pide aclarar fases compartidas por filas/columnas, concretar la degeneración de valores adicionales con un ejemplo de Sinaí, fusionar las elaboraciones de esa idea, y centrar el cierre en integrabilidad.
-- Cuestiona la utilidad narrativa de la verificación numérica mencionada. El valor de discrepancia de orden 10^-15 procede de Chaos_Results, no de una comprobación nueva del agente.
+## Discusión actual sobre estadística de Poisson
 
-El archivo actual prevalece frente a borradores del chat; el usuario podría enviar comentarios adicionales antes de pedir corregirlos. La petición de guardar contexto no autoriza resolver ahora esas observaciones ni editar la tesis.
+Resultados y distinciones establecidos en el chat:
+
+- Si se conservan las multiplicidades, N eigenfases totales y D distintas producen N−D espaciamientos circulares nulos. Una fracción positiva de ceros aporta un átomo en s=0, mientras que la distribución exponencial de media uno P(s)=exp(−s) es continua. Un unfolding que preserve las coincidencias no elimina ese átomo. La solubilidad espectral exacta y la invariancia de los subespacios tampoco implican independencia estadística entre los espectros.
+- Para examinar solo las eigenfases distintas, se acordó agrupar las coincidencias en el círculo con tolerancia, conservar una copia por eigenfase, ajustar el unfolding a esa lista y normalizar los espaciamientos circulares a media uno. Como comparación, se pueden normalizar los espaciamientos de esa misma lista sin unfolding. En Mathematica, QWPoissonComparison recibe las eigenfases originales en radianes. Internamente llama a QWPs para hacer unfolding. Si se le pasan niveles previamente devueltos por UnfoldCircular, los interpreta como ángulos módulo 2 Pi, altera el orden y vuelve a aplicar unfolding.
+- Prueba con un billar triangular aportada por Saúl: 2120 eigenfases distintas de 3444. El histograma obtenido al introducir las eigenfases originales presenta un déficit de espaciamientos pequeños frente a la exponencial. El histograma visualmente cercano a la exponencial se obtuvo con la entrada ya desplegada y no sirve como evidencia.
+- Ejemplo teórico discutido en el chat: en un cuadrado de n por n, asignar a cada caminata 1D de una fila o columna una moneda proporcional a la identidad con fase aleatoria independiente. Cada caminata aporta 2n eigenfases equiespaciadas, con un desplazamiento aleatorio. Al superponer M=2n caminatas, la probabilidad de que un espaciamiento circular normalizado exceda s es (1−s/M)^(M−1) para 0≤s≤M, y tiende a exp(−s). Esto demuestra convergencia para la distribución marginal de espaciamientos. El patrón se repite en cada intervalo de longitud pi/n y el ejemplo requiere un operador moneda dependiente de la posición.
+
+Pregunta abierta para retomar: ¿se puede obtener una ley exponencial de espaciamientos mediante una familia de billares con una misma moneda espacialmente homogénea C_h ⊕ C_v? Especificar si se incluye el espectro con multiplicidades o solo las eigenfases distintas. En el modelo homogéneo, los eigenvalores adicionales se comparten dentro de cada orientación y las eigenfases de banda también coinciden cuando se repiten fracciones m/n para distintos tamaños. Falta determinar si alguna familia de geometrías y monedas permite obtener la ley buscada dentro de ese modelo.
 
 ## Otros resultados y figuras
 

@@ -435,41 +435,29 @@ Estos resultados establecen la integrabilidad de la caminata con moneda diagonal
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
 % *}}}
 
-La solución analítica de la sección anterior explica cómo surgen las degeneraciones en el espectro de una caminata con moneda diagonal por bloques. Para examinar cómo se manifiestan estas degeneraciones, se comparan los espectros del billar rectangular y del billar de Sinaí con una misma moneda diagonal por bloques. En cada geometría se analiza la distribución de espaciamientos y el factor de forma espectral, con y sin \textit{unfolding}. En ambos casos se conservan las multiplicidades para cuantificar la fracción de espaciamientos nulos y examinar cómo se reflejan las degeneraciones en el factor de forma espectral. Con la normalización empleada, el promedio del factor de forma espectral a tiempos largos es $K=1$ si todas las eigenfases son distintas, tanto en un régimen caótico como en uno integrable. Las degeneraciones elevan ese nivel de saturación.
+El espectro de la caminata bidimensional con una moneda diagonal por bloques resulta de la superposición de los espectros de varias caminatas unidimensionales. Esta superposición y la presencia de degeneraciones motivan examinar en qué medida las fluctuaciones del espectro combinado se aproximan a la estadística de Poisson. Para ello, en esta sección se analiza la distribución de espaciamientos entre niveles consecutivos, P(s), y el factor de forma espectral (SFF) de una caminata en la geometría de Sinaí para dos monedas diagonales por bloques distintas.
 
-En el billar rectangular, el 96,1\% de los espaciamientos es nulo tanto antes como después del \textit{unfolding}, como muestran las figuras~\ref{fig:bloques-rect-sin-unfolding} y~\ref{fig:bloques-rect-con-unfolding}. Esta proporción refleja la repetición de eigenvalores entre las caminatas unidimensionales descritas en la sección 4.2. Todas las filas tienen la misma longitud y comparten la moneda $C_{\mathrm{h}}$, por lo que tienen espectros idénticos. Lo mismo ocurre entre las columnas, que comparten la moneda $C_{\mathrm{v}}$. En ambos tratamientos, el factor de forma espectral promediado en el tiempo fluctúa durante gran parte del intervalo mostrado muy por encima del nivel de saturación de un espectro sin degeneraciones, $K=1$. Este comportamiento concuerda con la abundancia de eigenfases repetidas.
+Se escoje el billar de Sinaí porque la variación en las longitudes de las filas y las columnas reduce la repetición de espectros completos de caminatas unidimensionales y por tanto elimina un conjunto de degeneraciones. Aun entre segmentos de distinta longitud, los que comparten un mismo bloque de la moneda tienen en común dos eigenvalores que son independientes de la longitud del segmento, lo que constituye otra fuente de degeneración. Para el análisis espectral, se agrupan las fases coincidentes y se conserva un único eigenvalor representativo por grupo.
 
-\begin{figure}[H]
+Las figuras~\ref{fig:bloques-sinai-coe} y~\ref{fig:bloques-sinai-rotaciones} corresponden a monedas diagonal por bloques formadas por dos matrices $2\times2$, del COE en la primera y de rotación en la segunda. Después del \textit{unfolding}, la densidad $P(s)$ de ambas monedas sigue aproximadamente la caída exponencial de la referencia de Poisson para espaciamientos intermedios y presenta un déficit para los espaciamientos más pequeños, más pronunciado para la primera moneda. Para ambas monedas, el SFF promediado en el tiempo sigue una tendencia de Poisson.
+
+\begin{figure}[!htbp] % {{{*
   \centering
-  \includegraphics[width=0.88\textwidth]{BlockDiagonal_Rect_statistics_NOunfold.pdf}
-  \caption{Estadísticas espectrales de la caminata con moneda diagonal por bloques en el billar rectangular, calculadas sin \textit{unfolding}. La línea discontinua marca el nivel de saturación para un espectro sin degeneraciones, $K=1$.}
-  \label{fig:bloques-rect-sin-unfolding}
-\end{figure}
+  \includegraphics[width=\textwidth]{BlockDiagonal_Sinai_Ps_COEsCoin.pdf}\par\smallskip
+  \includegraphics[width=0.86\textwidth]{BlockDiagonal_Sinai_SFF_COEs.pdf}
+  \caption{Estadística espectral de las eigenfases distintas en el billar de Sinaí para la moneda formada por dos matrices $2\times2$ del COE. Arriba se muestra $P(s)$ sin \textit{unfolding} (izquierda) y con \textit{unfolding} (derecha). La línea roja discontinua indica la referencia de Poisson. Abajo se muestra el SFF del espectro desplegado, con su promedio temporal y las referencias COE y CUE.}
+  \label{fig:bloques-sinai-coe}
+\end{figure} % *}}}
 
-\begin{figure}[H]
+\begin{figure}[!htbp] % {{{*
   \centering
-  \includegraphics[width=0.88\textwidth]{BlockDiagonal_Rect_statistics.pdf}
-  \caption{Estadísticas espectrales de la misma caminata en el billar rectangular. La distribución de espaciamientos y el factor de forma espectral se calculan después del \textit{unfolding}. El panel de eigenfases muestra las fases originales. La línea discontinua marca el nivel de saturación para un espectro sin degeneraciones, $K=1$.}
-  \label{fig:bloques-rect-con-unfolding}
-\end{figure}
+  \includegraphics[width=\textwidth]{BlockDiagonal_Sinai_Ps_RotationsCoin.pdf}\par\smallskip
+  \includegraphics[width=0.86\textwidth]{BlockDiagonal_Sinai_SFF_RotationsCoin.pdf}
+  \caption{Estadística espectral de las eigenfases distintas en el billar de Sinaí para la moneda formada por dos matrices de rotación $2\times2$ de ángulos $\pi/3$ y $\pi/5$. Arriba se muestra $P(s)$ sin \textit{unfolding} (izquierda) y con \textit{unfolding} (derecha). La línea roja discontinua indica la referencia de Poisson. Abajo se muestra el SFF del espectro desplegado, con su promedio temporal y las referencias COE y CUE.}
+  \label{fig:bloques-sinai-rotaciones}
+\end{figure} % *}}}
 
-En el billar de Sinaí, el 48,2\% de los espaciamientos es nulo tanto antes como después del \textit{unfolding}, como muestran las figuras~\ref{fig:bloques-sinai-sin-unfolding} y~\ref{fig:bloques-sinai-con-unfolding}. Aunque en esta geometría las caminatas unidimensionales tienen longitudes distintas, los eigenvalores adicionales de la ecuación~\eqref{eq:espectro-extremos-tramo} dependen únicamente de la moneda. Por ello, todas las caminatas que comparten un mismo bloque de moneda aportan esos mismos eigenvalores al espectro del billar. En ambos tratamientos, el factor de forma espectral promediado en el tiempo fluctúa alrededor de $K(\tau)\approx 6$ durante gran parte del intervalo mostrado, por encima del nivel de saturación de un espectro sin degeneraciones, $K=1$. Sin \textit{unfolding} se observa además un pico a tiempos cortos.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.88\textwidth]{BlockDiagonal_Sinai_statistics_NOunfold.pdf}
-  \caption{Estadísticas espectrales de la caminata con moneda diagonal por bloques en el billar de Sinaí, calculadas sin \textit{unfolding}. Los espaciamientos se expresan en radianes. La línea discontinua marca el nivel de saturación para un espectro sin degeneraciones, $K=1$.}
-  \label{fig:bloques-sinai-sin-unfolding}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.88\textwidth]{BlockDiagonal_Sinai_statistics.pdf}
-  \caption{Estadísticas espectrales de la misma caminata en el billar de Sinaí. La distribución de espaciamientos y el factor de forma espectral se calculan después del \textit{unfolding}. El panel de eigenfases muestra las fases originales. La línea discontinua marca el nivel de saturación para un espectro sin degeneraciones, $K=1$.}
-  \label{fig:bloques-sinai-con-unfolding}
-\end{figure}
-
-La comparación muestra que las degeneraciones son más frecuentes en el billar rectangular que en el de Sinaí. Con la misma moneda diagonal por bloques, la fracción de espaciamientos nulos es del 96,1\% en el rectángulo y del 48,2\% en Sinaí. Esta diferencia concuerda con la descomposición de la sección 4.1. En el rectángulo, las filas de igual longitud repiten su espectro completo, al igual que las columnas. En Sinaí, la variedad de longitudes reduce esa repetición, aunque los eigenvalores adicionales siguen coincidiendo entre las caminatas que comparten la misma moneda.
+La presencia de degeneraciones dificulta el análisis estadístico al concentrar parte de los espaciamientos en $s=0$. Al considerar las eigenfases distintas de las dos monedas estudiadas en el billar de Sinaí, se observa una semejanza parcial con la referencia de Poisson en $P(s)$ para espaciamientos intermedios. Tras los primeros tiempos, el SFF promediado fluctúa alrededor de la unidad sin mostrar una secuencia clara de \textit{dip} y rampa. Este comportamiento es compatible con la referencia de Poisson en el intervalo mostrado.
 % *}}}
 \chapter{Huellas de caos cuántico en billares} % {{{*
 \snnote{Modficado.}\cpnote{quiza mejor Huellas?} 
