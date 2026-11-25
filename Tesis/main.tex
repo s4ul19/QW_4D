@@ -256,7 +256,6 @@ donde las sumas recorren las filas y columnas que contienen sitios del billar. E
 \snnote{He hecho el cambio del font para distinguir.}
 \cpnote{La $U$ denota tanto el operador de evolucion como la direccion arriba up. Lo mismo con la $v$, que denota tanto vertical como un par $(x,y)$. Quizá con un cambio de font o algo asi se arregla}
 % *}}}
-
 \section{Derivación del espectro 1D y ausencia de firmas caóticas} % {{{*
 
 \snnote{Párrafo añadido.}
@@ -452,7 +451,21 @@ En la figura~\ref{fig:bloques-sinai-coe}, la distribución $P(s)$ del espectro d
 \snnote{Modficado.}\cpnote{quiza mejor Huellas?} 
 \section{Configuraciones y monedas seleccionadas} % {{{*
 
-Se inicia comentando que la dinámica de la caminata es sensible a la elección del operador moneda. En este trabajo se consideran dos monedas: la de Grover (\texttt{g}) y una matriz diagonal rotada metidante una matriz unitaria del CUE (\texttt{upu}).
+%Se inicia comentando que la dinámica de la caminata es sensible a la elección del operador moneda. En este trabajo se consideran dos monedas: la de Grover %(\texttt{g}) y una matriz diagonal rotada metidante una matriz unitaria del CUE (\texttt{upu}).
+En el capítulo anterior se mostró que una moneda diagonal por bloques separa la caminata en multiples caminatas unidimensionales independientes. En este capítulo se estudia cómo cambia la estadística espectral al emplear monedas que acoplan las direcciones horizontales y verticales. Para ello, se consideran dos monedas y se estudia cada una en el billar rectangular y en el de Sinaí, con el motivo de poder comparar el efecto de cambiar la moneda en un mismo billar y el de cambiar la geometría para una misma moneda.
+
+La primera moneda es la de Grover, denotada por \texttt{g}. En la base de direcciones, sus elementos diagonales son $-1/2$ y los demás son $1/2$. La segunda moneda, denotada por \texttt{upu}, se construye mediante la conjugación de una matriz diagonal unitaria $D$ por una matriz unitaria $V$ del ensamble circular unitario (CUE), de modo que
+\begin{equation}
+  C_{\mathrm{upu}} = V D V^\dagger,
+  \qquad
+  D = \operatorname{diag}\!\left(
+    e^{i\phi_1}, e^{i\phi_2}, e^{i\phi_3}, e^{i\phi_4}
+  \right),
+\end{equation}
+donde las fases $\phi_j$ se muestrean de una distribución de Poisson.
+
+Para cada configuración se calcula la densidad de eigenfases, la distribución de espaciamientos entre eigenfases consecutivas $P(s)$ y el factor de forma espectral (SFF). La densidad muestra cómo se distribuyen las eigenfases, mientras que $P(s)$ y el SFF permiten examinar la repulsión entre niveles vecinos y las correlaciones espectrales, respectivamente. En la sección siguiente se comparan estos indicadores con las referencias de Poisson, COE y CUE.
+
 % *}}}
 \section{Estadística espectral en los dos billares} % {{{*
 La comparación de las monedas en cada billar permite examinar en que casos
