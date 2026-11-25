@@ -433,31 +433,20 @@ Estos resultados establecen la integrabilidad de la caminata con moneda diagonal
 % *}}}
 \section{Análisis espectral} % {{{*
 \cpnote{Aca haría una seccion dedicada al analisis espectral con y sin unfolding del sistema. Osea P(s) y las otras que vayamos a usar por ahi mas adelante.}
-% *}}}
 
-El espectro de la caminata bidimensional con una moneda diagonal por bloques resulta de la superposición de los espectros de varias caminatas unidimensionales. Esta superposición y la presencia de degeneraciones motivan examinar en qué medida las fluctuaciones del espectro combinado se aproximan a la estadística de Poisson. Para ello, en esta sección se analiza la distribución de espaciamientos entre niveles consecutivos, P(s), y el factor de forma espectral (SFF) de una caminata en la geometría de Sinaí para dos monedas diagonales por bloques distintas.
+El espectro de la caminata bidimensional con una moneda diagonal por bloques resulta de la superposición de los espectros de varias caminatas unidimensionales. Para examinar en qué medida los espaciamientos de las eigenfases distintas se aproximan a la estadística de Poisson, se considera una caminata en el billar de Sinaí con una moneda formada por dos matrices unitarias de $2\times2$ del ensamble circular ortogonal (COE).
 
-Se escoje el billar de Sinaí porque la variación en las longitudes de las filas y las columnas reduce la repetición de espectros completos de caminatas unidimensionales y por tanto elimina un conjunto de degeneraciones. Aun entre segmentos de distinta longitud, los que comparten un mismo bloque de la moneda tienen en común dos eigenvalores que son independientes de la longitud del segmento, lo que constituye otra fuente de degeneración. Para el análisis espectral, se agrupan las fases coincidentes y se conserva un único eigenvalor representativo por grupo.
+Se escoge el billar de Sinaí porque la variedad de longitudes de sus filas y columnas reduce la repetición de espectros completos de las caminatas unidimensionales. Aun cuando sus longitudes difieren, las caminatas que comparten un mismo bloque de la moneda aportan los mismos dos eigenvalores adicionales, dados por la ecuación~\eqref{eq:espectro-extremos-tramo}. Para el análisis se conserva una sola copia de cada eigenfase coincidente antes de calcular la distribución de espaciamientos $P(s)$ y el factor de forma espectral (SFF). La distribución $P(s)$ se calcula con y sin \textit{unfolding}, y el SFF se calcula a partir de las eigenfases desplegadas y se promedia en el tiempo.
 
-Las figuras~\ref{fig:bloques-sinai-coe} y~\ref{fig:bloques-sinai-rotaciones} corresponden a monedas diagonal por bloques formadas por dos matrices $2\times2$, del COE en la primera y de rotación en la segunda. Después del \textit{unfolding}, la densidad $P(s)$ de ambas monedas sigue aproximadamente la caída exponencial de la referencia de Poisson para espaciamientos intermedios y presenta un déficit para los espaciamientos más pequeños, más pronunciado para la primera moneda. Para ambas monedas, el SFF promediado en el tiempo sigue una tendencia de Poisson.
-
-\begin{figure}[!htbp] % {{{*
+\begin{figure}[H] % {{{*
   \centering
-  \includegraphics[width=\textwidth]{BlockDiagonal_Sinai_Ps_COEsCoin.pdf}\par\smallskip
-  \includegraphics[width=0.86\textwidth]{BlockDiagonal_Sinai_SFF_COEs.pdf}
-  \caption{Estadística espectral de las eigenfases distintas en el billar de Sinaí para la moneda formada por dos matrices $2\times2$ del COE. Arriba se muestra $P(s)$ sin \textit{unfolding} (izquierda) y con \textit{unfolding} (derecha). La línea roja discontinua indica la referencia de Poisson. Abajo se muestra el SFF del espectro desplegado, con su promedio temporal y las referencias COE y CUE.}
+  \includegraphics[width=\textwidth]{BlockDiagonal_Sinai_Ps_COEs_Analytical.pdf}\par\smallskip
+  \includegraphics[width=0.86\textwidth]{BlockDiagonal_Sinai_SFF_COEs_Analytical.pdf}
+  \caption{Estadística espectral de las eigenfases distintas de la caminata en el billar de Sinaí con una moneda diagonal por bloques formada por dos matrices del COE. Arriba se muestra $P(s)$ sin \textit{unfolding} (izquierda) y con \textit{unfolding} (derecha). La línea roja discontinua indica la referencia de Poisson. Abajo se muestra el SFF promediado en el tiempo del espectro desplegado, junto con las referencias COE y CUE.}
   \label{fig:bloques-sinai-coe}
 \end{figure} % *}}}
 
-\begin{figure}[!htbp] % {{{*
-  \centering
-  \includegraphics[width=\textwidth]{BlockDiagonal_Sinai_Ps_RotationsCoin.pdf}\par\smallskip
-  \includegraphics[width=0.86\textwidth]{BlockDiagonal_Sinai_SFF_RotationsCoin.pdf}
-  \caption{Estadística espectral de las eigenfases distintas en el billar de Sinaí para la moneda formada por dos matrices de rotación $2\times2$ de ángulos $\pi/3$ y $\pi/5$. Arriba se muestra $P(s)$ sin \textit{unfolding} (izquierda) y con \textit{unfolding} (derecha). La línea roja discontinua indica la referencia de Poisson. Abajo se muestra el SFF del espectro desplegado, con su promedio temporal y las referencias COE y CUE.}
-  \label{fig:bloques-sinai-rotaciones}
-\end{figure} % *}}}
-
-La presencia de degeneraciones dificulta el análisis estadístico al concentrar parte de los espaciamientos en $s=0$. Al considerar las eigenfases distintas de las dos monedas estudiadas en el billar de Sinaí, se observa una semejanza parcial con la referencia de Poisson en $P(s)$ para espaciamientos intermedios. Tras los primeros tiempos, el SFF promediado fluctúa alrededor de la unidad sin mostrar una secuencia clara de \textit{dip} y rampa. Este comportamiento es compatible con la referencia de Poisson en el intervalo mostrado.
+En la figura~\ref{fig:bloques-sinai-coe}, la distribución $P(s)$ del espectro desplegado sigue aproximadamente la caída exponencial de la referencia de Poisson para espaciamientos intermedios y presenta un déficit cerca de $s=0$. El SFF promediado cae rápidamente a tiempos cortos y luego fluctúa alrededor de la unidad. Las eigenfases distintas muestran una semejanza parcial con la estadística de Poisson.
 % *}}}
 \chapter{Huellas de caos cuántico en billares} % {{{*
 \snnote{Modficado.}\cpnote{quiza mejor Huellas?} 

@@ -1,6 +1,6 @@
 # Contexto esencial de la tesis
 
-Actualizado: 2026-11-21. Resumen persistente de la conversación y comprobación del `main.tex` actual. Leer junto con `AGENTS.md` y `GUIA_ESCRITURA.md`.
+Actualizado: 2026-11-25. Resumen persistente de la conversación y comprobación del `main.tex` actual. Leer junto con `AGENTS.md` y `GUIA_ESCRITURA.md`.
 
 ## Proyecto y fuentes
 
@@ -28,7 +28,7 @@ Capítulos actuales, comprobados en `main.tex` (títulos aprobados; no cambiar p
 6. Poder coherente L1 de la moneda y firmas espectrales.
 7. Conclusiones.
 
-Capítulo 4: 4.1 «Descomposición de la caminata bidimensional en caminatas unidimensionales»; 4.2 «Derivación del espectro 1D y ausencia de firmas caóticas»; 4.3 «Análisis espectral», con resultados del rectángulo y Sinaí con y sin unfolding.
+Capítulo 4: 4.1 «Descomposición de la caminata bidimensional en caminatas unidimensionales»; 4.2 «Derivación del espectro 1D y ausencia de firmas caóticas»; 4.3 «Análisis espectral», centrada en las eigenfases distintas de una caminata en Sinaí.
 
 ## Modelo y convenciones
 
@@ -80,9 +80,8 @@ Espectro físico:
 ## Estado comprobado del capítulo 4
 
 - La sección 4.2 contiene la versión condensada de la derivación, con referencias cruzadas y cierre sobre solubilidad espectral. La reconstrucción del espectro con multiplicidades se explica en palabras.
-- La sección 4.3 contiene cuatro figuras, dos por geometría, primero sin unfolding y luego con unfolding. Se conserva la multiplicidad de las eigenfases. Fracción de espaciamientos nulos en el rectángulo: 96,1 %. En Sinaí: 48,2 %. En el rectángulo se repiten espectros completos dentro de cada orientación; en Sinaí varían las longitudes, pero los eigenvalores adicionales siguen coincidiendo.
-- En el texto y los pies de figura, K=1 es el nivel de saturación para un espectro sin degeneraciones. Con la normalización K(t)=|sum_j exp(i t phi_j)|²/N, el promedio a tiempo largo sobre tiempos enteros para las eigenfases originales es sum_j m_j²/N, donde m_j es la multiplicidad de cada eigenfase distinta. Los gráficos muestran un promedio móvil en un intervalo finito.
-- Figuras en Imgs: BlockDiagonal_Rect_statistics_NOunfold.pdf, BlockDiagonal_Rect_statistics.pdf, BlockDiagonal_Sinai_statistics_NOunfold.pdf y BlockDiagonal_Sinai_statistics.pdf.
+- Por acuerdo con Saúl y su asesor, la sección 4.3 presenta una sola figura de Sinaí. La figura usa BlockDiagonal_Sinai_Ps_COEs_Analytical.pdf y BlockDiagonal_Sinai_SFF_COEs_Analytical.pdf. La moneda se compone de dos bloques COE de 2 por 2. Ambos indicadores usan una copia por eigenfase coincidente. P(s) se muestra con y sin unfolding, y el SFF promediado se muestra para el espectro desplegado. El resultado descrito es una semejanza parcial con Poisson. La figura está acordada y la redacción queda pendiente de aprobación del asesor.
+- En una versión anterior se analizaba el espectro con multiplicidades. Las fracciones de espaciamientos nulos eran 96,1 % en el rectángulo y 48,2 % en Sinaí para aquella configuración. Con la normalización K(t)=|sum_j exp(i t phi_j)|²/N, el promedio a tiempo largo sobre tiempos enteros para las eigenfases originales es sum_j m_j²/N, donde m_j es la multiplicidad de cada eigenfase distinta. K=1 corresponde al espectro sin degeneraciones con esa normalización. Los gráficos muestran un promedio móvil en un intervalo finito.
 
 ## Discusión actual sobre estadística de Poisson
 
