@@ -81,9 +81,11 @@ tell us about exact solvability and spectral statistics?
 
 A coin, the shift, and a domain play different roles. These notes
 construct the complete quantum walk in stages. The first four stages
-identify what is present before a coin has been selected; the last three
-read every coin through the same geometric lens and then ask how each
-one breaks (or keeps) the exact solvability of the rectangle.
+identify what is present before a coin has been selected; the next three
+read every coin through the same geometric lens and ask how each
+one breaks (or keeps) the exact solvability of the rectangle; the final
+main chapter synthesizes a complete analytical and physical theory of why
+the rectangular Grover walk is integrable.
 \begin{center}\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}\toprule
 Stage & Question & Ingredients fixed so far\\\midrule
@@ -100,7 +102,9 @@ Stage & Question & Ingredients fixed so far\\\midrule
 6. Full walks & Which structures survive, and what do the spectra and eigenstates show?
 & Their ordered composition with the same rectangle and walls\\
 7. Mechanisms & By which route does each coin leave exact solvability?
-& The demonstrated reduction families and the coins placed among them\\\bottomrule
+& The demonstrated reduction families and the coins placed among them\\
+8. Grover integrability & Why is the rectangular Grover walk integrable, and what are its physical integrals and modes?
+& Method of images, local commuting observables, acoustic wave equation, and plaquette caging\\\bottomrule
 \end{tabularx}
 \end{center}
 
@@ -2822,6 +2826,647 @@ why the same rotation applied to \(B_{\mathrm{II}}\) does not act through
 that structure. It does not detect other exact structures, such as
 routing, independent axes or whatever organizes \(B_{\mathrm{II}}\), and
 no leakage value sets a universal threshold for chaotic statistics.
+\end{lesson}
+
+
+\chapter{Why the rectangular Grover walk is exactly integrable: analytical formulation and physical mechanism}
+\label{ch:groverintegrability}
+
+Chapters~\ref{ch:sixteen} and \ref{ch:assembled} showed \emph{that} the
+Grover walk \(U_G=S(\Id_{\mathrm{pos}}\otimes G)\) on an \(N_x\times N_y\)
+reflecting rectangle decomposes into standing-wave blocks of dimension at
+most four. A deeper physical and mathematical question remains: \emph{why}
+is this model completely integrable despite maximal local ray splitting?
+This chapter restricts attention exclusively to the reflecting rectangle
+with the homogeneous Grover coin and formulates a self-contained analytical
+and physical theory of its integrability. Four interlocking principles
+govern the model:
+\begin{enumerate}
+\item \textbf{Local multipole selection and mirror invariance:} Grover
+scatters exclusively through the isotropic scalar monopole while leaving
+horizontal and vertical dipole currents unmixed, making the coin commute
+with both orthogonal wall-reflection operators.
+\item \textbf{Kelvin's method of images:} mirror invariance unfolds the
+finite reflecting rectangle isometrically onto the mirror-even sector of a
+wall-free \(2N_x\times2N_y\) periodic torus, eliminating boundary diffraction.
+\item \textbf{Local Liouville-type integrals of motion:} the folded torus
+momenta yield two explicit, nearest-neighbor Hermitian operators
+\(\mathcal I_x\) and \(\mathcal I_y\) on \(\HH\) that commute with each
+other and with \(U_G\), and together with \(U_G\) generate a maximal
+abelian algebra of dimension \(D=4N_xN_y\).
+\item \textbf{Exact factorization into discrete acoustics and plaquette
+caging:} on the entire Hilbert space, \(U_G\) obeys a fourth-order polynomial
+identity in \(\mathcal I_x+\mathcal I_y\) that splits \(\HH\) into a
+separable second-order lattice sound wave (\(2N-2\) states) and compactly
+localized destructive-interference plaquette traps (\(2N+2\) flat-band states).
+\end{enumerate}
+
+\section{The apparent paradox: maximal ray splitting without mode mixing}
+
+In a classical rectangular billiard, integrability is immediate: a particle
+travels along straight rays in the bulk and undergoes specular reflection
+\((p_x,p_y)\mapsto(-p_x,p_y)\) or \((p_x,-p_y)\) at orthogonal walls, so
+\(|p_x|\) and \(|p_y|\) are independent constants of motion. In the discrete
+Grover walk, the ray picture appears to fail at the very first step. Written
+in the physical direction basis \((R,L,U,D)\),
+\begin{equation}
+G=2\ket s\bra s-\Id_4=\frac12\begin{pmatrix}
+-1&1&1&1\\1&-1&1&1\\1&1&-1&1\\1&1&1&-1
+\end{pmatrix},\qquad
+\ket s=\frac12\big(\ket R+\ket L+\ket U+\ket D\big),
+\end{equation}
+every incoming direction scatters with equal probability \(1/4\) into all
+four directions (\(\mathcal M_{\mathrm{split}}(G)=1\)), and half of the
+horizontal weight is transferred into vertical motion at every site and
+time step (\(\mathcal M_{q_1}(G)=1\)). Rather than following classical
+billiard trajectories between wall collisions, a localized walker undergoes
+four-way Huygens diffraction at every lattice site in the bulk.
+
+Why does repeated four-way bulk diffraction combined with hard-wall
+reflections never scramble the spatial modes? The answer lies in the
+relative \emph{phases} of the four output amplitudes: \(-1/2\) for
+back-reflection and \(+1/2\) for forward transmission and orthogonal turns.
+Those signs turn local ray splitting into a pure multipole reflection that
+respects both orthogonal mirrors simultaneously.
+
+\section{Multipole anatomy and the group-theoretic origin of the 16-cell rule}
+\label{sec:multipole}
+
+\subsection{Monopole, quadrupole, and dipole currents}
+
+To expose the physical content of \(G\), organize the four internal states at
+a site into irreducible multipoles of the square lattice:
+\begin{align}
+\ket s&=\frac{\ket R+\ket L+\ket U+\ket D}{2}
+=\frac{\ket{h_+}+\ket{v_+}}{\sqrt2}
+&&\text{(monopole }s\text{-wave: scalar pressure)},\\
+\ket d&=\frac{\ket R+\ket L-\ket U-\ket D}{2}
+=\frac{\ket{h_+}-\ket{v_+}}{\sqrt2}
+&&\text{(quadrupole }d_{x^2-y^2}\text{-wave: anisotropy)},\\
+\ket{h_-}&=\frac{\ket R-\ket L}{\sqrt2}
+&&\text{(horizontal }p_x\text{-dipole: }x\text{-current)},\\
+\ket{v_-}&=\frac{\ket U-\ket D}{\sqrt2}
+&&\text{(vertical }p_y\text{-dipole: }y\text{-current)}.
+\end{align}
+Because \(\{\ket s,\ket d,\ket{h_-},\ket{v_-}\}\) is an orthonormal basis of
+\(\mathbb C^4\), the Grover coin \(G=2\ket s\bra s-\Id_4\) is diagonal in
+this multipole basis:
+\begin{equation}
+\boxed{
+G=\ket s\bra s-\ket d\bra d-\ket{h_-}\bra{h_-}-\ket{v_-}\bra{v_-}.
+}
+\label{eq:Gmultipole}
+\end{equation}
+Equation~\eqref{eq:Gmultipole} reveals the local scattering mechanism:
+\begin{itemize}
+\item On the wall-even subspace \(\spanof\{\ket{h_+},\ket{v_+}\}
+=\spanof\{\ket s,\ket d\}\), \(G\) preserves the isotropic pressure
+\(\ket s\) with eigenvalue \(+1\) and flips the quadrupole \(\ket d\) with
+eigenvalue \(-1\), which is equivalent to exchanging \(\ket{h_+}\leftrightarrow\ket{v_+}\).
+Horizontal and vertical motions therefore communicate \emph{exclusively}
+through the scalar monopole \(\ket s\).
+\item On the wall-odd vector subspace \(\spanof\{\ket{h_-},\ket{v_-}\}\),
+\(G\) acts as \(-\Id_2\): it reverses both dipole currents equally and
+introduces \emph{zero transverse rotation} between \(p_x\) and \(p_y\).
+Physically, the medium has no local Hall, Coriolis, or vorticity coupling
+that would deflect a net \(x\)-current into a net \(y\)-current.
+\end{itemize}
+
+\subsection{Why mirror symmetry equals zero envelope leakage}
+
+In Chapter~\ref{ch:sixteen}, the allowed \(2+1+1\) pattern of the 16-cell
+coherent square was derived by matching cosine and sine spatial envelopes.
+Group theory explains why that pattern exists at the level of the local
+coin alone. Recall from Section~\ref{sec:rectsym} that the vertical walls
+reverse \(R\leftrightarrow L\) via \(\sigma_x\) while leaving \(U,D\)
+fixed, and the horizontal walls reverse \(U\leftrightarrow D\) via
+\(\sigma_y\) while leaving \(R,L\) fixed. Together they generate the
+abelian local mirror point group
+\(D_2=\{\Id_4,\sigma_x,\sigma_y,J\}\cong\mathbb Z_2\times\mathbb Z_2\),
+with \(J=\sigma_x\sigma_y\).
+
+In the coherent basis \((\ket{h_+},\ket{v_+},\ket{h_-},\ket{v_-})\),
+the two mirror reflections are diagonal projectors onto channel parities:
+\begin{equation}
+\widetilde\sigma_x=Q^\dagger\sigma_x Q=\diag(+1,+1,-1,+1),
+\qquad
+\widetilde\sigma_y=Q^\dagger\sigma_y Q=\diag(+1,+1,+1,-1),
+\end{equation}
+or equivalently, in basis-independent form on \(\mathbb C^4\),
+\begin{equation}
+\boxed{
+\sigma_x=\Id_4-2\ket{h_-}\bra{h_-},\qquad
+\sigma_y=\Id_4-2\ket{v_-}\bra{v_-}.
+}
+\label{eq:sigmaproj}
+\end{equation}
+Thus the four-dimensional internal space carries the reducible
+\(D_2\)-representation \(2A_{++}\oplus A_{-+}\oplus A_{+-}\): both
+\(\ket{h_+}\) and \(\ket{v_+}\) transform trivially as \((+1,+1)\),
+\(\ket{h_-}\) transforms as \((-1,+1)\), and \(\ket{v_-}\) transforms as
+\((+1,-1)\). By Schur's lemma, a unitary coin \(C\) commutes with both
+orthogonal wall reflections if and only if it preserves these three
+isotypic subspaces:
+\begin{equation}
+\boxed{
+[C,\sigma_x]=0\ \text{and}\ [C,\sigma_y]=0
+\quad\Longleftrightarrow\quad
+\widetilde C=C_+\oplus e^{i\alpha}\oplus e^{i\beta}
+\quad\Longleftrightarrow\quad
+\mathcal L_{\sw}(C)=0.
+}
+\label{eq:schursw}
+\end{equation}
+\exact The ten forbidden cells of the 16-cell mask are precisely the matrix
+elements that break either \(\sigma_x\) or \(\sigma_y\). Because the Grover
+coin is invariant under all \(4!=24\) direction permutations, it satisfies
+\([G,\sigma_x]=[G,\sigma_y]=0\) automatically.
+
+\section{Kelvin's method of images: exact unfolding onto a wall-free torus}
+\label{sec:images}
+
+Why does local mirror invariance \([G,\sigma_x]=[G,\sigma_y]=0\) produce
+\emph{complete} integrability rather than merely four coarse global parity
+sectors \(\Pi_{p_xp_y}\) of dimension \(\sim N\)? The physical reason is
+that in a rectangular domain, orthogonal flat walls act as optical mirrors
+that tile the plane without defects. When the local scattering operator
+commutes with the mirror reflections, the boundary conditions can be
+removed altogether by unfolding the finite billiard onto a periodic torus.
+
+Introduce the doubled periodic lattice
+\(\widetilde\Omega=\{1,\ldots,2N_x\}\times\{1,\ldots,2N_y\}\) with Hilbert
+space \(\HH_{\mathrm{torus}}=\mathbb C^{2N_x}\otimes\mathbb C^{2N_y}\otimes\mathbb C^4\)
+of dimension \(4(2N_x)(2N_y)=4D\), and equip it with the wall-free periodic
+translation shift
+\begin{equation}
+S_{\mathrm{torus}}\ket{x,y,d}
+=\ket{(x+\delta_{d,x})\bmod 2N_x,\;(y+\delta_{d,y})\bmod 2N_y,\;d},
+\end{equation}
+where coordinates are read in \(\{1,\ldots,2N_x\}\) and
+\(\{1,\ldots,2N_y\}\) (\(2N_x+1\equiv1\), \(0\equiv2N_x\), and similarly
+for \(y\)). Define on \(\HH_{\mathrm{torus}}\) two commuting unitary
+wall-mirror involutions across the half-integer mirror planes
+\(x\in\{\tfrac12,N_x+\tfrac12\}\) and \(y\in\{\tfrac12,N_y+\tfrac12\}\):
+\begin{align}
+M_x\ket{x,y,d}&=\ket{2N_x+1-x,\,y,\,\sigma_x(d)},\\
+M_y\ket{x,y,d}&=\ket{x,\,2N_y+1-y,\,\sigma_y(d)},
+\end{align}
+satisfying \(M_x^2=M_y^2=\Id\), \([M_x,M_y]=0\), and
+\([S_{\mathrm{torus}},M_x]=[S_{\mathrm{torus}},M_y]=0\). Crucially,
+\(M_x\) and \(M_y\) are \emph{not} the midline reflections
+\(\mathcal P_x,\mathcal P_y\) of the rectangle: \(\mathcal P_x\) reflects
+across the center \(x=(N_x+1)/2\) of \(\Omega\), whereas \(M_x\) reflects
+\(\Omega=\{1,\ldots,N_x\}\times\{1,\ldots,N_y\}\) across its walls into the
+adjacent image chambers of \(\widetilde\Omega\)
+(Fig.~\ref{fig:groverunfolding}(a)).
+
+Because \(2N_x+1-x\neq x\) and \(2N_y+1-y\neq y\) for all integers, every
+basis state \(\ket{x,y,d}\) of the physical rectangle has a four-element
+image orbit on the torus with no fixed points. Consequently, the
+method-of-images lift \(\mathcal V:\HH\to\HH_{\mathrm{torus}}\) defined on
+\((x,y)\in\Omega\) by
+\begin{equation}
+\boxed{
+\mathcal V\ket{x,y,d}
+=\frac12(\Id+M_x)(\Id+M_y)\ket{x,y,d},
+\qquad \mathcal V^\dagger\mathcal V=\Id_D,
+}
+\label{eq:isometryV}
+\end{equation}
+is an exact unitary isometry from \(\HH\) onto the mirror-symmetric torus
+subspace \(\HH_{\mathrm{even}}=\{\ket{\widetilde\Psi}\in\HH_{\mathrm{torus}}:
+M_x\ket{\widetilde\Psi}=M_y\ket{\widetilde\Psi}=\ket{\widetilde\Psi}\}\).
+
+\textbf{Exact intertwining of shift and walk.} Consider a walker on the
+physical rectangle attempting a blocked outward step at the right wall,
+\(\ket{N_x,y,R}\). Under \(\mathcal V\), its torus state carries equal
+amplitudes on \(\ket{N_x,y,R}\) inside \(\Omega\) and on its mirror image
+\(M_x\ket{N_x,y,R}=\ket{N_x+1,y,L}\) just behind the wall. When the
+wall-free shift \(S_{\mathrm{torus}}\) acts, \(\ket{N_x,y,R}\) steps out
+into \(\ket{N_x+1,y,R}\), while the image state \(\ket{N_x+1,y,L}\)
+simultaneously steps across the mirror into \(\Omega\) as \(\ket{N_x,y,L}\).
+The total image-symmetrized state is therefore \(\mathcal V\ket{N_x,y,L}
+=\mathcal V S\ket{N_x,y,R}\). The same cancellation holds at all four walls
+and corners, proving the exact operator identity
+\begin{equation}
+S_{\mathrm{torus}}\,\mathcal V=\mathcal V\,S.
+\end{equation}
+Now apply the homogeneous Grover coin
+\(\CC_{G,\mathrm{torus}}=\Id_{\mathrm{torus}}\otimes G\). Because \(G\) is
+site-independent and obeys \([G,\sigma_x]=[G,\sigma_y]=0\),
+\(\CC_{G,\mathrm{torus}}\) commutes with both \(M_x\) and \(M_y\), so
+\(\CC_{G,\mathrm{torus}}\mathcal V=\mathcal V\CC_G\). Combining the two
+factors establishes the exact unfolding theorem for the full Floquet step,
+\(U_{G,\mathrm{torus}}=S_{\mathrm{torus}}\CC_{G,\mathrm{torus}}\):
+\begin{equation}
+\boxed{
+U_{G,\mathrm{torus}}\,\mathcal V=\mathcal V\,U_G,
+\qquad
+U_G=\mathcal V^\dagger U_{G,\mathrm{torus}}\,\mathcal V.
+}
+\label{eq:unfolding}
+\end{equation}
+\exact Physically, the reflecting walls become completely transparent to the
+folded torus walk: every reflection on \(\Omega\) is the undisturbed
+ballistic passage of a mirror image on \(\widetilde\Omega\), with zero
+diffraction at the edges and zero vertex scattering at the four corners
+(\(K_{\mathrm{corner}}=+1\)).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth, font=\small]
+% Panel (a): Method of images unfolding
+\begin{scope}[shift={(0,0)}]
+\fill[soft] (0,0) rectangle (2.6,2.0);
+\draw[thick,ink] (0,0) rectangle (5.2,4.0);
+\draw[dashed,thick,accent] (2.6,-0.25) -- (2.6,4.25);
+\draw[dashed,thick,accent] (-0.25,2.0) -- (5.45,2.0);
+\node[ink,font=\bfseries\footnotesize] at (1.3,0.35) {\(\Omega\) (\(N_x\times N_y\))};
+\node[gray!80!black,font=\footnotesize] at (3.9,0.35) {\(M_x(\Omega)\)};
+\node[gray!80!black,font=\footnotesize] at (1.3,3.65) {\(M_y(\Omega)\)};
+\node[gray!80!black,font=\footnotesize] at (3.9,3.65) {\(M_xM_y(\Omega)\)};
+% Sites near right/top mirrors
+\fill[ink] (2.15,1.2) circle (2pt);
+\draw[->,thick,ink] (2.15,1.2) -- (2.53,1.2) node[midway,above,font=\scriptsize] {\(R\)};
+\fill[accent] (3.05,1.2) circle (2pt);
+\draw[->,thick,accent] (3.05,1.2) -- (2.67,1.2) node[midway,above,font=\scriptsize] {\(L\)};
+% Top mirror pair
+\fill[ink] (1.1,1.55) circle (2pt);
+\draw[->,thick,ink] (1.1,1.55) -- (1.1,1.93) node[midway,left,font=\scriptsize] {\(U\)};
+\fill[accent] (1.1,2.45) circle (2pt);
+\draw[->,thick,accent] (1.1,2.45) -- (1.1,2.07) node[midway,left,font=\scriptsize] {\(D\)};
+% Corner image orbit
+\fill[ink] (2.15,2.85) circle (1.6pt);
+\fill[accent] (3.05,2.85) circle (1.6pt);
+\node[accent,font=\scriptsize,below] at (2.6,-0.25) {\(x=N_x+\tfrac12\)};
+\node[accent,font=\scriptsize,right] at (5.45,2.0) {\(y=N_y+\tfrac12\)};
+\node[font=\bfseries\small] at (2.6,4.65) {(a) Unfolding onto the \(2N_x\times2N_y\) torus};
+\end{scope}
+
+% Panel (b): Plaquette, wall half-plaquette, and corner trap
+\begin{scope}[shift={(7.6,0)}]
+\draw[thick,ink] (0,0) rectangle (5.2,4.0);
+% Grid dots 4x3
+\foreach \ix in {0.65,1.95,3.25,4.55}{
+  \foreach \iy in {0.65,2.0,3.35}{
+    \fill[gray!55] (\ix,\iy) circle (1.7pt);
+  }
+}
+% Bulk 2x2 plaquette on (1.95,2.0)-(3.25,3.35)
+\fill[soft] (1.95,2.0) rectangle (3.25,3.35);
+\draw[thick,accent] (1.95,2.0) rectangle (3.25,3.35);
+\foreach \px/\py/\dx/\dy in {1.95/2.0/-0.42/-0.42, 1.95/3.35/-0.42/0.42, 3.25/2.0/0.42/-0.42, 3.25/3.35/0.42/0.42}{
+  \fill[ink] (\px,\py) circle (2.2pt);
+  \draw[->,thick,ink] (\px,\py) -- ++(\dx,0);
+  \draw[->,thick,ink] (\px,\py) -- ++(0,\dy);
+}
+\node[ink,font=\scriptsize,align=center] at (2.6,2.68) {\(\Phi^\pm_{x,y}\)\\(\(\lambda=\pm1\))};
+
+% Bottom wall half-plaquette on (3.25,0.65)-(4.55,0.65)
+\draw[thick,accent] (3.25,0.65) -- (4.55,0.65);
+\fill[ink] (3.25,0.65) circle (2.2pt);
+\draw[->,thick,ink] (3.25,0.65) -- ++(-0.42,0);
+\draw[->,thick,ink] (3.25,0.65) -- ++(0,0.42);
+\fill[ink] (4.55,0.65) circle (2.2pt);
+\draw[->,thick,ink] (4.55,0.65) -- ++(0.42,0);
+\draw[->,thick,ink] (4.55,0.65) -- ++(0,0.42);
+\node[accent,font=\scriptsize] at (3.9,0.28) {wall trap (\(+1\))};
+
+% Corner quarter-plaquette at (0.65,0.65)
+\fill[accent] (0.65,0.65) circle (2.6pt);
+\draw[->,very thick,accent] (0.65,0.65) -- ++(0.48,0);
+\draw[->,very thick,accent] (0.65,0.65) -- ++(0,0.48);
+\node[accent,font=\scriptsize,align=left] at (1.35,0.32) {corner trap (\(+1\))};
+\node[font=\bfseries\small] at (2.6,4.65) {(b) Compactly localized flat-band cages};
+\end{scope}
+\end{tikzpicture}
+\caption{(a) Kelvin's method of images embeds the reflecting \(N_x\times N_y\)
+rectangle \(\Omega\) into a \(2N_x\times2N_y\) periodic torus across
+half-site mirrors. When \([C,\sigma_x]=[C,\sigma_y]=0\), an image ray
+entering from behind the wall replaces the blocked physical ray with
+amplitude \(+1\), making the walls transparent.
+(b) Real-space flat-band eigenstates of \(U_G\). Arrows display the
+two nonzero direction amplitudes at each occupied site: bulk \(2\times2\)
+plaquettes \(\ket{\Phi^\pm_{x,y}}\) (\(\lambda=\pm1\)), two-site wall
+half-plaquettes (\(\lambda=+1\)), and single-site corner quarter-plaquettes
+(\(\lambda=+1\)). At every occupied site \(G\) cancels outgoing leakage and
+redirects all weight into the cage.}
+\label{fig:groverunfolding}
+\end{figure}
+
+\section{Explicit local integrals of motion and quantum Liouville integrability}
+\label{sec:localintegrals}
+
+\subsection{Construction of the local conserved observables \(\mathcal I_x\) and \(\mathcal I_y\)}
+
+On the \(2N_x\times2N_y\) periodic torus, discrete translation symmetry is
+generated by the one-site shift unitaries \(T_x^{\mathrm{torus}}\) and
+\(T_y^{\mathrm{torus}}\), which act trivially on \(\mathbb C^4\) and
+commute with \(U_{G,\mathrm{torus}}\). Individual translations do not
+preserve \(\HH_{\mathrm{even}}\) because mirror reflection inverts
+direction: \(M_x T_x^{\mathrm{torus}} M_x=(T_x^{\mathrm{torus}})^\dagger\).
+However, their Hermitian real parts---the longitudinal quasi-momentum cosines
+\(\cos\hat k_x=\tfrac12(T_x^{\mathrm{torus}}+T_x^{\mathrm{torus}\dagger})\)
+and
+\(\cos\hat k_y=\tfrac12(T_y^{\mathrm{torus}}+T_y^{\mathrm{torus}\dagger})\)---commute
+with \(M_x\), \(M_y\), and \(U_{G,\mathrm{torus}}\), and therefore restrict
+directly to conserved observables on \(\HH\):
+\begin{equation}
+\mathcal I_x=\mathcal V^\dagger\big(\cos\hat k_x\big)\mathcal V,
+\qquad
+\mathcal I_y=\mathcal V^\dagger\big(\cos\hat k_y\big)\mathcal V.
+\end{equation}
+
+Evaluating this projection in the physical position--direction basis yields
+explicit, nearest-neighbor Hermitian operators on
+\(\HH=\HH_x\otimes\HH_y\otimes\mathbb C^4\), with no prior diagonalization:
+\begin{align}
+\mathcal I_x&=\frac12(\tau_x+\tau_x^\dagger)\otimes\Id_y\otimes\Id_4
++\frac12\big(\ket1\bra1+\ket{N_x}\bra{N_x}\big)\otimes\Id_y\otimes\sigma_x,
+\label{eq:Ixdef}\\
+\mathcal I_y&=\frac12\Id_x\otimes(\tau_y+\tau_y^\dagger)\otimes\Id_4
++\frac12\Id_x\otimes\big(\ket1\bra1+\ket{N_y}\bra{N_y}\big)\otimes\sigma_y,
+\label{eq:Iydef}
+\end{align}
+where \(\tau_x=\sum_{x=1}^{N_x-1}\ket{x+1}\bra x\) and
+\(\tau_y=\sum_{y=1}^{N_y-1}\ket{y+1}\bra y\) are the open-chain nearest-neighbor
+shift matrices on \(\{1,\ldots,N_x\}\) and \(\{1,\ldots,N_y\}\).
+
+\textbf{Physical meaning of the boundary potential.} Equations~\eqref{eq:Ixdef}
+and \eqref{eq:Iydef} separate bulk kinematics from boundary reflection:
+\begin{itemize}
+\item In the interior (\(1<x<N_x\)), \(\mathcal I_x\) is the pure scalar
+lattice kinetic operator \(\tfrac12(\tau_x+\tau_x^\dagger)\otimes\Id_4\),
+which commutes with \emph{every} homogeneous coin \(\Id_{\mathrm{pos}}\otimes C\).
+\item At the vertical walls \(x\in\{1,N_x\}\), hopping across the missing
+link is replaced by onsite reflection \(\tfrac12\sigma_x\). By
+Eq.~\eqref{eq:sigmaproj}, \(\sigma_x\) assigns boundary sign \(+1\)
+(Neumann mirror condition, eigenstates \(f_m^x\)) to \(\ket{h_+},\ket{v_+},\ket{v_-}\)
+and boundary sign \(-1\) (Dirichlet mirror condition, eigenstates \(g_m^x\))
+to the normal current \(\ket{h_-}\).
+\end{itemize}
+Writing \(T_x^\pm=\tfrac12(\tau_x+\tau_x^\dagger)\pm\tfrac12(\ket1\bra1+\ket{N_x}\bra{N_x})\)
+for the \(N_x\times N_x\) Neumann and Dirichlet tridiagonal matrices, and
+similarly \(T_y^\pm\), gives the channel decomposition
+\begin{align}
+\mathcal I_x&=T_x^+\otimes\Id_y\otimes(\Id_4-\ket{h_-}\bra{h_-})
++T_x^-\otimes\Id_y\otimes\ket{h_-}\bra{h_-},\\
+\mathcal I_y&=\Id_x\otimes T_y^+\otimes(\Id_4-\ket{v_-}\bra{v_-})
++\Id_x\otimes T_y^-\otimes\ket{v_-}\bra{v_-}.
+\end{align}
+
+\subsection{Exact commutativity and generation of a maximal abelian algebra}
+
+Direct operator algebra now establishes quantum Liouville integrability:
+\begin{enumerate}
+\item \textbf{Mutual involution:} \(\mathcal I_x\) acts nontrivially on
+\(\HH_x\otimes\mathbb C^4\) (via \(\sigma_x\)) and \(\mathcal I_y\) on
+\(\HH_y\otimes\mathbb C^4\) (via \(\sigma_y\)); since
+\([\sigma_x,\sigma_y]=0\), they commute identically:
+\begin{equation}
+[\mathcal I_x,\mathcal I_y]=0.
+\end{equation}
+\item \textbf{Shift and Floquet conservation:} \([\mathcal I_x,S]=[\mathcal I_y,S]=0\)
+holds identically on \(\HH\). For any homogeneous coin \(\CC=\Id_{\mathrm{pos}}\otimes C\),
+Eqs.~\eqref{eq:Ixdef}--\eqref{eq:Iydef} reduce the full-space commutators to
+pure boundary terms:
+\begin{align}
+[\mathcal I_x,\CC]&=\frac12\big(\ket1\bra1+\ket{N_x}\bra{N_x}\big)\otimes\Id_y\otimes[\sigma_x,C],\\
+[\mathcal I_y,\CC]&=\frac12\Id_x\otimes\big(\ket1\bra1+\ket{N_y}\bra{N_y}\big)\otimes[\sigma_y,C].
+\end{align}
+Because \([G,\sigma_x]=[G,\sigma_y]=0\), both commutators vanish for Grover:
+\begin{equation}
+\boxed{
+[\mathcal I_x,U_G]=0,\qquad [\mathcal I_y,U_G]=0,\qquad [\mathcal I_x,\mathcal I_y]=0.
+}
+\label{eq:groverintegrals}
+\end{equation}
+\item \textbf{One-to-one labeling of the standing-wave sectors:} On
+\(\mathbb C^{N_x}\), \(T_x^+\) has nondegenerate eigenvalues
+\(\mu_m^x=\cos(\pi m/N_x)\) for \(m=0,\ldots,N_x-1\) (eigenvectors
+\(f_m^x\)), while \(T_x^-\) has nondegenerate eigenvalues
+\(\mu_m^x=\cos(\pi m/N_x)\) for \(m=1,\ldots,N_x\) (eigenvectors
+\(g_m^x\)). Because \(\cos\theta\) is strictly monotonic on \([0,\pi]\),
+the joint eigenvalues \((\mu_x,\mu_y)\) of \((\mathcal I_x,\mathcal I_y)\)
+uniquely separate every sector of \(\mathscr P_{\sw}\):
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}\toprule
+Eigenvalues \((\mu_x,\mu_y)\) & Range & Sector & Rank\\\midrule
+\(\big(\cos\frac{\pi m}{N_x},\,\cos\frac{\pi n}{N_y}\big)\) & \(0\le m<N_x,\ 0\le n<N_y\) & \(\mathcal K_{mn}\) & \(2+\mathbf 1_{m>0}+\mathbf 1_{n>0}\)\\
+\(\big(-1,\,\cos\frac{\pi n}{N_y}\big)\) & \(0\le n<N_y\) & \(\mathcal E_n^H\) & \(1\)\\
+\(\big(\cos\frac{\pi m}{N_x},\,-1\big)\) & \(0\le m<N_x\) & \(\mathcal E_m^V\) & \(1\)\\\bottomrule
+\end{tabular}
+\end{center}
+By Lagrange interpolation over the distinct pairs \((\mu_x,\mu_y)\), every
+mode projector \(P_a\in\mathscr P_{\sw}\) is an explicit bivariate
+polynomial in \(\mathcal I_x\) and \(\mathcal I_y\): the entire commutative
+standing-wave algebra \(\mathcal A_{\sw}\) is generated by just two local
+integrals of motion.
+\item \textbf{Complete resolution of degeneracies (maximal abelian subalgebra):}
+Inside every joint eigenspace of \((\mathcal I_x,\mathcal I_y)\), the
+restricted Grover operator has \emph{strictly simple} spectrum:
+\(\{+1,-1,e^{+i\varphi_{mn}},e^{-i\varphi_{mn}}\}\) with
+\(\varphi_{mn}\in(0,\pi)\) when \(m,n>0\) (since
+\(|\cos\tfrac{\pi m}{N_x}+\cos\tfrac{\pi n}{N_y}|<2\));
+\(\{+1,e^{+i\varphi_{mn}},e^{-i\varphi_{mn}}\}\) when exactly one index
+vanishes; \(\{+1,-1\}\) on \(\mathcal K_{00}\); and \(\{+1\}\) on each
+terminal singleton. Consequently, the commuting set of local operators
+\begin{equation}
+\Big\{\mathcal I_x,\;\mathcal I_y,\;\tfrac12(U_G+U_G^\dagger),\;
+\tfrac1{2i}(U_G-U_G^\dagger)\Big\}
+\end{equation}
+possesses a nondegenerate joint eigenbasis across the entire
+\(4N_xN_y\)-dimensional space \(\HH\) and generates a maximal abelian
+subalgebra of dimension \(D\). All spectral degeneracies of \(U_G\)---both
+the extensive flat bands at \(\pm1\) and accidental number-theoretic
+coincidences between different \((m,n)\)---reflect decoupled sectors labeled
+by distinct conserved longitudinal quasi-momenta \((\mathcal I_x,\mathcal I_y)\).
+\end{enumerate}
+
+\section{Discrete acoustic dynamics versus plaquette caging}
+\label{sec:acousticsplaquettes}
+
+\subsection{Exact global operator wave equation}
+
+In every joint eigenspace of \((\mathcal I_x,\mathcal I_y)\), every
+eigenvalue \(\lambda\) of \(U_G\) satisfies either \(\lambda^2-1=0\) or
+\(\lambda^2+(\mu_x+\mu_y)\lambda+1=0\). Because \(\mathcal I_x,\mathcal I_y\)
+and \(U_G\) commute and are simultaneously diagonalizable on \(\HH\), these
+scalar characteristic equations lift to an exact operator polynomial identity
+on the full Hilbert space:
+\begin{equation}
+\boxed{
+(U_G^2-\Id)\Big[U_G^2+(\mathcal I_x+\mathcal I_y)\,U_G+\Id\Big]=0.
+}
+\label{eq:globalcayley}
+\end{equation}
+\exact Equation~\eqref{eq:globalcayley} splits \(\HH=\HH_{\mathrm{disp}}\oplus\HH_{\mathrm{flat}}\)
+dynamically into two orthogonal physical regimes without invoking an
+effective-Hamiltonian approximation.
+
+\subsection{The propagating branch: a separable lattice sound wave}
+
+On the \((2N-2)\)-dimensional dispersive subspace
+\(\HH_{\mathrm{disp}}=(\Id-\Pi_{+1}-\Pi_{-1})\HH\), \(U_G^2-\Id\) is
+invertible, so Eq.~\eqref{eq:globalcayley} simplifies after multiplying by
+\(U_G^{-1}\) to the exact second-order recurrence
+\begin{equation}
+\boxed{
+\frac{\ket{\psi_{n+1}}+\ket{\psi_{n-1}}}{2}
+=-\frac12\big(\mathcal I_x+\mathcal I_y\big)\ket{\psi_n}
+\qquad(\ket{\psi_n}\in\HH_{\mathrm{disp}}).
+}
+\label{eq:acousticwave}
+\end{equation}
+Equation~\eqref{eq:acousticwave} explains a subtle feature of quantum-walk
+integrability. Unlike a continuous-time separable Hamiltonian
+\(H=H_x+H_y\), where \(e^{-iHt}=e^{-iH_xt}\otimes e^{-iH_yt}\) factorizes
+multiplicatively and quasi-energies add, \(U_G\) does \emph{not} factorize
+into an \(x\)-walk times a \(y\)-walk, nor is \(\varphi_{mn}\) a sum of
+one-dimensional functions. Instead, \(\tfrac12(U_G+U_G^\dagger)=\cos\varphi\)
+is \emph{additively separable}:
+\begin{equation}
+\cos\varphi_{mn}=-\frac12(\mu_m^x+\mu_n^y)
+=-\frac12\left(\cos\frac{\pi m}{N_x}+\cos\frac{\pi n}{N_y}\right).
+\end{equation}
+Physically, Eq.~\eqref{eq:acousticwave} is the discrete two-dimensional
+acoustic wave equation on the reflecting rectangle (up to the overall minus
+sign coming from Grover's \(-1\) reflection phase on dipole currents, which
+places the long-wavelength acoustic origin at \(\varphi=\pi\) rather than
+\(\varphi=0\)). In each step, spatial gradients of the scalar monopole
+amplitude \(\ket s\) drive the longitudinal dipole currents
+\(\ket{h_-},\ket{v_-}\), whose lattice divergence feeds back into \(\ket s\)
+at the next step. Because \(\mathcal I_x+\mathcal I_y\) is the sum of
+independent one-dimensional operators, the two-step Chebyshev generator
+\(\tfrac12(U_G+U_G^\dagger)\) separates by standard separation of variables,
+producing the square-lattice tight-binding density of states with its
+logarithmic van Hove singularity at \(\cos\varphi=0\) (\(\varphi=\pi/2\),
+Fig.~\ref{fig:groversectors}).
+
+Within each interior sector \(\mathcal K_{mn}\) (\(1\le m<N_x\),
+\(1\le n<N_y\)), writing \(k_m=\pi m/N_x\), \(q_n=\pi n/N_y\),
+\(c_x=\cos k_m\), \(s_x=\sin k_m\), \(c_y=\cos q_n\), and \(s_y=\sin q_n\),
+all four orthonormal eigenstates of \(U_G\) take closed analytical form in
+the basis \((\ket{a_{mn}},\ket{b_{mn}},\ket{c_{mn}},\ket{d_{mn}})\):
+\begin{align}
+\ket{\psi_{mn}^{\pm}}&=\frac1{2\sin\varphi_{mn}}
+\Big[(e^{\pm i\varphi_{mn}}+c_y)\ket{a_{mn}}
+-(e^{\pm i\varphi_{mn}}+c_x)\ket{b_{mn}}
+-s_x\ket{c_{mn}}+s_y\ket{d_{mn}}\Big],\\
+\ket{\psi_{mn}^{(+1)}}&=\frac{\cos\frac{k_m}{2}\cos\frac{q_n}{2}\big(\ket{a_{mn}}+\ket{b_{mn}}\big)
++\sin\frac{k_m}{2}\cos\frac{q_n}{2}\ket{c_{mn}}
++\cos\frac{k_m}{2}\sin\frac{q_n}{2}\ket{d_{mn}}}{\sqrt2\,\sin(\varphi_{mn}/2)},\\
+\ket{\psi_{mn}^{(-1)}}&=\frac{\sin\frac{k_m}{2}\sin\frac{q_n}{2}\big(\ket{a_{mn}}+\ket{b_{mn}}\big)
+-\cos\frac{k_m}{2}\sin\frac{q_n}{2}\ket{c_{mn}}
+-\sin\frac{k_m}{2}\cos\frac{q_n}{2}\ket{d_{mn}}}{\sqrt2\,\cos(\varphi_{mn}/2)}.
+\end{align}
+When \(m=0,n>0\) (or \(m>0,n=0\)), setting \(c_x=1,s_x=0\) (or
+\(c_y=1,s_y=0\)) in \(\ket{\psi_{mn}^{\pm}}\) and \(\ket{\psi_{mn}^{(+1)}}\)
+yields the exact orthonormal eigenstates of the three-dimensional edge blocks
+with no modification. Notice that in \(\ket{\psi_{mn}^{(\pm1)}}\) the
+wall-even part lies purely along \(\ket{a_{mn}}+\ket{b_{mn}}\propto\ket s\),
+whereas the acoustic branches \(\ket{\psi_{mn}^\pm}\) excite the quadrupole
+component \(\ket{a_{mn}}-\ket{b_{mn}}\propto\ket d\) whenever \(c_x\neq c_y\).
+
+\subsection{The flat bands: destructive-interference plaquette and boundary caging}
+
+Why do \(2N+2\) states---more than half of the full Hilbert space---fail to
+propagate at all, sitting frozen at \(\lambda=+1\) (\(N+N_x+N_y\) states)
+and \(\lambda=-1\) (\(N-N_x-N_y+2\) states)? Their physical origin is
+real-space \emph{caging by destructive interference}, rooted in a special
+two-ray identity of the four-dimensional Grover coin: for \emph{any} pair of
+distinct directions \(\{d_1,d_2\}\) and its complementary pair
+\(\{d_3,d_4\}\),
+\begin{equation}
+\boxed{
+G\big(\ket{d_1}+\ket{d_2}\big)=\ket{d_3}+\ket{d_4}.
+}
+\label{eq:tworay}
+\end{equation}
+Back-reflection (\(-1/2\)) and cross-transmission (\(+1/2\)) cancel
+identically on both input directions (\(d_1,d_2\)), while the two remaining
+directions interfere constructively (\(1/2+1/2=1\)).
+
+Now place two outward-pointing directions at each of the four vertices of any
+elementary \(2\times2\) lattice plaquette
+\(\square_{x,y}=\{x,x+1\}\times\{y,y+1\}\) (\(1\le x<N_x\), \(1\le y<N_y\)),
+as drawn in Fig.~\ref{fig:groverunfolding}(b):
+\begin{align}
+\ket{\Phi^+_{x,y}}&=\frac1{2\sqrt2}\Big[
+\big(\ket{x,y,L}+\ket{x,y,D}\big)
++\big(\ket{x,y+1,L}+\ket{x,y+1,U}\big)\nonumber\\
+&\qquad\quad+\big(\ket{x+1,y,R}+\ket{x+1,y,D}\big)
++\big(\ket{x+1,y+1,R}+\ket{x+1,y+1,U}\big)\Big],\\
+\ket{\Phi^-_{x,y}}&=\frac1{2\sqrt2}\Big[
+\big(\ket{x,y,L}+\ket{x,y,D}\big)
+-\big(\ket{x,y+1,L}+\ket{x,y+1,U}\big)\nonumber\\
+&\qquad\quad-\big(\ket{x+1,y,R}+\ket{x+1,y,D}\big)
++\big(\ket{x+1,y+1,R}+\ket{x+1,y+1,U}\big)\Big].
+\end{align}
+Follow one Floquet step \(U_G=S\CC_G\):
+\begin{enumerate}
+\item By Eq.~\eqref{eq:tworay}, at every corner of \(\square_{x,y}\) the
+coin \(G\) annihilates both outward escape amplitudes before the shift can
+move them, converting e.g.\ \(\ket{x,y,L}+\ket{x,y,D}\) entirely into the
+inward pair \(\ket{x,y,R}+\ket{x,y,U}\) directed along the plaquette's own
+interior links.
+\item The shift \(S\) then transports these eight inward amplitudes by one
+lattice spacing along the four sides of \(\square_{x,y}\) (never touching a
+blocked boundary link, even if \(\square_{x,y}\) borders a wall), restoring
+the exact outward pair at every corner with factor \(+1\) for
+\(\ket{\Phi^+_{x,y}}\) and---because every nearest-neighbor step flips the
+sublattice sign \((-1)^{x+y}\)---factor \(-1\) for \(\ket{\Phi^-_{x,y}}\):
+\begin{equation}
+U_G\ket{\Phi^+_{x,y}}=+\ket{\Phi^+_{x,y}},\qquad
+U_G\ket{\Phi^-_{x,y}}=-\ket{\Phi^-_{x,y}}.
+\end{equation}
+\end{enumerate}
+
+\exact Counting these real-space cages explains both flat-band multiplicities
+and the basis-dependent IPR spikes of Fig.~\ref{fig:iprbase}:
+\begin{itemize}
+\item \textbf{The \(\lambda=-1\) flat band (\(N-N_x-N_y+2\) states):} The
+\((N_x-1)(N_y-1)=N-N_x-N_y+1\) alternating plaquette states
+\(\ket{\Phi^-_{x,y}}\) are linearly independent and orthogonal to the
+spatially uniform quadrupole state
+\(\ket u\otimes\ket d=(\ket{a_{00}}-\ket{b_{00}})/\sqrt2\), which also has
+eigenvalue \(-1\). Together they span the entire \((-1)\)-eigenspace.
+\item \textbf{The \(\lambda=+1\) flat band (\(N+N_x+N_y\) states):} Folding
+a \(2\times2\) torus plaquette across one wall mirror produces \(2(N_x-1)+2(N_y-1)\)
+two-site \emph{wall half-plaquette} eigenstates (for example,
+\(\tfrac12[\ket{x,1,L}+\ket{x,1,U}+\ket{x+1,1,R}+\ket{x+1,1,U}]\) along the
+bottom wall, where blocked \(D\) bounces immediately back into \(U\) with
+sign \(+1\)). Folding across two orthogonal mirrors at a corner produces four
+\emph{single-site corner traps}:
+\begin{equation}
+\ket{\Phi^{\mathrm{corner}}_{1,1}}=\frac{\ket{1,1,R}+\ket{1,1,U}}{\sqrt2},
+\quad\text{and analogously at }(N_x,1),\,(1,N_y),\,(N_x,N_y),
+\end{equation}
+where \(G\) turns \(\ket R+\ket U\) into \(\ket L+\ket D\) and the two
+corner walls immediately reverse \(\ket L+\ket D\) back to \(\ket R+\ket U\)
+on the single corner site (\(\mathrm{IPR}=1\)). The \((N_x-1)(N_y-1)\) bulk
+plaquettes \(\ket{\Phi^+_{x,y}}\), the \(2N_x+2N_y-4\) wall half-plaquettes,
+and the \(4\) corner traps supply \(N+N_x+N_y+1\) cages connected by a
+single checkerboard Euler syzygy, spanning the exact dimension
+\(n(+1)=N+N_x+N_y\).
+\end{itemize}
+Standing-wave flat-band eigenstates \(\ket{\psi_{mn}^{(\pm1)}}\) are simply
+delocalized Fourier superpositions of these elementary real-space cages,
+which is why an arbitrary numerical eigenbasis inside \(\lambda=\pm1\) mixes
+extended superpositions (\(\mathrm{IPR}\sim N^{-1}\)) with localized corner
+and plaquette cages (\(\mathrm{IPR}\) up to \(O(1)\)).
+
+\begin{lesson}{Summary: why the rectangular Grover billiard is integrable}
+Maximal ray splitting in the Grover coin is coherent Huygens scattering
+through the isotropic monopole \(\ket s\), with zero transverse coupling
+between the dipole currents \(\ket{h_-}\) and \(\ket{v_-}\). Because this
+preserves both orthogonal mirror reflections (\([G,\sigma_x]=[G,\sigma_y]=0\)),
+Kelvin's method of images unfolds the finite rectangle onto a translationally
+invariant \(2N_x\times2N_y\) torus. The folded torus momenta become two
+explicit nearest-neighbor commuting integrals of motion \(\mathcal I_x\) and
+\(\mathcal I_y\) that resolve the full dynamics into a separable lattice
+acoustic wave equation on \(\HH_{\mathrm{disp}}\) and compactly localized
+destructive-interference plaquette cages on \(\HH_{\mathrm{flat}}\).
 \end{lesson}
 
 
